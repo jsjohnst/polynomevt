@@ -1,0 +1,9 @@
+
+
+
+
+
+
+
+
+Number of components 1<br>Number of fixed points 4<br>Fixed point, component size, stability <br> (0 0 0), 8, 1.00 <br> (0 1 1), 8, 0.50 <br> (1 0 0), 8, 0.50 <br> (1 1 1), 8, 0.25<br>

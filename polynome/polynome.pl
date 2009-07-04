@@ -21,7 +21,7 @@ sub make_file_prefix () {
     
 }
 
-chdir("../perl/");
+chdir("./public/perl/");
 
 #include files with subroutines
 require "create_input_data.pl";
@@ -43,6 +43,8 @@ print ACCESS ( $ENV{REMOTE_ADDR} );
 system("date >>access");
 flock( ACCESS, LOCK_UN ) or die("Could not unlock file $!");
 close(ACCESS);
+
+my $http_base_path = "/perl/";
 
 my ($n_nodes) = @ARGV;
 
@@ -148,7 +150,7 @@ if ( $p_value && $n_nodes ) {
     if ($discretized_datafile ) {
         if ($show_discretized_data) {
             print
-                "<A href=\"$discretized_datafile\" target=\"_blank\"><font color=green><i>Discretization was successful.</i></font></A><br><br>";
+                "<A href=\"$http_base_path$discretized_datafile\" target=\"_blank\"><font color=green><i>Discretization was successful.</i></font></A><br><br>";
         }
         else {
             print
@@ -187,7 +189,7 @@ if ( $p_value && $n_nodes ) {
         }
         if ($wiring_diagram_filename) {
             print
-                "<A href=\"$wiring_diagram_filename\" target=\"_blank\"><font color=green><i>Wiring diagram.</i></font></A><br><br>";
+                "<A href=\"$http_base_path$wiring_diagram_filename\" target=\"_blank\"><font color=green><i>Wiring diagram.</i></font></A><br><br>";
         }
 
         # else there's no wiring diagram -> problem
@@ -224,7 +226,7 @@ if ( $p_value && $n_nodes ) {
                     = sgfan( \@list_of_discretized_datafiles, $p_value,
                     $n_nodes, $file_prefix );
                 if ( $function_file && $show_functions ) {
-                    print "<A href=\"$function_file\" target=\"_blank\"><font
+                    print "<A href=\"$http_base_path$function_file\" target=\"_blank\"><font
                     color=green><i>Functions.</i></font></A><br>";
                 }
                 run_stochastic_simulation(

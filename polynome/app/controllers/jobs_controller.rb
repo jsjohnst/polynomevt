@@ -3,6 +3,7 @@ class JobsController < ApplicationController
     @job = Job.new(:nodes => 3);
   end
   def generate
-    @job = Job.create(params[:job]);
+    @job = Job.new(params[:job]);
+    @perl_output = `./polynome.pl #{@job.nodes}`
   end
 end
