@@ -1,0 +1,34 @@
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-03 23:42:47) [GET]
+
+ActionView::MissingTemplate (Missing template jobs/create.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-03 23:48:08) [GET]
+Rendering jobs/create
+Completed in 73ms (View: 69, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-03 23:48:08) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-03 23:50:58) [GET]
+Rendering jobs/create
+Completed in 39ms (View: 35, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-03 23:50:58) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
