@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+  layout "main"
+  
   def index
     @job = Job.new(:nodes => 3, :input_data => 
 "1.2  2.3  3.4
