@@ -229,6 +229,7 @@ print "</td></tr>
 </div>";
 print end_form;
 
+# log user access
 open( ACCESS, ">>access" ) or die("Failed to open file for writing");
 flock( ACCESS, LOCK_EX ) or die("Could not get exclusive lock $!");
 print ACCESS ( $ENV{REMOTE_ADDR} );
