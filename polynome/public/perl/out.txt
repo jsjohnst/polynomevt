@@ -1,0 +1,2 @@
+WT = {files-22-53-3.input1.txt}
+WToutputfiles = {files-22-53-3.discretized-input1.txt}

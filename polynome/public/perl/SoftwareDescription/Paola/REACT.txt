@@ -1,0 +1,5 @@
+
+REACT (Reverse Engineering Algorithm with Evolutionary Computation Tools) is a software application to reverse engineer Boolean networks. It takes as input one or more time courses of microarray data and produces an optimal Boolean network model of the underlying gene regulatory network. The algorithm is able to incorporate both wildtype and knockout data, as well as prior biological knowledge. 
+
+The method consists of an evolutionary algorithm that optimizes the dynamic network structure with respect to data fit and noel numerical measure of model complexity.
+
