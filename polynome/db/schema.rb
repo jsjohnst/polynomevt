@@ -18,13 +18,14 @@ ActiveRecord::Schema.define(:version => 20090704073236) do
     t.string   "wiring_diagram_format"
     t.boolean  "state_space"
     t.string   "state_space_format"
-    t.boolean  "show_probabilities"
     t.boolean  "show_discretized"
     t.boolean  "show_functions"
     t.string   "input_data"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "update_schedule"
+    t.boolean  "show_probabilities_wiring_diagram"
+    t.boolean  "show_probabilities_state_space"
   end
 
 end

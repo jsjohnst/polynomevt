@@ -39,10 +39,9 @@
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">
-	<%= form.check_box :simulate %>
-	<label for="job_simulate">Simulate the state space using an update schedule?</label> 
+	<%= form.check_box :simulate %><%= form.label :simulate, "Simulate the state space using an update schedule?" %>
             			    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces
-                            <input type="text" name="update_schedule"  size="20" /><br>
+							<%= form.text_field :update_schedule, :size => 20 %><br>
 			                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
@@ -51,25 +50,34 @@
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap>
-                            <font size="2">Select output to view and file format.&nbsp;
+                            <font size="2">Select output to view and file format.&nbsp;</font>
                             <a href="tutorial.html#G" onmouseover="doTooltip(event,6)" onmouseout="hideTip()">
-                            <font size="1">what is this?</font></a><br><label><input type="checkbox" name="show_wiring_diagram" value="Wiring diagram" label="Wiring diagram" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;
-                            <select name="wiring_diagram_format">
-                                <option value="*.gif">*.gif</option>
-                                <option value="*.jpg">*.jpg</option>
-                                <option value="*.png">*.png</option>
-                                <option value="*.ps">*.ps</option>
-                            </select>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type="checkbox" name="show_discretized_data" value="Show Discretized data" label="Show Discretized data" />Show Discretized data</label><br><label><input type="checkbox" name="show_statespace" value="State space graph" label="State space graph" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <select name="statespace_format">
-                                <option value="*.gif">*.gif</option>
-                                <option value="*.jpg">*.jpg</option>
-                                <option value="*.png">*.png</option>
-                                <option value="*.ps">*.ps</option>
-                            </select>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type="checkbox" name="show_functions" value="Show functions for Polynomial dynamical system" label="Show functions for Polynomial dynamical system" />Show functions for Polynomial dynamical system</label><br><label><input type="checkbox" name="show_probabilities" value="Print probabilities in state space" label="how
-                        probabilities on the state space\?" />Print probabilities in state space</label><br>
-                            </font>
+                            <font size="1">what is this?</font></a><br>
+						<table width="100%" style="font-size: 13">
+		<tr><td colspan="4"><%= form.check_box :show_discretized %><%= form.label :show_discretized, "Show discretized data" %>
+		</td></tr>
+							<tr><td>
+							<%= form.check_box :wiring_diagram %><%= form.label :wiring_diagram, "Wiring Diagram" %>
+						</td><td>
+							<%= form.select :wiring_diagram_format, [ 
+								["*.gif", "gif"],
+								["*.jpg", "jpg"],
+								["*.png", "png"],
+								["*.ps", "ps"],
+							] %></td>
+							<td><%= form.check_box :show_probabilities_wiring_diagram %><%= form.label :show_probabilities_wiring_diagram, "Print probabilities in wiring diagram" %>
+							</td></tr>
+<tr><td colspan="4"><%= form.check_box :show_functions %><%= form.label :show_functions, "Show functions for Polynomial dynamical system" %></td></tr>
+							<tr><td><%= form.check_box :state_space %><%= form.label :state_space, "State space graph" %>
+							</td><td>
+                            	<%= form.select :state_space_format, [ 
+									["*.gif", "gif"],
+									["*.jpg", "jpg"],
+									["*.png", "png"],
+									["*.ps", "ps"],
+								] %></td>
+<td><%= form.check_box :show_probabilities_state_space %><%= form.label :show_probabilities_state_space, "Print probabilities in state space" %>							</td></tr>
+</table>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                     </table>
