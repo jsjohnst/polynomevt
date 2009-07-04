@@ -1,2 +1,0 @@
-WT = {files-20-58-22.input1.txt}
-WToutputfiles = {files-20-58-22.discretized-input1.txt}
