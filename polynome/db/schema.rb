@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20090704073236) do
     t.string   "input_data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "update_schedule"
   end
 
 end
