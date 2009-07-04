@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  def create
+  def index
     @job = Job.new(:nodes => 3);
   end
   def generate
