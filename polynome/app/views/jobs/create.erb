@@ -1,4 +1,4 @@
-<% form_for :job, @job, :url => { :action => "generate" } do |f| %>
+<% form_for :job, @job, :url => { :action => "generate" } do |form| %>
 <div style="font-family:Verdana,Arial">
     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
@@ -16,7 +16,7 @@
                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
-	<%= f.text_field :nodes, :size => 2, :maxlength => 2 %>
+	<%= form.text_field :nodes, :size => 2, :maxlength => 2 %>
 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
                             <font size="1">what is this?</font></a>
                         </td></tr>
@@ -38,7 +38,9 @@
                             <font size="1">what is this?</font></a>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
-                        <tr valign="top"><td nowrap><font size="2"><label><input type="checkbox" name="has_sequential_update" value="Simulate the state space using an update schedule?" label="Simulate the state space using an update schedule?" />Simulate the state space using an update schedule?</label> 
+                        <tr valign="top"><td nowrap><font size="2">
+	<% form.check_box :simulate %>
+	<label for="job_simulate">Simulate the state space using an update schedule?</label> 
             			    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces
                             <input type="text" name="update_schedule"  size="20" /><br>
 			                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>
@@ -102,7 +104,8 @@
         </td>
         </tr>
         <tr><td align="center" colspan="2">
-            <input type="submit" name="button_name" value="Generate" /> <br><font color="#006C00"><br>
+            <%= submit_tag 'Generate' %>
+ 			<br><font color="#006C00"><br>
             <i>Output will be displayed below.
             <b>Note</b>: Computation time depends on data size and internet connection.
             </i></font>
