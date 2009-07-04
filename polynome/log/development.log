@@ -32,3 +32,1431 @@ ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:met
   
 
 Rendering rescues/layout (not_found)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:06:17) [GET]
+Rendering jobs/create
+ERROR: compiling _run_erb_app47views47jobs47create46erb RAISED compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111: syntax error, unexpected kENSURE, expecting kEND
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:113: syntax error, unexpected $end, expecting kEND
+Function body:           def _run_erb_app47views47jobs47create46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_for :url => { :action => 'generate' } do |f| ; @output_buffer.concat "\n"
+@output_buffer.concat "<div style=\"font-family:Verdana,Arial\">\n"
+@output_buffer.concat "    <div id=\"tipDiv\" style=\"position:absolute; visibility:hidden; z-index:100\"></div>\n"
+@output_buffer.concat "    <table background=\"gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Polynome: Discrete System Identification</font></b>\n"
+@output_buffer.concat "            <p>If this is your first time, please read the <a href=\"tutorial.html\" target=\"_blank\">tutorial</a>.\n"
+@output_buffer.concat "            It is important that you follow the format specified in the tutorial.<br>\n"
+@output_buffer.concat "            Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr><td>\n"
+@output_buffer.concat "            <table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\">\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap><strong><font color=\"#FFFFFF\">Input Specification</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Data</strong></font></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Number of nodes: </font><input type=\"text\" name=\"n_nodes\" value=\"3\" size=\"2\" maxlength=\"2\" /><a href=\"tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "<!--\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Model</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Select the type of polynomial dynamical system to be generated:<br>\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Deterministic\" checked=\"checked\" />Deterministic<br />\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Stochastic\" />Stochastic<br />\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "-->\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Simulation</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><label><input type=\"checkbox\" name=\"has_sequential_update\" value=\"Simulate the state space using an update schedule?\" label=\"Simulate the state space using an update schedule?\" />Simulate the state space using an update schedule?</label> \n"
+@output_buffer.concat "            \t\t\t    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces\n"
+@output_buffer.concat "                            <input type=\"text\" name=\"update_schedule\"  size=\"20\" /><br>\n"
+@output_buffer.concat "\t\t\t                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>\n"
+@output_buffer.concat "                            <b><font color=\"#FFFFFF\">Output Options<span style=\"background-color:#808080\"></span></font></b>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap>\n"
+@output_buffer.concat "                            <font size=\"2\">Select output to view and file format.&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a><br><label><input type=\"checkbox\" name=\"show_wiring_diagram\" value=\"Wiring diagram\" label=\"Wiring diagram\" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"wiring_diagram_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_discretized_data\" value=\"Show Discretized data\" label=\"Show Discretized data\" />Show Discretized data</label><br><label><input type=\"checkbox\" name=\"show_statespace\" value=\"State space graph\" label=\"State space graph\" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"statespace_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_functions\" value=\"Show functions for Polynomial dynamical system\" label=\"Show functions for Polynomial dynamical system\" />Show functions for Polynomial dynamical system</label><br><label><input type=\"checkbox\" name=\"show_probabilities\" value=\"Print probabilities in state space\" label=\"how\n"
+@output_buffer.concat "                        probabilities on the state space\\?\" />Print probabilities in state space</label><br>\n"
+@output_buffer.concat "                            </font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                    </table>\n"
+@output_buffer.concat "                </td></tr>\n"
+@output_buffer.concat "            </table>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "            <table cellSpacing=\"0\" cellPadding=\"1\" align=\"left\" bgColor=\"#ababab\" border=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">\n"
+@output_buffer.concat "                        <tr vAlign=top><td nowrap bgColor=\"#ff8000\"><strong><font color=\"#ffffff\">Input Data</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Upload data file: </font>\n"
+@output_buffer.concat "                            <input type=\"file\" name=\"input_file\"  />&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit data below)</font></div></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><div align=\"center\"><textarea name=\"input_data\"  rows=\"8\" cols=\"50\">1.2  2.3  3.4\n"
+@output_buffer.concat "1.1  1.2  1.3\n"
+@output_buffer.concat "2.2  2.3  2.4\n"
+@output_buffer.concat "0.1  0.2  0.3</textarea></td></tr>\n"
+@output_buffer.concat "       <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        </tr>\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\">\n"
+@output_buffer.concat "            <input type=\"submit\" name=\"button_name\" value=\"Generate\" /> <br><font color=\"#006C00\"><br>\n"
+@output_buffer.concat "            <i>Output will be displayed below.\n"
+@output_buffer.concat "            <b>Note</b>: Computation time depends on data size and internet connection.\n"
+@output_buffer.concat "            </i></font>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "    </table>\n"
+@output_buffer.concat "</div>\n"
+@output_buffer.concat "</form>"; @output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:113:in `compile!'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:61:in `compile'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:28:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/template.rb:194:in `render_template'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/base.rb:260:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1241:in `render_for_file'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:937:in `render_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1317:in `default_render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1323:in `perform_action_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:617:in `call_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/flash.rb:141:in `perform_action'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `send'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `process_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:606:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:391:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:386:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/routing/route_set.rb:433:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:88:in `dispatch'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:111:in `_call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:82:in `initialize'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:9:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:28:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/head.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/params_parser.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rewindable_input.rb:25:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/session/cookie_store.rb:93:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/reloader.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/failsafe.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:106:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/static.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `each'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/log_tailer.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/chunked.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:61:in `process'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:34:in `run'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/commands/server.rb:111
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111: syntax error, unexpected kENSURE, expecting kEND
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:113: syntax error, unexpected $end, expecting kEND) on line #111 of app/views/jobs/create.erb:
+108:     </table>
+109: </div>
+110: </form>
+
+    app/views/jobs/create.erb:113:in `compile!'
+
+Rendered rescues/_trace (63.6ms)
+Rendered rescues/_request_and_response (21.6ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:07:03) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `nil_class_path' for #<ActionView::Base:0x24968c4>) on line #1 of app/views/jobs/create.erb:
+1: <% form_for :url => { :action => 'generate' } do |f| %>
+2: <div style="font-family:Verdana,Arial">
+3:     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+4:     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
+
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (130.9ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:08:55) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id) on line #1 of app/views/jobs/create.erb:
+1: <% form_for @job, :url => { :action => 'generate' } do |f| %>
+2: <div style="font-family:Verdana,Arial">
+3:     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+4:     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
+
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (59.8ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:11:44) [GET]
+Rendering jobs/create
+ERROR: compiling _run_erb_app47views47jobs47create46erb RAISED compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:1: syntax error, unexpected ':', expecting kEND
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate' :multipart => true ; @output_buffer.concat "\n"
+                                                                                                                          ^
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111: syntax error, unexpected kENSURE, expecting $end
+Function body:           def _run_erb_app47views47jobs47create46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate' :multipart => true ; @output_buffer.concat "\n"
+@output_buffer.concat "<div style=\"font-family:Verdana,Arial\">\n"
+@output_buffer.concat "    <div id=\"tipDiv\" style=\"position:absolute; visibility:hidden; z-index:100\"></div>\n"
+@output_buffer.concat "    <table background=\"gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Polynome: Discrete System Identification</font></b>\n"
+@output_buffer.concat "            <p>If this is your first time, please read the <a href=\"tutorial.html\" target=\"_blank\">tutorial</a>.\n"
+@output_buffer.concat "            It is important that you follow the format specified in the tutorial.<br>\n"
+@output_buffer.concat "            Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr><td>\n"
+@output_buffer.concat "            <table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\">\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap><strong><font color=\"#FFFFFF\">Input Specification</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Data</strong></font></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Number of nodes: </font><input type=\"text\" name=\"n_nodes\" value=\"3\" size=\"2\" maxlength=\"2\" /><a href=\"tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "<!--\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Model</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Select the type of polynomial dynamical system to be generated:<br>\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Deterministic\" checked=\"checked\" />Deterministic<br />\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Stochastic\" />Stochastic<br />\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "-->\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Simulation</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><label><input type=\"checkbox\" name=\"has_sequential_update\" value=\"Simulate the state space using an update schedule?\" label=\"Simulate the state space using an update schedule?\" />Simulate the state space using an update schedule?</label> \n"
+@output_buffer.concat "            \t\t\t    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces\n"
+@output_buffer.concat "                            <input type=\"text\" name=\"update_schedule\"  size=\"20\" /><br>\n"
+@output_buffer.concat "\t\t\t                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>\n"
+@output_buffer.concat "                            <b><font color=\"#FFFFFF\">Output Options<span style=\"background-color:#808080\"></span></font></b>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap>\n"
+@output_buffer.concat "                            <font size=\"2\">Select output to view and file format.&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a><br><label><input type=\"checkbox\" name=\"show_wiring_diagram\" value=\"Wiring diagram\" label=\"Wiring diagram\" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"wiring_diagram_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_discretized_data\" value=\"Show Discretized data\" label=\"Show Discretized data\" />Show Discretized data</label><br><label><input type=\"checkbox\" name=\"show_statespace\" value=\"State space graph\" label=\"State space graph\" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"statespace_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_functions\" value=\"Show functions for Polynomial dynamical system\" label=\"Show functions for Polynomial dynamical system\" />Show functions for Polynomial dynamical system</label><br><label><input type=\"checkbox\" name=\"show_probabilities\" value=\"Print probabilities in state space\" label=\"how\n"
+@output_buffer.concat "                        probabilities on the state space\\?\" />Print probabilities in state space</label><br>\n"
+@output_buffer.concat "                            </font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                    </table>\n"
+@output_buffer.concat "                </td></tr>\n"
+@output_buffer.concat "            </table>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "            <table cellSpacing=\"0\" cellPadding=\"1\" align=\"left\" bgColor=\"#ababab\" border=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">\n"
+@output_buffer.concat "                        <tr vAlign=top><td nowrap bgColor=\"#ff8000\"><strong><font color=\"#ffffff\">Input Data</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Upload data file: </font>\n"
+@output_buffer.concat "                            <input type=\"file\" name=\"input_file\"  />&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit data below)</font></div></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><div align=\"center\"><textarea name=\"input_data\"  rows=\"8\" cols=\"50\">1.2  2.3  3.4\n"
+@output_buffer.concat "1.1  1.2  1.3\n"
+@output_buffer.concat "2.2  2.3  2.4\n"
+@output_buffer.concat "0.1  0.2  0.3</textarea></td></tr>\n"
+@output_buffer.concat "       <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        </tr>\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\">\n"
+@output_buffer.concat "            <input type=\"submit\" name=\"button_name\" value=\"Generate\" /> <br><font color=\"#006C00\"><br>\n"
+@output_buffer.concat "            <i>Output will be displayed below.\n"
+@output_buffer.concat "            <b>Note</b>: Computation time depends on data size and internet connection.\n"
+@output_buffer.concat "            </i></font>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "    </table>\n"
+@output_buffer.concat "</div>\n"
+ end ; @output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111:in `compile!'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:61:in `compile'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:28:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/template.rb:194:in `render_template'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/base.rb:260:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1241:in `render_for_file'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:937:in `render_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1317:in `default_render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1323:in `perform_action_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:617:in `call_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/flash.rb:141:in `perform_action'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `send'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `process_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:606:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:391:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:386:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/routing/route_set.rb:433:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:88:in `dispatch'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:111:in `_call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:82:in `initialize'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:9:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:28:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/head.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/params_parser.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rewindable_input.rb:25:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/session/cookie_store.rb:93:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/reloader.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/failsafe.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:106:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/static.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `each'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/log_tailer.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/chunked.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:61:in `process'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:34:in `run'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/commands/server.rb:111
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:1: syntax error, unexpected ':', expecting kEND
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate' :multipart => true ; @output_buffer.concat "\n"
+                                                                                                                          ^
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111: syntax error, unexpected kENSURE, expecting $end) on line #1 of app/views/jobs/create.erb:
+1: <% form_tag '/jobs/generate' :multipart => true %>
+2: <div style="font-family:Verdana,Arial">
+3:     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+4:     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
+
+    app/views/jobs/create.erb:111:in `compile!'
+
+Rendered rescues/_trace (53.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:11:56) [GET]
+Rendering jobs/create
+ERROR: compiling _run_erb_app47views47jobs47create46erb RAISED compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111: syntax error, unexpected kENSURE, expecting $end
+Function body:           def _run_erb_app47views47jobs47create46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true ; @output_buffer.concat "\n"
+@output_buffer.concat "<div style=\"font-family:Verdana,Arial\">\n"
+@output_buffer.concat "    <div id=\"tipDiv\" style=\"position:absolute; visibility:hidden; z-index:100\"></div>\n"
+@output_buffer.concat "    <table background=\"gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Polynome: Discrete System Identification</font></b>\n"
+@output_buffer.concat "            <p>If this is your first time, please read the <a href=\"tutorial.html\" target=\"_blank\">tutorial</a>.\n"
+@output_buffer.concat "            It is important that you follow the format specified in the tutorial.<br>\n"
+@output_buffer.concat "            Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr><td>\n"
+@output_buffer.concat "            <table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\">\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap><strong><font color=\"#FFFFFF\">Input Specification</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Data</strong></font></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Number of nodes: </font><input type=\"text\" name=\"n_nodes\" value=\"3\" size=\"2\" maxlength=\"2\" /><a href=\"tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "<!--\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Model</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Select the type of polynomial dynamical system to be generated:<br>\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Deterministic\" checked=\"checked\" />Deterministic<br />\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Stochastic\" />Stochastic<br />\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "-->\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Simulation</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><label><input type=\"checkbox\" name=\"has_sequential_update\" value=\"Simulate the state space using an update schedule?\" label=\"Simulate the state space using an update schedule?\" />Simulate the state space using an update schedule?</label> \n"
+@output_buffer.concat "            \t\t\t    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces\n"
+@output_buffer.concat "                            <input type=\"text\" name=\"update_schedule\"  size=\"20\" /><br>\n"
+@output_buffer.concat "\t\t\t                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>\n"
+@output_buffer.concat "                            <b><font color=\"#FFFFFF\">Output Options<span style=\"background-color:#808080\"></span></font></b>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap>\n"
+@output_buffer.concat "                            <font size=\"2\">Select output to view and file format.&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a><br><label><input type=\"checkbox\" name=\"show_wiring_diagram\" value=\"Wiring diagram\" label=\"Wiring diagram\" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"wiring_diagram_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_discretized_data\" value=\"Show Discretized data\" label=\"Show Discretized data\" />Show Discretized data</label><br><label><input type=\"checkbox\" name=\"show_statespace\" value=\"State space graph\" label=\"State space graph\" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"statespace_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_functions\" value=\"Show functions for Polynomial dynamical system\" label=\"Show functions for Polynomial dynamical system\" />Show functions for Polynomial dynamical system</label><br><label><input type=\"checkbox\" name=\"show_probabilities\" value=\"Print probabilities in state space\" label=\"how\n"
+@output_buffer.concat "                        probabilities on the state space\\?\" />Print probabilities in state space</label><br>\n"
+@output_buffer.concat "                            </font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                    </table>\n"
+@output_buffer.concat "                </td></tr>\n"
+@output_buffer.concat "            </table>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "            <table cellSpacing=\"0\" cellPadding=\"1\" align=\"left\" bgColor=\"#ababab\" border=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">\n"
+@output_buffer.concat "                        <tr vAlign=top><td nowrap bgColor=\"#ff8000\"><strong><font color=\"#ffffff\">Input Data</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Upload data file: </font>\n"
+@output_buffer.concat "                            <input type=\"file\" name=\"input_file\"  />&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit data below)</font></div></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><div align=\"center\"><textarea name=\"input_data\"  rows=\"8\" cols=\"50\">1.2  2.3  3.4\n"
+@output_buffer.concat "1.1  1.2  1.3\n"
+@output_buffer.concat "2.2  2.3  2.4\n"
+@output_buffer.concat "0.1  0.2  0.3</textarea></td></tr>\n"
+@output_buffer.concat "       <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        </tr>\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\">\n"
+@output_buffer.concat "            <input type=\"submit\" name=\"button_name\" value=\"Generate\" /> <br><font color=\"#006C00\"><br>\n"
+@output_buffer.concat "            <i>Output will be displayed below.\n"
+@output_buffer.concat "            <b>Note</b>: Computation time depends on data size and internet connection.\n"
+@output_buffer.concat "            </i></font>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "    </table>\n"
+@output_buffer.concat "</div>\n"
+ end ; @output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111:in `compile!'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:61:in `compile'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:28:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/template.rb:194:in `render_template'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/base.rb:260:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1241:in `render_for_file'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:937:in `render_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1317:in `default_render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1323:in `perform_action_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:617:in `call_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/flash.rb:141:in `perform_action'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `send'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `process_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:606:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:391:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:386:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/routing/route_set.rb:433:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:88:in `dispatch'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:111:in `_call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:82:in `initialize'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:9:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:28:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/head.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/params_parser.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rewindable_input.rb:25:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/session/cookie_store.rb:93:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/reloader.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/failsafe.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:106:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/static.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `each'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/log_tailer.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/chunked.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:61:in `process'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:34:in `run'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/commands/server.rb:111
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:111: syntax error, unexpected kENSURE, expecting $end) on line #111 of app/views/jobs/create.erb:
+108:     </table>
+109: </div>
+110: <% end %>
+
+    app/views/jobs/create.erb:111:in `compile!'
+
+Rendered rescues/_trace (230.8ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:12:34) [GET]
+Rendering jobs/create
+ERROR: compiling _run_erb_app47views47jobs47create46erb RAISED compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:1: syntax error, unexpected ';'
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true do - ; @output_buffer.concat "\n"
+                                                                                                                                                   ^
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:110: syntax error, unexpected '-', expecting kEND
+ end - ; @output_buffer
+      ^
+Function body:           def _run_erb_app47views47jobs47create46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true do - ; @output_buffer.concat "\n"
+@output_buffer.concat "<div style=\"font-family:Verdana,Arial\">\n"
+@output_buffer.concat "    <div id=\"tipDiv\" style=\"position:absolute; visibility:hidden; z-index:100\"></div>\n"
+@output_buffer.concat "    <table background=\"gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Polynome: Discrete System Identification</font></b>\n"
+@output_buffer.concat "            <p>If this is your first time, please read the <a href=\"tutorial.html\" target=\"_blank\">tutorial</a>.\n"
+@output_buffer.concat "            It is important that you follow the format specified in the tutorial.<br>\n"
+@output_buffer.concat "            Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr><td>\n"
+@output_buffer.concat "            <table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\">\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap><strong><font color=\"#FFFFFF\">Input Specification</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Data</strong></font></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Number of nodes: </font><input type=\"text\" name=\"n_nodes\" value=\"3\" size=\"2\" maxlength=\"2\" /><a href=\"tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "<!--\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Model</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Select the type of polynomial dynamical system to be generated:<br>\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Deterministic\" checked=\"checked\" />Deterministic<br />\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Stochastic\" />Stochastic<br />\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "-->\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Simulation</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><label><input type=\"checkbox\" name=\"has_sequential_update\" value=\"Simulate the state space using an update schedule?\" label=\"Simulate the state space using an update schedule?\" />Simulate the state space using an update schedule?</label> \n"
+@output_buffer.concat "            \t\t\t    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces\n"
+@output_buffer.concat "                            <input type=\"text\" name=\"update_schedule\"  size=\"20\" /><br>\n"
+@output_buffer.concat "\t\t\t                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>\n"
+@output_buffer.concat "                            <b><font color=\"#FFFFFF\">Output Options<span style=\"background-color:#808080\"></span></font></b>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap>\n"
+@output_buffer.concat "                            <font size=\"2\">Select output to view and file format.&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a><br><label><input type=\"checkbox\" name=\"show_wiring_diagram\" value=\"Wiring diagram\" label=\"Wiring diagram\" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"wiring_diagram_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_discretized_data\" value=\"Show Discretized data\" label=\"Show Discretized data\" />Show Discretized data</label><br><label><input type=\"checkbox\" name=\"show_statespace\" value=\"State space graph\" label=\"State space graph\" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"statespace_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_functions\" value=\"Show functions for Polynomial dynamical system\" label=\"Show functions for Polynomial dynamical system\" />Show functions for Polynomial dynamical system</label><br><label><input type=\"checkbox\" name=\"show_probabilities\" value=\"Print probabilities in state space\" label=\"how\n"
+@output_buffer.concat "                        probabilities on the state space\\?\" />Print probabilities in state space</label><br>\n"
+@output_buffer.concat "                            </font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                    </table>\n"
+@output_buffer.concat "                </td></tr>\n"
+@output_buffer.concat "            </table>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "            <table cellSpacing=\"0\" cellPadding=\"1\" align=\"left\" bgColor=\"#ababab\" border=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">\n"
+@output_buffer.concat "                        <tr vAlign=top><td nowrap bgColor=\"#ff8000\"><strong><font color=\"#ffffff\">Input Data</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Upload data file: </font>\n"
+@output_buffer.concat "                            <input type=\"file\" name=\"input_file\"  />&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit data below)</font></div></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><div align=\"center\"><textarea name=\"input_data\"  rows=\"8\" cols=\"50\">1.2  2.3  3.4\n"
+@output_buffer.concat "1.1  1.2  1.3\n"
+@output_buffer.concat "2.2  2.3  2.4\n"
+@output_buffer.concat "0.1  0.2  0.3</textarea></td></tr>\n"
+@output_buffer.concat "       <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        </tr>\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\">\n"
+@output_buffer.concat "            <input type=\"submit\" name=\"button_name\" value=\"Generate\" /> <br><font color=\"#006C00\"><br>\n"
+@output_buffer.concat "            <i>Output will be displayed below.\n"
+@output_buffer.concat "            <b>Note</b>: Computation time depends on data size and internet connection.\n"
+@output_buffer.concat "            </i></font>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "    </table>\n"
+@output_buffer.concat "</div>\n"
+ end - ; @output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:113:in `compile!'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:61:in `compile'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:28:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/template.rb:194:in `render_template'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/base.rb:260:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1241:in `render_for_file'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:937:in `render_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1317:in `default_render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1323:in `perform_action_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:617:in `call_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/flash.rb:141:in `perform_action'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `send'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `process_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:606:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:391:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:386:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/routing/route_set.rb:433:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:88:in `dispatch'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:111:in `_call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:82:in `initialize'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:9:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:28:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/head.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/params_parser.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rewindable_input.rb:25:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/session/cookie_store.rb:93:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/reloader.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/failsafe.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:106:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/static.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `each'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/log_tailer.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/chunked.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:61:in `process'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:34:in `run'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/commands/server.rb:111
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:1: syntax error, unexpected ';'
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true do - ; @output_buffer.concat "\n"
+                                                                                                                                                   ^
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:110: syntax error, unexpected '-', expecting kEND
+ end - ; @output_buffer
+      ^) on line #1 of app/views/jobs/create.erb:
+1: <% form_tag '/jobs/generate', :multipart => true do - %>
+2: <div style="font-family:Verdana,Arial">
+3:     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+4:     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
+
+    app/views/jobs/create.erb:113:in `compile!'
+
+Rendered rescues/_trace (62.7ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:13:04) [GET]
+Rendering jobs/create
+ERROR: compiling _run_erb_app47views47jobs47create46erb RAISED compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:1: syntax error, unexpected ';'
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true do - ; @output_buffer.concat "\n"
+                                                                                                                                                   ^
+Function body:           def _run_erb_app47views47jobs47create46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true do - ; @output_buffer.concat "\n"
+@output_buffer.concat "<div style=\"font-family:Verdana,Arial\">\n"
+@output_buffer.concat "    <div id=\"tipDiv\" style=\"position:absolute; visibility:hidden; z-index:100\"></div>\n"
+@output_buffer.concat "    <table background=\"gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Polynome: Discrete System Identification</font></b>\n"
+@output_buffer.concat "            <p>If this is your first time, please read the <a href=\"tutorial.html\" target=\"_blank\">tutorial</a>.\n"
+@output_buffer.concat "            It is important that you follow the format specified in the tutorial.<br>\n"
+@output_buffer.concat "            Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr><td>\n"
+@output_buffer.concat "            <table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\">\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap><strong><font color=\"#FFFFFF\">Input Specification</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Data</strong></font></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Number of nodes: </font><input type=\"text\" name=\"n_nodes\" value=\"3\" size=\"2\" maxlength=\"2\" /><a href=\"tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "<!--\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Model</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Select the type of polynomial dynamical system to be generated:<br>\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Deterministic\" checked=\"checked\" />Deterministic<br />\n"
+@output_buffer.concat "                            <input type=\"radio\" name=\"is_deterministic_model\" value=\"Stochastic\" />Stochastic<br />\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "-->\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><strong>Type of Simulation</strong></font>\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\"><label><input type=\"checkbox\" name=\"has_sequential_update\" value=\"Simulate the state space using an update schedule?\" label=\"Simulate the state space using an update schedule?\" />Simulate the state space using an update schedule?</label> \n"
+@output_buffer.concat "            \t\t\t    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces\n"
+@output_buffer.concat "                            <input type=\"text\" name=\"update_schedule\"  size=\"20\" /><br>\n"
+@output_buffer.concat "\t\t\t                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>\n"
+@output_buffer.concat "                            <b><font color=\"#FFFFFF\">Output Options<span style=\"background-color:#808080\"></span></font></b>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap>\n"
+@output_buffer.concat "                            <font size=\"2\">Select output to view and file format.&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a><br><label><input type=\"checkbox\" name=\"show_wiring_diagram\" value=\"Wiring diagram\" label=\"Wiring diagram\" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"wiring_diagram_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_discretized_data\" value=\"Show Discretized data\" label=\"Show Discretized data\" />Show Discretized data</label><br><label><input type=\"checkbox\" name=\"show_statespace\" value=\"State space graph\" label=\"State space graph\" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+@output_buffer.concat "                            <select name=\"statespace_format\">\n"
+@output_buffer.concat "                                <option value=\"*.gif\">*.gif</option>\n"
+@output_buffer.concat "                                <option value=\"*.jpg\">*.jpg</option>\n"
+@output_buffer.concat "                                <option value=\"*.png\">*.png</option>\n"
+@output_buffer.concat "                                <option value=\"*.ps\">*.ps</option>\n"
+@output_buffer.concat "                            </select>\n"
+@output_buffer.concat "                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type=\"checkbox\" name=\"show_functions\" value=\"Show functions for Polynomial dynamical system\" label=\"Show functions for Polynomial dynamical system\" />Show functions for Polynomial dynamical system</label><br><label><input type=\"checkbox\" name=\"show_probabilities\" value=\"Print probabilities in state space\" label=\"how\n"
+@output_buffer.concat "                        probabilities on the state space\\?\" />Print probabilities in state space</label><br>\n"
+@output_buffer.concat "                            </font>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                    </table>\n"
+@output_buffer.concat "                </td></tr>\n"
+@output_buffer.concat "            </table>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "            <table cellSpacing=\"0\" cellPadding=\"1\" align=\"left\" bgColor=\"#ababab\" border=\"0\">\n"
+@output_buffer.concat "                <tr><td>\n"
+@output_buffer.concat "                    <table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">\n"
+@output_buffer.concat "                        <tr vAlign=top><td nowrap bgColor=\"#ff8000\"><strong><font color=\"#ffffff\">Input Data</font></strong></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><font size=\"2\">Upload data file: </font>\n"
+@output_buffer.concat "                            <input type=\"file\" name=\"input_file\"  />&nbsp;\n"
+@output_buffer.concat "                            <a href=\"tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\">\n"
+@output_buffer.concat "                            <font size=\"1\">what is this?</font></a>\n"
+@output_buffer.concat "                        </td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit data below)</font></div></td></tr>\n"
+@output_buffer.concat "                        <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "                        <tr valign=\"top\"><td nowrap><div align=\"center\"><textarea name=\"input_data\"  rows=\"8\" cols=\"50\">1.2  2.3  3.4\n"
+@output_buffer.concat "1.1  1.2  1.3\n"
+@output_buffer.concat "2.2  2.3  2.4\n"
+@output_buffer.concat "0.1  0.2  0.3</textarea></td></tr>\n"
+@output_buffer.concat "       <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        </table>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "        <tr>\n"
+@output_buffer.concat "        <td>\n"
+@output_buffer.concat "        </td>\n"
+@output_buffer.concat "        </tr>\n"
+@output_buffer.concat "        <tr><td align=\"center\" colspan=\"2\">\n"
+@output_buffer.concat "            <input type=\"submit\" name=\"button_name\" value=\"Generate\" /> <br><font color=\"#006C00\"><br>\n"
+@output_buffer.concat "            <i>Output will be displayed below.\n"
+@output_buffer.concat "            <b>Note</b>: Computation time depends on data size and internet connection.\n"
+@output_buffer.concat "            </i></font>\n"
+@output_buffer.concat "        </td></tr>\n"
+@output_buffer.concat "    </table>\n"
+@output_buffer.concat "</div>\n"
+ end 
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:114:in `compile!'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:61:in `compile'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/renderable.rb:28:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/template.rb:194:in `render_template'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_view/base.rb:260:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1241:in `render_for_file'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:937:in `render_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1317:in `default_render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:1323:in `perform_action_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:617:in `call_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+/Users/jstone/.gem/ruby/1.8/gems/activesupport-2.3.2/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/flash.rb:141:in `perform_action'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `send'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:523:in `process_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/filters.rb:606:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:391:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/base.rb:386:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/routing/route_set.rb:433:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:88:in `dispatch'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:111:in `_call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:82:in `initialize'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:29:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:9:in `cache'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/query_cache.rb:28:in `call'
+/Users/jstone/.gem/ruby/1.8/gems/activerecord-2.3.2/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/head.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/params_parser.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/rewindable_input.rb:25:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/session/cookie_store.rb:93:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/reloader.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/failsafe.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/dispatcher.rb:106:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/static.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:46:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `each'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/urlmap.rb:40:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/rails/rack/log_tailer.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/chunked.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:61:in `process'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.2/lib/action_controller/vendor/rack-1.0/rack/handler/mongrel.rb:34:in `run'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.2/lib/commands/server.rb:111
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/Users/jstone/Source/github/polynomevt/polynome/app/views/jobs/create.erb:1: syntax error, unexpected ';'
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ;  form_tag '/jobs/generate', :multipart => true do - ; @output_buffer.concat "\n"
+                                                                                                                                                   ^) on line #1 of app/views/jobs/create.erb:
+1: <% form_tag '/jobs/generate', :multipart => true do - %>
+2: <div style="font-family:Verdana,Arial">
+3:     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+4:     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
+
+    app/views/jobs/create.erb:114:in `compile!'
+
+Rendered rescues/_trace (62.6ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:13:33) [GET]
+Rendering jobs/create
+Completed in 54ms (View: 29, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-04 00:13:34) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:15:21) [GET]
+Rendering jobs/create
+Completed in 23ms (View: 21, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-04 00:15:22) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:20:44) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.text_ﬁeld) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld 'n_nodes', '3', :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (71.6ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:21:30) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld_tag' for #<ActionView::Base:0x2408704>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= text_ﬁeld_tag 'n_nodes', '3', :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (73.7ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:21:42) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.text_ﬁeld_tag) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld_tag 'n_nodes', '3', :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (127.4ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:33:54) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.text_ﬁeld_tag) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld_tag 'n_nodes', '3', :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (125.0ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:37:18) [GET]
+
+ActiveRecord::StatementInvalid (Could not find table 'jobs'):
+  app/controllers/jobs_controller.rb:3:in `new'
+  app/controllers/jobs_controller.rb:3:in `create'
+
+Rendered rescues/_trace (46.8ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (3.2ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (2.7ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateJobs (20090704073236)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (1.6ms)[0m   [0mCREATE TABLE "jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nodes" integer, "simulate" boolean, "wiring_diagram" boolean, "wiring_diagram_format" varchar(255), "state_space" boolean, "state_space_format" varchar(255), "show_probabilities" boolean, "show_discretized" boolean, "show_functions" boolean, "input_data" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090704073236')[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("jobs")[0m
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:37:47) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld_tag' for #<ActionView::Helpers::FormBuilder:0x23e2590>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld_tag 'n_nodes', '3', :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (66.9ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:38:05) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x2459a14>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld 'n_nodes', '3', :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (136.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:40:43) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x2492d8c>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld :nodes, :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (127.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:41:28) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x24f4140>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld :nodes, :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (54.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:41:53) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x2576ca8>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld :nodes, :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (50.8ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:41:55) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x241f4e0>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld :nodes, :size => 2, :maxlength => 2 %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (74.4ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:43:26) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x2446a40>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld :nodes %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (112.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:47:01) [GET]
+Rendering jobs/create
+
+ActionView::TemplateError (undefined method `text_ﬁeld' for #<ActionView::Helpers::FormBuilder:0x24a5fcc>) on line #19 of app/views/jobs/create.erb:
+16:                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+17:                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+18:                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+19: 	<%= f.text_ﬁeld :nodes %>
+20: 	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+21:                             <font size="1">what is this?</font></a>
+22:                         </td></tr>
+
+    app/views/jobs/create.erb:19
+    app/views/jobs/create.erb:1
+
+Rendered rescues/_trace (121.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:48:06) [GET]
+Rendering jobs/create
+Completed in 25ms (View: 17, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-04 00:48:07) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:50:24) [GET]
+Rendering jobs/create
+Completed in 21ms (View: 15, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-04 00:50:25) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-07-04 00:50:42) [GET]
+Rendering jobs/create
+Completed in 11ms (View: 2, DB: 0) | 200 OK [http://0.0.0.0/jobs/create]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-04 00:50:42) [GET]
+
+ActionController::RoutingError (No route matches "/jobs/gradient.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
