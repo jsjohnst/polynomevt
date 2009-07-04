@@ -1,4 +1,4 @@
-<% form_for :job, @job, :url => { :action => "generate" } do |form| %>
+<% form_for :job, @job, :url => { :action => "generate" }, :html => { :multipart => true } do |form| %>
 <div style="font-family:Verdana,Arial">
     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
     <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
@@ -39,7 +39,7 @@
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">
-	<% form.check_box :simulate %>
+	<%= form.check_box :simulate %>
 	<label for="job_simulate">Simulate the state space using an update schedule?</label> 
             			    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces
                             <input type="text" name="update_schedule"  size="20" /><br>
