@@ -7,17 +7,18 @@ use CGI qw( :standard );
 use Fcntl qw( :flock );
 
 use strict;
+use Digest::MD5 qw(md5_hex);
 
 sub make_file_prefix () {
-    #get the clients ip address
-    #$file_prefix = $ENV{'REMOTE_ADDR'};
-    my $file_prefix =~ s/\./\-/g;
-    my ( $sec, $min, $hr ) = localtime();
-    $file_prefix = $file_prefix . '-' . $sec . '-' . $min . '-' . $hr;
+	my $input_data = $ENV{POLYNOME_INPUT_DATA};
+	my $file_prefix = md5_hex($input_data);
+    $file_prefix =~ s/\./\-/g;
+    #my ( $sec, $min, $hr ) = localtime();
+    #$file_prefix = $file_prefix . '-' . $sec . '-' . $min . '-' . $hr;
 
     #$file_prefix = $sec.'-'.$min.'-'.$hr;
-    $file_prefix = 'files' . $file_prefix;
-    return $file_prefix;
+    $file_prefix = 'files-' . $file_prefix;
+    return "files/".$file_prefix;
     
 }
 
@@ -58,64 +59,25 @@ my $has_sequential_update = 0;
     # "Simulate the state space using an update schedule" if sequential update, otherwise synchronuous update
     # This will be changed once we find out, why value instead of label is
     # printed to html form for check boxes
-my $update_schedule = "";
+my $update_schedule = $ENV{POLYNOME_UPDATE_SCHEDULE};
     # if has_sequential_update is true, this is a string
     # of the form e.g. "1 3 4 2 5" (indices start at 1, and should include all 1..$n_nodes values in some order).
 
-my $input_data = "1.2  2.3  3.4
-1.1  1.2  1.3
-2.2  2.3  2.4
-0.1  0.2  0.3";
+my $input_data = $ENV{POLYNOME_INPUT_DATA};
 my $input_file;
 
-my $show_discretized_data = 1;
-my $show_wiring_diagram   = 0;
-my $wiring_diagram_format = 0;
-my $show_statespace       = 0;
+my $show_discretized_data = $ENV{POLYNOME_SHOW_DISCRETIZED};
+my $show_wiring_diagram   = $ENV{POLYNOME_WIRING_DIAGRAM};
+my $wiring_diagram_format = $ENV{POLYNOME_WIRING_DIAGRAM_FORMAT};
+my $show_statespace       = $ENV{POLYNOME_STATE_SPACE};
     ### FBH for now, the statespace is always created, but only when
     ### $show_statespace is set, the link is reported to the user
 
-my $statespace_format  = ".gif";
-my $show_probabilities_in_state_space = 0;
+my $statespace_format  = $ENV{POLYNOME_STATE_SPACE_FORMAT};
+my $show_probabilities_in_state_space = $ENV{POLYNOME_SHOW_PROBABILITIES_STATE_SPAC};
     # if set, probabilities are drawn in state space
 
-my $show_functions = 0;
-
-###my $p_value                = 2;
-###my $n_nodes                = param('n_nodes');
-###my $is_deterministic_model = param('is_deterministic_model');
-###    # values Deterministic, Stochastic
-###
-#### to generate the model, synchronuous updates are used, but the user can
-#### choose to simulate the model using sequential updates
-###my $has_sequential_update = param('has_sequential_update');
-###    # "Simulate the state space using an update schedule" if sequential update, otherwise synchronuous update
-###    # This will be changed once we find out, why value instead of label is
-###    # printed to html form for check boxes
-###my $update_schedule = param('update_schedule');
-###    # if has_sequential_update is true, this is a string
-###    # of the form e.g. "1 3 4 2 5" (indices start at 1, and should include all 1..$n_nodes values in some order).
-###
-###my $input_file = upload('input_file');
-###my $input_data = param('input_data');
-###
-###### FBH I have no idea what this is used for?!
-###### $option_box = param('option_box');
-###### $trajectory_value = param('trajectory_value');
-###
-###my $show_discretized_data = param('show_discretized_data');
-###my $show_wiring_diagram   = param('show_wiring_diagram');
-###my $wiring_diagram_format = param('wiring_diagram_format');
-###my $show_statespace       = param('show_statespace');
-###    ### FBH for now, the statespace is always created, but only when
-###    ### $show_statespace is set, the link is reported to the user
-###
-###my $statespace_format  = param('statespace_format');
-###my $show_probabilities_in_state_space = param('show_probabilities_in_state_space');
-###    # if set, probabilities are drawn in state space
-###
-###my $show_functions = param('show_functions');
-
+my $show_functions = $ENV{POLYNOME_SHOW_FUNCTIONS};
 
 #check routines
 # p_value, n_nodes: are they numbers and allowed numbers?
@@ -170,7 +132,7 @@ if ( $p_value && $n_nodes ) {
 
         ## if only the wiring diagram but not the functions are needed, minsets()
         ## is used
-        if ( is_data_consistent( \@list_of_discretized_datafiles, $p_value, $n_nodes ) )
+        if ( is_data_consistent( \@list_of_discretized_datafiles, $p_value, $n_nodes, $file_prefix.".consistent.txt" ) )
         {
             if ( $n_nodes <= 10 ) {
                 $wiring_diagram_filename
@@ -206,7 +168,7 @@ if ( $p_value && $n_nodes ) {
 #            }
 #            else
 #            {
-#                if(!is_data_consistent($discretized_datafile,$p_value,$n_nodes))
+#                if(!is_data_consistent($discretized_datafile,$p_value,$n_nodes,$file_prefix.".consistent.txt"))
 #                {
 #                    make_consistent();
 #                }
@@ -220,7 +182,7 @@ if ( $p_value && $n_nodes ) {
 
         if ( $n_nodes <= 10 ) {
     
-            if (is_data_consistent( \@list_of_discretized_datafiles, $p_value, $n_nodes))
+            if (is_data_consistent( \@list_of_discretized_datafiles, $p_value, $n_nodes, $file_prefix.".consistent.txt"))
             {
                 my $function_file
                     = sgfan( \@list_of_discretized_datafiles, $p_value,
