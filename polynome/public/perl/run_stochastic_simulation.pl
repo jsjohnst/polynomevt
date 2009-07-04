@@ -7,7 +7,7 @@ $MAX_NET_SIZE = 1024;    # 2^10
 sub run_stochastic_simulation()
 {
     my ($p_value, $n_nodes, $file_prefix, $show_wiring_diagram, $wiring_diagram_format, $show_statespace,
-    $statespace_format, $show_probabilities, $function_file) = @_;
+    $statespace_format, $show_probabilities, $function_file, $http_base_path) = @_;
 #	if($option_box eq "All trajectories from all possible initial states")
 #	{
 		print "<font color=blue><b>ANALYSIS OF THE STATE SPACE</b></font>"." [p = ".$p_value.", n = ".$n_nodes;
@@ -38,7 +38,7 @@ $updsequ_flag  = "0";
 				if(-e "$file_prefix.out.$statespace_format")
 				{
 #print "\n not alright";
-					print  "<A href=\"$file_prefix.out.$statespace_format\"
+					print  "<A href=\"$http_base_path$file_prefix.out.$statespace_format\"
                     target=\"_blank\"><font color=green><i>Click to view the state space graph.</i></font></A><br>";
 				}
 			}
@@ -49,7 +49,7 @@ $updsequ_flag  = "0";
 	  #if(-e "$file_prefix.wiring-diagram.$wiring_diagram_format")
 	  if(-e "$file_prefix.wiring-diagram.$statespace_format")
 		{
-				print  "<A href=\"$file_prefix.wiring-diagram.$wiring_diagram_format\"
+				print  "<A href=\"$http_base_path$file_prefix.wiring-diagram.$wiring_diagram_format\"
                 target=\"_blank\"><font color=green><i>Click to view the
                 wiring diagram.</i></font></A><br>";
 				`rm -f $file_prefix.wiring-diagram.dot` if(!$DEBUG); 
