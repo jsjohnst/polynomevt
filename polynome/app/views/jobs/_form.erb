@@ -1,0 +1,115 @@
+<% form_for :job, @job, :url => { :action => "generate" }, :html => { :multipart => true } do |form| %>
+<div style="font-family:Verdana,Arial">
+    <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
+    <table background="gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
+        <tr><td align="center" colspan="2"><b><font size="5">Polynome: Discrete System Identification</font></b>
+            <p>If this is your first time, please read the <a href="tutorial.html" target="_blank">tutorial</a>.
+            It is important that you follow the format specified in the tutorial.<br>
+            Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>
+        </td></tr>
+        <tr><td>
+            <table align="center" border="0" bgcolor="#ABABAB"  cellpadding="1" cellspacing="0">
+                <tr><td>
+                    <table border="0" bgcolor="#FFFFCC" width="100%" cellspacing="0" cellpadding="1">
+                        <tr valign="top"><td bgcolor="#FF8000" nowrap><strong><font color="#FFFFFF">Input Specification</font></strong></td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2"><strong>Type of Data</strong></font></td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
+	<%= form.text_field :nodes, :size => 2, :maxlength => 2 %>
+	<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()">
+                            <font size="1">what is this?</font></a>
+                        </td></tr>
+<!--
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2"><strong>Type of Model</strong></font>
+                            <a href="tutorial.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
+                            <font size="1">what is this?</font></a>
+                        </td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2">Select the type of polynomial dynamical system to be generated:<br>
+                            <input type="radio" name="is_deterministic_model" value="Deterministic" checked="checked" />Deterministic<br />
+                            <input type="radio" name="is_deterministic_model" value="Stochastic" />Stochastic<br />
+                        </td></tr>
+-->
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2"><strong>Type of Simulation</strong></font>
+                            <a href="tutorial.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
+                            <font size="1">what is this?</font></a>
+                        </td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2">
+	<%= form.check_box :simulate %>
+	<label for="job_simulate">Simulate the state space using an update schedule?</label> 
+            			    <br>&nbsp;&nbsp;&nbsp;&nbsp; - Enter update schedule separated by spaces
+                            <input type="text" name="update_schedule"  size="20" /><br>
+			                &nbsp;&nbsp;&nbsp;&nbsp; - If none is entered, then the nodes will be simulated in parallel.</font>
+                        </td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td bgcolor="#FF8000" nowrap>
+                            <b><font color="#FFFFFF">Output Options<span style="background-color:#808080"></span></font></b>&nbsp;&nbsp;&nbsp;
+                        </td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap>
+                            <font size="2">Select output to view and file format.&nbsp;
+                            <a href="tutorial.html#G" onmouseover="doTooltip(event,6)" onmouseout="hideTip()">
+                            <font size="1">what is this?</font></a><br><label><input type="checkbox" name="show_wiring_diagram" value="Wiring diagram" label="Wiring diagram" />Wiring diagram</label>&nbsp;&nbsp;&nbsp;
+                            <select name="wiring_diagram_format">
+                                <option value="*.gif">*.gif</option>
+                                <option value="*.jpg">*.jpg</option>
+                                <option value="*.png">*.png</option>
+                                <option value="*.ps">*.ps</option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type="checkbox" name="show_discretized_data" value="Show Discretized data" label="Show Discretized data" />Show Discretized data</label><br><label><input type="checkbox" name="show_statespace" value="State space graph" label="State space graph" />State space graph</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="statespace_format">
+                                <option value="*.gif">*.gif</option>
+                                <option value="*.jpg">*.jpg</option>
+                                <option value="*.png">*.png</option>
+                                <option value="*.ps">*.ps</option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input type="checkbox" name="show_functions" value="Show functions for Polynomial dynamical system" label="Show functions for Polynomial dynamical system" />Show functions for Polynomial dynamical system</label><br><label><input type="checkbox" name="show_probabilities" value="Print probabilities in state space" label="how
+                        probabilities on the state space\?" />Print probabilities in state space</label><br>
+                            </font>
+                        </td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                    </table>
+                </td></tr>
+            </table>
+        </td>
+        <td>
+            <table cellSpacing="0" cellPadding="1" align="left" bgColor="#ababab" border="0">
+                <tr><td>
+                    <table cellSpacing="0" cellPadding="1" width="100%" bgColor="#ffffcc" border="0">
+                        <tr vAlign=top><td nowrap bgColor="#ff8000"><strong><font color="#ffffff">Input Data</font></strong></td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><font size="2">Upload data file: </font>
+                            <input type="file" name="input_file"  />&nbsp;
+                            <a href="tutorial.html#F" onmouseover="doTooltip(event,2)" onmouseout="hideTip()">
+                            <font size="1">what is this?</font></a>
+                        </td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr><td><div align="center"><b>OR</b> <font size="2" color="#006C00">(Edit data below)</font></div></td></tr>
+                        <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+                        <tr valign="top"><td nowrap><div align="center"><textarea name="input_data"  rows="8" cols="50">1.2  2.3  3.4
+1.1  1.2  1.3
+2.2  2.3  2.4
+0.1  0.2  0.3</textarea></td></tr>
+       <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
+        </table>
+        </td></tr>
+        </table>
+        </td></tr>
+        <tr>
+        <td>
+        </td>
+        </tr>
+        <tr><td align="center" colspan="2">
+            <%= submit_tag 'Generate' %>
+ 			<br><font color="#006C00"><br>
+            <i>Output will be displayed below.
+            <b>Note</b>: Computation time depends on data size and internet connection.
+            </i></font>
+        </td></tr>
+    </table>
+</div>
+<% end %>
