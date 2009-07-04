@@ -195,7 +195,7 @@ if ( $p_value && $n_nodes ) {
                     $p_value, $n_nodes, $file_prefix,
                     $show_wiring_diagram, $wiring_diagram_format,
                     $show_statespace,     $statespace_format,
-                    $show_probabilities_in_state_space, $function_file
+                    $show_probabilities_in_state_space, $function_file, $http_base_path
                 );
             }
             else {
