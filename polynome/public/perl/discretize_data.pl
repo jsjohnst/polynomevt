@@ -18,9 +18,18 @@ sub discretize_data() {
     
     my $datafile_string = make_m2_string_from_array( @list_of_datafiles );
     my $discretized_datafile_string = make_m2_string_from_array( @list_of_discretized_datafiles );
-   
-    `M2 Discretize.m2 --silent -q -e \"discretize( $datafile_string,
-    $discretized_datafile_string, $p_value ); exit 0; \" > out.txt`;
+
+	my $pid = fork();
+	if(not defined $pid) {
+		print "could not fork!";
+	} elsif($pid == 0) {
+		# inside child
+		`M2 Discretize.m2 --silent -q -e \"discretize( $datafile_string,
+	    $discretized_datafile_string, $p_value ); exit 0; \" > out.txt 2> /dev/null`;
+		exit(0);
+	} else {
+		waitpid($pid, 0);
+	}
 
     
     foreach my $discretized_datafile (@list_of_discretized_datafiles) {

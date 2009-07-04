@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090704073236) do
+ActiveRecord::Schema.define(:version => 20090704125226) do
 
   create_table "jobs", :force => true do |t|
     t.integer  "nodes"

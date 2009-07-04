@@ -15,7 +15,17 @@ sub generate_wiring_diagram() {
     my @list_of_datafiles = @{$ref_list_of_datafiles};
     my $datafiles_string = make_m2_string_from_array( @list_of_datafiles );
 
-    `M2 wd.m2 --silent -q -e \"wd( $datafiles_string, \\\"$dot_file\\\",  $p_value, $n_nodes );exit 0;\"`;
+	my $pid = fork();
+	if(not defined $pid) {
+		print "could not fork!";
+	} elsif($pid == 0) {
+		# inside child
+		`M2 wd.m2 --silent -q -e \"wd( $datafiles_string, \\\"$dot_file\\\",  $p_value, $n_nodes );exit 0;\" > /dev/null 2>&1`;
+		exit(0);
+	} else {
+		waitpid($pid, 0);
+	}
+
     if ( -e $dot_file ) {
         $graph = $file_prefix. ".wiring-diagram." . $file_format;
         `dot -T$file_format -o$graph $dot_file`;
