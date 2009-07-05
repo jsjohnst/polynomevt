@@ -1,6 +1,7 @@
 require 'digest/md5'
 
 include Spawn
+include Macauley
 
 class JobsController < ApplicationController
   layout "main"
@@ -14,6 +15,7 @@ class JobsController < ApplicationController
     @error_message = params[:error_message];
   end
   def generate
+    @p_value = 2;
     if(!params || !params[:job])
       logger.info "Inside Redirect!";
       redirect_to :action => "index";
@@ -34,8 +36,30 @@ class JobsController < ApplicationController
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
     
-    spawn do 
-        @perl_output = `./polynome.pl #{@job.nodes}`
-    end
+    
+    File.open("/tmp/macauley.data.txt", 'w') {|f| f.write("0 1 1
+0 0 0
+1 1 1
+0 0 0") }
+
+    self.generate_wiring_diagram("/tmp/macauley.data.txt", "gif", @p_value, @job.nodes);
+    
+    
+    #spawn do 
+    #    @perl_output = `./polynome.pl #{@job.nodes}`
+    #end
+  end
+  
+  def generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
+    dotfile = "public/perl/" + @file_prefix + ".wiring-diagram.dot";
+    graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
+    datafiles_string = make_m2_string_from_array(discretized_data_files);
+    
+    macauley_opts = {};
+    macauley_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
+        '\",  ' + p_value + ', ' + n_nodes + ' )';
+    macauley_opts[:m2_file] = "wd.m2";
+    macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
+    macauley2(macauley_opts);
   end
 end
