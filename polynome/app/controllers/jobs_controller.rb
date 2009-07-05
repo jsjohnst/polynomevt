@@ -46,6 +46,8 @@ class JobsController < ApplicationController
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
     self.generate_wiring_diagram(discretized_datafiles, "gif", @p_value, @job.nodes);
     
+    `echo 'var data = 1' > public/perl/" + @file_prefix + ".done.js"`;
+    
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
     #end
