@@ -1,4 +1,7 @@
 <%= render :partial => "form" %>
+<p>
+The links below will show your results once we have processed your data. 
+</p>
 <% if @job.show_discretized %>
     <a href="/perl/<%= @file_prefix  %>.discretized-input.txt" target="_blank"><font
     color=green><i>Discretized Data<br></i></font></a>
