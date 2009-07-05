@@ -35,30 +35,38 @@ class JobsController < ApplicationController
     Digest::MD5.hexdigest(params[:job][:input_data]);
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
-    
-    
-    File.open("/tmp/macauley.input.txt", 'w') {|f| f.write("0 1 1
-0 0 0
-1 1 1
-0 0 0") }
 
-    datafiles = [];
-    datafiles.push("/tmp/macauley.input.txt");
+    datafiles = self.split_data_into_files(params[:job][:input_data]);
     
-    discretized_datafiles = doscretoze_data(datafiles, @p_value);
-
+    discretized_datafiles = [];
+    datafiles.each { |datafile|
+      discretized_datafiles.push(datafile.gsub(/input/, 'discretized-input'));
+    }
+    
+    self.discretize_data(datafiles, discretized_datafiles, @p_value);
     self.generate_wiring_diagram(discretized_datafiles, "gif", @p_value, @job.nodes);
-    
     
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
     #end
   end
   
-  def discretize_data(datafiles, p_value)
-    discretized_datafiles = [];
-    datafiles.each { |datafile|
-      discretized_datafiles.push(data.gsub(/input/, 'discretized-input'));
+  def split_data_into_files(data)
+    datafile = "public/perl/" + @file_prefix + ".input.txt";
+    File.open(datafile, 'w') {|f| f.write(data) }
+    datafiles = [];
+    datafiles.push(datafile);
+    return datafiles;
+  end
+  
+  def discretize_data(datafiles, discretized_datafiles, p_value)
+    tmp = datafiles;
+    tmp.each { |datafile|
+      datafiles.push("../" + datafile);
+    }
+    tmp = discretized_datafiles;
+    tmp.each { |datafile|
+      discretized_datafiles.push("../" + datafile);
     }
     datafiles_string = make_m2_string_from_array(datafiles);
     discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
@@ -67,7 +75,8 @@ class JobsController < ApplicationController
     macauley_opts[:m2_command] = 'discretize( ' + datafiles_string + ', ' + 
         discretized_datafiles_string + ', ' + p_value + ' )';
     macauley_opts[:m2_file] = "Discretize.m2";
-    return discretized_datafiles;
+    macauley_opts[:m2_wait] = 1;
+    macauley2(macauley_opts);
   end
   
   def generate_wiring_diagram(discretized_datafiles, file_format, p_value, n_nodes)
