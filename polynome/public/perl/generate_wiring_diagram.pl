@@ -49,7 +49,7 @@ sub minsets_generate_wiring_diagram() {
     my $dot_file = $file_prefix. ".wiring-diagram.dot";
     my @list_of_datafiles = @{$ref_list_of_datafiles};
     my $datafiles_string = make_m2_string_from_array( @list_of_datafiles );
-    `M2 minsets-web.m2 --silent -q -e \"minsetsWD( $datafiles_string, \\\"$dot_file\\\",  $p_value, $n_nodes );exit 0;\"`;
+    `M2 minsets-web.m2 --silent -q -e \"minsetsWD( $datafiles_string, \\\"$dot_file\\\",  $p_value, $n_nodes ); exit 0;\"`;
     
     if ( -e $dot_file ) {
         $graph = $file_prefix. ".wiring-diagram." . $file_format;
