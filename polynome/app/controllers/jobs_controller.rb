@@ -36,8 +36,11 @@ class JobsController < ApplicationController
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
 
+    # TODO: Fix this!
+    `echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
+
     datafiles = self.split_data_into_files(params[:job][:input_data]);
-    
+        
     discretized_datafiles = [];
     datafiles.each { |datafile|
       discretized_datafiles.push(datafile.gsub(/input/, 'discretized-input'));
@@ -46,7 +49,7 @@ class JobsController < ApplicationController
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
     self.generate_wiring_diagram(discretized_datafiles, "gif", @p_value, @job.nodes);
     
-    `echo 'var data = 1' > public/perl/" + @file_prefix + ".done.js"`;
+
     
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
@@ -57,19 +60,11 @@ class JobsController < ApplicationController
     datafile = "public/perl/" + @file_prefix + ".input.txt";
     File.open(datafile, 'w') {|f| f.write(data) }
     datafiles = [];
-    datafiles.push(datafile);
+    datafiles.push(Dir.getwd + "/" + datafile);
     return datafiles;
   end
   
-  def discretize_data(datafiles, discretized_datafiles, p_value)
-    tmp = datafiles;
-    tmp.each { |datafile|
-      datafiles.push("../" + datafile);
-    }
-    tmp = discretized_datafiles;
-    tmp.each { |datafile|
-      discretized_datafiles.push("../" + datafile);
-    }
+  def discretize_data(datafiles, discretized_datafiles, p_value)    
     datafiles_string = make_m2_string_from_array(datafiles);
     discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
     
@@ -84,7 +79,9 @@ class JobsController < ApplicationController
   def generate_wiring_diagram(discretized_datafiles, file_format, p_value, n_nodes)
     dotfile = "public/perl/" + @file_prefix + ".wiring-diagram.dot";
     graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
+
     datafiles_string = make_m2_string_from_array(discretized_datafiles);
+    logger.info "Datafiles: " + datafiles_string;
     
     macauley_opts = {};
     macauley_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
