@@ -7,8 +7,14 @@ class JobsController < ApplicationController
 1.1  1.2  1.3
 2.2  2.3  2.4
 0.1  0.2  0.3");
+    @error_message = params[:error_message];
   end
   def generate
+    if(!params || !params[:job])
+      logger.info "Inside Redirect!";
+      redirect_to :action => "index";
+      return;
+    end
     if(params[:job][:input_file])
       logger.info "Reading :input_file into :input_data";
       params[:job][:input_data] = params[:job][:input_file].read;
