@@ -11,6 +11,7 @@ use Digest::MD5 qw(md5_hex);
 
 sub make_file_prefix () {
 	my $input_data = $ENV{POLYNOME_INPUT_DATA};
+    # use md5 check sum for filename
 	my $file_prefix = md5_hex($input_data);
     $file_prefix =~ s/\./\-/g;
     #my ( $sec, $min, $hr ) = localtime();
