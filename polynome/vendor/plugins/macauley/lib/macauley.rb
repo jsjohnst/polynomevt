@@ -8,6 +8,7 @@ module Macauley
     # options.post_m2_command
     # options.m2_options
     # options.m2_script_path
+    # options.m2_wait
     
     # TODO: Make sure m2_file actually exists
     if(!options[:m2_file] || !options[:m2_command])
@@ -25,12 +26,19 @@ module Macauley
     end
 
     # fork a background task to run M2
-    spawn do
+    spawn_id = spawn do
       # TODO: Check the return value of M2 and handle errors
       `cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\"; cd ..;`;
       if(options[:post_m2_command])
         `#{options[:post_m2_command]}`;
       end
+    end
+    
+    if(options[:m2_wait])
+      logger.info "Fixing to wait for M2 to complete as requested"
+      wait(spawn_id);
+    else
+      logger.info "Returning immediately without waiting for M2 to finish"
     end
   end
   
