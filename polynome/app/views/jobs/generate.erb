@@ -1,2 +1,7 @@
 <%= render :partial => "form" %>
-<%= @perl_output %>
+<% if @job.wiring_diagram %>
+    <a href="/perl/<%= @file_prefix  %>.wiring-diagram.<%=
+    @job.wiring_diagram_format %>" target="_blank"><font color=green><i>Wiring diagram.</i></font></a>
+<% end %>
+
+<!-- <%= @perl_output %> -->
