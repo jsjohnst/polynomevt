@@ -15,7 +15,7 @@ class JobsController < ApplicationController
     @error_message = params[:error_message];
   end
   def generate
-    @p_value = 2;
+    @p_value = "2";
     if(!params || !params[:job])
       logger.info "Inside Redirect!";
       redirect_to :action => "index";
