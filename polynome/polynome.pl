@@ -74,7 +74,7 @@ my $show_statespace       = $ENV{POLYNOME_STATE_SPACE};
     ### $show_statespace is set, the link is reported to the user
 
 my $statespace_format  = $ENV{POLYNOME_STATE_SPACE_FORMAT};
-my $show_probabilities_in_state_space = $ENV{POLYNOME_SHOW_PROBABILITIES_STATE_SPAC};
+my $show_probabilities_in_state_space = $ENV{POLYNOME_SHOW_PROBABILITIES_STATE_SPACE};
     # if set, probabilities are drawn in state space
 
 my $show_functions = $ENV{POLYNOME_SHOW_FUNCTIONS};
