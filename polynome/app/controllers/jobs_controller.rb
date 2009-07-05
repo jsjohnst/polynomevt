@@ -1,5 +1,6 @@
 require 'digest/md5'
-require 'spawn'
+
+include Spawn
 
 class JobsController < ApplicationController
   layout "main"
@@ -33,7 +34,6 @@ class JobsController < ApplicationController
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
     
-
     spawn do 
         @perl_output = `./polynome.pl #{@job.nodes}`
     end
