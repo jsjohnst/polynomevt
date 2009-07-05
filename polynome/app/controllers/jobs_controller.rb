@@ -57,7 +57,7 @@ class JobsController < ApplicationController
     
     macauley_opts = {};
     macauley_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
-        '\",  ' + p_value + ', ' + n_nodes + ' )';
+        '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
     macauley_opts[:m2_file] = "wd.m2";
     macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
     macauley2(macauley_opts);
