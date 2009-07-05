@@ -208,6 +208,9 @@ if ( $p_value && $n_nodes ) {
             print "Cannot have more than 10 nodes at this time.<br>";
         }
     }
+} 
+else {
+	print
+        "<font color=red>The number of nodes was not set correctly. Number must be greater than 0</font><br>";
 }
-
 
