@@ -62,6 +62,18 @@ class JobsController < ApplicationController
     macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
     macauley2(macauley_opts);
   end
+  def minsets_generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
+    dotfile = "public/perl/" + @file_prefix + ".wiring-diagram.dot";
+    graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
+    datafiles_string = make_m2_string_from_array(discretized_data_files);
+    
+    macauley_opts = {};
+    macauley_opts[:m2_command] = 'minsetsWD( ' + datafiles_string + ', \"../' + dotfile + 
+        '\",  ' + p_value.to_s + ', ' + n_nodes.to_s + ' )';
+    macauley_opts[:m2_file] = "minsets-web.m2";
+    macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
+    macauley2(macauley_opts);
+  end
   def is_data_consistent(discretized_data_files, p_value, n_nodes)
     function_file= "public/perl/" + @file_prefix + ".consistent.txt";
     datafiles_string = make_m2_string_from_array(discretized_data_files);
