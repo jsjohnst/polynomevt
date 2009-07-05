@@ -47,7 +47,8 @@ class JobsController < ApplicationController
     }
     
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
-    self.generate_wiring_diagram(discretized_datafiles, "gif", @p_value, @job.nodes);
+    self.generate_wiring_diagram(discretized_datafiles,
+    @job.wiring_diagram_format, @p_value, @job.nodes);
     
 
     
