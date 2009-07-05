@@ -62,14 +62,24 @@ class JobsController < ApplicationController
     macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
     macauley2(macauley_opts);
   end
-  def is_data_consistent(data_files, p_value, n_nodes)
+  def is_data_consistent(discretized_data_files, p_value, n_nodes)
     function_file= "public/perl/" + @file_prefix + ".consistent.txt";
-    datafiles_string = make_m2_string_from_array(data_files);
+    datafiles_string = make_m2_string_from_array(discretized_data_files);
     
     macauley_opts = {};
     macauley_opts[:m2_command] = 'isConsistent( ' + datafiles_string + ', '  +
     p_value.to_s + ', ' + n_nodes.to_s + ' )';
     macauley_opts[:m2_file] = "isConsistent.m2";
+    macauley2(macauley_opts);
+  end
+  def sgfan(discretized_data_files, file_format, p_value, n_nodes)
+    functionfile = "public/perl/" + @file_prefix + ".functionfile.txt";
+    datafiles_string = make_m2_string_from_array(discretized_data_files);
+    
+    macauley_opts = {};
+    macauley_opts[:m2_command] = 'sgfan( ' + datafiles_string + ', \"../' +
+    functionfile + '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
+    macauley_opts[:m2_file] = "func.m2";
     macauley2(macauley_opts);
   end
 end
