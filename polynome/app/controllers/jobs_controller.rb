@@ -37,12 +37,17 @@ class JobsController < ApplicationController
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
     
     
-    File.open("/tmp/macauley.data.txt", 'w') {|f| f.write("0 1 1
+    File.open("/tmp/macauley.input.txt", 'w') {|f| f.write("0 1 1
 0 0 0
 1 1 1
 0 0 0") }
 
-    self.generate_wiring_diagram("/tmp/macauley.data.txt", "gif", @p_value, @job.nodes);
+    datafiles = [];
+    datafiles.push("/tmp/macauley.input.txt");
+    
+    discretized_datafiles = doscretoze_data(datafiles, @p_value);
+
+    self.generate_wiring_diagram(discretized_datafiles, "gif", @p_value, @job.nodes);
     
     
     #spawn do 
@@ -50,10 +55,25 @@ class JobsController < ApplicationController
     #end
   end
   
-  def generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
+  def discretize_data(datafiles, p_value)
+    discretized_datafiles = [];
+    datafiles.each { |datafile|
+      discretized_datafiles.push(data.gsub(/input/, 'discretized-input'));
+    }
+    datafiles_string = make_m2_string_from_array(datafiles);
+    discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
+    
+    macauley_opts = {};
+    macauley_opts[:m2_command] = 'discretize( ' + datafiles_string + ', ' + 
+        discretized_datafiles_string + ', ' + p_value + ' )';
+    macauley_opts[:m2_file] = "Discretize.m2";
+    return discretized_datafiles;
+  end
+  
+  def generate_wiring_diagram(discretized_datafiles, file_format, p_value, n_nodes)
     dotfile = "public/perl/" + @file_prefix + ".wiring-diagram.dot";
     graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
-    datafiles_string = make_m2_string_from_array(discretized_data_files);
+    datafiles_string = make_m2_string_from_array(discretized_datafiles);
     
     macauley_opts = {};
     macauley_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
