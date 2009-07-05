@@ -18,4 +18,10 @@
     color=green><i>Statespace<br></i></font></a>
 <% end %>
 
+<div id="completion_msg"><font color="red">Please wait while we process your data...</font></div>
+	
+<%= javascript_include_tag 'perl_completion' %>
+<script>
+	setTimeout("check_perl_completed('<%= @file_prefix  %>');", 2000);
+</script>
 <!-- <%= @perl_output %> -->
