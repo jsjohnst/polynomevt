@@ -1,6 +1,9 @@
+require 'digest/md5'
+require 'spawn'
+
 class JobsController < ApplicationController
   layout "main"
-  
+
   def index
     @job = Job.new(:nodes => 3, :input_data => 
 "1.2  2.3  3.4
@@ -24,6 +27,15 @@ class JobsController < ApplicationController
     params[:job].each { | key, value |
       ENV['POLYNOME_' + key.upcase] = value;
     }
-    @perl_output = `./polynome.pl #{@job.nodes}`
+    # create file prefix using md5 check sum as part of the filename
+    ENV['POLYNOME_FILE_PREFIX'] = 'files/files-' +
+    Digest::MD5.hexdigest(params[:job][:input_data]);
+    logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
+    @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
+    
+
+    spawn do 
+        @perl_output = `./polynome.pl #{@job.nodes}`
+    end
   end
 end

@@ -9,19 +9,15 @@ use Fcntl qw( :flock );
 use strict;
 use Digest::MD5 qw(md5_hex);
 
-sub make_file_prefix () {
-	my $input_data = $ENV{POLYNOME_INPUT_DATA};
-    # use md5 check sum for filename
-	my $file_prefix = md5_hex($input_data);
-    $file_prefix =~ s/\./\-/g;
-    #my ( $sec, $min, $hr ) = localtime();
-    #$file_prefix = $file_prefix . '-' . $sec . '-' . $min . '-' . $hr;
-
-    #$file_prefix = $sec.'-'.$min.'-'.$hr;
-    $file_prefix = 'files-' . $file_prefix;
-    return "files/".$file_prefix;
-    
-}
+#sub make_file_prefix () {
+#	my $input_data = $ENV{POLYNOME_INPUT_DATA};
+#    # use md5 check sum for filename
+#	my $file_prefix = md5_hex($input_data);
+#    $file_prefix =~ s/\./\-/g;
+#    $file_prefix = 'files-' . $file_prefix;
+#    return "files/".$file_prefix;
+#    
+#}
 
 chdir("./public/perl/");
 
@@ -80,6 +76,8 @@ my $show_probabilities_in_state_space = $ENV{POLYNOME_SHOW_PROBABILITIES_STATE_S
 
 my $show_functions = $ENV{POLYNOME_SHOW_FUNCTIONS};
 
+my $file_prefix = $ENV{POLYNOME_FILE_PREFIX};
+
 #check routines
 # p_value, n_nodes: are they numbers and allowed numbers?
 # is # of nodes equal to # of columns in data? is data in number format
@@ -96,7 +94,6 @@ $statespace_format     =~ s/\*\.//;
 $wiring_diagram_format =~ s/\*\.//;
 
 if ( $p_value && $n_nodes ) {
-    my $file_prefix = make_file_prefix();
     $input_file
         = create_input_datafile( $file_prefix, $input_file, $input_data );
         unless (data_has_correct_format( $n_nodes, $input_file ) ) {
