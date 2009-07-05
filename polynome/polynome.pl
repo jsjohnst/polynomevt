@@ -108,7 +108,7 @@ if ( $p_value && $n_nodes ) {
         = discretize_data( \@list_of_input_files, $p_value, $file_prefix );
 
     my $discretized_datafile = concat_files( \@list_of_discretized_datafiles,
-    $file_prefix. ".input.txt" );
+    $file_prefix. ".discretized-input.txt" );
     if ($discretized_datafile ) {
         if ($show_discretized_data) {
             print
