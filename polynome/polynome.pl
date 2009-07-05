@@ -93,6 +93,8 @@ my $file_prefix = $ENV{POLYNOME_FILE_PREFIX};
 $statespace_format     =~ s/\*\.//;
 $wiring_diagram_format =~ s/\*\.//;
 
+system("rm $file_prefix.done.js");
+
 if ( $p_value && $n_nodes ) {
     $input_file
         = create_input_datafile( $file_prefix, $input_file, $input_data );
@@ -212,3 +214,4 @@ else {
         "<font color=red>The number of nodes was not set correctly. Number must be greater than 0</font><br>";
 }
 
+system("echo 'var done = 1;' > $file_prefix.done.js");
