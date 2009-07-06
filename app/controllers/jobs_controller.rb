@@ -48,6 +48,7 @@ class JobsController < ApplicationController
 
     # MES: need to validate the input file, using n_nodes
     # MES: need to validate n_nodes, p_value
+    # MES:
     
     datafiles = self.split_data_into_files(params[:job][:input_data]);
         
