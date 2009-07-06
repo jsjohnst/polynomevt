@@ -1,6 +1,6 @@
-module Macauley
-  # run a Macauley job via M2
-  def macauley2(options = {})
+module Macaulay
+  # run a Macaulay job via M2
+  def macaulay2(options = {})
     # available params:
     #
     # options.m2_file
@@ -22,7 +22,7 @@ module Macauley
     
     # if no script path is provided, then default to sane defaults
     if(!options[:m2_script_path]) 
-      options[:m2_script_path] = "macauley2/"; 
+      options[:m2_script_path] = "macaulay2/"; 
     end
 
     # fork a background task to run M2

@@ -1,7 +1,7 @@
 require 'digest/md5'
 
 include Spawn
-include Macauley
+include Macaulay
 
 class JobsController < ApplicationController
   layout "main"
