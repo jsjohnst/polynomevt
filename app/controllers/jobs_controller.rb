@@ -8,10 +8,16 @@ class JobsController < ApplicationController
 
   def index
     @job = Job.new(:nodes => 3, :input_data => 
-"1.2  2.3  3.4
-1.1  1.2  1.3
-2.2  2.3  2.4
-0.1  0.2  0.3");
+    "0 0 0
+     0 0 0
+     0 0 0
+     0 0 0");
+
+#  "1.2  2.3  3.4
+#  1.1  1.2  1.3
+# 2.2  2.3  2.4
+# 0.1  0.2  0.3");
+
     @error_message = params[:error_message];
   end
   def generate
@@ -40,18 +46,23 @@ class JobsController < ApplicationController
     `echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
     
 
+    # MES: need to validate the input file, using n_nodes
+    # MES: need to validate n_nodes, p_value
+    
     datafiles = self.split_data_into_files(params[:job][:input_data]);
         
-    discretized_datafiles = [];
-    datafiles.each { |datafile|
-      discretized_datafiles.push(datafile.gsub(/input/, 'discretized-input'));
+    discretized_datafiles = datafiles.collect { |datafile|
+      datafile.gsub(/input/, 'discretized-input');
     }
     
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
+
     self.generate_wiring_diagram(discretized_datafiles,
-    @job.wiring_diagram_format, @p_value, @job.nodes);
+      @job.wiring_diagram_format, @p_value, @job.nodes);
 
     self.sgfan(discretized_datafiles, @p_value, @job.nodes);
+    
+    
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
     #end
@@ -69,12 +80,11 @@ class JobsController < ApplicationController
     datafiles_string = make_m2_string_from_array(datafiles);
     discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
     
-    macaulay_opts = {};
-    macaulay_opts[:m2_command] = 'discretize( ' + datafiles_string + ', ' + 
-        discretized_datafiles_string + ', ' + p_value + ' )';
-    macaulay_opts[:m2_file] = "Discretize.m2";
-    macaulay_opts[:m2_wait] = 1;
-    macaulay2(macaulay_opts);
+    macaulay2(  {
+      :m2_command => 'discretize( ' + datafiles_string + ', ' + discretized_datafiles_string + ', ' + p_value + ' )',
+      :m2_file => "Discretize.m2",
+      :m2_wait => 1
+    });
   end
   
   def generate_wiring_diagram(discretized_datafiles, file_format, p_value, n_nodes)
