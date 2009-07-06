@@ -130,7 +130,7 @@ bool Polynomial::Evaluate( NTuple& x )
 	{
 		// The result is the Z2 sum (XOR) of the evaluation
 		// at each monomial that makes up this polynomial
-		y += (*iter).Evaluate( x );
+	  y += (const_cast<Monomial&>(*iter)).Evaluate( x );
 		++iter;
 	}
 	// Return true if the sum is odd, equivalently if y = 1 (mod 2)
@@ -144,7 +144,7 @@ size_t Polynomial::MaxDegree( )
 	PolyIter p_iter = mPoly.begin();
 	while( p_iter != mPoly.end() )
 	{
-		d = p_iter->Count();
+	  d = const_cast<Monomial&>(*p_iter).Count();
 		md = std::max( d, md );	
 		++p_iter;
 	}
@@ -370,7 +370,7 @@ Monomial& Polynomial::operator[]( size_t i )
 		++iter;
 		--i;
 	}
-	return *iter;
+	return const_cast<Monomial&>(*iter);
 }
 
 // Compare this polynomial to another, return true if they are identical
@@ -385,7 +385,7 @@ bool Polynomial::operator==( Polynomial& other )
 	{
 		// not identical if we encounter distinct monomials
 		// This works because mPoly is a set, hence the monomials are sorted
-		if( !(*ita++ == *itb++ ) ) return false;
+	  if( !(const_cast<Monomial&>(*ita++) == const_cast<Monomial&>(*itb++) ) ) return false;
 	}
 	// If we get here the polynomials are identical
 	return true;

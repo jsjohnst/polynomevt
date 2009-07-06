@@ -7,14 +7,14 @@
 #include "BoolModel.h"
 
 // Comparator function for sorting gene pool into ascending order
-bool IsFirstGreater( DynSysModel& first, DynSysModel& second )
+bool IsFirstGreater(const DynSysModel& first, const DynSysModel& second )
 {
-	return first.GetScore() > second.GetScore();
+  return (const_cast<DynSysModel&>(first)).GetScore() > (const_cast<DynSysModel&>(second)).GetScore();
 }
 
-bool IsFirstGreaterPoly( Polynomial& first, Polynomial& second )
+bool IsFirstGreaterPoly(const Polynomial& first, const Polynomial& second )
 {
-	return first.GetPolyProb() > second.GetPolyProb();
+  return (const_cast<Polynomial&>(first)).GetPolyProb() > (const_cast<Polynomial&>(second)).GetPolyProb();
 }
 
 // Destructor

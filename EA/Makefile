@@ -3,12 +3,13 @@ CXXFLAGS += -O2
 OBJ := BitString.o\
     DynSysModel.o \
     FileManager.o \
-    GAModel.o \
     GAParams.o \
     NTuple.o \
-    Polynomial.o \
+    React.o \
     Monomial.o \
-    React.o
+    Polynomial.o \
+    GAModel.o
+
 
 React : $(OBJ)
 
