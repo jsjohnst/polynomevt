@@ -69,12 +69,12 @@ class JobsController < ApplicationController
     datafiles_string = make_m2_string_from_array(datafiles);
     discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
     
-    macauley_opts = {};
-    macauley_opts[:m2_command] = 'discretize( ' + datafiles_string + ', ' + 
+    macaulay_opts = {};
+    macaulay_opts[:m2_command] = 'discretize( ' + datafiles_string + ', ' + 
         discretized_datafiles_string + ', ' + p_value + ' )';
-    macauley_opts[:m2_file] = "Discretize.m2";
-    macauley_opts[:m2_wait] = 1;
-    macauley2(macauley_opts);
+    macaulay_opts[:m2_file] = "Discretize.m2";
+    macaulay_opts[:m2_wait] = 1;
+    macaulay2(macaulay_opts);
   end
   
   def generate_wiring_diagram(discretized_datafiles, file_format, p_value, n_nodes)
@@ -84,12 +84,12 @@ class JobsController < ApplicationController
     datafiles_string = make_m2_string_from_array(discretized_datafiles);
     logger.info "Datafiles: " + datafiles_string;
     
-    macauley_opts = {};
-    macauley_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
+    macaulay_opts = {};
+    macaulay_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
         '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
-    macauley_opts[:m2_file] = "wd.m2";
-    macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
-    macauley2(macauley_opts);
+    macaulay_opts[:m2_file] = "wd.m2";
+    macaulay_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
+    macaulay2(macaulay_opts);
   end
 
   def minsets_generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
@@ -97,44 +97,44 @@ class JobsController < ApplicationController
     graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
     datafiles_string = make_m2_string_from_array(discretized_data_files);
     
-    macauley_opts = {};
-    macauley_opts[:m2_command] = 'minsetsWD( ' + datafiles_string + ', \"../' + dotfile + 
+    macaulay_opts = {};
+    macaulay_opts[:m2_command] = 'minsetsWD( ' + datafiles_string + ', \"../' + dotfile + 
         '\",  ' + p_value.to_s + ', ' + n_nodes.to_s + ' )';
-    macauley_opts[:m2_file] = "minsets-web.m2";
-    macauley_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
-    macauley2(macauley_opts);
+    macaulay_opts[:m2_file] = "minsets-web.m2";
+    macaulay_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
+    macaulay2(macaulay_opts);
   end
   
   def is_data_consistent(discretized_data_files, p_value, n_nodes)
     function_file= "public/perl/" + @file_prefix + ".consistent.txt";
     datafiles_string = make_m2_string_from_array(discretized_data_files);
     
-    macauley_opts = {};
-    macauley_opts[:m2_command] = 'isConsistent( ' + datafiles_string + ', '  +
+    macaulay_opts = {};
+    macaulay_opts[:m2_command] = 'isConsistent( ' + datafiles_string + ', '  +
     p_value.to_s + ', ' + n_nodes.to_s + ' )';
-    macauley_opts[:m2_file] = "isConsistent.m2";
-    return macauley2(macauley_opts);
+    macaulay_opts[:m2_file] = "isConsistent.m2";
+    return macaulay2(macaulay_opts);
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
     functionfile = "public/perl/" + @file_prefix + ".functionfile.txt";
     datafiles_string = make_m2_string_from_array(discretized_data_files);
     
-    macauley_opts = {};
-    macauley_opts[:m2_command] = 'sgfan( ' + datafiles_string + ', \"../' +
+    macaulay_opts = {};
+    macaulay_opts[:m2_command] = 'sgfan( ' + datafiles_string + ', \"../' +
     functionfile + '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
-    macauley_opts[:m2_file] = "func.m2";
-    macauley2(macauley_opts);
+    macaulay_opts[:m2_file] = "func.m2";
+    macaulay2(macaulay_opts);
   end
   
   def minsets(discretized_data_files, file_format, p_value, n_nodes)
     functionfile = "public/perl/" + @file_prefix + ".functionfile.txt";
     datafiles_string = make_m2_string_from_array(discretized_data_files);
     
-    macauley_opts = {};
-    macauley_opts[:m2_command] = 'minsets( ' + datafiles_string + ', \"../' +
+    macaulay_opts = {};
+    macaulay_opts[:m2_command] = 'minsets( ' + datafiles_string + ', \"../' +
     functionfile + '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
-    macauley_opts[:m2_file] = "minsets-web.m2";
-    macauley2(macauley_opts);
+    macaulay_opts[:m2_file] = "minsets-web.m2";
+    macaulay2(macaulay_opts);
   end
 end

@@ -28,7 +28,7 @@ module Macaulay
     # fork a background task to run M2
     spawn_id = spawn do
       # TODO: Check the return value of M2 and handle errors
-      `cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macauley.log 2>&1; cd ..;`;
+      `cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;`;
       if(options[:post_m2_command])
         `#{options[:post_m2_command]}`;
       end
