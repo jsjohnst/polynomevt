@@ -37,7 +37,7 @@ class JobsController < ApplicationController
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
 
     # TODO: Fix this!
-    #`echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
+    `echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
     
 
     datafiles = self.split_data_into_files(params[:job][:input_data]);
@@ -50,9 +50,8 @@ class JobsController < ApplicationController
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
     self.generate_wiring_diagram(discretized_datafiles,
     @job.wiring_diagram_format, @p_value, @job.nodes);
-    
 
-    
+    self.sgfan(discretized_datafiles, @p_value, @job.nodes);
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
     #end
