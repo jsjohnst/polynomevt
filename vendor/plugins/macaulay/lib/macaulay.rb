@@ -28,6 +28,8 @@ module Macaulay
     # fork a background task to run M2
     spawn_id = spawn do
       # TODO: Check the return value of M2 and handle errors
+      logger.info "cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;"
+      
       `cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;`;
       if(options[:post_m2_command])
         `#{options[:post_m2_command]}`;
@@ -57,5 +59,10 @@ module Macaulay
     }
     m2_string += "}";
     return m2_string;
+  end
+  
+  # a shorter synonym for make_m2_string_from_array
+  def m2_string(filenames)
+    make_m2_string_from_array(filenames)
   end
 end

@@ -6,17 +6,24 @@ include Macaulay
 class JobsController < ApplicationController
   layout "main"
 
+  def functionfile_name(prefix)
+    "public/perl/" + prefix + ".functionfile.txt";
+  end
+  
+  def dotfile_name(prefix)
+    "public/perl/" + prefix + ".wiring-diagram.dot";
+  end
+    
+  def graphfile_name(prefix, file_format)
+    "public/perl/" + prefix + ".wiring-diagram." + file_format;
+  end
+  
   def index
     @job = Job.new(:nodes => 3, :input_data => 
-    "0 0 0
-     0 0 0
-     0 0 0
-     0 0 0");
-
-#  "1.2  2.3  3.4
-#  1.1  1.2  1.3
-# 2.2  2.3  2.4
-# 0.1  0.2  0.3");
+    "1.2  2.3  3.4
+1.1  1.2  1.3
+2.2  2.3  2.4
+0.1  0.2  0.3");
 
     @error_message = params[:error_message];
   end
@@ -61,8 +68,8 @@ class JobsController < ApplicationController
     self.generate_wiring_diagram(discretized_datafiles,
       @job.wiring_diagram_format, @p_value, @job.nodes);
 
-    self.sgfan(discretized_datafiles, @p_value, @job.nodes);
-    
+    @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
+    @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
     
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
@@ -77,43 +84,49 @@ class JobsController < ApplicationController
     return datafiles;
   end
   
-  def discretize_data(datafiles, discretized_datafiles, p_value)    
+  def discretize_data_old(datafiles, discretized_datafiles, p_value)    
     datafiles_string = make_m2_string_from_array(datafiles);
     discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
-    
+
     macaulay2(  {
-      :m2_command => 'discretize( ' + datafiles_string + ', ' + discretized_datafiles_string + ', ' + p_value + ' )',
+      :m2_command => "discretize(#{datafiles_string}, #{discretized_datafiles_string}, #{p_value})",
       :m2_file => "Discretize.m2",
       :m2_wait => 1
     });
   end
   
-  def generate_wiring_diagram(discretized_datafiles, file_format, p_value, n_nodes)
-    dotfile = "public/perl/" + @file_prefix + ".wiring-diagram.dot";
-    graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
+  def discretize_data(infiles, outfiles, p_value)    
+    # infiles: list of input file names to be discretized together
+    # outfiles: the names of the output discretized files.  The length
+    #    of infiles and outfiles should be identical.
+    macaulay2(
+      :m2_command => "discretize(#{m2_string(infiles)}, #{m2_string(outfiles)}, #{p_value})",
+      :m2_file => "Discretize.m2",
+      :m2_wait => 1
+      );
 
-    datafiles_string = make_m2_string_from_array(discretized_datafiles);
-    logger.info "Datafiles: " + datafiles_string;
-    
-    macaulay_opts = {};
-    macaulay_opts[:m2_command] = 'wd( ' + datafiles_string + ', \"../' + dotfile + 
-        '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
-    macaulay_opts[:m2_file] = "wd.m2";
-    macaulay_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
-    macaulay2(macaulay_opts);
+  end
+  
+  def generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
+    dotfile = self.dotfile_name(@file_prefix);
+    graphfile = self.graphfile_name(@file_prefix, file_format);
+
+    macaulay2(
+      :m2_command => "wd(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
+      :m2_file => "wd.m2",
+      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}"
+      );
   end
 
   def minsets_generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
-    dotfile = "public/perl/" + @file_prefix + ".wiring-diagram.dot";
-    graphfile = "public/perl/" + @file_prefix + ".wiring-diagram." + file_format;
-    datafiles_string = make_m2_string_from_array(discretized_data_files);
-    
-    macaulay_opts = {};
-    macaulay_opts[:m2_command] = 'minsetsWD( ' + datafiles_string + ', \"../' + dotfile + 
-        '\",  ' + p_value.to_s + ', ' + n_nodes.to_s + ' )';
-    macaulay_opts[:m2_file] = "minsets-web.m2";
-    macaulay_opts[:post_m2_command] = "dot -T" + file_format + " -o " + graphfile + " " + dotfile;
-    macaulay2(macaulay_opts);
+    dotfile = self.dotfile_name(@file_prefix);
+    graphfile = self.graphfile_name(@file_prefix, file_format);
+
+    macaulay2(
+      :m2_command => "minsetsWD(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
+      :m2_file => "minsets-web.m2",
+      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}"
+      );
   end
   
   def is_data_consistent(discretized_data_files, p_value, n_nodes)
@@ -128,24 +141,20 @@ class JobsController < ApplicationController
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
-    functionfile = "public/perl/" + @file_prefix + ".functionfile.txt";
-    datafiles_string = make_m2_string_from_array(discretized_data_files);
-    
-    macaulay_opts = {};
-    macaulay_opts[:m2_command] = 'sgfan( ' + datafiles_string + ', \"../' +
-    functionfile + '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
-    macaulay_opts[:m2_file] = "func.m2";
-    macaulay2(macaulay_opts);
+    functionfile = self.functionfile_name(@file_prefix);
+    macaulay2(
+      :m2_command => "sgfan(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
+      :m2_file => "func.m2"
+      );
+      functionfile;
   end
   
-  def minsets(discretized_data_files, file_format, p_value, n_nodes)
-    functionfile = "public/perl/" + @file_prefix + ".functionfile.txt";
-    datafiles_string = make_m2_string_from_array(discretized_data_files);
-    
-    macaulay_opts = {};
-    macaulay_opts[:m2_command] = 'minsets( ' + datafiles_string + ', \"../' +
-    functionfile + '\",  ' + p_value + ', ' + n_nodes.to_s + ' )';
-    macaulay_opts[:m2_file] = "minsets-web.m2";
-    macaulay2(macaulay_opts);
+  def minsets(discretized_data_files, p_value, n_nodes)
+    functionfile = self.functionfile_name(@file_prefix);
+    macaulay2(
+      :m2_command => "minsets(#{m2_string(discretized_data_files)}, \"#{functionfile}\", #{p_value}, #{n_nodes})",
+      :m2_file => "misets-web.m2"
+      );
+      functionfile;
   end
 end
