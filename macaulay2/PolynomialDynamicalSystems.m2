@@ -273,7 +273,7 @@ beginDocumentation()
 document { Key => PolynomialDynamicalSystems,
      Headline => "Utilities for polynomial dynamical systems",
      EM "PDS", " is a package for the algebraic manipulation of polynomial dynamical systems.",
-     PARA,
+     PARA{},
      "This package defines the following types:",
      UL {
       TO ""

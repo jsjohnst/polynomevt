@@ -15,24 +15,26 @@ module Macaulay
       return;
     end
     
-    # if no m2 options are provided, then default to sane defaults
-    if(!options[:m2_options]) 
-      options[:m2_options] = " --no-debug --silent -q -e "; 
-    end
-    
     # if no script path is provided, then default to sane defaults
     if(!options[:m2_script_path]) 
       options[:m2_script_path] = "macaulay2/"; 
     end
 
+    # if no m2 options are provided, then default to sane defaults
+    if(!options[:m2_options]) 
+      options[:m2_options] = " --no-debug --silent -q -e "; 
+    end
+    
     # fork a background task to run M2
     spawn_id = spawn do
       # TODO: Check the return value of M2 and handle errors
       logger.info "cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;"
-      
       `cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;`;
+      #`M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay2/macaulay.log 2>&1`;
+      # retval = $?; # the return code from the M2 call, I believe.
       if(options[:post_m2_command])
         `#{options[:post_m2_command]}`;
+        # retval2 = $?;
       end
     end
     

@@ -65,6 +65,13 @@ class JobsController < ApplicationController
     
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
 
+    # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
+    if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
+      # here we somehow give the error that the data is not consistent.
+      flash[:notice] = "discretized data is not consistent";
+    else
+      flash[:notice] = "discretized data is consistent";
+    end
     self.generate_wiring_diagram(discretized_datafiles,
       @job.wiring_diagram_format, @p_value, @job.nodes);
 
@@ -104,7 +111,6 @@ class JobsController < ApplicationController
       :m2_file => "Discretize.m2",
       :m2_wait => 1
       );
-
   end
   
   def generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
@@ -129,15 +135,11 @@ class JobsController < ApplicationController
       );
   end
   
-  def is_data_consistent(discretized_data_files, p_value, n_nodes)
-    function_file= "public/perl/" + @file_prefix + ".consistent.txt";
-    datafiles_string = make_m2_string_from_array(discretized_data_files);
-    
-    macaulay_opts = {};
-    macaulay_opts[:m2_command] = 'isConsistent( ' + datafiles_string + ', '  +
-    p_value.to_s + ', ' + n_nodes.to_s + ' )';
-    macaulay_opts[:m2_file] = "isConsistent.m2";
-    return macaulay2(macaulay_opts);
+  def data_consistent?(discretized_data_files, p_value, n_nodes)
+    macaulay2(
+      :m2_command => "isConsistent(#{m2_string(discretized_data_files)}, #{p_value}, #{n_nodes})",
+      :m2_file => "isConsistent.m2"
+      );
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
@@ -146,15 +148,15 @@ class JobsController < ApplicationController
       :m2_command => "sgfan(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "func.m2"
       );
-      functionfile;
+    functionfile;
   end
   
   def minsets(discretized_data_files, p_value, n_nodes)
     functionfile = self.functionfile_name(@file_prefix);
     macaulay2(
-      :m2_command => "minsets(#{m2_string(discretized_data_files)}, \"#{functionfile}\", #{p_value}, #{n_nodes})",
-      :m2_file => "misets-web.m2"
+      :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
+      :m2_file => "minsets-web.m2"
       );
-      functionfile;
+    functionfile;
   end
 end

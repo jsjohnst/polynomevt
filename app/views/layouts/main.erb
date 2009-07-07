@@ -6,6 +6,7 @@
 <title>Polynome Web Interface</title>
 <%= javascript_include_tag '/perl/tutorial' %>
 </head>
+<div id="notification"><%= flash[:notice] %></div>
 <body id="bodytag">
 <%= yield %>	
 </body>
