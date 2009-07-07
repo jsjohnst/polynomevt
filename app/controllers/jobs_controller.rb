@@ -27,7 +27,9 @@ class JobsController < ApplicationController
 
     @error_message = params[:error_message];
   end
+
   def generate
+    # Boolean, not multistate yet  
     @p_value = "2";
     if(!params || !params[:job])
       logger.info "Inside Redirect!";
@@ -55,7 +57,6 @@ class JobsController < ApplicationController
 
     # MES: need to validate the input file, using n_nodes
     # MES: need to validate n_nodes, p_value
-    # FBH:
     
     datafiles = self.split_data_into_files(params[:job][:input_data]);
         
@@ -85,6 +86,11 @@ class JobsController < ApplicationController
   
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
+#    File.open("testfile") do |file| 
+#        while line = file.gets 
+#            puts line 
+#        end 
+#    end 
     File.open(datafile, 'w') {|f| f.write(data) }
     datafiles = [];
     datafiles.push(Dir.getwd + "/" + datafile);
