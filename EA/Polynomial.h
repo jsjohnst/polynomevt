@@ -54,7 +54,7 @@ public:
 	size_t Cost() const;
 
 	// Return a reference to the i'th monomial of this polynomial
-	Monomial& operator[]( size_t i );
+	const Monomial& operator[]( size_t i );
 
 	// Remove the i'th monomial, and return a copy of it.
 	Monomial Remove( size_t i );
@@ -111,11 +111,11 @@ public:
 // private:
 
 	// Linear interpolate f(x) where y1 = f(x1), y2 = f(x2) and x1 <= x <= x2
-	static double Polynomial::LinearInterp( double x1, double y1,
+	static double LinearInterp( double x1, double y1,
 			double x2, double y2, double x );
 
 	// Compute the Complexity Function of x, where 0. <= x <= 1.0
-	static double Polynomial:: ComplexityFunction( double x );
+	static double ComplexityFunction( double x );
 
 	// Maximum support for any monomial - this is static, only one copy for all polynomials
 	static size_t mMaxSupport;

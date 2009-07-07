@@ -48,7 +48,7 @@ public:
 
 	// Evaluate - compute the value of this monomial term at N-tuple x
 	// return 1 (true) if support of mTerm is contained in the support of x
-	inline bool Evaluate( NTuple& x )
+	inline bool Evaluate( NTuple& x ) const
 	{
 		// Return 0 if coefficient is 0, else (for the boolean case)
 		//  return 1 (true) if all 1 bits in the monomial term are 1 in the N-tuple

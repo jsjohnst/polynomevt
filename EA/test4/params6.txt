@@ -1,12 +1,12 @@
 21875
 
-GenePoolSize                    2055.00 
+GenePoolSize                    255.00 
   
-NumCandidates                    105.00  
+NumCandidates                    15.00  
  
 mNumParentsToPreserve             5.00  
  
-MaxGenerations                   15055.00   
+MaxGenerations                   1555.00   
 
 StableGenerationLimit            50.00   
 

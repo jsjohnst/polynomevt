@@ -107,6 +107,4 @@ private:
 };
 
 
-
-
 #endif // _VBI_POLYMATH_GA_PARAMS_H_

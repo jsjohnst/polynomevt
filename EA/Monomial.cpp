@@ -121,3 +121,6 @@ std::ostream& operator<<( std::ostream& out, const Monomial& t )
 	out << t.mTerm;
 	return out;
 }
+
+// End Monomial.cpp
+

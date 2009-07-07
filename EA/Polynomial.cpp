@@ -130,8 +130,9 @@ bool Polynomial::Evaluate( NTuple& x )
 	{
 		// The result is the Z2 sum (XOR) of the evaluation
 		// at each monomial that makes up this polynomial
-	  y += (const_cast<Monomial&>(*iter)).Evaluate( x );
-		++iter;
+		// Monomial m = *iter;
+		y += iter++->Evaluate( x );
+		//++iter;
 	}
 	// Return true if the sum is odd, equivalently if y = 1 (mod 2)
 	return ( (y & 1) != 0);
@@ -144,7 +145,8 @@ size_t Polynomial::MaxDegree( )
 	PolyIter p_iter = mPoly.begin();
 	while( p_iter != mPoly.end() )
 	{
-	  d = const_cast<Monomial&>(*p_iter).Count();
+		Monomial m = *p_iter;
+		m.Count();
 		md = std::max( d, md );	
 		++p_iter;
 	}
@@ -195,6 +197,8 @@ void Polynomial::Mutate( )
 			m.Set( e );
 		}
 
+		AddTerm(m);	// JJM Jan08 Does nothing if already there
+/*
 		// If the mutated version is already in the container
 		PolyIter f_iter = mPoly.find( m );
 		if( f_iter != mPoly.end( ) )
@@ -213,6 +217,7 @@ void Polynomial::Mutate( )
 		{
 			AddTerm( m );
 		}
+*/
 	}
 	// Remember we mutated, means we need to re-compute scores
 	mMutated = true;
@@ -357,7 +362,7 @@ String Polynomial::ToString( bool with_star ) const
 }
 
 // Return a reference to the i'th monomial of this polynomial 1 <= i <= num terms
-Monomial& Polynomial::operator[]( size_t i )
+const Monomial& Polynomial::operator[]( size_t i )
 {
 	// Check for valid index
 	if( i > mPoly.size() )
@@ -370,7 +375,7 @@ Monomial& Polynomial::operator[]( size_t i )
 		++iter;
 		--i;
 	}
-	return const_cast<Monomial&>(*iter);
+	return *iter;
 }
 
 // Compare this polynomial to another, return true if they are identical
@@ -385,7 +390,8 @@ bool Polynomial::operator==( Polynomial& other )
 	{
 		// not identical if we encounter distinct monomials
 		// This works because mPoly is a set, hence the monomials are sorted
-	  if( !(const_cast<Monomial&>(*ita++) == const_cast<Monomial&>(*itb++) ) ) return false;
+		Monomial a = *ita++;   Monomial b = *itb++;
+		if( !(a == b)  ) return false;
 	}
 	// If we get here the polynomials are identical
 	return true;

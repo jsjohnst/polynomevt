@@ -117,4 +117,3 @@ typedef BitString TupleType;
 //#include "BoolDynSysGA.h"
 
 #endif //_VBI_POLYMATH_BOOL_MODEL_H_
- 

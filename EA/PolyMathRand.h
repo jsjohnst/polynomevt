@@ -45,7 +45,7 @@ public:
 	// RandReal - return a double in interval [0,1)
 	static double RandReal( )
 	{
-		return( static_cast< double >( rand() ) / (RAND_MAX+1) );
+		return fabs( (1.0*rand()) /(RAND_MAX + 1) );
 	}
 
 	// RandReal - return a double in the interval [min, max)

@@ -7,14 +7,14 @@
 #include "BoolModel.h"
 
 // Comparator function for sorting gene pool into ascending order
-bool IsFirstGreater(const DynSysModel& first, const DynSysModel& second )
+bool IsFirstGreater( DynSysModel& first, DynSysModel& second )
 {
-  return (const_cast<DynSysModel&>(first)).GetScore() > (const_cast<DynSysModel&>(second)).GetScore();
+	return first.GetScore() > second.GetScore();
 }
 
-bool IsFirstGreaterPoly(const Polynomial& first, const Polynomial& second )
+bool IsFirstGreaterPoly( Polynomial& first, Polynomial& second )
 {
-  return (const_cast<Polynomial&>(first)).GetPolyProb() > (const_cast<Polynomial&>(second)).GetPolyProb();
+	return first.GetPolyProb() > second.GetPolyProb();
 }
 
 // Destructor
@@ -518,9 +518,9 @@ void GAModel::Run( )
 	// How much the max score has to change to be recognized as better
 	double epsilon  = 1e-4;
 
-//#ifdef GA_DEBUG_FILE
-//	std::ofstream debug_file( "DebugModels.txt" );
-//#endif 
+#ifdef GA_DEBUG_FILE
+	std::ofstream debug_file( "DebugModels.txt" );
+#endif 
 	// For up to MaxGenerations
 	size_t generation = 1;
 	while( true )
@@ -528,9 +528,9 @@ void GAModel::Run( )
 		// Iterate each model in the gene pool, producing scores for each one
 		IterateModels();		
 
-//#ifdef GA_DEBUG_FILE
-		//DumpGenePool( debug_file, 5*GAParams::NumParentsToPreserve() );
-//#endif
+#ifdef GA_DEBUG_FILE
+		DumpGenePool( debug_file, 5*GAParams::NumParentsToPreserve() );
+#endif
 		std::cout << "Generation: " << (int) generation << "\t Best score: " << mMaxModelScore;
 
 		if( generation >= GAParams::MaxGenerations() ) break;
@@ -557,12 +557,14 @@ void GAModel::Run( )
 
 		++generation;
 	}
-//#ifdef GA_DEBUG_FILE
-//	debug_file.close(); 
-//#endif
+#ifdef GA_DEBUG_FILE
+	debug_file.close(); 
+#endif
 	// Select best 'r' models and output them to a result file
 	std::ofstream out_file( "BestModels.txt" );		// TBD - get the name from the control file
 	DumpGenePool( out_file, 5*GAParams::NumParentsToPreserve() );
 	out_file.close();
 }
+// End
+
 

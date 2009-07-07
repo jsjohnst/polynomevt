@@ -1,5 +1,6 @@
 // BitString.h
 //
+// SPECIAL VERSION THAT WORKS ONLY FOR STRINGS OF LENGTH LESS THAN 32
 // Uses 0-based indexing
 
 #ifndef _VBI_POLYMATH_N_BITSTRING_H_
@@ -22,18 +23,8 @@ class BitString
 {
 public:
 	// Default constructor ( all zeros bitstring of num_bits )
-	BitString( size_t num_bits )
+	BitString( size_t num_bits ) : mWords(0), mN( num_bits )
 	{
-		mN = num_bits;
-
-		if( num_bits > 0 )
-		{
-			// Compute the number of words we need to hold mN bits
-			USHORT k = (USHORT) ( 1 + ( (num_bits - 1) / BitsPerWord ));
-
-			// Insert k words of value 0
-			mWords.assign( k, 0 );
-		}
 	}
 
 	// Copy Contruct from another BitString
@@ -42,32 +33,34 @@ public:
 	{
 	}
 
+	// Construct from UNLONG and # of bits
+	BitString( ULONG x, size_t n ) : mWords( x ), mN( n )
+	{
+	}
+
 	// Return true if bit number i = 1 (can not be used for assignment)
-	bool operator[]( size_t i ) const;
+	inline bool operator[]( size_t b ) const { return (((1 << b) & mWords) != 0); }
 
 	// Bitwise AND operator (Performs * in F_2^n)
-	BitString operator&( const BitString& other ) const;
+	inline BitString operator&( const BitString& other ) const { return BitString(mWords & other.mWords, mN );}
 
 	// Bitwise XOR operator (Performs + in F_2^n)
-	BitString operator^( const BitString& other ) const;
+	inline BitString operator^( const BitString& other ) const { return BitString(mWords ^ other.mWords, mN ); }
 
 	// Bitwise OR operator
-	BitString operator|( const BitString& other ) const;
+	BitString operator|( const BitString& other ) const { return BitString(mWords | other.mWords, mN ); }
 
 	// Reset all bits of this bitstring
 	inline void Reset()
 	{
-		mWords.clear();
-		// Compute the number of words we need to hold mN bits
-		size_t k = 1 + ( (mN - 1) / BitsPerWord );
-		mWords.assign( k, 0 );
+		mWords = 0;
 	}
 
 	// Equality test operator
-	bool operator==( const BitString& other ) const;
+	inline bool operator==( const BitString& other ) const { return mWords == other.mWords; }
 
 	// Count the number of 1 bits in this BitString
-	size_t Count( ) const;
+	size_t Count( ) const { return BitCount( mWords ); }
 
 	// Return the number of bits in this BitString
 	inline size_t Size() const
@@ -76,13 +69,13 @@ public:
 	}
 
 	// Set - set the b'th bit of this term
-	void Set( size_t b );
+	inline void Set( size_t b ) { mWords |= (1 << b); }
 
 	// Reset - reset the b'th bit of this term
-	void Reset( size_t b );
+	inline void Reset( size_t b ) { mWords &= ~(1 << b); }
 
 	// Flip the b'th bit of this term
-	void Flip( size_t b );
+	inline void Flip( size_t b ) { mWords ^= (1 << b); }
 
 	// Support output of a BitString to a stream
 	friend std::ostream& operator<<( std::ostream& out, const BitString& t );
@@ -90,7 +83,7 @@ public:
 private:
 	// Number of bits
 	size_t		mN;
-	WordArray	mWords;
+	ULONG		mWords;
 };
 
 #endif // _VBI_POLYMATH_N_BITSTRING_H_

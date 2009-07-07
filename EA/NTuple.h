@@ -42,13 +42,13 @@ public:
 	}
 
 	// Bitwise AND operator
-	inline NTuple operator&( const NTuple& other )
+	inline NTuple operator&( const NTuple& other ) const
 	{
 		return NTuple( mTuple & other.mTuple );
 	}
 
 	// Bitwise OR operator
-	inline NTuple operator|( const NTuple& other )
+	inline NTuple operator|( const NTuple& other ) const
 	{
 		return NTuple( mTuple | other.mTuple );
 	}
@@ -60,13 +60,13 @@ public:
 	}
 
 	// Bitwise XOR operator
-	inline NTuple operator^( const NTuple& other )
+	inline NTuple operator^( const NTuple& other ) const
 	{
 		return NTuple( mTuple ^ other.mTuple );
 	}
 
 	// Equality test operator
-	inline bool operator==( const NTuple& other )
+	inline bool operator==( const NTuple& other ) const
 	{
 		return ( mTuple == other.mTuple );
 	}
@@ -100,7 +100,7 @@ public:
 	inline void Flip( size_t b ) { mTuple.Flip( b - 1); }
 
 	// Subtraction operator gives the Hamming distance
-	inline size_t operator-( const NTuple& other )
+	inline size_t operator-( const NTuple& other ) const
 	{
 		// Hamming distance counts the number of 1's in the XOR of the two NTuples
 		return NTuple( mTuple ^ other.mTuple ).Count();
@@ -110,7 +110,7 @@ public:
 	void Randomize( );
 
 	// HammingDistance computed using the subtraction operator
-	inline size_t HammingDistance( const NTuple& other ) { *this - other; };
+	inline size_t HammingDistance( const NTuple& other ) const { *this - other; };
 
 	// Support output of a NTuple to a stream
 	friend std::ostream& operator<<( std::ostream& out, const NTuple& t );
