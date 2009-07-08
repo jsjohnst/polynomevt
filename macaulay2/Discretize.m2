@@ -22,8 +22,6 @@ ereadMat(String,InexactFieldFamily) := (filename,R) -> (
 
 discretize = method()
 discretize(List, List, ZZ) := (WT, WToutputfiles, n) -> (
-    << "WT = " << WT << endl;
-    << "WToutputfiles = " << WToutputfiles << endl;
     m:={};
     discrm:={};
     count:={};

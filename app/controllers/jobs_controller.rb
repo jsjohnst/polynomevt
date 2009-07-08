@@ -51,7 +51,6 @@ class JobsController < ApplicationController
 
     # TODO: Fix this!
     `echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
-    
 
     # MES: need to validate the input file, using n_nodes
     # MES: need to validate n_nodes, p_value
