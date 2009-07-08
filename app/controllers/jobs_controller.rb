@@ -115,7 +115,7 @@ class JobsController < ApplicationController
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
-                if (line.match ( /^[\s*\d*]+\s*$/ ) ) 
+                if (line.match ( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
                     output.puts line;
                     logger.info "write line" + line;
                     something_was_written = TRUE;
