@@ -117,11 +117,12 @@ class JobsController < ApplicationController
             else 
                 if (!something_was_written) 
                     outputfile_name = datafile.gsub(/input/,"input" +
-                    (++counter).to_s);
+                    counter.to_s);
+                    counter +=1;
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
-                if (line.match ( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
+                if (line.match( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
                     output.puts line;
                     logger.info "write line" + line;
                     something_was_written = TRUE;
