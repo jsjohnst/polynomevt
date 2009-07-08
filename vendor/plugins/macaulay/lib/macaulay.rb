@@ -51,12 +51,12 @@ module Macaulay
     # if M2 begins with capitol letter it's considered a constant
     # we want a variable, thus why it's lower case
     m2_string = "{";
-    first = 1;
+    first = true;
     filenames.each { |filename|
       if(!first)
         m2_string += ",";
       end
-      first = 0;
+      first = false;
       m2_string += "///" + filename + "///";
     }
     m2_string += "}";
