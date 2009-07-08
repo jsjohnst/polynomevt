@@ -61,7 +61,7 @@ class JobsController < ApplicationController
     datafiles = self.split_data_into_files(params[:job][:input_data]);
     if (!datafiles)
         # TODO make this error message nice
-        @error_message = "The data you entered is invaled";
+        @error_message = "The data you entered is invalid";
         return; 
     end
         
@@ -100,7 +100,8 @@ class JobsController < ApplicationController
     #end
   end
   
-  # TODO check inputdata is not empty and number of columns == n_nodes
+  # TODO FBH: This function is doing the checking at the moment, should
+  # probably restructure
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
 
@@ -113,7 +114,7 @@ class JobsController < ApplicationController
         something_was_written = FALSE;
         while line = file.gets 
             # parse lines and break into different files at #
-            if( line.match( /^\s*\#/ ) )
+            if( line.match( /^\s*\#\s*$/ ) )
                 if (something_was_written && output) 
                     output.close;
                     output = NIL;
@@ -132,7 +133,7 @@ class JobsController < ApplicationController
                     logger.info "write line" + line;
                     something_was_written = TRUE;
                 else
-                    logger.warn "Error: Input data not digits";
+                    logger.warn "Error: Input data not correct";
                     return NIL;
                 end
             end
