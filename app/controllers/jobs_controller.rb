@@ -27,7 +27,9 @@ class JobsController < ApplicationController
 
     @error_message = params[:error_message];
   end
+
   def generate
+    # Boolean, not multistate yet  
     @p_value = "2";
     if(!params || !params[:job])
       logger.info "Inside Redirect!";
@@ -54,15 +56,30 @@ class JobsController < ApplicationController
 
     # MES: need to validate the input file, using n_nodes
     # MES: need to validate n_nodes, p_value
-    # FBH:
     
     datafiles = self.split_data_into_files(params[:job][:input_data]);
+    if (!datafiles)
+        # TODO make this error message nice
+        @error_message = "The data you entered is invalid";
+        return; 
+    end
         
     discretized_datafiles = datafiles.collect { |datafile|
       datafile.gsub(/input/, 'discretized-input');
     }
-    
+
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
+
+    #concatenate_discretized_files
+    first = TRUE;
+    File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
+        |f| discretized_datafiles.each{ |datafile|
+            if (!first)
+                f.write("#\n");
+            end
+            f.write(File.open(datafile, 'r').read);
+            first = FALSE;}
+   }
 
     # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
     if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
@@ -82,11 +99,49 @@ class JobsController < ApplicationController
     #end
   end
   
+  # TODO FBH: This function is doing the checking at the moment, should
+  # probably restructure
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
+
     File.open(datafile, 'w') {|f| f.write(data) }
+
     datafiles = [];
-    datafiles.push(Dir.getwd + "/" + datafile);
+    output = NIL;
+    File.open(datafile) do |file| 
+        counter = 0;
+        something_was_written = FALSE;
+        while line = file.gets 
+            # parse lines and break into different files at #
+            if( line.match( /^\s*\#\s*$/ ) )
+                if (something_was_written && output) 
+                    output.close;
+                    output = NIL;
+                end
+                something_was_written = FALSE;
+            else 
+                if (!something_was_written) 
+                    outputfile_name = datafile.gsub(/input/,"input" +
+                    counter.to_s);
+                    counter +=1;
+                    output = File.open(outputfile_name, "w"); 
+                    datafiles.push(Dir.getwd + "/" + outputfile_name);
+                end
+                if (line.match( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
+                    output.puts line;
+                    logger.info "write line" + line;
+                    something_was_written = TRUE;
+                else
+                    logger.warn "Error: Input data not correct";
+                    return NIL;
+                end
+            end
+        end 
+        file.close;
+        if (output) 
+            output.close;
+        end
+    end
     return datafiles;
   end
   
