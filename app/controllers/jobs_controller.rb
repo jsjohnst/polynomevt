@@ -59,6 +59,11 @@ class JobsController < ApplicationController
     # MES: need to validate n_nodes, p_value
     
     datafiles = self.split_data_into_files(params[:job][:input_data]);
+    if (!datafiles)
+        # TODO make this error message nice
+        @error_message = "The data you entered is invaled";
+        return; 
+    end
         
     discretized_datafiles = datafiles.collect { |datafile|
       datafile.gsub(/input/, 'discretized-input');
@@ -84,7 +89,7 @@ class JobsController < ApplicationController
     #end
   end
   
-  #check inputdata = "" and need to check that at least 1 file was created
+  # TODO check inputdata is not empty and number of columns == n_nodes
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
 
@@ -110,16 +115,21 @@ class JobsController < ApplicationController
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
-                output.puts line;
-                logger.info "write line" + line;
-                something_was_written = TRUE;
+                if (line.match ( /^[\s*\d*]+\s*$/ ) ) 
+                    output.puts line;
+                    logger.info "write line" + line;
+                    something_was_written = TRUE;
+                else
+                    logger.warn "Error: Input data not digits";
+                    return NIL;
+                end
             end
         end 
         file.close;
         if (output) 
             output.close;
         end
-    end;
+    end
     return datafiles;
   end
   
