@@ -72,9 +72,14 @@ class JobsController < ApplicationController
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
 
     #concatenate_discretized_files
+    first = TRUE;
     File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
-        |f| discretized_datafiles.each{ |datafile| 
-            f.write(File.open(datafile, 'r').read) }
+        |f| discretized_datafiles.each{ |datafile|
+            if (!first)
+                f.write("#\n");
+            end
+            f.write(File.open(datafile, 'r').read);
+            first = FALSE;}
    }
 
     # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
