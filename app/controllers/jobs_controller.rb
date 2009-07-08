@@ -114,7 +114,7 @@ class JobsController < ApplicationController
         something_was_written = FALSE;
         while line = file.gets 
             # parse lines and break into different files at #
-            if( line.match( /^\s*\#\s*$/ ) )
+            if( line.match( /^\s*\#+\s*$/ ) )
                 if (something_was_written && output) 
                     output.close;
                     output = NIL;
@@ -128,7 +128,8 @@ class JobsController < ApplicationController
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
-                if (line.match( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
+                # line matches @n_nodes digits
+                if (line.match( /^\s*(\.?\d+\.?\d*\s+){#{@job.nodes}}\s*$/ ) ) 
                     output.puts line;
                     logger.info "write line" + line;
                     something_was_written = TRUE;
