@@ -116,9 +116,9 @@ class JobsController < ApplicationController
                 something_was_written = FALSE;
             else 
                 if (!something_was_written) 
-                    counter += 1;
-                    outputfile_name = datafile.gsub(/input/,"input" + counter.to_s);
-                    logger.info "Output filename: " + outputfile_name;
+                    outputfile_name = datafile.gsub(/input/,"input" +
+                    counter.to_s);
+                    counter +=1;
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
