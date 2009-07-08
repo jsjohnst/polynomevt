@@ -84,16 +84,42 @@ class JobsController < ApplicationController
     #end
   end
   
+  #check inputdata = "" and need to check that at least 1 file was created
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
-#    File.open("testfile") do |file| 
-#        while line = file.gets 
-#            puts line 
-#        end 
-#    end 
+
     File.open(datafile, 'w') {|f| f.write(data) }
+
     datafiles = [];
-    datafiles.push(Dir.getwd + "/" + datafile);
+    output = NIL;
+    File.open(datafile) do |file| 
+        counter = 1;
+        something_was_written = FALSE;
+        while line = file.gets 
+            # parse lines and break into different files at #
+            if( line.match( /^\s*\#/ ) )
+                if (something_was_written && output) 
+                    output.close;
+                    output = NIL;
+                end
+                something_was_written = FALSE;
+            else 
+                if (!something_was_written) 
+                    outputfile_name = datafile.gsub(/input/,"input" +
+                    (++counter).to_s);
+                    output = File.open(outputfile_name, "w"); 
+                    datafiles.push(Dir.getwd + "/" + outputfile_name);
+                end
+                output.puts line;
+                logger.info "write line" + line;
+                something_was_written = TRUE;
+            end
+        end 
+        file.close;
+        if (output) 
+            output.close;
+        end
+    end;
     return datafiles;
   end
   
