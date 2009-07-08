@@ -104,7 +104,7 @@ class JobsController < ApplicationController
     datafiles = [];
     output = NIL;
     File.open(datafile) do |file| 
-        counter = 1;
+        counter = 0;
         something_was_written = FALSE;
         while line = file.gets 
             # parse lines and break into different files at #
@@ -116,12 +116,13 @@ class JobsController < ApplicationController
                 something_was_written = FALSE;
             else 
                 if (!something_was_written) 
-                    outputfile_name = datafile.gsub(/input/,"input" +
-                    (++counter).to_s);
+                    counter += 1;
+                    outputfile_name = datafile.gsub(/input/,"input" + counter.to_s);
+                    logger.info "Output filename: " + outputfile_name;
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
-                if (line.match ( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
+                if (line.match( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
                     output.puts line;
                     logger.info "write line" + line;
                     something_was_written = TRUE;
