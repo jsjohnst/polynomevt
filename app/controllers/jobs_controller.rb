@@ -119,6 +119,9 @@ class JobsController < ApplicationController
          if (@job.is_deterministic)
             if (@job.nodes <= 4 )
                 logger.info "EA is not implemented yet";
+                @error_message = `./EA/EA1_Two`;
+                @error_message += "<br>We're calling EA here but don't have the
+                right config file yet. Be patient!<br>";
             # else this has to be changed to an else once EA is implemented
                 logger.info "Using minsets to generate the functions";
                 # TODO FBH need to check data for consistency and run make
@@ -134,6 +137,7 @@ class JobsController < ApplicationController
     if (@job.state_space)
         # run simulation
         logger.info "Starting stochastic_runner";
+
         show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
         wiring_diagram = @job.wiring_diagram ? "1" : "0";
 
