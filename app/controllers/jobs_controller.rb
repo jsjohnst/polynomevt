@@ -93,7 +93,9 @@ class JobsController < ApplicationController
 
     @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
     @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
-    
+
+
+    `perl dvd_stochasitic_runner.pl`; 
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
     #end
@@ -113,7 +115,7 @@ class JobsController < ApplicationController
         something_was_written = FALSE;
         while line = file.gets 
             # parse lines and break into different files at #
-            if( line.match( /^\s*\#\s*$/ ) )
+            if( line.match( /^\s*\#+\s*$/ ) )
                 if (something_was_written && output) 
                     output.close;
                     output = NIL;
@@ -127,7 +129,9 @@ class JobsController < ApplicationController
                     output = File.open(outputfile_name, "w"); 
                     datafiles.push(Dir.getwd + "/" + outputfile_name);
                 end
-                if (line.match( /^[\s*\d*\.?\d*]+\s*$/ ) ) 
+                # check if line matches @n_nodes digits
+                nodes_minus_one = (@job.nodes - 1).to_s;
+                if (line.match( /^\s*(\.?\d+\.?\d*\s+){#{nodes_minus_one}}\.?\d+\.?\d*\s*$/ ) ) 
                     output.puts line;
                     logger.info "write line" + line;
                     something_was_written = TRUE;
