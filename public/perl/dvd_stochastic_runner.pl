@@ -40,9 +40,12 @@ use Cwd;
 use Getopt::Std;
 getopts('vh');
 
-print getcwd;
-#set non-zero to get too much information
 $DEBUG=$opt_v;
+
+if ($DEBUG) {print getcwd;}
+if ($DEBUG) { print "<br>Number of arguments (should equal 12) " . $#ARGV .
+"<br>"; }
+#set non-zero to get too much information
 
 die "Usage: dvd_stochasitic_runner.pl [-vh] #nodes #states
 all_trajectories_flag update_stochastic_flag outputfilename graph_format
@@ -70,15 +73,15 @@ $Stochastic = $ARGV[9]; 	# if set to one, probabilities are included in graph
 $trajectory_flag = $ARGV[10]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
 $trajectory_value = $ARGV[11]; # initial state
 
-print "All trajectories flag, 1 if all trajectories, 0 for a single initial
-state: $trajectory_flag \n <br>";
+if ($DEBUG) {print "All trajectories flag, 1 if all trajectories, 0 for a single initial
+state: $trajectory_flag \n <br>"; }
 $stochastic_input_file = $ARGV[-1]; 
 
-print "Number of nodes $n_nodes <br>
+if ($DEBUG) {print "Number of nodes $n_nodes <br>
     P_value $p_value <br>
     file_prefix $file_prefix <br>
     Statespace format $ss_format <br>
-    Functionfile $stochastic_input_file <br>";
+    Functionfile $stochastic_input_file <br>"; }
 
 open($function_file, $stochastic_input_file);
 _log("Attempted to read from '$stochastic_input_file'");
