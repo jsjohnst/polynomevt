@@ -19,7 +19,6 @@
 							<%= form.text_field :nodes, :size => 2, :maxlength => 2 %>
 							<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()"><font size="1">what is this?</font></a>
                         </td></tr>
-<!--
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Model</strong></font>
                             <a href="tutorial.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
@@ -27,10 +26,11 @@
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">Select the type of polynomial dynamical system to be generated:<br>
+                            <%= form.check_box :is_deterministic%>
+                            <%= form.label :is_deterministic, "Deterministic" %>
                             <input type="radio" name="is_deterministic_model" value="Deterministic" checked="checked" />Deterministic<br />
                             <input type="radio" name="is_deterministic_model" value="Stochastic" />Stochastic<br />
                         </td></tr>
--->
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Simulation</strong></font>
                             <a href="tutorial.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
