@@ -87,25 +87,36 @@ class JobsController < ApplicationController
             first = FALSE;}
    }
 
-    # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
-    if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
-      # here we somehow give the error that the data is not consistent.
-      flash[:notice] = "discretized data is not consistent";
-    else
-      flash[:notice] = "discretized data is consistent";
+
+    if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
+        # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
+        if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
+            # here we somehow give the error that the data is not consistent.
+            flash[:notice] = "discretized data is not consistent";
+            logger.info "Discretized data not consistent, need to implement
+            EA or make data consistent? Nore sure yet.";
+            return;
+        else
+            flash[:notice] = "discretized data is consistent";
+            if ( @job.nodes <= 10 ) 
+                self.generate_wiring_diagram(discretized_datafiles,
+                    @job.wiring_diagram_format, @p_value, @job.nodes);
+            else 
+                self.minsets_generate_wiring_diagram(discretized_datafiles,
+                    @job.wiring_diagram_format, @p_value, @job.nodes);
+            end
+        end
+
+        @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
+        @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
+
+        logger.info "Starting stochastic_runner";
+        `perl public/perl/dvd_stochastic_runner.pl`; 
+
+        #spawn do 
+        #    @perl_output = `./polynome.pl #{@job.nodes}`
+        #end
     end
-    self.generate_wiring_diagram(discretized_datafiles,
-      @job.wiring_diagram_format, @p_value, @job.nodes);
-
-    @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
-    @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
-
-    logger.info "Starting stochastic_runner";
-    `perl public/perl/dvd_stochastic_runner.pl`; 
-
-    #spawn do 
-    #    @perl_output = `./polynome.pl #{@job.nodes}`
-    #end
   end
   
   # TODO FBH: This function is doing the checking at the moment, should
