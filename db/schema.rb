@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090704125226) do
+ActiveRecord::Schema.define(:version => 20090708125300) do
 
   create_table "jobs", :force => true do |t|
     t.integer  "nodes"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20090704125226) do
     t.string   "update_schedule"
     t.boolean  "show_probabilities_wiring_diagram"
     t.boolean  "show_probabilities_state_space"
+    t.boolean  "is_deterministic"
   end
 
 end
