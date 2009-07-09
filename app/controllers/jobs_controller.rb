@@ -61,6 +61,11 @@ class JobsController < ApplicationController
         @error_message = "Number of nodes too small";
         return;
     end
+    if (@job.nodes > 11)
+        logger.info "Number of nodes too big";
+        @error_message = "Number of nodes too big";
+        return;
+    end
    
     # split is also checking the input format
     datafiles = self.split_data_into_files(params[:job][:input_data]);
@@ -111,18 +116,24 @@ class JobsController < ApplicationController
     end
 
     if (@job.show_functions || @job.state_space )
-        # if (deterministic)
-            # EA or minsets
-            @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
-        # else not deterministic
+         if (@job.is_deterministic)
+            if (@job.nodes <= 4 )
+                logger.info "EA is not implemented yet";
+            # else this has to be changed to an else once EA is implemented
+                logger.info "Using minsets to generate the functions";
+                # TODO FBH need to check data for consistency and run make
+                # consistent
+                @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
+            end
+        else
             @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
-        #end
+        end
     end
     
     if (@job.state_space)
         # run simulation
         logger.info "Starting stochastic_runner";
-        `perl public/perl/dvd_stochastic_runner.pl`; 
+        @error_message = `perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value} 1 0 #{@file_prefix} #{@job.state_space_format} 1 0 0 #{@show_probabilities_state_space} 1 0 #{@functionfile_name}`;
 
         #spawn do 
         #    @perl_output = `./polynome.pl #{@job.nodes}`
@@ -131,7 +142,7 @@ class JobsController < ApplicationController
   end
   
   # TODO FBH: This function is doing the checking at the moment, should
-  # probably restructure
+  # probably restructure 
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
 

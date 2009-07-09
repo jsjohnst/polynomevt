@@ -69,6 +69,12 @@ $trajectory_value = $ARGV[11]; # initial state
 
 $stochastic_input_file = $ARGV[-1]; 
 
+print "Number of nodes $n_nodes <br>
+    P_value $p_value <br>
+    file_prefix $file_prefix <br>
+    Statespace format $ss_format <br>
+    Functionfile $stochastic_input_file <br>";
+
 open($function_file, $stochastic_input_file);
 _log("Attempted to read from '$stochastic_input_file'");
 
