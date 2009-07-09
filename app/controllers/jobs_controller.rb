@@ -129,11 +129,15 @@ class JobsController < ApplicationController
             @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
         end
     end
-    
+   
+    # TODO FBH need to wait for sgfan() to be done
     if (@job.state_space)
         # run simulation
         logger.info "Starting stochastic_runner";
-        @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} 2 1 0 public/perl/#{@file_prefix}   #{@job.state_space_format} 1 0 0 1 1 0 #{@functionfile_name}`; 
+        show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
+        wiring_diagram = @job.wiring_diagram ? "1" : "0";
+
+        @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
 
         #spawn do 
         #    @perl_output = `./polynome.pl #{@job.nodes}`
