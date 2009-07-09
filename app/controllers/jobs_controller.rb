@@ -133,7 +133,7 @@ class JobsController < ApplicationController
     if (@job.state_space)
         # run simulation
         logger.info "Starting stochastic_runner";
-        @error_message = `perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value} 1 0 #{@file_prefix} #{@job.state_space_format} 1 0 0 #{@show_probabilities_state_space} 1 0 #{@functionfile_name}`;
+        @error_message = `perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} 2 1 0 #{@file_prefix}   #{@job.state_space_format} 1 0 0 1 1 0 #{@functionfile_name}`; 
 
         #spawn do 
         #    @perl_output = `./polynome.pl #{@job.nodes}`
