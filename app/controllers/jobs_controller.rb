@@ -106,9 +106,9 @@ class JobsController < ApplicationController
                     @job.wiring_diagram_format, @p_value, @job.nodes);
             end
         end
+        # There's nothing else here to do
+        return;
     end
-    # There's nothing else here to do
-    return;
 
     if (@job.show_functions || @job.show_statespace )
         # if (deterministic)
@@ -117,9 +117,10 @@ class JobsController < ApplicationController
         # else not deterministic
             @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
         #end
-
+    end
+    
+    if (@job.show_statespace)
         # run simulation
-
         logger.info "Starting stochastic_runner";
         `perl public/perl/dvd_stochastic_runner.pl`; 
 
