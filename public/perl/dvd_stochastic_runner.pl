@@ -32,12 +32,15 @@
 
 # Need this so I can have access from a different folder - needs to be changed
 # for polymath
-use lib '../../polynome';
+use lib './public/perl';
+
+#use lib '../../polynome';
 use DVDCore qw($Clientip $Function_data $Function_file &error_check @Output_array $Pwd &dvd_session &_log $Stochastic);
 use Cwd;
 use Getopt::Std;
 getopts('vh');
 
+print getcwd;
 #set non-zero to get too much information
 $DEBUG=$opt_v;
 
@@ -67,6 +70,8 @@ $Stochastic = $ARGV[9]; 	# if set to one, probabilities are included in graph
 $trajectory_flag = $ARGV[10]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
 $trajectory_value = $ARGV[11]; # initial state
 
+print "All trajectories flag, 1 if all trajectories, 0 for a single initial
+state: $trajectory_flag \n <br>";
 $stochastic_input_file = $ARGV[-1]; 
 
 print "Number of nodes $n_nodes <br>

@@ -709,7 +709,7 @@ sub dvd_translator {
 # has all possible connections in it or a graph that shows one possible update
 # for each function
 sub count_comps_final {
-    _log("In Count rapper: $All_trajectories_flag");
+_log("In count_comps_final rapper: $All_trajectories_flag<br>\n");
     if ($All_trajectories_flag) {
         count_comps_final_all_trajectories(@_);
         create_output();
