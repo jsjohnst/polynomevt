@@ -4,7 +4,7 @@
 
 # This module must be symlinked to /etc/perl/DVDCore.pm
 package DVDCore;
-
+use Cwd;
 BEGIN {
     use Exporter ();
     our ( $VERSION, @ISA, @EXPORT, @EXPORT_OK, %EXPORT_TAGS );
@@ -1166,7 +1166,7 @@ sub sim {
         $dot_filename = _get_filelocation("$file_prefix.graph.dot");
         open( $Dot_file, ">$dot_filename" )
             or return _package_error(
-            "Could not open $dot_filename for writing.");
+                "Could not open $dot_filename for writing.");
         print $Dot_file "digraph G{ \n";
         if ( $lastval eq $old ) {
             print $Dot_file "node[style=filled, color=cyan]\;\n";
@@ -1235,6 +1235,8 @@ sub regulatory {
 
     my $dot_filename = _get_filelocation("$file_prefix.wiring-diagram.dot");
     #my $dot_filename = _get_filelocation("$file_prefix.out1.dot");
+    _log ("Right here<br><br>");
+    _log (getcwd);
     open( $Dot_file, ">$dot_filename" )
         or return _package_error("Could not open $dot_filename for writing.");
     print $Dot_file "digraph test {\n";
