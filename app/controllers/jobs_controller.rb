@@ -110,7 +110,7 @@ class JobsController < ApplicationController
         return;
     end
 
-    if (@job.show_functions || @job.show_statespace )
+    if (@job.show_functions || @job.state_space )
         # if (deterministic)
             # EA or minsets
             @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
@@ -119,7 +119,7 @@ class JobsController < ApplicationController
         #end
     end
     
-    if (@job.show_statespace)
+    if (@job.state_space)
         # run simulation
         logger.info "Starting stochastic_runner";
         `perl public/perl/dvd_stochastic_runner.pl`; 
