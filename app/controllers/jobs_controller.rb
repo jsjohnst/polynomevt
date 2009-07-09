@@ -95,8 +95,10 @@ class JobsController < ApplicationController
     @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
     @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
 
-
-    `perl dvd_stochasitic_runner.pl`; 
+    logger.info "Starting stochastic_runner";
+    #@simulation_output = `./dvd_stochastic_runner.pl`; 
+    
+    #@simulation_output = `perl test.pl`;
     #spawn do 
     #    @perl_output = `./polynome.pl #{@job.nodes}`
     #end
