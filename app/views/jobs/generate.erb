@@ -22,7 +22,7 @@ The links below will show your results once we have processed your data.
     @job.state_space_format %>" target="_blank"><font
     color=green><i>Statespace<br></i></font></a>
 <% end %>
-<font color=blue>Deterministic? <%= @job.is_deterministic %> </font>
+<font color=blue>Deterministic? <%= if @job.is_deterministic then "yup" else "nope" end %> </font>
 
 <div id="completion_msg"><font color="red">Please wait while we process your data...</font></div>
 	
