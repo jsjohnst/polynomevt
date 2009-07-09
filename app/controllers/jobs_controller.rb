@@ -106,9 +106,19 @@ class JobsController < ApplicationController
                     @job.wiring_diagram_format, @p_value, @job.nodes);
             end
         end
+    end
+    # There's nothing else here to do
+    return;
 
-        @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
-        @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
+    if (@job.show_functions || @job.show_statespace )
+        # if (deterministic)
+            # EA or minsets
+            @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
+        # else not deterministic
+            @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
+        #end
+
+        # run simulation
 
         logger.info "Starting stochastic_runner";
         `perl public/perl/dvd_stochastic_runner.pl`; 
