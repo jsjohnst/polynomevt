@@ -94,6 +94,7 @@ class JobsController < ApplicationController
    }
 
 
+
     if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
         # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
         if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
@@ -119,8 +120,8 @@ class JobsController < ApplicationController
     if (@job.show_functions || @job.state_space )
          if (@job.is_deterministic)
             if (@job.nodes <= 4 )
+                @error_message = run( @job.nodes, discretized_datafiles );
                 logger.info "EA is not implemented yet";
-                @error_message = `./EA/EA1_Two `;
                 @error_message += "<br>We're calling EA here but don't have the
                 right config file yet. Be patient!<br>";
             # else this has to be changed to an else once EA is implemented
