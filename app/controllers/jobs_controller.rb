@@ -52,9 +52,6 @@ class JobsController < ApplicationController
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
 
-    # TODO: Fix this!
-    `echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
-
     # MES: need to validate the input file, using n_nodes
     # MES: need to validate n_nodes, p_value
     if (@job.nodes < 1)
@@ -151,6 +148,9 @@ class JobsController < ApplicationController
           #    @perl_output = `./polynome.pl #{@job.nodes}`
           #end
       end
+      
+      # Tell the website we are done
+      `echo 'var done = 1;' > public/perl/#{@file_prefix}.done.js`;
     end
   end
   

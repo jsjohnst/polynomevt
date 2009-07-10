@@ -4,7 +4,7 @@ var htmlBody = document.getElementById("bodytag");
 function check_perl_completed(prefix) {
 	if(!done) {
 		var node = document.createElement("script");
-		node.src = "/perl/" + prefix + ".done.js?t=" + Date.now();
+		node.src = "/perl/" + prefix + ".done.js?t=" + (new Date).getTime();
 		htmlBody.appendChild(node);
 		setTimeout("check_perl_completed('" + prefix + "')", 5000);
 	} else {
