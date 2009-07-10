@@ -118,7 +118,7 @@ class JobsController < ApplicationController
 
       if (@job.show_functions || @job.state_space )
            if (@job.is_deterministic)
-              if (@job.nodes <= 4 )
+              #if (@job.nodes <= 4 )
                   @error_message = run( @job.nodes, discretized_datafiles );
                   logger.info "EA is not implemented yet";
                   @error_message += "<br>We're calling EA here but don't have the
@@ -128,7 +128,7 @@ class JobsController < ApplicationController
                   # TODO FBH need to check data for consistency and run make
                   # consistent
                   @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
-              end
+              #end
           else
               @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
           end
