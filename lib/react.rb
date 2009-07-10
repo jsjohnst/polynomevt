@@ -1,7 +1,7 @@
 module React
 
   def run(n_nodes, datafiles)
-    return "Sucessfully callling react lib";
+    return "Successfully calling react lib";
   end
   
   def parse_output(infile, outfile)
