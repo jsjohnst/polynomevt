@@ -93,6 +93,15 @@ sub dvd_session {
     #$ENV{'PATH'}            = '/usr/local/bin:/bin:/etc:/usr/bin';
     $ENV{'LD_LIBRARY_PATH'} = '/usr/local/lib/graphviz';
 
+    # check that ccomps and dot are installed
+#    my $path_to = `which dot`;
+#    if ( $path_to eq "" ) {
+#        return _package_error ("dot is not installed");
+#    }
+#    $path_to = `which ccomps`;
+#    if ( $path_to eq "" ) {
+#        return _package_error ("ccomps is not installed");
+#    }
     # eventually serialize a hash
     # count the arguments
     $count = scalar(@_);
