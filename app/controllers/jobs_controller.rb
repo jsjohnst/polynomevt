@@ -74,7 +74,7 @@ class JobsController < ApplicationController
     end
     
     # create the dummy file to avoid RouteErrors
-    `echo 'var done = 0;' > public/perl/#{@file_prefix}.done.js`;
+    self.write_done_file("0", "");
         
     spawn do
       discretized_datafiles = datafiles.collect { |datafile|
@@ -83,7 +83,6 @@ class JobsController < ApplicationController
 
       self.discretize_data(datafiles, discretized_datafiles, @p_value);
 
-    
       #concatenate_discretized_files
       first = TRUE;
       File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
@@ -99,7 +98,7 @@ class JobsController < ApplicationController
 
       if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
           # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
-          if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
+          if !self.data_consistent?(discretized_datafiles, @p_value, @job.nodes)
               # here we somehow give the error that the data is not consistent.
               flash[:notice] = "discretized data is not consistent";
               logger.info "Discretized data not consistent, need to implement
@@ -115,6 +114,7 @@ class JobsController < ApplicationController
                       @job.wiring_diagram_format, @p_value, @job.nodes);
               end
           end
+          self.write_done_file("1", flash[:notice]);
           # There's nothing else here to do
           return;
       end
@@ -137,7 +137,7 @@ class JobsController < ApplicationController
           end
       end
    
-      # TODO FBH need to wait for sgfan() to be done
+      simulation_output = "";
       if (@job.state_space)
           # run simulation
           logger.info "Starting stochastic_runner";
@@ -145,14 +145,18 @@ class JobsController < ApplicationController
           show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
           wiring_diagram = @job.wiring_diagram ? "1" : "0";
 
-          @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
-          @simulation_output = @simulation_output.gsub("\n", "");
+          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
+          simulation_output = simulation_output.gsub("\n", "");
       end
       
-      # Tell the website we are done
-      `echo 'var done = 1;' > public/perl/#{@file_prefix}.done.js`;
-      `echo "var simulation_output = '#{@simulation_output}';" >> public/perl/#{@file_prefix}.done.js`;
+      self.write_done_file("1", simulation_output);
     end
+  end
+  
+  def write_done_file(done, simulation_output)
+    # Tell the website we are done
+    `echo 'var done = #{done};' > public/perl/#{@file_prefix}.done.js`;
+    `echo "var simulation_output = '#{simulation_output}';" >> public/perl/#{@file_prefix}.done.js`;
   end
   
   # TODO FBH: This function is doing the checking at the moment, should
@@ -218,7 +222,7 @@ class JobsController < ApplicationController
     dotfile = self.dotfile_name(@file_prefix);
     graphfile = self.graphfile_name(@file_prefix, file_format);
 
-    macaulay2(
+    logger.info macaulay2(
       :m2_command => "wd(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "wd.m2",
       :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}",

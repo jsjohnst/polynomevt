@@ -29,18 +29,16 @@ module Macaulay
     spawn_id = spawn do
       # TODO: Check the return value of M2 and handle errors
       logger.info "cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;"
-      `cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;`;
-      #`M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay2/macaulay.log 2>&1`;
-      # retval = $?; # the return code from the M2 call, I believe.
+      `cd #{options[:m2_script_path]}; echo "Running cmd: " M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; echo $? > ./exitcode.val; cd ..;`;
       if(options[:post_m2_command])
-        `#{options[:post_m2_command]}`;
-        # retval2 = $?;
+        `#{options[:post_m2_command]}; echo $? > #{options[:m2_script_path]}/exitcode-post_m2.val`;
       end
     end
     
     if(options[:m2_wait])
       logger.info "About to wait for M2 to complete as requested"
       wait(spawn_id);
+      return `cat #{options[:m2_script_path]}/exitcode.val`;
     else
       logger.info "Returning immediately without waiting for M2 to finish"
     end
