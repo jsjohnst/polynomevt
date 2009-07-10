@@ -513,7 +513,7 @@ void GAModel::CreateNextGeneration()
 }
 
 // Run - run the G.A. from the initial state until convergence or max_iter
-void GAModel::Run( )
+void GAModel::Run( char * best_models_filename)
 {
 	// Make sure each run is different!
 	PolyMathRand::Randomize();
@@ -571,7 +571,7 @@ void GAModel::Run( )
 	debug_file.close(); 
 #endif
 	// Select best 'r' models and output them to a result file
-	std::ofstream out_file( "BestModels.txt" );		// TBD - get the name from the control file
+	std::ofstream out_file( best_models_filename );		// TBD - get the name from the control file
 	DumpGenePool( out_file, 5*GAParams::NumParentsToPreserve() );
 	out_file.close();
 }

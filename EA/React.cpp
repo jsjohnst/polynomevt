@@ -461,10 +461,15 @@ int main( int num_args, char* cmd_line_args[] )
 	try
 	{
 		String control_file_path = "GaControlFile.txt";
-		if( num_args == 2 )
+		char *best_models_filename = "BestModels.txt";
+		if( num_args >= 2 )
 		{
 			control_file_path = String( cmd_line_args[1] );
 		}
+		if (num_args >= 3)
+		  {
+		    best_models_filename = cmd_line_args[2];
+		  }
 		std::cout << "Opening: " << control_file_path << std::endl;
 
 		// Initialize the run based on the control file
@@ -472,7 +477,7 @@ int main( int num_args, char* cmd_line_args[] )
 		ga.InitializeGA( control_file_path );
 
 		// Run the GA until convergence
-		ga.Run( );
+		ga.Run( best_models_filename );
 
 	}
 	catch( const char* msg )

@@ -50,7 +50,8 @@ public:
 	void CreateNextGeneration();
 
 	// Run - run the G.A. from the initial state until convergence or max_iter
-	void Run( );
+	// MES: added: parameter: filename is the output which had been hardcoded as "BestModels.txt"
+	void Run( char *filename );
 
 	// Dump the contents of the gene pool to the given open file in human-readable format
 	void DumpGenePool( std::ofstream& out_file, size_t max_models = 0 );
