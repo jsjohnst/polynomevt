@@ -52,9 +52,6 @@ class JobsController < ApplicationController
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
 
-    # TODO: Fix this!
-    `echo 'var data = 1;' > public/perl/#{@file_prefix}.done.js`;
-
     # MES: need to validate the input file, using n_nodes
     # MES: need to validate n_nodes, p_value
     if (@job.nodes < 1)
@@ -76,79 +73,84 @@ class JobsController < ApplicationController
         return; 
     end
         
-    discretized_datafiles = datafiles.collect { |datafile|
-      datafile.gsub(/input/, 'discretized-input');
-    }
+    spawn do
+      discretized_datafiles = datafiles.collect { |datafile|
+        datafile.gsub(/input/, 'discretized-input');
+      }
 
-    self.discretize_data(datafiles, discretized_datafiles, @p_value);
-
-    
-    #concatenate_discretized_files
-    first = TRUE;
-    File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
-        |f| discretized_datafiles.each{ |datafile|
-            if (!first)
-                f.write("#\n");
-            end
-            f.write(File.open(datafile, 'r').read);
-            first = FALSE;}
-   }
+      self.discretize_data(datafiles, discretized_datafiles, @p_value);
 
     
+      #concatenate_discretized_files
+      first = TRUE;
+      File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
+          |f| discretized_datafiles.each{ |datafile|
+              if (!first)
+                  f.write("#\n");
+              end
+              f.write(File.open(datafile, 'r').read);
+              first = FALSE;}
+      }
 
-    if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
-        # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
-        if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
-            # here we somehow give the error that the data is not consistent.
-            flash[:notice] = "discretized data is not consistent";
-            logger.info "Discretized data not consistent, need to implement
-            EA or make data consistent? Nore sure yet.";
-            return;
-        else
-            flash[:notice] = "discretized data is consistent";
-            if ( @job.nodes <= 10 ) 
-                self.generate_wiring_diagram(discretized_datafiles,
-                    @job.wiring_diagram_format, @p_value, @job.nodes);
-            else 
-                self.minsets_generate_wiring_diagram(discretized_datafiles,
-                    @job.wiring_diagram_format, @p_value, @job.nodes);
-            end
-        end
-        # There's nothing else here to do
-        return;
-    end
+    
 
-    if (@job.show_functions || @job.state_space )
-         if (@job.is_deterministic)
-            if (@job.nodes <= 4 )
-                @error_message = run( @job.nodes, discretized_datafiles );
-                logger.info "EA is not implemented yet";
-                @error_message += "<br>We're calling EA here but don't have the
-                right config file yet. Be patient!<br>";
-            # else this has to be changed to an else once EA is implemented
-                logger.info "Using minsets to generate the functions";
-                # TODO FBH need to check data for consistency and run make
-                # consistent
-                @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
-            end
-        else
-            @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
-        end
-    end
+      if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
+          # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
+          if !self.data_consistent?(discretized_datafiles, @p_value, @n_nodes)
+              # here we somehow give the error that the data is not consistent.
+              flash[:notice] = "discretized data is not consistent";
+              logger.info "Discretized data not consistent, need to implement
+              EA or make data consistent? Nore sure yet.";
+              return;
+          else
+              flash[:notice] = "discretized data is consistent";
+              if ( @job.nodes <= 10 ) 
+                  self.generate_wiring_diagram(discretized_datafiles,
+                      @job.wiring_diagram_format, @p_value, @job.nodes);
+              else 
+                  self.minsets_generate_wiring_diagram(discretized_datafiles,
+                      @job.wiring_diagram_format, @p_value, @job.nodes);
+              end
+          end
+          # There's nothing else here to do
+          return;
+      end
+
+      if (@job.show_functions || @job.state_space )
+           if (@job.is_deterministic)
+              if (@job.nodes <= 4 )
+                  @error_message = run( @job.nodes, discretized_datafiles );
+                  logger.info "EA is not implemented yet";
+                  @error_message += "<br>We're calling EA here but don't have the
+                  right config file yet. Be patient!<br>";
+              # else this has to be changed to an else once EA is implemented
+                  logger.info "Using minsets to generate the functions";
+                  # TODO FBH need to check data for consistency and run make
+                  # consistent
+                  @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
+              end
+          else
+              @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
+          end
+      end
    
-    # TODO FBH need to wait for sgfan() to be done
-    if (@job.state_space)
-        # run simulation
-        logger.info "Starting stochastic_runner";
+      # TODO FBH need to wait for sgfan() to be done
+      if (@job.state_space)
+          # run simulation
+          logger.info "Starting stochastic_runner";
 
-        show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
-        wiring_diagram = @job.wiring_diagram ? "1" : "0";
+          show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
+          wiring_diagram = @job.wiring_diagram ? "1" : "0";
 
-        @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
+          @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
 
-        #spawn do 
-        #    @perl_output = `./polynome.pl #{@job.nodes}`
-        #end
+          #spawn do 
+          #    @perl_output = `./polynome.pl #{@job.nodes}`
+          #end
+      end
+      
+      # Tell the website we are done
+      `echo 'var done = 1;' > public/perl/#{@file_prefix}.done.js`;
     end
   end
   
