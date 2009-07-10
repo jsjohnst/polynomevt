@@ -143,7 +143,7 @@ class JobsController < ApplicationController
         show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
         wiring_diagram = @job.wiring_diagram ? "1" : "0";
 
-        @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
+        @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
 
         #spawn do 
         #    @perl_output = `./polynome.pl #{@job.nodes}`
