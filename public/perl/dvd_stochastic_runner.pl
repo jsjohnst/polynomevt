@@ -9,7 +9,7 @@
 ## Authored by Jonte Craighead and Franziska Hinkelmann
 #
 # Use: perl dvd_stochasitic_runner.pl #nodes #states all_trajectories_flag
-# update_stochastic_flag outputfilename graph_format dependencygraph_flag
+# update_stochastic_flag outputfilename graph_format wiring_diagram_flag
 # update_sequential_flag update_schedule inputfile.txt
 # 
 # If this script is run, Stochastic is hard coded to 1, so we always get a
@@ -48,10 +48,11 @@ if ($DEBUG) { print "<br>Number of arguments (should equal 12) " . $#ARGV .
 #set non-zero to get too much information
 
 die "Usage: dvd_stochasitic_runner.pl [-vh] #nodes #states
-all_trajectories_flag update_stochastic_flag outputfilename graph_format
-dependencygraph_flag update_sequential_flag update_schedule
-Probabilities_in_graph_flag trajectory_flag trajectory_value inputfile.txt \n\t-v  verbose \n\t-h  this help\n"
-if ($opt_h || $#ARGV != 12);
+all_trajectories_flag update_stochastic_flag outputfilename statespace_format
+wiring_diagram_format wiring_diagram_flag update_sequential_flag
+update_schedule Probabilities_in_graph_flag trajectory_flag trajectory_value
+inputfile.txt \n\t-v  verbose \n\t-h  this help\n"
+if ($opt_h || $#ARGV != 13);
 
 $n_nodes = $ARGV[0]; #number of variables
 $p_value = $ARGV[1]; #number of states
@@ -61,17 +62,17 @@ $all_trajectories_flag= $ARGV[2];  # This flag set means all possible arrows are
 $update_stochastic_flag=$ARGV[3]; 	#if set, an update stochastic system is simulated using
 #random delays
 $file_prefix = $ARGV[4]; #outputfiles
-$ss_format = $ARGV[5]; #graph format
-$regulatory = $ARGV[6]; #on if dependency graph should be graphed
+$statespace_format = $ARGV[5]; #graph format
+$wiring_diagram_format = @ARGV[6];
+$show_wiring_diagram = $ARGV[7]; #on if wiring diagram should be graphed
 $translate = 0; #translate_box (whether Boolean or polynomial; at the moment
 # translation is done in the new_dvd2.pl program
-$update_sequential_flag = $ARGV[7]; #1 if sequential update
-$update_schedule = $ARGV[8]; #update_schedule
+$update_sequential_flag = $ARGV[8]; #1 if sequential update
+$update_schedule = $ARGV[9]; #update_schedule
 $statespace = 1; #statespace 1 means create picture
-$dg_format = $ss_format; 
-$Stochastic = $ARGV[9]; 	# if set to one, probabilities are included in graph
-$trajectory_flag = $ARGV[10]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
-$trajectory_value = $ARGV[11]; # initial state
+$Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph
+$trajectory_flag = $ARGV[11]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
+$trajectory_value = $ARGV[12]; # initial state
 
 if ($DEBUG) {print "All trajectories flag, 1 if all trajectories, 0 for a single initial
 state: $trajectory_flag \n <br>"; }
@@ -80,7 +81,7 @@ $stochastic_input_file = $ARGV[-1];
 if ($DEBUG) {print "Number of nodes $n_nodes <br>
     P_value $p_value <br>
     file_prefix $file_prefix <br>
-    Statespace format $ss_format <br>
+    Statespace format $statespace_format <br>
     Functionfile $stochastic_input_file <br>"; }
 
 open($function_file, $stochastic_input_file);
@@ -90,7 +91,7 @@ $Pwd = getcwd();
 
 @response = dvd_session($n_nodes, $p_value, $file_prefix, $translate,
 $update_sequential_flag, $update_schedule, $all_trajectories_flag,
-$statespace, $ss_format, $regulatory, $dg_format,
+$statespace, $statespace_format, $show_wiring_diagram, $wiring_diagram_format,
 $trajectory_flag, $trajectory_value, $update_stochastic_flag, $DEBUG,
 $function_file);
 
@@ -104,5 +105,4 @@ if($response[0] == 1) { # a response code should always be returned by the main 
 } 
 else {
     print $_."\n" foreach(@response);
-#	print "<br>Use<br>\nperl dvd_stochasitic_runner.pl n_nodes p_value all_trajectories_flag update_stochastic_flag file_prefix ss_format dependencygraph update_sequential_flag update_schedule inputfile<br>\n";
 }
