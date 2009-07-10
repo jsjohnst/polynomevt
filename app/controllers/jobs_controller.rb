@@ -1,5 +1,6 @@
 require 'digest/md5'
 
+include React
 include Spawn
 include Macaulay
 
@@ -119,7 +120,7 @@ class JobsController < ApplicationController
          if (@job.is_deterministic)
             if (@job.nodes <= 4 )
                 logger.info "EA is not implemented yet";
-                @error_message = `./EA/EA1_Two`;
+                @error_message = `./EA/EA1_Two `;
                 @error_message += "<br>We're calling EA here but don't have the
                 right config file yet. Be patient!<br>";
             # else this has to be changed to an else once EA is implemented
