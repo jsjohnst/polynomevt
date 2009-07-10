@@ -253,7 +253,8 @@ class JobsController < ApplicationController
     functionfile = self.functionfile_name(@file_prefix);
     macaulay2(
       :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
-      :m2_file => "minsets-web.m2"
+      :m2_file => "minsets-web.m2",
+      :m2_wait => 1
       );
     functionfile;
   end
