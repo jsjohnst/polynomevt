@@ -4,8 +4,8 @@
 #
 #  primary target goes first
 #
-EA1_Two: BitString.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModelNew.o EA1_Two.o
-	g++ BitString.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModelNew.o EA1_Two.o -O3 -o EA1_Two
+React: BitString.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModelNew.o React.o
+	g++ BitString.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModelNew.o React.o -O3 -o React
 
 BitString.o: BitString.cpp
 	gcc BitString.cpp -O3 -c
@@ -31,10 +31,10 @@ FileManager.o: FileManager.cpp
 GAModelNew.o: GAModelNew.cpp
 	gcc GAModelNew.cpp -O3 -c
 
-EA1_Two.o: EA1_Two.cpp
-	gcc EA1_Two.cpp -O3 -c
+React.o: React.cpp
+	gcc React.cpp -O3 -c
 
 
 clean:
-	rm -rf *.o EA1_Two
+	rm -rf *.o React
 
