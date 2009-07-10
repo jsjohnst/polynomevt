@@ -82,6 +82,7 @@ class JobsController < ApplicationController
 
     self.discretize_data(datafiles, discretized_datafiles, @p_value);
 
+    
     #concatenate_discretized_files
     first = TRUE;
     File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
@@ -93,7 +94,7 @@ class JobsController < ApplicationController
             first = FALSE;}
    }
 
-
+    
 
     if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
         # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
@@ -197,17 +198,6 @@ class JobsController < ApplicationController
         end
     end
     return datafiles;
-  end
-  
-  def discretize_data_old(datafiles, discretized_datafiles, p_value)    
-    datafiles_string = make_m2_string_from_array(datafiles);
-    discretized_datafiles_string = make_m2_string_from_array(discretized_datafiles);
-
-    macaulay2(  {
-      :m2_command => "discretize(#{datafiles_string}, #{discretized_datafiles_string}, #{p_value})",
-      :m2_file => "Discretize.m2",
-      :m2_wait => 1
-    });
   end
   
   def discretize_data(infiles, outfiles, p_value)    
