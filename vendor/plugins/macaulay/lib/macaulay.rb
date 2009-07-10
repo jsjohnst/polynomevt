@@ -39,7 +39,7 @@ module Macaulay
     end
     
     if(options[:m2_wait])
-      logger.info "Fixing to wait for M2 to complete as requested"
+      logger.info "About to wait for M2 to complete as requested"
       wait(spawn_id);
     else
       logger.info "Returning immediately without waiting for M2 to finish"

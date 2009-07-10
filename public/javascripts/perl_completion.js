@@ -1,4 +1,5 @@
 var done = 0;
+var simulation_output = '';
 var htmlBody = document.getElementById("bodytag");
 
 function check_perl_completed(prefix) {
@@ -9,6 +10,6 @@ function check_perl_completed(prefix) {
 		setTimeout("check_perl_completed('" + prefix + "')", 5000);
 	} else {
 		var node = document.getElementById("completion_msg");
-		node.innerHTML = 'Your data has been generated successfully!';
+		node.innerHTML = simulation_output + '<br><br><strong>Your data has been generated successfully!</strong>';
 	}
 }

@@ -72,6 +72,9 @@ class JobsController < ApplicationController
         @error_message = "The data you entered is invalid";
         return; 
     end
+    
+    # create the dummy file to avoid RouteErrors
+    `echo 'var done = 0;' > public/perl/#{@file_prefix}.done.js`;
         
     spawn do
       discretized_datafiles = datafiles.collect { |datafile|
@@ -143,14 +146,12 @@ class JobsController < ApplicationController
           wiring_diagram = @job.wiring_diagram ? "1" : "0";
 
           @simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
-
-          #spawn do 
-          #    @perl_output = `./polynome.pl #{@job.nodes}`
-          #end
+          @simulation_output = @simulation_output.gsub("\n", "");
       end
       
       # Tell the website we are done
       `echo 'var done = 1;' > public/perl/#{@file_prefix}.done.js`;
+      `echo "var simulation_output = '#{@simulation_output}';" >> public/perl/#{@file_prefix}.done.js`;
     end
   end
   
@@ -220,7 +221,8 @@ class JobsController < ApplicationController
     macaulay2(
       :m2_command => "wd(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "wd.m2",
-      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}"
+      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}",
+      :m2_wait => 1
       );
   end
 
@@ -231,14 +233,16 @@ class JobsController < ApplicationController
     macaulay2(
       :m2_command => "minsetsWD(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "minsets-web.m2",
-      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}"
+      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}",
+      :m2_wait => 1
       );
   end
   
   def data_consistent?(discretized_data_files, p_value, n_nodes)
     macaulay2(
       :m2_command => "isConsistent(#{m2_string(discretized_data_files)}, #{p_value}, #{n_nodes})",
-      :m2_file => "isConsistent.m2"
+      :m2_file => "isConsistent.m2",
+      :m2_wait => 1
       );
   end
 
@@ -246,7 +250,8 @@ class JobsController < ApplicationController
     functionfile = self.functionfile_name(@file_prefix);
     macaulay2(
       :m2_command => "sgfan(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
-      :m2_file => "func.m2"
+      :m2_file => "func.m2",
+      :m2_wait => 1
       );
     functionfile;
   end
