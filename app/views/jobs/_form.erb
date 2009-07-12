@@ -39,10 +39,12 @@
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">
-							<%= form.check_box :simulate %><%= form.label :simulate, "Simulate the state space using an update schedule?" %>
+							<%= form.check_box :sequential %><%= form.label :sequential, "Simulate the state space using an update schedule?" %>
             			    <br><ul><li>Enter update schedule separated by spaces
 							<%= form.text_field :update_schedule, :size => 20 %></li>
-			                <li>If none is entered, then the nodes will be simulated in parallel.</li></ul></font>
+			                <li>If none is entered, then the nodes will be
+                            simulated in parallel.<br> (FBH Shouldn't this be random
+                            sequential updates? )</li></ul></font>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td bgcolor="#FF8000" nowrap>

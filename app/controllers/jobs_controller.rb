@@ -122,6 +122,8 @@ class JobsController < ApplicationController
       if (@job.show_functions || @job.state_space )
            if (@job.is_deterministic)
               #if (@job.nodes <= 4 )
+                    # FBH Error messages doesn't work in child - need to write
+                    # to html file or something
                   @error_message = run( @job.nodes, discretized_datafiles );
                   logger.info "EA is not implemented yet";
                   @error_message += "<br>We're calling EA here but don't have the
@@ -137,17 +139,43 @@ class JobsController < ApplicationController
           end
       end
    
-      simulation_output = "";
+     
       if (@job.state_space)
           # run simulation
           logger.info "Starting stochastic_runner";
+          
+          # set parameters for simulation 
+          logger.info "Sequential update: " + @job.sequential.to_s;
+          stochastic_sequential_update = "0";
+          if (@job.sequential)
+            if ( !@job.is_deterministic )
+                logger.info "Not deterministic";
+                logger.warn "Sequential updates can only be chosen for
+                deterministic models. Exiting";
+                return;
+            end
+            if ( !@job.update_schedule )
+                logger.info "Update sequential but no schedule given, doing
+                sequential udpate with random update schedule";
+                stochastic_sequential_update = "1";
+            end
+          end
 
           show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
           wiring_diagram = @job.wiring_diagram ? "1" : "0";
+          sequential = @job.sequential ? "1" : "0";
 
-          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 0 public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} 0 0 #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
+          if ( !@job.update_schedule || @job.update_schedule == "") 
+            @job.update_schedule = "0";
+          else 
+            # concatenate update schedule into one string with _ as separators
+            @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" );
+          end
+          logger.info "Update Schedule: " + @job.update_schedule;
+
+          simulation_output = `perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`; 
           simulation_output = simulation_output.gsub("\n", "");
-      end
+          end
       
       self.write_done_file("1", simulation_output);
     end
