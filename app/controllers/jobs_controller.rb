@@ -115,7 +115,7 @@ class JobsController < ApplicationController
                       @job.wiring_diagram_format, @p_value, @job.nodes);
               end
           end
-          self.write_done_file("1", @error_message); 
+          self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
           # There's nothing else here to do
           return;
       end
