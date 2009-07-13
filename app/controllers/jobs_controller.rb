@@ -279,9 +279,11 @@ class JobsController < ApplicationController
       );
     # 0 inconsistent
     # 1 consistent
-    logger.info "data is consistent returned " + ret_val;
-    logger.info (ret_val != 0 );
-    logger.info (ret_val == 0 );
+    logger.info "data is consistent returned ." + ret_val + ".";
+    #logger.info(ret_val != 0 );
+    #logger.info(ret_val == 0 );
+    logger.info( "Line 1" + (ret_val != 0).to_s );
+    logger.info( "Line 2" + (ret_val != "0").to_s );    
     return ( ret_val != "0" );
   end
 
