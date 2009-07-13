@@ -8,10 +8,11 @@ function check_perl_completed(prefix) {
 		node.src = "/perl/" + prefix + ".done.js?t=" + (new Date).getTime();
 		htmlBody.appendChild(node);
 		setTimeout("check_perl_completed('" + prefix + "')", 5000);
-	} else if (done==1){
+	} else if (done==1) {
 		var node = document.getElementById("completion_msg");
 		node.innerHTML = '<br>' + simulation_output + '<br><strong>Your data has been generated successfully!</strong>';
-	} else
+	} else {
 		var node = document.getElementById("completion_msg");
 		node.innerHTML = '<br>' + simulation_output + '<br><font color=red><strong>Your data has not been generated successfully!</strong></font>';
+    }
 }

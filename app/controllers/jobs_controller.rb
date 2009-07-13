@@ -102,9 +102,11 @@ class JobsController < ApplicationController
           # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
           if !self.data_consistent?(discretized_datafiles, @p_value, @job.nodes)
               # here we somehow give the error that the data is not consistent.
-              @error_message = "discretized data is not consistent";
+              @error_message = "Discretized data is not consistent.";
               logger.info "Discretized data not consistent, need to implement
               EA or make data consistent? Nore sure yet.";
+              self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
+              return; 
           else
               flash[:notice] = "discretized data is consistent";
               if ( @job.nodes <= 10 ) 
@@ -115,7 +117,7 @@ class JobsController < ApplicationController
                       @job.wiring_diagram_format, @p_value, @job.nodes);
               end
           end
-          self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
+          self.write_done_file("1", ""); 
           # There's nothing else here to do
           return;
       end
