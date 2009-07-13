@@ -22,7 +22,8 @@ class JobsController < ApplicationController
   
   def index
     @job = Job.new(:is_deterministic => false, :nodes => 3, :input_data => 
-    "1.2  2.3  3.4
+    "# First time course 
+1.2  2.3  3.4
 1.1  1.2  1.3
 2.2  2.3  2.4
 0.1  0.2  0.3");
@@ -101,10 +102,9 @@ class JobsController < ApplicationController
           # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
           if !self.data_consistent?(discretized_datafiles, @p_value, @job.nodes)
               # here we somehow give the error that the data is not consistent.
-              flash[:notice] = "discretized data is not consistent";
+              @error_message = "discretized data is not consistent";
               logger.info "Discretized data not consistent, need to implement
               EA or make data consistent? Nore sure yet.";
-              return;
           else
               flash[:notice] = "discretized data is consistent";
               if ( @job.nodes <= 10 ) 
@@ -115,7 +115,7 @@ class JobsController < ApplicationController
                       @job.wiring_diagram_format, @p_value, @job.nodes);
               end
           end
-          self.write_done_file("1", flash[:notice]);
+          self.write_done_file("1", @error_message); 
           # There's nothing else here to do
           return;
       end
@@ -178,7 +178,7 @@ class JobsController < ApplicationController
           simulation_output = simulation_output.gsub("\n", "");
           end
       
-      self.write_done_file("1", simulation_output);
+      self.write_done_file("1", simulation_output, @error_message);
     end
   end
   
@@ -279,11 +279,8 @@ class JobsController < ApplicationController
       );
     # 0 inconsistent
     # 1 consistent
-    logger.info "data is consistent returned ." + ret_val + ".";
-    #logger.info(ret_val != 0 );
-    #logger.info(ret_val == 0 );
-    logger.info( "Line 1" + (ret_val != 0).to_s );
-    logger.info( "Line 2" + (ret_val != "0").to_s );    
+    logger.info "data is consistent returned " + ret_val + "0 inconsistent,
+    1 consistent";
     return ( ret_val != "0" );
   end
 
