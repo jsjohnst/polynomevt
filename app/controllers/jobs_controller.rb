@@ -272,11 +272,17 @@ class JobsController < ApplicationController
   end
   
   def data_consistent?(discretized_data_files, p_value, n_nodes)
-    macaulay2(
+    ret_val = macaulay2(
       :m2_command => "isConsistent(#{m2_string(discretized_data_files)}, #{p_value}, #{n_nodes})",
       :m2_file => "isConsistent.m2",
       :m2_wait => 1
       );
+    # 0 inconsistent
+    # 1 consistent
+    logger.info "data is consistent returned " + ret_val;
+    logger.info (ret_val != 0 );
+    logger.info (ret_val == 0 );
+    return ( ret_val != "0" );
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
