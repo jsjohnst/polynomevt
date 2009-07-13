@@ -18,9 +18,10 @@ class JobsController < ApplicationController
   def graphfile_name(prefix, file_format)
     "public/perl/" + prefix + ".wiring-diagram." + file_format;
   end
+
   
   def index
-    @job = Job.new(:nodes => 3, :input_data => 
+    @job = Job.new(:is_deterministic => false, :nodes => 3, :input_data => 
     "1.2  2.3  3.4
 1.1  1.2  1.3
 2.2  2.3  2.4
