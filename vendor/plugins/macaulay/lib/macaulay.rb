@@ -22,7 +22,7 @@ module Macaulay
 
     # if no m2 options are provided, then default to sane defaults
     if(!options[:m2_options]) 
-      options[:m2_options] = " --no-debug --silent -q -e "; 
+      options[:m2_options] = " --stop --no-debug --silent -q -e "; 
     end
     
     # fork a background task to run M2
