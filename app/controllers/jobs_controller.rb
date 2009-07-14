@@ -85,17 +85,17 @@ class JobsController < ApplicationController
     logger.info "Sequential update: " + @job.sequential.to_s;
     stochastic_sequential_update = "0";
     if (@job.sequential)
-    if ( !@job.is_deterministic )
-        logger.info "Not deterministic";
-        @error_message = "Sequential updates can only be chosen for deterministic models. Exiting";
-        self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
-        return;
-    end
-    if ( !@job.update_schedule )
-        logger.info "Update sequential but no schedule given, doing
-        sequential udpate with random update schedule";
-        stochastic_sequential_update = "1";
-    end
+        if ( !@job.is_deterministic )
+            logger.info "Not deterministic";
+            @error_message = "Sequential updates can only be chosen for deterministic models. Exiting";
+            self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
+            return;
+        end
+        if ( !@job.update_schedule )
+            logger.info "Update sequential but no schedule given, doing
+            sequential udpate with random update schedule";
+            stochastic_sequential_update = "1";
+        end
     end
         
     spawn do
