@@ -80,7 +80,10 @@ class JobsController < ApplicationController
     # create the dummy file to avoid RouteErrors
     self.write_done_file("0", "");
     
-    
+    ## All checking of any input should be done before we spawn, so the user
+    #receives feedback about invalid options right away and not after some time
+    # ( = everything) 
+
     # check for correct input options
     logger.info "Sequential update: " + @job.sequential.to_s;
     stochastic_sequential_update = "0";
@@ -97,7 +100,9 @@ class JobsController < ApplicationController
             stochastic_sequential_update = "1";
         end
     end
-        
+   
+    ## TODO FBH Need to check update schedule for correctness 
+
     spawn do
         #TODO this will change to a single new filename
       discretized_datafiles = datafiles.collect { |datafile|
@@ -167,8 +172,13 @@ class JobsController < ApplicationController
       if (@job.state_space)
           # run simulation
           logger.info "Starting simulation of state space.";
+            
+          if ( @job.sequential && !@job.update_schedule )
+              logger.info "Update sequential but no schedule given, doing
+              sequential udpate with random update schedule";
+              stochastic_sequential_update = "1";
+          end
           
-
           show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
           wiring_diagram = @job.wiring_diagram ? "1" : "0";
           sequential = @job.sequential ? "1" : "0";
