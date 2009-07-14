@@ -180,7 +180,7 @@ class JobsController < ApplicationController
           simulation_output = simulation_output.gsub("\n", "");
           end
       
-      self.write_done_file("1", simulation_output, @error_message);
+      self.write_done_file("1",  @error_message);
     end
   end
  
