@@ -145,7 +145,7 @@ class JobsController < ApplicationController
      
       if (@job.state_space)
           # run simulation
-          logger.info "Starting stochastic_runner";
+          logger.info "Starting simulation of state space.";
           
           # set parameters for simulation 
           logger.info "Sequential update: " + @job.sequential.to_s;
@@ -153,8 +153,9 @@ class JobsController < ApplicationController
           if (@job.sequential)
             if ( !@job.is_deterministic )
                 logger.info "Not deterministic";
-                logger.warn "Sequential updates can only be chosen for
+                @error_message = "Sequential updates can only be chosen for
                 deterministic models. Exiting";
+                self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
                 return;
             end
             if ( !@job.update_schedule )
