@@ -153,8 +153,7 @@ class JobsController < ApplicationController
           if (@job.sequential)
             if ( !@job.is_deterministic )
                 logger.info "Not deterministic";
-                @error_message = "Sequential updates can only be chosen for
-                deterministic models. Exiting";
+                @error_message = "Sequential updates can only be chosen for deterministic models. Exiting";
                 self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
                 return;
             end
@@ -184,7 +183,9 @@ class JobsController < ApplicationController
       self.write_done_file("1", simulation_output, @error_message);
     end
   end
-  
+ 
+
+
   def write_done_file(done, simulation_output)
     # Tell the website we are done
     `echo 'var done = #{done};' > public/perl/#{@file_prefix}.done.js`;
@@ -205,7 +206,7 @@ class JobsController < ApplicationController
         something_was_written = FALSE;
         while line = file.gets 
             # parse lines and break into different files at #
-            if( line.match( /^\s*\#+\s*$/ ) )
+            if( line.match( /^\s*\#+/ ) )
                 if (something_was_written && output) 
                     output.close;
                     output = NIL;
