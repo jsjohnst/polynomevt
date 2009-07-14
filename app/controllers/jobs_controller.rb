@@ -72,6 +72,8 @@ class JobsController < ApplicationController
     if (!datafiles)
         # TODO make this error message nice
         @error_message = "The data you entered is invalid";
+        self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
+        @error_message = "";
         return; 
     end
     
@@ -194,6 +196,9 @@ class JobsController < ApplicationController
   
   # TODO FBH: This function is doing the checking at the moment, should
   # probably restructure 
+  # We won't need this function anymore as soon as Brandy has rewritten M2
+  # code to accept single file with #
+  # This should only do the error checking! 
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
 
