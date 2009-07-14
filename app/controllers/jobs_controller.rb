@@ -72,18 +72,27 @@ class JobsController < ApplicationController
     if (!datafiles)
         # TODO make this error message nice
         @error_message = "The data you entered is invalid";
-        self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
+        self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> "); 
         @error_message = "";
         return; 
     end
     
     # create the dummy file to avoid RouteErrors
     self.write_done_file("0", "");
+
+    n_react_threshold = 5;
+    n_stochastic_threshold = 10;
     
     ## All checking of any input should be done before we spawn, so the user
     #receives feedback about invalid options right away and not after some time
     # ( = everything) 
-
+    if !@job.is_deterministic && @job.nodes > n_stochastic_threshold
+      @error_message = "A stochastic model requires no more than #{n_stochastic_threshold} nodes.  Sorry!";
+      self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ");
+      @error_message = "";
+      return;
+    end
+    
     # check for correct input options
     logger.info "Sequential update: " + @job.sequential.to_s;
     stochastic_sequential_update = "0";
@@ -122,54 +131,57 @@ class JobsController < ApplicationController
               first = FALSE;}
       }
 
-    
+      # react: n <= n_threshold, is_deterministic
+      # minsets: n > n_threshold, is_deterministic
+      # sgfan: n <= n_threshold, !is_deterministic, data_consistent
+      # error: all other cases, i.e. n > n_threshold, !is_deterministic, !data_consistent
 
-      if ( @job.wiring_diagram && !@job.state_space && !@job.show_functions )
-          # MES: this call to data_consistent? fails currently since we can't get the return val from M2 calls
-          if !self.data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-              # here we somehow give the error that the data is not consistent.
-              @error_message = "Discretized data is not consistent.";
-              logger.info "Discretized data not consistent, need to implement
-              EA or make data consistent? Nore sure yet.";
-              self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
-              return; 
-          else
-              flash[:notice] = "discretized data is consistent";
-              if ( @job.nodes <= 10 ) 
-                  self.generate_wiring_diagram(discretized_datafiles,
-                      @job.wiring_diagram_format, @p_value, @job.nodes);
-              else 
-                  self.minsets_generate_wiring_diagram(discretized_datafiles,
-                      @job.wiring_diagram_format, @p_value, @job.nodes);
-              end
-          end
-          self.write_done_file("1", ""); 
-          # There's nothing else here to do
-          return;
+      if @job.state_space
+        @job.show_functions = true;
+        @functionfile_name = self.functionfile_name(@file_prefix);
       end
-
-      if (@job.show_functions || @job.state_space )
-           if (@job.is_deterministic)
-              #if (@job.nodes <= 4 )
-                    # FBH Error messages doesn't work in child - need to write
-                    # to html file or something
-                  @error_message = run( @job.nodes, discretized_datafiles );
-                  logger.info "EA is not implemented yet";
-                  @error_message += "<br>We're calling EA here but don't have the
-                  right config file yet. Be patient!<br>";
-              # else this has to be changed to an else once EA is implemented
-                  logger.info "Using minsets to generate the functions";
-                  # TODO FBH need to check data for consistency and run make
-                  # consistent
-                  @functionfile_name = self.minsets(discretized_datafiles, @p_value, @job.nodes);
-              #end
-          else
-              @functionfile_name = self.sgfan(discretized_datafiles, @p_value, @job.nodes);
-          end
+      
+      if !@job.show_functions && !@job.wiring_diagram
+        self.write_done_file("1", "Thats all folks!");
+        return;
       end
-   
-     
-      if (@job.state_space)
+      
+      do_wiring_diagram_version = @job.wiring_diagram && !@job.functions;
+      # if function file is not needed, then run shorter version of minset/sgfan
+      #    which produces a wiring diagram but not a function file.
+      
+      if @job.is_deterministic
+        if @job.nodes <= n_react_threshold
+          # do react
+          run_react(@job.nodes, discretized_datafiles);
+        else
+          # do: makeconsistent, minsets
+          self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes);
+          if do_wiring_diagram_version
+            self.minsets_generate_wiring_diagram(discretized_datafiles,
+                @job.wiring_diagram_format, @p_value, @job.nodes);
+          else
+            self.minsets(discretized_datafiles, @p_value, @job.nodes);           
+          end
+        end
+      else 
+        self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes);
+        if @job.nodes <= n_stochastic_threshold
+          # do sgfan
+          if do_wiring_diagram_version
+            self.generate_wiring_diagram(discretized_datafiles,
+                @job.wiring_diagram_format, @p_value, @job.nodes);
+          else
+            self.sgfan(discretized_datafiles, @p_value, @job.nodes);
+          end
+        else
+          logger.warn("internal error: should not be here")
+        end
+      end
+      
+      self.write_done_file("1", ""); 
+      
+      if !do_wiring_diagram_version
           # run simulation
           logger.info "Starting simulation of state space.";
             
@@ -193,14 +205,12 @@ class JobsController < ApplicationController
 
           simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`; 
           simulation_output = simulation_output.gsub("\n", "");
-          end
+      end
       
-      self.write_done_file("1",  @error_message);
+      self.write_done_file("1",  simulation_output);
     end
   end
  
-
-
   def write_done_file(done, simulation_output)
     # Tell the website we are done
     `echo 'var done = #{done};' > public/perl/#{@file_prefix}.done.js`;
@@ -304,6 +314,10 @@ class JobsController < ApplicationController
     logger.info "data is consistent returned " + ret_val + "0 inconsistent,
     1 consistent";
     return ( ret_val != "0" );
+  end
+
+  def make_data_consistent(discretized_data_files, p_value, n_nodes)
+    logger.warn("make_data_consistent is not yet written: always just continues...");
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)

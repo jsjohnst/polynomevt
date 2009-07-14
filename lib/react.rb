@@ -1,6 +1,6 @@
 module React
 
-  def run(n_nodes, datafiles)
+  def run_react(n_nodes, datafiles)
     return "Successfully calling react lib";
   end
   
