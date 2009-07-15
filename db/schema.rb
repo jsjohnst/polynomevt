@@ -9,11 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090711181928) do
+ActiveRecord::Schema.define(:version => 20090704073236) do
 
   create_table "jobs", :force => true do |t|
     t.integer  "nodes"
-    t.boolean  "simulate"
     t.boolean  "wiring_diagram"
     t.string   "wiring_diagram_format"
     t.boolean  "state_space"
@@ -21,13 +20,13 @@ ActiveRecord::Schema.define(:version => 20090711181928) do
     t.boolean  "show_discretized"
     t.boolean  "show_functions"
     t.string   "input_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "update_schedule"
     t.boolean  "show_probabilities_wiring_diagram"
     t.boolean  "show_probabilities_state_space"
     t.boolean  "is_deterministic"
     t.boolean  "sequential"
+    t.string   "update_schedule"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
