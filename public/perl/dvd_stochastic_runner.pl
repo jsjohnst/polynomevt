@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-## Franziska Hinkelmann
-
 ## dvd_stochasitic_runner.pl
 ## Multi-function, stochastic DVD Processing
 ## This script takes a number of nodes, the number of states, and the filename for the input file
@@ -30,66 +28,67 @@
 # returned, because a function and update stochastic system is not
 # allowed. 
 
-# Need this so I can have access from a different folder - needs to be changed
-# for polymath
+use strict;
+
 use lib './public/perl';
 
-#use lib '../../polynome';
 use DVDCore qw($Clientip $Function_data $Function_file &error_check @Output_array $Pwd &dvd_session &_log $Stochastic);
 use Cwd;
 use Getopt::Std;
-getopts('vh');
+getopts('vhd');
+ 
+our ($opt_d, $opt_v, $opt_h);
+my $DEBUG=$opt_d;
+my $MINDEBUG=$opt_v;
 
-$DEBUG=$opt_v;
+if ($DEBUG) {
+    $MINDEBUG = 1;
+}
 
 if ($DEBUG) {print getcwd;}
-if ($DEBUG) { print "<br>Number of arguments (should equal 12) " . $#ARGV .
-"<br>"; }
-#set non-zero to get too much information
+if ($MINDEBUG) {print "Using Minimum Debug output for dvd_stochastic_runner.pl<br>\n";}
+if ($DEBUG) { print "<br>Number of arguments (should equal 12) " . $#ARGV .  "<br>"; }
 
-die "Usage: dvd_stochasitic_runner.pl [-vh] #nodes #states
-all_trajectories_flag update_stochastic_flag outputfilename statespace_format
-wiring_diagram_format wiring_diagram_flag update_sequential_flag
-update_schedule Probabilities_in_graph_flag trajectory_flag trajectory_value
-inputfile.txt \n\t-v  verbose \n\t-h  this help\n"
-if ($opt_h || $#ARGV != 13);
+die "Usage: dvd_stochasitic_runner.pl [-vdh] #nodes #states all_trajectories_flag update_stochastic_flag outputfilename statespace_format wiring_diagram_format wiring_diagram_flag update_sequential_flag update_schedule Probabilities_in_graph_flag trajectory_flag trajectory_value inputfile.txt \n\t-v minimal debug output \n\t-d debug output \n\t-h  this help\n" if ($opt_h || $#ARGV != 13);
 
-$n_nodes = $ARGV[0]; #number of variables
-$p_value = $ARGV[1]; #number of states
-$all_trajectories_flag= $ARGV[2];  # This flag set means all possible arrows are drawn in one
-# graph, without this option, one update is choosen at random for every
-# variables
-$update_stochastic_flag=$ARGV[3]; 	#if set, an update stochastic system is simulated using
-#random delays
-$file_prefix = $ARGV[4]; #outputfiles
-$statespace_format = $ARGV[5]; #graph format
-$wiring_diagram_format = @ARGV[6];
-$show_wiring_diagram = $ARGV[7]; #on if wiring diagram should be graphed
-$translate = 0; #translate_box (whether Boolean or polynomial; at the moment
-# translation is done in the new_dvd2.pl program
-$update_sequential_flag = $ARGV[8]; #1 if sequential update
-$update_schedule = $ARGV[9]; #update_schedule
-$statespace = 1; #statespace 1 means create picture
-$Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph
-$trajectory_flag = $ARGV[11]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
-$trajectory_value = $ARGV[12]; # initial state
+my $n_nodes = $ARGV[0]; #number of variables
+my $p_value = $ARGV[1]; #number of states
+my $all_trajectories_flag= $ARGV[2];  # This flag set means all possible arrows are drawn in one
+    # graph, without this option, one update is choosen at random for every
+    # variables
+my $update_stochastic_flag=$ARGV[3]; 	#if set, an update stochastic system is simulated using
+    #random delays
+my $file_prefix = $ARGV[4]; #outputfiles
+my $statespace_format = $ARGV[5]; #graph format
+my $wiring_diagram_format = @ARGV[6];
+my $show_wiring_diagram = $ARGV[7]; #on if wiring diagram should be graphed
+my $update_sequential_flag = $ARGV[8]; #1 if sequential update
+my $update_schedule = $ARGV[9]; #update_schedule
+my $statespace = 1; #statespace 1 means create picture
+my $Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph
+my $trajectory_flag = $ARGV[11]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
+my $trajectory_value = $ARGV[12]; # initial state
+my $stochastic_input_file = $ARGV[-1]; 
 
-if ($DEBUG) {print "All trajectories flag, 1 if all trajectories, 0 for a single initial
-state: $trajectory_flag \n <br>"; }
-$stochastic_input_file = $ARGV[-1]; 
+if ($DEBUG) {print "All trajectories flag, 1 if all trajectories, 0 for a single initial state: $trajectory_flag \n <br>"; }
 
-if ($DEBUG) {print "Number of nodes $n_nodes <br>
-    P_value $p_value <br>
-    file_prefix $file_prefix <br>
-    Statespace format $statespace_format <br>
-    Functionfile $stochastic_input_file <br>"; }
+if ($MINDEBUG) {print "Number of nodes $n_nodes <br>
+    P_value :$p_value: <br>
+    file_prefix :$file_prefix: <br>
+    Statespace format :$statespace_format: <br>
+    Wiring diagram format :$wiring_diagram_format:<br>
+    Functionfile :$stochastic_input_file: <br>
+    Update sequential :$update_sequential_flag: <br>
+    Update schedule :$update_schedule: <br>
+    Update stochastic :$update_stochastic_flag: <br>
+    "; }
 
-open($function_file, $stochastic_input_file);
+open(my $function_file, $stochastic_input_file);
 _log("Attempted to read from '$stochastic_input_file'");
 
-$Pwd = getcwd();
+my $Pwd = getcwd();
 
-@response = dvd_session($n_nodes, $p_value, $file_prefix, $translate,
+my @response = dvd_session($n_nodes, $p_value, $file_prefix, 0,
 $update_sequential_flag, $update_schedule, $all_trajectories_flag,
 $statespace, $statespace_format, $show_wiring_diagram, $wiring_diagram_format,
 $trajectory_flag, $trajectory_value, $update_stochastic_flag, $DEBUG,
