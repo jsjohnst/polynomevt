@@ -146,7 +146,7 @@ class JobsController < ApplicationController
         return;
       end
       
-      do_wiring_diagram_version = @job.wiring_diagram && !@job.functions;
+      do_wiring_diagram_version = @job.wiring_diagram && !@job.show_functions;
       # if function file is not needed, then run shorter version of minset/sgfan
       #    which produces a wiring diagram but not a function file.
       

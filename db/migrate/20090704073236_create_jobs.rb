@@ -7,10 +7,14 @@ class CreateJobs < ActiveRecord::Migration
       t.string :wiring_diagram_format
       t.boolean :state_space
       t.string :state_space_format
-      t.boolean :show_probabilities
       t.boolean :show_discretized
       t.boolean :show_functions
       t.string :input_data
+      t.string   :update_schedule
+      t.boolean  :show_probabilities_wiring_diagram
+      t.boolean  :show_probabilities_state_space
+      t.boolean  :is_deterministic
+      t.boolean  :sequential
 
       t.timestamps
     end
