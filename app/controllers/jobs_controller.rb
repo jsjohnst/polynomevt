@@ -270,6 +270,7 @@ class JobsController < ApplicationController
  
 
 
+ # 
   def discretize_data(infiles, outfiles, p_value)    
     # infiles: list of input file names to be discretized together
     # outfiles: the names of the output discretized files.  The length
