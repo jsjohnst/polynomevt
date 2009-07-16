@@ -21,11 +21,12 @@ module React
 	## MODEL = {};
 	## PARAMS = {"params1.txt"};
 
-    file_string; 
+
+    file_string = ""; 
     filemanagerfile = "EA/" + @file_format +".fileman.txt";
     data = "P=2;
     N=#{n_nodes};
-    WT = {\"#{filestring}\"};
+    WT = {\"#{file_string}\"};
     KO = {};
     REV = {};
     CMPLX = {};
