@@ -200,11 +200,12 @@ class JobsController < ApplicationController
             @job.update_schedule = "0";
           else 
             # concatenate update schedule into one string with _ as separators
+            # so we can pass it to dvd_stochastic_runner.pl
             @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" );
           end
           logger.info "Update Schedule: " + @job.update_schedule;
 
-          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`; 
+          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
           simulation_output = simulation_output.gsub("\n", "");
       end
       

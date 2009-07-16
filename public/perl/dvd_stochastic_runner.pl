@@ -80,8 +80,7 @@ if ($MINDEBUG) {print "Number of nodes $n_nodes <br>
     Functionfile :$stochastic_input_file: <br>
     Update sequential :$update_sequential_flag: <br>
     Update schedule :$update_schedule: <br>
-    Update stochastic :$update_stochastic_flag: <br>
-    "; }
+    Update stochastic :$update_stochastic_flag: <br> "; }
 
 open(my $function_file, $stochastic_input_file);
 _log("Attempted to read from '$stochastic_input_file'");
