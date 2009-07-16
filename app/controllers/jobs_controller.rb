@@ -97,13 +97,14 @@ class JobsController < ApplicationController
     logger.info "Sequential update: " + @job.sequential.to_s;
     stochastic_sequential_update = "0";
     if (@job.sequential)
+        logger.info "Update_schedule :" +@job.update_schedule + ":";
         if ( !@job.is_deterministic )
             logger.info "Not deterministic";
             @error_message = "Sequential updates can only be chosen for deterministic models. Exiting";
             self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> "); 
             return;
         end
-        if ( !@job.update_schedule )
+        if ( @job.update_schedule == "")
             logger.info "Update sequential but no schedule given, doing
             sequential udpate with random update schedule";
             stochastic_sequential_update = "1";
@@ -199,11 +200,12 @@ class JobsController < ApplicationController
             @job.update_schedule = "0";
           else 
             # concatenate update schedule into one string with _ as separators
+            # so we can pass it to dvd_stochastic_runner.pl
             @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" );
           end
           logger.info "Update Schedule: " + @job.update_schedule;
 
-          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`; 
+          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
           simulation_output = simulation_output.gsub("\n", "");
       end
       
@@ -267,7 +269,10 @@ class JobsController < ApplicationController
     end
     return datafiles;
   end
-  
+ 
+
+
+ # 
   def discretize_data(infiles, outfiles, p_value)    
     # infiles: list of input file names to be discretized together
     # outfiles: the names of the output discretized files.  The length
