@@ -2,7 +2,7 @@ require 'test_helper'
 
 class JobsGenerateTest < ActionController::IntegrationTest
   fixtures :jobs
-
+   #
   # Replace this with your real tests.
   test "the truth" do
     assert true
