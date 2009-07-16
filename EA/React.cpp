@@ -465,7 +465,7 @@ int main( int num_args, char* cmd_line_args[] )
         if (num_args < 2)
         {
             std::cout << "Use React with the parameters:" << std::endl;
-            std::cout << "./react controlfilepath (usually param.txt) outputfilename" << std::endl; 
+            std::cout << "./React controlfilepath (usually fileman.txt) outputfilename" << std::endl; 
             return 0;
         }
 		if( num_args >= 2 )
