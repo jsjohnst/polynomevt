@@ -462,6 +462,12 @@ int main( int num_args, char* cmd_line_args[] )
 	{
 		String control_file_path = "GaControlFile.txt";
 		char *best_models_filename = "BestModels.txt";
+        if (num_args < 2)
+        {
+            std::cout << "Use React with the parameters:" << std::endl;
+            std::cout << "./react controlfilepath (usually param.txt) outputfilename" << std::endl; 
+            return 0;
+        }
 		if( num_args >= 2 )
 		{
 			control_file_path = String( cmd_line_args[1] );
