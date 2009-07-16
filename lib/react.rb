@@ -8,7 +8,7 @@ module React
   end
 
 
-# n_nodes, file_prefix
+# n_nodes, file_prefix, list_of_datafiles
   def write_manager_file
     ## Needs to look like this 
 	## P=2;
@@ -21,10 +21,11 @@ module React
 	## MODEL = {};
 	## PARAMS = {"params1.txt"};
 
+    file_string; 
     filemanagerfile = "EA/" + @file_format +".fileman.txt";
     data = "P=2;
     N=#{n_nodes};
-    WT = {"w1.txt","w2.txt"};
+    WT = {\"#{filestring}\"};
     KO = {};
     REV = {};
     CMPLX = {};
