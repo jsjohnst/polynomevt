@@ -1,5 +1,7 @@
 require 'test_helper'
 
+#these don't work yet
+
 class JobsGenerateTest < ActionController::IntegrationTest
   fixtures :jobs
    
