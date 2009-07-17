@@ -13,7 +13,6 @@ ActiveRecord::Schema.define(:version => 20090716153935) do
 
   create_table "jobs", :force => true do |t|
     t.integer  "nodes"
-    t.boolean  "simulate"
     t.boolean  "wiring_diagram"
     t.string   "wiring_diagram_format"
     t.boolean  "state_space"
@@ -21,13 +20,13 @@ ActiveRecord::Schema.define(:version => 20090716153935) do
     t.boolean  "show_discretized"
     t.boolean  "show_functions"
     t.string   "input_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "update_schedule"
     t.boolean  "show_probabilities_wiring_diagram"
     t.boolean  "show_probabilities_state_space"
     t.boolean  "is_deterministic"
     t.boolean  "sequential"
+    t.string   "update_schedule"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", :force => true do |t|
