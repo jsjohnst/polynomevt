@@ -65,7 +65,7 @@ my $show_wiring_diagram = $ARGV[7]; #on if wiring diagram should be graphed
 my $update_sequential_flag = $ARGV[8]; #1 if sequential update
 my $update_schedule = $ARGV[9]; #update_schedule
 my $statespace = 1; #statespace 1 means create picture
-my $Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph
+my $Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph of state space 
 my $trajectory_flag = $ARGV[11]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
 my $trajectory_value = $ARGV[12]; # initial state
 my $stochastic_input_file = $ARGV[-1]; 
@@ -80,7 +80,8 @@ if ($MINDEBUG) {print "Number of nodes $n_nodes <br>
     Functionfile :$stochastic_input_file: <br>
     Update sequential :$update_sequential_flag: <br>
     Update schedule :$update_schedule: <br>
-    Update stochastic :$update_stochastic_flag: <br> "; }
+    Update stochastic :$update_stochastic_flag: <br> 
+    show_probabilities_state_space :$Stochastic: <br>";}
 
 open(my $function_file, $stochastic_input_file);
 _log("Attempted to read from '$stochastic_input_file'");
@@ -90,7 +91,7 @@ my $Pwd = getcwd();
 my @response = dvd_session($n_nodes, $p_value, $file_prefix, 0,
 $update_sequential_flag, $update_schedule, $all_trajectories_flag,
 $statespace, $statespace_format, $show_wiring_diagram, $wiring_diagram_format,
-$trajectory_flag, $trajectory_value, $update_stochastic_flag, $DEBUG,
+$trajectory_flag, $trajectory_value, $update_stochastic_flag, $Stochastic, $DEBUG,
 $function_file);
 
 if($response[0] == 1) { # a response code should always be returned by the main DVDCore functions

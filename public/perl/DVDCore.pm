@@ -49,7 +49,6 @@ our @Functions;
 # $Pwd is set by user to define the current working directory
 our $Pwd;
 our $Polynome;
-our $Stochastic;
 our $Use_log;
 
 #our $Use_log=1;
@@ -109,7 +108,7 @@ sub dvd_session {
         $translate,             $update_sequential, $update_schedule,
         $all_trajectories_flag, $statespace,        $ss_format,
         $regulatory,            $dg_format,         $all_trajectories,
-        $initial_state,         $update_stochastic, $debug
+        $initial_state,         $update_stochastic, $stochastic, $debug
     ) = @_[ 0 .. 14 ];
     $Use_log         = $debug;
     $Current_program = "dvd_session";
@@ -138,6 +137,7 @@ sub dvd_session {
 
     _log("\$Update_stochastic: $Update_stochastic");
     $Session_on = 1;
+    $Stochastic = $stochastic;
 
     # begin evaluation of input
     if ( ( !$p_value ) & ( !$n_nodes ) ) {
