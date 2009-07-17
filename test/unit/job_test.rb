@@ -14,11 +14,20 @@ class JobTest < ActiveSupport::TestCase
   end
   
   def test_nodes_numeric
-    job = Job.create({:nodes => "2"})
+    job = Job.create({:nodes => "-3"})
+    assert !job.valid?
+
+    job = Job.create({:nodes => "0"})
+    assert !job.valid?
+
+    job = Job.create({:nodes => "1"})
     assert job.valid?
 
-    job = Job.create({:nodes => "17"})
+    job = Job.create({:nodes => "11"})
     assert job.valid?
+
+    job = Job.create({:nodes => "12"})
+    assert !job.valid?
 
     job = Job.create({:nodes => "1.3"})
     assert !job.valid?
@@ -26,11 +35,6 @@ class JobTest < ActiveSupport::TestCase
     job = Job.create({:nodes => "asdhas"})
     assert !job.valid?
 
-    job = Job.create({:nodes => "-3"})
-    assert !job.valid?
-
-    job = Job.create({:nodes => "1"})
-    assert !job.valid?
   end
 
 end
