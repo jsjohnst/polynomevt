@@ -12,5 +12,25 @@ class JobTest < ActiveSupport::TestCase
   #  get :index
   #  assert_response :success
   end
+  
+  def test_nodes_numeric
+    job = Job.create({:nodes => "2"})
+    assert job.valid?
+
+    job = Job.create({:nodes => "17"})
+    assert job.valid?
+
+    job = Job.create({:nodes => "1.3"})
+    assert !job.valid?
+
+    job = Job.create({:nodes => "asdhas"})
+    assert !job.valid?
+
+    job = Job.create({:nodes => "-3"})
+    assert !job.valid?
+
+    job = Job.create({:nodes => "1"})
+    assert !job.valid?
+  end
 
 end
