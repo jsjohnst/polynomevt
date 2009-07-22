@@ -64,19 +64,6 @@ class JobsController < ApplicationController
     logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX'];
     @file_prefix = ENV['POLYNOME_FILE_PREFIX'];
 
-    # MES: need to validate the input file, using n_nodes
-    # MES: need to validate n_nodes, p_value
-    if (@job.nodes < 1)
-        logger.info "Number of nodes too small";
-        @error_message = "Number of nodes too small";
-        return;
-    end
-    if (@job.nodes > 11)
-        logger.info "Number of nodes too big";
-        @error_message = "Number of nodes too big";
-        return;
-    end
-   
     # split is also checking the input format
     datafiles = self.split_data_into_files(params[:job][:input_data]);
     if (!datafiles)
