@@ -23,7 +23,7 @@ module React
 
 
     file_string = ""; 
-    filemanagerfile = "EA/" + @file_format +".fileman.txt";
+    filemanagerfile = "public/perl/" + @file_prefix +".fileman.txt";
     data = "P=2;
     N=#{n_nodes};
     WT = {\"#{file_string}\"};
