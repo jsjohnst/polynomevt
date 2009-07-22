@@ -151,7 +151,7 @@ class JobsController < ApplicationController
       if @job.is_deterministic
         if @job.nodes <= n_react_threshold
           # do react
-          run_react(@job.nodes, discretized_datafiles);
+          run_react(@job.nodes, @file_prefix, discretized_datafiles);
         else
           # do: makeconsistent, minsets
           self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes);

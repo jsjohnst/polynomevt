@@ -1,14 +1,16 @@
 module React
 
-  def run(n_nodes, file_prefix, datafiles)
+  def run_react(n_nodes, file_prefix, datafiles)
     managerfile = "public/perl/" + file_prefix +".fileman.txt";
-    functionfile = "public/perl/" + file_prefix +".functions.txt";
+    modelfile = "public/perl/" + file_prefix +".model.txt";
+    functionfile = "public/perl/" + file_prefix +".functionfile.txt";
     write_manager_file(managerfile, n_nodes, file_prefix, datafiles);
-    run_react(managerfile, modelfile);
+    run(managerfile, modelfile);
     parse_output(modelfile, functionfile);
   end
 
-  def run_react(managerfile, modelfile)
+  def run(managerfile, modelfile)
+    logger.info "Successfully calling react lib";
     return "Successfully calling react lib";
   end
   
