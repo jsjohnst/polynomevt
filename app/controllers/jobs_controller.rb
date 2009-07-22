@@ -46,11 +46,11 @@ class JobsController < ApplicationController
     end
     @job = Job.new(params[:job]);
     if (@job.valid?)
-        logger.info "job.valid? " + @job.valid?;  
+        logger.info "job.valid? " + @job.valid?.to_s;  
         # create the dummy file to avoid RouteErrors
         self.write_done_file("0", "");
     else 
-        logger.info "job.valid? " + @job.valid?;  
+        logger.info "job.valid? " + @job.valid?.to_s;  
         self.write_done_file("2", "Please check the data you input.");
         return;
     end
