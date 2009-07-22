@@ -1,6 +1,14 @@
 module React
 
-  def run_react(n_nodes, datafiles)
+  def run(n_nodes, file_prefix, datafiles)
+    managerfile = "public/perl/" + file_prefix +".fileman.txt";
+    functionfile = "public/perl/" + file_prefix +".functions.txt";
+    write_manager_file(managerfile, n_nodes, file_prefix, datafiles)
+    run_react(managerfile, modelfile)
+    parse_output(modelfile, functionfile)
+  end
+
+  def run_react(n_nodes, file_prefix, datafiles)
     return "Successfully calling react lib";
   end
   
@@ -9,7 +17,7 @@ module React
 
 
 # n_nodes, file_prefix, list_of_datafiles
-  def write_manager_file
+  def write_manager_file(managerfile, n_nodes, file_prefix, datafiles)
     ## Needs to look like this 
 	## P=2;
 	## N=8;
@@ -23,7 +31,7 @@ module React
 
 
     file_string = ""; 
-    filemanagerfile = "public/perl/" + @file_prefix +".fileman.txt";
+    
     data = "P=2;
     N=#{n_nodes};
     WT = {\"#{file_string}\"};
