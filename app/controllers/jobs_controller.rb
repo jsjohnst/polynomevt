@@ -45,6 +45,16 @@ class JobsController < ApplicationController
       params[:job].delete(:input_file);
     end
     @job = Job.new(params[:job]);
+    if (@job.valid?)
+        logger.info "job.valid? " + @job.valid?;  
+        # create the dummy file to avoid RouteErrors
+        self.write_done_file("0", "");
+    else 
+        logger.info "job.valid? " + @job.valid?;  
+        self.write_done_file("2", "Please check the data you input.");
+        return;
+    end
+
     params[:job].each { | key, value |
       ENV['POLYNOME_' + key.upcase] = value;
     }
@@ -71,7 +81,7 @@ class JobsController < ApplicationController
     datafiles = self.split_data_into_files(params[:job][:input_data]);
     if (!datafiles)
         # TODO make this error message nice
-        @error_message = "The data you entered is invalid";
+        @error_message = "The data you entered is invalid.";
         self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> "); 
         @error_message = "";
         return; 
