@@ -1,0 +1,16 @@
+number  nodes
+boolean  wiring_diagram
+string  wiring_diagram_format
+boolean  state_space
+string state_space_format
+boolean  show_discretized
+boolean  show_functions
+string  input_data
+boolean  show_probabilities_wiring_diagram
+boolean  show_probabilities_state_space
+boolean  is_deterministic
+string sequential
+string  update_schedule
+boolean completed
+boolean removed
+number user_id
