@@ -1,7 +1,7 @@
 <h1>Listing jobs</h1>
 
-<table>
-  <tr>
+<table cellpadding="3" cellspacing="3" bgcolor="#C3C3C3">
+  <tr bgcolor="#E3E3E3">
     <th>Nodes</th>
     <th>Pvalue</th>
     <th>Show wiring diagram</th>
@@ -19,10 +19,11 @@
     <th>Completed</th>
     <th>Deleted</th>
     <th>User</th>
+	<th colspan="3">Actions</th>
   </tr>
 
 <% @jobs.each do |job| %>
-  <tr>
+  <tr bgcolor="#FFFFFF">
     <td><%=h job.nodes %></td>
     <td><%=h job.pvalue %></td>
     <td><%=h job.show_wiring_diagram %></td>
@@ -39,7 +40,7 @@
     <td><%=h job.update_schedule %></td>
     <td><%=h job.completed %></td>
     <td><%=h job.deleted %></td>
-    <td><%=h job.user_id %></td>
+    <td><%=h job.user.login %></td>
     <td><%= link_to 'Show', job %></td>
     <td><%= link_to 'Edit', edit_job_path(job) %></td>
     <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
