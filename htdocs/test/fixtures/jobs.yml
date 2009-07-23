@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nodes: 1
+  pvalue: 1
+  show_wiring_diagram: false
+  wiring_diagram_format: MyString
+  show_state_space: false
+  state_space_format: MyString
+  show_discretized: false
+  show_functions: false
+  input_data: MyText
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  make_deterministic_model: false
+  update_type: MyString
+  update_schedule: MyString
+  completed: false
+  deleted: false
+  user_id: 1
+
+two:
+  nodes: 1
+  pvalue: 1
+  show_wiring_diagram: false
+  wiring_diagram_format: MyString
+  show_state_space: false
+  state_space_format: MyString
+  show_discretized: false
+  show_functions: false
+  input_data: MyText
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  make_deterministic_model: false
+  update_type: MyString
+  update_schedule: MyString
+  completed: false
+  deleted: false
+  user_id: 1

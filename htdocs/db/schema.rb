@@ -9,6 +9,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20090723082203) do
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "nodes"
+    t.integer  "pvalue"
+    t.boolean  "show_wiring_diagram"
+    t.string   "wiring_diagram_format"
+    t.boolean  "show_state_space"
+    t.string   "state_space_format"
+    t.boolean  "show_discretized"
+    t.boolean  "show_functions"
+    t.text     "input_data"
+    t.boolean  "show_probabilities_wiring_diagram"
+    t.boolean  "show_probabilities_state_space"
+    t.boolean  "make_deterministic_model"
+    t.string   "update_type"
+    t.string   "update_schedule"
+    t.boolean  "completed"
+    t.boolean  "deleted"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "login"
+    t.string   "password"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "organization"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

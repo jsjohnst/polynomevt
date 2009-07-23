@@ -1,16 +1,17 @@
-number  nodes
-boolean  wiring_diagram
-string  wiring_diagram_format
-boolean  state_space
-string state_space_format
-boolean  show_discretized
-boolean  show_functions
-string  input_data
-boolean  show_probabilities_wiring_diagram
-boolean  show_probabilities_state_space
-boolean  is_deterministic
-string sequential
-string  update_schedule
-boolean completed
-boolean removed
-number user_id
+nodes:integer 
+pvalue:integer 
+show_wiring_diagram:boolean 
+wiring_diagram_format:string
+show_state_space:boolean 
+state_space_format:string 
+show_discretized:boolean 
+show_functions:boolean 
+input_data:text 
+show_probabilities_wiring_diagram:boolean 
+show_probabilities_state_space:boolean 
+make_deterministic_model:boolean 
+update_type:string 
+update_schedule:string 
+completed:boolean 
+deleted:boolean 
+user_id:integer
