@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  nodes: 1
-  pvalue: 1
+  nodes: 3
+  pvalue: 2
   show_wiring_diagram: false
   wiring_diagram_format: MyString
   show_state_space: false
@@ -20,8 +20,8 @@ one:
   user_id: 1
 
 two:
-  nodes: 1
-  pvalue: 1
+  nodes: 3
+  pvalue: 2
   show_wiring_diagram: false
   wiring_diagram_format: MyString
   show_state_space: false

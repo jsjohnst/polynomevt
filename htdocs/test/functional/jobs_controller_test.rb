@@ -14,7 +14,7 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should create job" do
     assert_difference('Job.count') do
-      post :create, :job => { }
+      post :create, :job => { :user_id => 1, :nodes => 3, :pvalue => 2 }
     end
 
     assert_redirected_to job_path(assigns(:job))
@@ -31,7 +31,7 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should update job" do
-    put :update, :id => jobs(:one).to_param, :job => { }
+    put :update, :id => jobs(:one).to_param, :job => { :user_id => 1, :nodes => 5, :pvalue => 2 }
     assert_redirected_to job_path(assigns(:job))
   end
 
