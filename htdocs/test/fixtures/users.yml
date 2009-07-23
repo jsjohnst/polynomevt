@@ -25,18 +25,26 @@ valid_user:
   last_name: User
   organization:
 
-valid_user_with_email_address:
-  login: simpleuser1
+invalid_login:
+  login: s
   password: simpleuserspassword
-  email: double2@address.com
-  first_name: Double1
-  last_name: User1
+  email: d@address.com
+  first_name: Double
+  last_name: User
+  organization:
+
+valid_user_with_email_address:
+  login: simpleuserfirst
+  password: simpleuserspassword
+  email: doubletwo@address.com
+  first_name: Double
+  last_name: User
   organization:
 
 valid_user_with_double_email_address:
   login: simpleuser2
   password: simpleuserspassword
-  email: double2@address.com
+  email: doubletwo@address.com
   first_name: Double2
   last_name: User2
   organization:
