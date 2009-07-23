@@ -32,17 +32,30 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should not allow duplicate email addresses" do 
     my_user1 = User.new({ :login => "simpleuserfirst",
-    :password => "simpleuserspassword",
-    :email => "doubletwo@address.com",
-    :first_name => "Double",
-    :last_name => "User"})
+      :password => "simpleuserspassword",
+      :email => "doubletwo@address.com",
+      :first_name => "Double",
+      :last_name => "User"})
     assert my_user1.save, "first user should have been saved" 
-    my_user2 = User.new({ :login => "simpleuserfirst",
-            :password => "simpleuserspassword",
-            :email => "doubletwo@address.com",
-            :first_name => "Double",
-            :last_name => "User"})
+    my_user2 = User.new({ :login => "simpleusersecond",
+      :password => "simpleuserspassword",
+      :email => "doubletwo@address.com",
+      :first_name => "Double",
+      :last_name => "User"})
     assert !my_user2.save, "second user with same email address should not have been saved"
+  end
+  
+  test "should allow two users with empty email address" do
+    my_user1 = User.new({ :login => "firstwithoutemail",
+      :password => "simpleuserspassword",
+      :first_name => "First",
+      :last_name => "User"})
+    assert my_user1.save, "first user without email address should have been saved" 
+    my_user2 = User.new({ :login => "secondwithoutemail",
+      :password => "simpleuserspassword",
+      :first_name => "Second",
+      :last_name => "User"})
+    assert my_user2.save, "second user without email address should have been saved"
   end
 
   test "should create user" do
