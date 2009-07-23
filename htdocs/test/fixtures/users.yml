@@ -1,9 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   login: MyString
   password: MyString
-  email: MyString
+  email: foo@bar.com
   first_name: MyString
   last_name: MyString
   organization: MyString
@@ -11,7 +12,7 @@ one:
 two:
   login: MyString
   password: MyString
-  email: MyString
+  email: foo2@bar.com
   first_name: MyString
   last_name: MyString
   organization: MyString
