@@ -1,0 +1,52 @@
+<h1>Listing jobs</h1>
+
+<table>
+  <tr>
+    <th>Nodes</th>
+    <th>Pvalue</th>
+    <th>Show wiring diagram</th>
+    <th>Wiring diagram format</th>
+    <th>Show state space</th>
+    <th>State space format</th>
+    <th>Show discretized</th>
+    <th>Show functions</th>
+    <th>Input data</th>
+    <th>Show probabilities wiring diagram</th>
+    <th>Show probabilities state space</th>
+    <th>Make deterministic model</th>
+    <th>Update type</th>
+    <th>Update schedule</th>
+    <th>Completed</th>
+    <th>Deleted</th>
+    <th>User</th>
+  </tr>
+
+<% @jobs.each do |job| %>
+  <tr>
+    <td><%=h job.nodes %></td>
+    <td><%=h job.pvalue %></td>
+    <td><%=h job.show_wiring_diagram %></td>
+    <td><%=h job.wiring_diagram_format %></td>
+    <td><%=h job.show_state_space %></td>
+    <td><%=h job.state_space_format %></td>
+    <td><%=h job.show_discretized %></td>
+    <td><%=h job.show_functions %></td>
+    <td><%=h job.input_data %></td>
+    <td><%=h job.show_probabilities_wiring_diagram %></td>
+    <td><%=h job.show_probabilities_state_space %></td>
+    <td><%=h job.make_deterministic_model %></td>
+    <td><%=h job.update_type %></td>
+    <td><%=h job.update_schedule %></td>
+    <td><%=h job.completed %></td>
+    <td><%=h job.deleted %></td>
+    <td><%=h job.user_id %></td>
+    <td><%= link_to 'Show', job %></td>
+    <td><%= link_to 'Edit', edit_job_path(job) %></td>
+    <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New job', new_job_path %>

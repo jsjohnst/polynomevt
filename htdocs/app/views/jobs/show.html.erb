@@ -1,0 +1,88 @@
+<p>
+  <b>Nodes:</b>
+  <%=h @job.nodes %>
+</p>
+
+<p>
+  <b>Pvalue:</b>
+  <%=h @job.pvalue %>
+</p>
+
+<p>
+  <b>Show wiring diagram:</b>
+  <%=h @job.show_wiring_diagram %>
+</p>
+
+<p>
+  <b>Wiring diagram format:</b>
+  <%=h @job.wiring_diagram_format %>
+</p>
+
+<p>
+  <b>Show state space:</b>
+  <%=h @job.show_state_space %>
+</p>
+
+<p>
+  <b>State space format:</b>
+  <%=h @job.state_space_format %>
+</p>
+
+<p>
+  <b>Show discretized:</b>
+  <%=h @job.show_discretized %>
+</p>
+
+<p>
+  <b>Show functions:</b>
+  <%=h @job.show_functions %>
+</p>
+
+<p>
+  <b>Input data:</b>
+  <%=h @job.input_data %>
+</p>
+
+<p>
+  <b>Show probabilities wiring diagram:</b>
+  <%=h @job.show_probabilities_wiring_diagram %>
+</p>
+
+<p>
+  <b>Show probabilities state space:</b>
+  <%=h @job.show_probabilities_state_space %>
+</p>
+
+<p>
+  <b>Make deterministic model:</b>
+  <%=h @job.make_deterministic_model %>
+</p>
+
+<p>
+  <b>Update type:</b>
+  <%=h @job.update_type %>
+</p>
+
+<p>
+  <b>Update schedule:</b>
+  <%=h @job.update_schedule %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%=h @job.completed %>
+</p>
+
+<p>
+  <b>Deleted:</b>
+  <%=h @job.deleted %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @job.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>
