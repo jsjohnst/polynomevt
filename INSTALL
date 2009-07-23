@@ -1,0 +1,13 @@
+Do a gem system update:
+
+sudo gem update --system
+
+
+
+Install Required Gems
+-----------------------
+Rails 2.3.3 or higher
+mongrel 1.1.15 or higher
+chronic 0.2.3 or higher
+packet 0.1.15 or higher
+ 
