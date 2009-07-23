@@ -16,3 +16,43 @@ two:
   first_name: MyString
   last_name: MyString
   organization: MyString
+
+valid_user:
+  login: simpleuser
+  password: simpleuserspassword
+  email: valid@adress.com
+  first_name: Simple
+  last_name: User
+  organization:
+
+valid_user_with_email_address:
+  login: simpleuser1
+  password: simpleuserspassword
+  email: double2@address.com
+  first_name: Double1
+  last_name: User1
+  organization:
+
+valid_user_with_double_email_address:
+  login: simpleuser2
+  password: simpleuserspassword
+  email: double2@address.com
+  first_name: Double2
+  last_name: User2
+  organization:
+
+invalid_user_without_login:
+  login: 
+  password: simpleuserspassword
+  email: valid@address.com
+  first_name: Simple
+  last_name: User
+  organization:
+
+invalid_user_with_invalid_email:
+  login: invalidemailuser 
+  password: simpleuserspassword
+  email: invalidadress.com
+  first_name: Simple
+  last_name: User
+  organization:
