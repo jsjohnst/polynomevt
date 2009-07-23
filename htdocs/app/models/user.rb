@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :job
+  validates_associated :job
   validates_length_of :login, :within => 3..40, :message => "Invalid login"
   validates_length_of :password, :within => 6..40
   validates_presence_of :login , :password
