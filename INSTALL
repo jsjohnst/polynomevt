@@ -11,3 +11,7 @@ mongrel 1.1.15 or higher
 chronic 0.2.3 or higher
 packet 0.1.15 or higher
  
+Then do:
+
+git submodule init
+git submodule update
