@@ -1,0 +1,9 @@
+So for running of the jobs (which could take a long time) we are using delayed job.
+
+We have a job called ComputationJob inside lib/. In it's "perform" method we need
+to fill out the code for grabbing the job from the DB and then processing it via
+m2 and other scripts as needed and then updating the job in the DB when it's done.
+
+To kick off the job, we do something like the following:
+
+Delayed::Job.enqueue(ComputationJob.new(params[:id]))
