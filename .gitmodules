@@ -1,0 +1,3 @@
+[submodule "htdocs/vendor/plugins/backgroundrb"]
+	path = htdocs/vendor/plugins/backgroundrb
+	url = git://github.com/gnufied/backgroundrb.git
