@@ -33,22 +33,6 @@ invalid_login:
   last_name: User
   organization:
 
-valid_user_with_email_address:
-  login: simpleuserfirst
-  password: simpleuserspassword
-  email: doubletwo@address.com
-  first_name: Double
-  last_name: User
-  organization:
-
-valid_user_with_double_email_address:
-  login: simpleuser2
-  password: simpleuserspassword
-  email: doubletwo@address.com
-  first_name: Double2
-  last_name: User2
-  organization:
-
 invalid_user_without_login:
   login: 
   password: simpleuserspassword

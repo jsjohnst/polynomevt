@@ -25,9 +25,17 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should not allow duplicate email addresses" do 
-    my_user1 = users(:valid_user_with_email_address)
+    my_user1 = User.new({ :login => "simpleuserfirst",
+    :password => "simpleuserspassword",
+    :email => "doubletwo@address.com",
+    :first_name => "Double",
+    :last_name => "User"})
     assert my_user1.save, "first user should have been saved" 
-    my_user2 = users(:valid_user_with_double_email_address)
+    my_user2 = User.new({ :login => "simpleuserfirst",
+    :password => "simpleuserspassword",
+    :email => "doubletwo@address.com",
+    :first_name => "Double",
+    :last_name => "User"})
     assert !my_user2.save, "second user with same email address should not
     have been saved"
   end
