@@ -191,6 +191,7 @@ class JobsController < ApplicationController
           
           show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0";
           wiring_diagram = @job.wiring_diagram ? "1" : "0";
+          logger.info "Wiring diagram: :" + wiring_diagram + ":"
           sequential = @job.sequential ? "1" : "0";
 
           if ( !@job.update_schedule || @job.update_schedule == "") 
@@ -201,10 +202,19 @@ class JobsController < ApplicationController
             @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" );
           end
           logger.info "Update Schedule: " + @job.update_schedule;
+        @functionfile_name = self.functionfile_name(@file_prefix);
+          logger.info "Functionfile : " + @functionfile_name;
 
-
+            logger.info "perl public/perl/dvd_stochastic_runner.pl -v
+            #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update}
+            public/perl/#{@file_prefix} #{@job.state_space_format}
+            #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential}
+            #{@job.update_schedule} #{show_probabilities_state_space} 1 0
+            #{@functionfile_name}"
           simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}`;
+          logger.info "simulation output: " + simulation_output
           simulation_output = simulation_output.gsub("\n", "");
+
       end
       
       self.write_done_file("1",  simulation_output);
