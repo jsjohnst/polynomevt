@@ -235,7 +235,7 @@ class JobsController < ApplicationController
   def split_data_into_files(data)
     datafile = "public/perl/" + @file_prefix + ".input.txt";
 
-    File.open(datafile, 'w') {|f| f.write(data) }
+    File.open(datafile, 'w') {|file| file.write(data) }
 
     datafiles = [];
     output = NIL;
