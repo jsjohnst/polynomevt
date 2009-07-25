@@ -280,7 +280,7 @@ bool FileManager::ReadTimeSeries( String& file_path, TimeSeries& ts, size_t kov 
 	in_file.open( file_path.c_str() );
 	if( !in_file.good() )
 	{
-		throw( String("FileManager::ReadTimeSeries - unable to open file") + file_path);
+		throw( String("FileManager::ReadTimeSeries - unable to open file ") + file_path);
 	}
 
 	String in_line;
