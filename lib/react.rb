@@ -1,20 +1,47 @@
 module React
 
   def run_react(n_nodes, file_prefix, datafiles)
-    managerfile = "public/perl/" + file_prefix +".fileman.txt";
-    modelfile = "public/perl/" + file_prefix +".model.txt";
-    functionfile = "public/perl/" + file_prefix +".functionfile.txt";
-    write_manager_file(managerfile, n_nodes, file_prefix, datafiles);
-    run(managerfile, modelfile);
-    parse_output(modelfile, functionfile);
+    managerfile = "public/perl/" + file_prefix +".fileman.txt"
+    modelfile = "public/perl/" + file_prefix +".model.txt"
+    functionfile = "public/perl/" + file_prefix +".functionfile.txt"
+    write_manager_file(managerfile, n_nodes, file_prefix, datafiles)
+    run(managerfile, modelfile)
+    # FBH for testing using already generated file
+    modelfile = "EA/test4/model_for_testing_ruby.txt"
+    parse_output(modelfile, functionfile)
   end
 
   def run(managerfile, modelfile)
-    logger.info "Successfully calling react lib";
-    return "Successfully calling react lib";
+    logger.info "Successfully calling react lib"
+    return "Successfully calling react lib"
   end
   
   def parse_output(infile, outfile)
+    File.open(outfile, 'w') do |out_file|
+      File.open(infile, 'r') do |file|
+        line = file.gets
+        logger.info "model.txt \# #{line}"
+        unless (line.match( /^Model/ ))
+            logger.info "ERROR: React did not create a model file starting with Model."
+            return
+        end
+        while line = file.gets
+            logger.info "model.txt \# #{line}"
+            if (line.match( /^\s*f/ ))
+                logger.info "Line matches fx"
+                out_file.write(line)
+            elsif (line.match( /^\s*H/ ))
+                logger.info "Line matches H"
+            elsif (line.match( /^\s*$/))
+                logger.info "Line matches newline"
+                break
+            else
+                logger.info "ERROR: Reacht parsing models file: Line doesn't match anything"
+                return
+            end
+        end
+      end
+    end
   end
 
 
