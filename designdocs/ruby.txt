@@ -1,0 +1,2 @@
+Ruby Style guide 
+http://www.caliban.org/ruby/rubyguide.shtml
