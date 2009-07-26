@@ -6,13 +6,13 @@ module React
     functionfile = "public/perl/" + file_prefix +".functionfile.txt"
     write_manager_file(managerfile, n_nodes, file_prefix, datafiles)
     run(managerfile, modelfile)
-    # FBH for testing using already generated file
-    modelfile = "EA/test4/model_for_testing_ruby.txt"
     parse_output(modelfile, functionfile)
   end
 
   def run(managerfile, modelfile)
-    logger.info "Successfully calling react lib"
+    logger.info "Successfully calling react lib:"
+    logger.info "./EA/React #{managerfile} #{modelfile}"
+    `./EA/React #{managerfile} #{modelfile}`
     return "Successfully calling react lib"
   end
   
@@ -58,19 +58,29 @@ module React
 	## MODEL = {};
 	## PARAMS = {"params1.txt"};
 
+    file_string = ''  
+    first = true
+    datafiles.each  do |dataf| 
+        unless (first)  
+            file_string = file_string + ","
+        end
+        first = false
+        file_string = file_string + "\"" + dataf + "\""  
+    end
+    logger.info "file_string in EA: " + file_string
 
-    file_string = ""; 
-    
-    data = "P=2;
-    N=#{n_nodes};
-    WT = {\"#{file_string}\"};
-    KO = {};
-    REV = {};
-    CMPLX = {};
-    BIO = {};
-    MODEL = {};
-    PARAMS = {\"params.txt\"};"
-    File.open(managerfile, 'w') { |file| file.write(data) }
+    File.open( managerfile, 'w' ) do |file| 
+        
+        data = "P=2; N=#{n_nodes};
+WT = {#{file_string}};
+KO = {};
+REV = {};
+CMPLX = {};
+BIO = {};
+MODEL = {};
+PARAMS = {\"EA/params.txt\"};"
+        file.write(data)
+    end
 
   end
 end
