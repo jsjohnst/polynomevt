@@ -121,12 +121,13 @@ class JobsController < ApplicationController
       #concatenate_discretized_files
       first = TRUE
       File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
-          |f| discretized_datafiles.each{ |datafile|
-              if (!first)
+          |f| discretized_datafiles.each do |datafile|
+              unless (first)
                   f.write("#\n")
               end
+              first = FALSE
               f.write(File.open(datafile, 'r').read)
-              first = FALSE}
+          end
       }
 
       # react: n <= n_threshold, is_deterministic
