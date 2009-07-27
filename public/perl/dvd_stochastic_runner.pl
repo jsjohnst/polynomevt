@@ -60,7 +60,7 @@ my $file_prefix = $ARGV[4]; #outputfiles
 my $statespace_format = $ARGV[5]; #graph format
 my $wiring_diagram_format = $ARGV[6];
 my $show_wiring_diagram = $ARGV[7]; #on if wiring diagram should be graphed
-my $update_sequential_flag = $ARGV[8]; #1 if sequential update
+my $update_sequential_flag = $ARGV[8]; #1 if sequential update, has to be set to 0 for random sequential updates (i.e., update_stochastic_flag == 1 )
 my $update_schedule = $ARGV[9]; #update_schedule
 my $statespace = 1; #statespace 1 means create picture
 my $Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph of state space 
