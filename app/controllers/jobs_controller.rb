@@ -111,7 +111,7 @@ class JobsController < ApplicationController
     ## TODO FBH Need to check update schedule for correctness 
 
     spawn do
-        #TODO this will change to a single new filename
+        #TODO this will change to a single new filename, waiting for Brandy
       discretized_datafiles = datafiles.collect { |datafile|
         datafile.gsub(/input/, 'discretized-input')
       }
@@ -184,26 +184,23 @@ class JobsController < ApplicationController
           # run simulation
           logger.info "Starting simulation of state space."
             
-          if ( @job.sequential && !@job.update_schedule )
-              logger.info "Update sequential but no schedule given, doing
-              sequential udpate with random update schedule"
-              stochastic_sequential_update = "1"
-          end
-          
           show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0"
           wiring_diagram = @job.wiring_diagram ? "1" : "0"
           logger.info "Wiring diagram: :" + wiring_diagram + ":"
           sequential = @job.sequential ? "1" : "0"
 
           if ( !@job.update_schedule || @job.update_schedule == "") 
+            logger.info "Setting the update schedule to 0 for
+            stochastic_sequential_update"
             @job.update_schedule = "0"
+            sequential = "0"
           else 
             # concatenate update schedule into one string with _ as separators
             # so we can pass it to dvd_stochastic_runner.pl
             @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
           end
-          logger.info "Update Schedule: " + @job.update_schedule
-        @functionfile_name = self.functionfile_name(@file_prefix)
+          logger.info "Update Schedule :" + @job.update_schedule + ":"
+          @functionfile_name = self.functionfile_name(@file_prefix)
           logger.info "Functionfile : " + @functionfile_name
 
             logger.info "perl public/perl/dvd_stochastic_runner.pl -v
