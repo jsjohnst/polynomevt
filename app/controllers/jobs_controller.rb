@@ -106,6 +106,8 @@ class JobsController < ApplicationController
             sequential udpate with random update schedule"
             stochastic_sequential_update = "1"
         end
+    else 
+        @job.update_schedule = ""
     end
    
     ## TODO FBH Need to check update schedule for correctness 
@@ -187,19 +189,26 @@ class JobsController < ApplicationController
           show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0"
           wiring_diagram = @job.wiring_diagram ? "1" : "0"
           logger.info "Wiring diagram: :" + wiring_diagram + ":"
+
+          # for synchronous updates or stochastic sequential updates
+          if (!@job.sequential || @job.update_schedule == "" )
+              @job.update_schedule ="0"
+          end
+          
+          # for stochastic sequential updates, sequential has to be set to 0
+          # for dvd_stochastic_runner.pl to run correctly 
+          if (@job.sequential && @job.update_schedule == "0")
+              stochastic_sequential_update = "1"
+              @job.sequential = false
+          end
+          
           sequential = @job.sequential ? "1" : "0"
 
-          if ( !@job.update_schedule || @job.update_schedule == "") 
-            logger.info "Setting the update schedule to 0 for
-            stochastic_sequential_update"
-            @job.update_schedule = "0"
-            sequential = "0"
-          else 
-            # concatenate update schedule into one string with _ as separators
-            # so we can pass it to dvd_stochastic_runner.pl
-            @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
-          end
+          # concatenate update schedule into one string with _ as separators
+          # so we can pass it to dvd_stochastic_runner.pl
+          @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
           logger.info "Update Schedule :" + @job.update_schedule + ":"
+
           @functionfile_name = self.functionfile_name(@file_prefix)
           logger.info "Functionfile : " + @functionfile_name
 
