@@ -117,6 +117,14 @@ class JobsController < ApplicationController
         return
     end
 
+    if ( @job.state_space && @job.nodes > 7 )
+        logger.info "Too many variables to simulate"
+        @error_message = "Too many variables to simulate, running all
+        computations but the simulations. "
+        @job.state_space = false
+        self.write_done_file("0", "<font color=red>" +  @error_message+ "</font><br> ") 
+    end
+
 
     spawn do
         #TODO this will change to a single new filename, waiting for Brandy
