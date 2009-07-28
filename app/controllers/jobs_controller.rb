@@ -90,9 +90,8 @@ class JobsController < ApplicationController
       return
     end
     
-    # check for correct input options
+    # check for correct input options, don't set any options here.
     logger.info "Sequential update: " + @job.sequential.to_s
-    stochastic_sequential_update = "0"
     if (@job.sequential)
         logger.info "Update_schedule :" +@job.update_schedule + ":"
         if ( !@job.is_deterministic )
@@ -104,13 +103,20 @@ class JobsController < ApplicationController
         if ( @job.update_schedule == "")
             logger.info "Update sequential but no schedule given, doing
             sequential udpate with random update schedule"
-            stochastic_sequential_update = "1"
         end
-    else 
-        @job.update_schedule = ""
     end
    
-    ## TODO FBH Need to check update schedule for correctness 
+    ## Check update schedule for correctness, this should happen in models/job.rb
+    ## for now this is only checking if it is n numbers, not if each number is
+    ## used exactly once
+    nodes_minus_one = (@job.nodes - 1).to_s
+    unless ( @job.update_schedule.match( /^\s*((\d+\s+){#{nodes_minus_one}}\d+)?\s*$/ ) )
+        logger.info "Wrong update schedule: " + @job.update_schedule
+        @error_message = "Wrong update schedule: " + @job.update_schedule + ". Exiting"
+        self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> ") 
+        return
+    end
+
 
     spawn do
         #TODO this will change to a single new filename, waiting for Brandy
@@ -197,6 +203,7 @@ class JobsController < ApplicationController
           
           # for stochastic sequential updates, sequential has to be set to 0
           # for dvd_stochastic_runner.pl to run correctly 
+          stochastic_sequential_update = "0"
           if (@job.sequential && @job.update_schedule == "0")
               stochastic_sequential_update = "1"
               @job.sequential = false
