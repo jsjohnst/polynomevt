@@ -27,7 +27,7 @@ class JobsController < ApplicationController
 1.1  1.2  1.3
 2.2  2.3  2.4
 0.1  0.2  0.3")
-
+    @job.save
     @error_message = params[:error_message]
   end
 
@@ -77,7 +77,7 @@ class JobsController < ApplicationController
     # create the dummy file to avoid RouteErrors
     self.write_done_file("0", "")
 
-    n_react_threshold = 5
+    n_react_threshold = 10
     n_stochastic_threshold = 10
     
     ## All checking of any input should be done before we spawn, so the user
