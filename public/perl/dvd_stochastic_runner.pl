@@ -45,9 +45,7 @@ if ($DEBUG) {print getcwd;}
 if ($MINDEBUG) {print "Using Minimum Debug output for dvd_stochastic_runner.pl<br>\n";}
 if ($DEBUG) { print "<br>Number of arguments (should equal 12) " . $#ARGV .  "<br>"; }
 
-die "Usage: dvd_stochasitic_runner.pl [-vdh] #nodes #states
-all_trajectories_flag update_stochastic_flag outputfilename statespace_format
-wiring_diagram_format show_wiring_diagram update_sequential_flag update_schedule Probabilities_in_graph_flag trajectory_flag trajectory_value inputfile.txt \n\t-v minimal debug output \n\t-d debug output \n\t-h  this help\n" if ($opt_h || $#ARGV != 13);
+die "Usage: dvd_stochasitic_runner.pl [-vdh] #nodes #states all_trajectories_flag update_stochastic_flag outputfilename statespace_format wiring_diagram_format show_wiring_diagram show_statespace update_sequential_flag update_schedule Probabilities_in_graph_flag trajectory_flag trajectory_value inputfile.txt \n\t-v minimal debug output \n\t-d debug output \n\t-h  this help\n" if ($opt_h || $#ARGV != 14);
 
 my $n_nodes = $ARGV[0]; #number of variables
 my $p_value = $ARGV[1]; #number of states
@@ -60,12 +58,12 @@ my $file_prefix = $ARGV[4]; #outputfiles
 my $statespace_format = $ARGV[5]; #graph format
 my $wiring_diagram_format = $ARGV[6];
 my $show_wiring_diagram = $ARGV[7]; #on if wiring diagram should be graphed
-my $update_sequential_flag = $ARGV[8]; #1 if sequential update, has to be set to 0 for random sequential updates (i.e., update_stochastic_flag == 1 )
-my $update_schedule = $ARGV[9]; #update_schedule
-my $statespace = 1; #statespace 1 means create picture
-my $Stochastic = $ARGV[10]; 	# if set to one, probabilities are included in graph of state space 
-my $trajectory_flag = $ARGV[11]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
-my $trajectory_value = $ARGV[12]; # initial state
+my $show_statespace = $ARGV[8]; #show_statespace 1 means create picture
+my $update_sequential_flag = $ARGV[9]; #1 if sequential update, has to be set to 0 for random sequential updates (i.e., update_stochastic_flag == 1 )
+my $update_schedule = $ARGV[10]; #update_schedule
+my $Stochastic = $ARGV[11]; 	# if set to one, probabilities are included in graph of state space 
+my $trajectory_flag = $ARGV[12]; # 1 if all trajectories, 0 for a single trajetory form intitial state trajectory_value
+my $trajectory_value = $ARGV[13]; # initial state
 my $stochastic_input_file = $ARGV[-1]; 
 
 if ($DEBUG) {print "All trajectories flag, 1 if all trajectories, 0 for a single initial state: $trajectory_flag \n <br>"; }
@@ -89,7 +87,7 @@ my $Pwd = getcwd();
 
 my @response = dvd_session($n_nodes, $p_value, $file_prefix, 0,
 $update_sequential_flag, $update_schedule, $all_trajectories_flag,
-$statespace, $statespace_format, $show_wiring_diagram, $wiring_diagram_format,
+$show_statespace, $statespace_format, $show_wiring_diagram, $wiring_diagram_format,
 $trajectory_flag, $trajectory_value, $update_stochastic_flag, $Stochastic, $DEBUG,
 $function_file);
 
