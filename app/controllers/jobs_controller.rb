@@ -39,12 +39,18 @@ class JobsController < ApplicationController
       redirect_to :action => "index"
       return
     end
+    
+    @job = Job.new(params[:job])
+    
+    # FBH if we use params and change them, then the new values will be
+    # printed to the form, if we change a variable in @job, the variable on
+    # the form will not change 
+
     if(params[:job][:input_file])
       logger.info "Reading :input_file into :input_data"
       params[:job][:input_data] = params[:job][:input_file].read
       params[:job].delete(:input_file)
     end
-    @job = Job.new(params[:job])
     if (@job.valid?)
         logger.info "job.valid? " + @job.valid?.to_s  
         # create the dummy file to avoid RouteErrors
@@ -56,11 +62,11 @@ class JobsController < ApplicationController
     end
 
     # create file prefix using md5 check sum as part of the filename
-    @file_prefix = 'files/files-' + Digest::MD5.hexdigest(params[:job][:input_data])
+    @file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
     logger.info "fileprefix: "+ @file_prefix 
 
     # split is also checking the input format
-    datafiles = self.split_data_into_files(params[:job][:input_data])
+    datafiles = self.split_data_into_files( @job.input_data )
     if (!datafiles)
         # TODO make this error message nice
         @error_message = "The data you entered is invalid."
