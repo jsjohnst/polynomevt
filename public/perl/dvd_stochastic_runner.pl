@@ -74,6 +74,7 @@ if ($MINDEBUG) {print "Number of nodes $n_nodes <br>
     Statespace format :$statespace_format: <br>
     Wiring diagram format :$wiring_diagram_format:<br>
     Show Wiring diagram :$show_wiring_diagram:<br>
+    Show Statespace :$show_statespace: <br>
     Functionfile :$stochastic_input_file: <br>
     Update sequential :$update_sequential_flag: <br>
     Update schedule :$update_schedule: <br>
@@ -100,5 +101,8 @@ if($response[0] == 1) { # a response code should always be returned by the main 
     }
 } 
 else {
+    ### FBH TODO if show_statespace is false, DVD session returns a 0 as
+    ### $response[0], what does that mean? should we return a 1 or should we check
+    ### for == 0? state_space
     #print "Does this mean error?" .  $_ ."\n" foreach(@response);
 }
