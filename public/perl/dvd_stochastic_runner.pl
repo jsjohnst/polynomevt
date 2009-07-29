@@ -100,5 +100,5 @@ if($response[0] == 1) { # a response code should always be returned by the main 
     }
 } 
 else {
-    print $_."\n" foreach(@response);
+    #print "Does this mean error?" .  $_ ."\n" foreach(@response);
 }
