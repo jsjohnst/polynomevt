@@ -18,6 +18,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should upload input.txt" do
     job = jobs(:one)
     result = JobsController.new.generate_output_of(job)
+    sleep 4
     prefix = "public/perl/" + job.file_prefix
     input_data = prefix + ".input.txt"
     assert  FileTest.exists?("#{input_data}"), "#{input_data} does not exist"
@@ -29,9 +30,9 @@ class JobsControllerTest < ActionController::TestCase
     unless line.match( /^var\sdone\s=\s/ )
         print "line did not match var"
     end
-    unless line.match( /^var\sdone\s=\s0/ )
-        print "line did not match var done = 0"
-    end
+    #unless line.match( /^var\sdone\s=\s0/ )
+    #    print "line did not match var done = 0"
+    #end
     unless line.match( /^var\sdone\s=\s1/ )
         print "line did not match var done = 1"
     end
