@@ -16,7 +16,17 @@ class JobsControllerTest < ActionController::TestCase
    end
 
   test "should create job" do
-      post :generate, jobs(:one)
+      post :generate, :job => jobs(:one)
+      #assert_response :success
+      #post :generate, :job => { :nodes => "3", :input_data=> "1 0 0
+      #1 0 0 
+      #0 1 1" }
+  end
+
+  test "should create job 2" do
+    p = JobsController.new
+    j = jobs(:one)
+    p.generate_output_of(j)
       #assert_response :success
       #post :generate, :job => { :nodes => "3", :input_data=> "1 0 0
       #1 0 0 
