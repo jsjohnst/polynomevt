@@ -14,6 +14,15 @@ class JobsControllerTest < ActionController::TestCase
     print jobs(:one).to_s
     assert_response :success
    end
+  
+  test "should upload input.txt" do
+    `rm -rf public/perl/files/*`
+    job = jobs(:one)
+    result = JobsController.new.generate_output_of(job)
+    input_data = "public/perl/" + job.file_prefix + ".input.txt"
+    assert  FileTest.exists?(input_data), "#{input_data} does not exist"
+    `rm -rf public/perl/files/*`
+  end
 
   test "generate 1" do
     job = jobs(:one)
