@@ -62,14 +62,8 @@ class JobsController < ApplicationController
     end
 
     # create file prefix using md5 check sum as part of the filename
-    @file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
-    logger.info "fileprefix: "+ @file_prefix 
-
-    ## testing
-    @job.file_prefix = @file_prefix
-    logger.info "Our classy @job.file_prefix is " + @job.file_prefix
-    logger.info "Our not so classy @file_prefix is " + @file_prefix
-
+    @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
+    logger.info "@job.file_prefix: "+ @job.file_prefix 
 
     # split is also checking the input format
     datafiles = self.split_data_into_files( @job.input_data )
@@ -143,7 +137,7 @@ class JobsController < ApplicationController
 
       #concatenate_discretized_files
       first = TRUE
-      File.open( "public/perl/" + @file_prefix + ".discretized-input.txt", 'w') {
+      File.open( "public/perl/" + @job.file_prefix + ".discretized-input.txt", 'w') {
           |f| discretized_datafiles.each do |datafile|
               unless (first)
                   f.write("#\n")
@@ -160,7 +154,7 @@ class JobsController < ApplicationController
 
       if @job.state_space
         @job.show_functions = true
-        @functionfile_name = self.functionfile_name(@file_prefix)
+        @functionfile_name = self.functionfile_name(@job.file_prefix)
       end
       
       if !@job.show_functions && !@job.wiring_diagram
@@ -175,7 +169,7 @@ class JobsController < ApplicationController
       if @job.is_deterministic
         if @job.nodes <= n_react_threshold
           # do react
-          run_react(@job.nodes, @file_prefix, discretized_datafiles)
+          run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
         else
           # do: makeconsistent, minsets
           self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
@@ -231,12 +225,12 @@ class JobsController < ApplicationController
           @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
           logger.info "Update Schedule :" + @job.update_schedule + ":"
 
-          @functionfile_name = self.functionfile_name(@file_prefix)
+          @functionfile_name = self.functionfile_name(@job.file_prefix)
           logger.info "Functionfile : " + @functionfile_name
 
-          logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}"
+          logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}"
 
-          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}` 
+          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}` 
           logger.info "simulation output: " + simulation_output 
           simulation_output = simulation_output.gsub("\n", "") 
       end
@@ -247,8 +241,8 @@ class JobsController < ApplicationController
  
   def write_done_file(done, simulation_output)
     # Tell the website we are done
-    `echo 'var done = #{done}' > public/perl/#{@file_prefix}.done.js`;
-    `echo "var simulation_output = '#{simulation_output}'" >> public/perl/#{@file_prefix}.done.js`;
+    `echo 'var done = #{done}' > public/perl/#{@job.file_prefix}.done.js`;
+    `echo "var simulation_output = '#{simulation_output}'" >> public/perl/#{@job.file_prefix}.done.js`;
   end
   
   # TODO FBH: This function is doing the checking at the moment, should
@@ -257,7 +251,7 @@ class JobsController < ApplicationController
   # code to accept single file with #
   # This should only do the error checking! 
   def split_data_into_files(data)
-    datafile = "public/perl/" + @file_prefix + ".input.txt"
+    datafile = "public/perl/" + @job.file_prefix + ".input.txt"
 
     File.open(datafile, 'w') {|file| file.write(data) }
 
@@ -317,8 +311,8 @@ class JobsController < ApplicationController
   end
   
   def generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
-    dotfile = self.dotfile_name(@file_prefix)
-    graphfile = self.graphfile_name(@file_prefix, file_format)
+    dotfile = self.dotfile_name(@job.file_prefix)
+    graphfile = self.graphfile_name(@job.file_prefix, file_format)
 
     logger.info macaulay2(
       :m2_command => "wd(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
@@ -329,8 +323,8 @@ class JobsController < ApplicationController
   end
 
   def minsets_generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
-    dotfile = self.dotfile_name(@file_prefix)
-    graphfile = self.graphfile_name(@file_prefix, file_format)
+    dotfile = self.dotfile_name(@job.file_prefix)
+    graphfile = self.graphfile_name(@job.file_prefix, file_format)
 
     macaulay2(
       :m2_command => "minsetsWD(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
@@ -358,7 +352,7 @@ class JobsController < ApplicationController
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
-    functionfile = self.functionfile_name(@file_prefix)
+    functionfile = self.functionfile_name(@job.file_prefix)
     macaulay2(
       :m2_command => "sgfan(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "func.m2",
@@ -368,7 +362,7 @@ class JobsController < ApplicationController
   end
   
   def minsets(discretized_data_files, p_value, n_nodes)
-    functionfile = self.functionfile_name(@file_prefix)
+    functionfile = self.functionfile_name(@job.file_prefix)
     macaulay2(
       :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "minsets-web.m2",
