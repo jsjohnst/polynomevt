@@ -55,14 +55,9 @@ class JobsController < ApplicationController
         return
     end
 
-    params[:job].each { | key, value |
-      ENV['POLYNOME_' + key.upcase] = value
-    }
     # create file prefix using md5 check sum as part of the filename
-    ENV['POLYNOME_FILE_PREFIX'] = 'files/files-' +
-    Digest::MD5.hexdigest(params[:job][:input_data])
-    logger.info "fileprefix: "+ ENV['POLYNOME_FILE_PREFIX']
-    @file_prefix = ENV['POLYNOME_FILE_PREFIX']
+    @file_prefix = 'files/files-' + Digest::MD5.hexdigest(params[:job][:input_data])
+    logger.info "fileprefix: "+ @file_prefix 
 
     # split is also checking the input format
     datafiles = self.split_data_into_files(params[:job][:input_data])
