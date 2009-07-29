@@ -65,6 +65,12 @@ class JobsController < ApplicationController
     @file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
     logger.info "fileprefix: "+ @file_prefix 
 
+    ## testing
+    @job.file_prefix = @file_prefix
+    logger.info "Our classy @job.file_prefix is " + @job.file_prefix
+    logger.info "Our not so classy @file_prefix is " + @file_prefix
+
+
     # split is also checking the input format
     datafiles = self.split_data_into_files( @job.input_data )
     if (!datafiles)
