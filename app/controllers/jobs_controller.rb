@@ -33,7 +33,7 @@ class JobsController < ApplicationController
 
   def generate
     initialize_job
-    generate_output
+    generate_output_of (@job)
   end
 
   def initialize_job 
@@ -67,7 +67,8 @@ class JobsController < ApplicationController
     end
   end
 
-  def generate_output( job )
+ # this one need a job to be passed (needed for testing)
+  def generate_output_of ( job )
     @job = job
     generate_output
   end
