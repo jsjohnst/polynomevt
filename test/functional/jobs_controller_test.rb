@@ -15,18 +15,15 @@ class JobsControllerTest < ActionController::TestCase
     assert_response :success
    end
 
-  test "should create job" do
-      post :generate, :job => jobs(:one)
-      #assert_response :success
-      #post :generate, :job => { :nodes => "3", :input_data=> "1 0 0
-      #1 0 0 
-      #0 1 1" }
-  end
-
-  test "should create job 2" do
-    p = JobsController.new
-    j = jobs(:one)
-    p.generate_output_of(j)
+  test "generate 1" do
+    job = jobs(:one)
+    result = JobsController.new.generate_output_of(job)
+    
+    #testFileExists "public/perl/"
+    #check that generate completed
+    #check the existence of certain files
+    #for some of the files, use diff to test them.
+    
       #assert_response :success
       #post :generate, :job => { :nodes => "3", :input_data=> "1 0 0
       #1 0 0 
