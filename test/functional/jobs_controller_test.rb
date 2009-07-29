@@ -18,6 +18,11 @@ class JobsControllerTest < ActionController::TestCase
   test "generate 1" do
     job = jobs(:one)
     result = JobsController.new.generate_output_of(job)
+    input_data = job.file_prefix + ".input.txt"
+    assert  FileTest.exists?("#{input_data}")
+    input_data = "dummy.txt"
+    assert FileTest.exists?("#{input_data}")
+
     
     #testFileExists "public/perl/"
     #check that generate completed
