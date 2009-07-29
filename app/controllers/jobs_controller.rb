@@ -67,6 +67,11 @@ class JobsController < ApplicationController
     end
   end
 
+  def generate_output( job )
+    @job = job
+    generate_output
+  end
+
   def generate_output
     # create file prefix using md5 check sum as part of the filename
     @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
