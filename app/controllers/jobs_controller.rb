@@ -32,6 +32,11 @@ class JobsController < ApplicationController
   end
 
   def generate
+    initialize_job
+    generate_output
+  end
+
+  def initialize_job 
     # Boolean, not multistate yet  
     @p_value = "2"
     if(!params || !params[:job])
@@ -60,7 +65,9 @@ class JobsController < ApplicationController
         self.write_done_file("2", "Please check the data you input.")
         return
     end
+  end
 
+  def generate_output
     # create file prefix using md5 check sum as part of the filename
     @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
     logger.info "@job.file_prefix: "+ @job.file_prefix 
