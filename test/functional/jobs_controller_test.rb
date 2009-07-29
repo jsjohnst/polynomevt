@@ -23,7 +23,8 @@ class JobsControllerTest < ActionController::TestCase
     input_data = "dummy.txt"
     assert !FileTest.exists?(input_data), "#{input_data} should not exist"
 
-    
+    newfiles = `ls public/perl/#{job.file_prefix}*`
+    print newfiles
     #testFileExists "public/perl/"
     #check that generate completed
     #check the existence of certain files
