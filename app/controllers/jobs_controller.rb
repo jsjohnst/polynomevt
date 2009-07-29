@@ -37,8 +37,6 @@ class JobsController < ApplicationController
   end
 
   def initialize_job 
-    # Boolean, not multistate yet  
-    @p_value = "2"
     if(!params || !params[:job])
       logger.info "Inside Redirect!"
       redirect_to :action => "index"
@@ -74,6 +72,8 @@ class JobsController < ApplicationController
   end
 
   def generate_output
+    # Boolean, not multistate yet  
+    @p_value = "2"
     # create file prefix using md5 check sum as part of the filename
     @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
     logger.info "@job.file_prefix: "+ @job.file_prefix 
