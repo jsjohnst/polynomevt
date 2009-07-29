@@ -18,11 +18,15 @@ class JobsControllerTest < ActionController::TestCase
   test "generate 1" do
     job = jobs(:one)
     result = JobsController.new.generate_output_of(job)
+
+    print "about to sleep"
+    sleep 4
+    print "done sleeping"
+
     input_data = "public/perl/" + job.file_prefix + ".input.txt"
     assert  FileTest.exists?(input_data), "#{input_data} does not exist"
     not_existing_file = "dummy.txt"
     assert !FileTest.exists?(not_existing_file), "#{input_data} should not exist"
-
     newfiles = `ls public/perl/#{job.file_prefix}*`
     print newfiles
     #testFileExists "public/perl/"
