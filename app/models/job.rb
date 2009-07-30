@@ -5,6 +5,9 @@ class Job < ActiveRecord::Base
   validates_numericality_of :nodes, :greater_than => 0, :message => "Number of nodes is too small!", :on => :create
   validate :check_update_schedule
 
+  ## Check update schedule for correctness
+  ## for now this is only checking if it is n numbers, not if each number is
+  ## used exactly once
   # check update schedule to be blank or the right regex
   def check_update_schedule
     if update_schedule 
