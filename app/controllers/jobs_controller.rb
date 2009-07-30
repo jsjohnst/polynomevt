@@ -123,13 +123,6 @@ class JobsController < ApplicationController
     ## Check update schedule for correctness, this should happen in models/job.rb
     ## for now this is only checking if it is n numbers, not if each number is
     ## used exactly once
-    nodes_minus_one = (@job.nodes - 1).to_s
-    unless ( @job.update_schedule.match( /^\s*((\d+\s+){#{nodes_minus_one}}\d+)?\s*$/ ) )
-        logger.info "Wrong update schedule: " + @job.update_schedule
-        @error_message = "Wrong update schedule: " + @job.update_schedule + ". Exiting"
-        self.write_done_file("2", "<font color=red>" +  @error_message+ "</font><br> ") 
-        return
-    end
 
     if ( @job.state_space && @job.nodes > 7 )
         logger.info "Too many variables to simulate"
