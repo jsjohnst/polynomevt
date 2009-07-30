@@ -120,9 +120,6 @@ class JobsController < ApplicationController
         end
     end
    
-    ## Check update schedule for correctness, this should happen in models/job.rb
-    ## for now this is only checking if it is n numbers, not if each number is
-    ## used exactly once
 
     if ( @job.state_space && @job.nodes > 7 )
         logger.info "Too many variables to simulate"
