@@ -40,12 +40,63 @@ class JobsControllerTest < ActionController::TestCase
     job = jobs(:one)
     result = JobsController.new.generate_output_of(job)
     prefix = "public/perl/" + job.file_prefix
+
     wait_until_completed( prefix )
     input_data = prefix + ".input.txt"
     assert  FileTest.exists?("#{input_data}"), "#{input_data} does not exist"
     assert  !FileTest.exists?("#{input_data}.dummy"), "#{input_data}.dummy does not exist"
     `rm #{prefix}*`
-    print "rm #{prefix}*\n"
+  end
+  
+  test "should discretize data " do
+    job = jobs(:one)
+    result = JobsController.new.generate_output_of(job)
+    prefix = "public/perl/" + job.file_prefix
+
+    wait_until_completed( prefix )
+    file =  prefix + ".discretized-input.txt"
+    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
+    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    `rm #{prefix}*`
+  end
+  
+  test "should generate wiring diagram" do
+    job = jobs(:one)
+    job.wiring_diagram = true
+    result = JobsController.new.generate_output_of(job)
+    prefix = "public/perl/" + job.file_prefix
+
+    wait_until_completed( prefix )
+    file =  prefix + ".wiring-diagram." + job.wiring_diagram_format
+    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
+    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    `rm -r #{prefix}*`
+  end
+  
+  test "should generate function file" do
+    job = jobs(:one)
+    job.show_functions = true
+    result = JobsController.new.generate_output_of(job)
+    prefix = "public/perl/" + job.file_prefix
+
+    wait_until_completed( prefix )
+    file =  prefix + ".functionfile.txt"
+    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
+    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    `rm -r #{prefix}*`
+  end
+
+  test "should generate state space" do
+    job = jobs(:one)
+    job.state_space = true
+    result = JobsController.new.generate_output_of(job)
+    prefix = "public/perl/" + job.file_prefix
+
+    wait_until_completed( prefix )
+    file =  prefix + ".out." + job.state_space_format
+    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
+    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    `rm -r #{prefix}*`
   end
 
   test "generate 1" do
