@@ -15,10 +15,8 @@ class JobsControllerTest < ActionController::TestCase
     assert_response :success
    end
   
-  test "should upload input.txt" do
-    job = jobs(:one)
-    result = JobsController.new.generate_output_of(job)
-    prefix = "public/perl/" + job.file_prefix
+  # check prefix.done.js until var done = 1
+  def wait_until_completed(prefix)  
     done_file = prefix + ".done.js"
     line = ""
     waiting = true
@@ -35,6 +33,14 @@ class JobsControllerTest < ActionController::TestCase
             sleep 1 
         end
     end
+    
+  end
+
+  test "should upload input.txt" do
+    job = jobs(:one)
+    result = JobsController.new.generate_output_of(job)
+    prefix = "public/perl/" + job.file_prefix
+    wait_until_completed( prefix )
     input_data = prefix + ".input.txt"
     assert  FileTest.exists?("#{input_data}"), "#{input_data} does not exist"
     assert  !FileTest.exists?("#{input_data}.dummy"), "#{input_data}.dummy does not exist"
