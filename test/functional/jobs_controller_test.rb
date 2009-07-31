@@ -36,90 +36,43 @@ class JobsControllerTest < ActionController::TestCase
     
   end
 
-  test "should upload input.txt" do
-    job = jobs(:one)
+  def run_test_on_job( job, filename )
     result = JobsController.new.generate_output_of(job)
     prefix = "public/perl/" + job.file_prefix
 
     wait_until_completed( prefix )
-    input_data = prefix + ".input.txt"
-    assert  FileTest.exists?("#{input_data}"), "#{input_data} does not exist"
-    assert  !FileTest.exists?("#{input_data}.dummy"), "#{input_data}.dummy does not exist"
-    `rm #{prefix}*`
+    file = prefix + filename
+    assert  FileTest.exists?(file), "#{file} does not exist"
+    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    `rm -r #{prefix}*`
+  end
+
+  test "should upload input.txt" do
+    job = jobs(:one)
+    run_test_on_job( job, ".input.txt" )
   end
   
   test "should discretize data " do
     job = jobs(:one)
-    result = JobsController.new.generate_output_of(job)
-    prefix = "public/perl/" + job.file_prefix
-
-    wait_until_completed( prefix )
-    file =  prefix + ".discretized-input.txt"
-    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
-    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
-    `rm #{prefix}*`
+    run_test_on_job( job, ".discretized-input.txt" )
   end
   
   test "should generate wiring diagram" do
     job = jobs(:one)
     job.wiring_diagram = true
-    result = JobsController.new.generate_output_of(job)
-    prefix = "public/perl/" + job.file_prefix
-
-    wait_until_completed( prefix )
-    file =  prefix + ".wiring-diagram." + job.wiring_diagram_format
-    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
-    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
-    `rm -r #{prefix}*`
+    run_test_on_job( job, ".wiring-diagram." + job.wiring_diagram_format )
   end
   
   test "should generate function file" do
     job = jobs(:one)
     job.show_functions = true
-    result = JobsController.new.generate_output_of(job)
-    prefix = "public/perl/" + job.file_prefix
-
-    wait_until_completed( prefix )
-    file =  prefix + ".functionfile.txt"
-    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
-    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
-    `rm -r #{prefix}*`
+    run_test_on_job( job, ".functionfile.txt" )
   end
 
   test "should generate state space" do
     job = jobs(:one)
     job.state_space = true
-    result = JobsController.new.generate_output_of(job)
-    prefix = "public/perl/" + job.file_prefix
-
-    wait_until_completed( prefix )
-    file =  prefix + ".out." + job.state_space_format
-    assert  FileTest.exists?("#{file}"), "#{file} does not exist"
-    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
-    `rm -r #{prefix}*`
-  end
-
-  test "generate 1" do
-    job = jobs(:one)
-    result = JobsController.new.generate_output_of(job)
-
-    print "about to sleep"
-    sleep 1 
-    print "done sleeping"
-
-    input_data = "public/perl/" + job.file_prefix + ".input.txt"
-    assert  FileTest.exists?(input_data), "#{input_data} does not exist"
-    not_existing_file = "dummy.txt"
-    assert !FileTest.exists?(not_existing_file), "#{input_data} should not exist"
-    newfiles = `ls public/perl/#{job.file_prefix}*`
-    print newfiles
-    #testFileExists "public/perl/"
-    #check that generate completed
-    #check the existence of certain files
-    #for some of the files, use diff to test them.
-    
-      #1 0 0 
-      #0 1 1" }
+    run_test_on_job( job, ".out." + job.state_space_format )
   end
 
 end
