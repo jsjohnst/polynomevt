@@ -17,6 +17,7 @@ class JobsControllerTest < ActionController::TestCase
         prefix = "public/perl/" + @job.file_prefix
         `rm -r #{prefix}* 2> /dev/null`
     end
+    sleep 2 
   end
 
    test "should create dummy job" do 
