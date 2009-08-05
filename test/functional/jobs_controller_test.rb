@@ -105,7 +105,8 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
-  test "should generate wiring diagram for determinstic network" do
+  test "should generate wiring diagram for determinstic network but I think we
+  need to fix this bug" do
     @job.wiring_diagram = true
     @job.is_deterministic = true 
     run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
