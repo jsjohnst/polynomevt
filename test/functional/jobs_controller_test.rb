@@ -153,8 +153,16 @@ class JobsControllerTest < ActionController::TestCase
   
  ############ update sequential ############ 
   
+  test "should not allow stochastic model with random sequential update" do
+    @job = jobs(:stochastic_with_sequential)
+    JobsController.new.generate_output_of(@job)
+    @prefix = "public/perl/" + @job.file_prefix
+    assert !wait_until_completed( @prefix ), "generate should have returned an error"
+  end
+
   test "should not allow stochastic model with sequential update" do
     @job = jobs(:stochastic_with_sequential)
+    @job.update_schedule = "1 2 3" 
     JobsController.new.generate_output_of(@job)
     @prefix = "public/perl/" + @job.file_prefix
     assert !wait_until_completed( @prefix ), "generate should have returned an error"
@@ -216,6 +224,69 @@ class JobsControllerTest < ActionController::TestCase
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
   
+  
+ test "should upload input.txt for sequential network" do
+    @job.is_deterministic = true
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, ".input.txt" )
+  end
+  
+  test "should discretize data for sequential network" do
+    @job.is_deterministic = true 
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, ".discretized-input.txt" )
+  end
+  
+  test "should generate wiring diagram for sequential network but I think we
+  need to fix this bug" do
+    @job.wiring_diagram = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
+  test "should generate function file for sequential network" do
+    @job.show_functions = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, ".functionfile.txt" )
+  end
+
+  test "should generate function file with n lines for sequential network" do
+    @job.show_functions = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, ".functionfile.txt" )
+    function_file = @prefix + ".functionfile.txt"
+    number_of_functions = `wc -l < #{function_file}`
+    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+  end
+
+  test "should generate state space for sequential network" do
+    @job.state_space = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, ".out." + @job.state_space_format )
+  end
+  
+  test "should generate all files for sequential network" do
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    @job.update_schedule = "1 2 3" 
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
   
   
 
