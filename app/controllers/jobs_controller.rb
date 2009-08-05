@@ -198,7 +198,9 @@ class JobsController < ApplicationController
         end
       end
       
-      self.write_done_file("1", "") 
+      ### TODO: Why is this even here? We shouldn't be saying we are done until
+      # we are done and this was above the other code? Hmmm!?
+      #self.write_done_file("1", "") 
       
       if !do_wiring_diagram_version
           # run simulation
