@@ -100,7 +100,10 @@ class JobsControllerTest < ActionController::TestCase
     @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
   end
   
-
+ test "should generate only wiring diagram for deterministic network" do 
+    @job = jobs(:deterministic_wiring_diagram_only)
+    run_test_on_job(@job, ".wiring-diagram." + @job.wiring_diagram_format )
+ end
 
  test "should upload input.txt for deterministic network" do
     @job.is_deterministic = true
@@ -288,10 +291,6 @@ class JobsControllerTest < ActionController::TestCase
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
   
-  
-
-
-
 #  test "should not generate this file" do 
 #    assert !run_test_on_job( @job, "not-existing-file" )
 #  end
