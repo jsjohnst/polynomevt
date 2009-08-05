@@ -3,9 +3,9 @@
 one:
   nodes: 3
   wiring_diagram: false
-  wiring_diagram_format: .gif
+  wiring_diagram_format: gif
   state_space: false
-  state_space_format: .gif
+  state_space_format: gif
   show_discretized: false
   show_functions: false 
   input_data: "1 2 3\n 2 3 4\n 3 4 5\n"
@@ -18,9 +18,9 @@ one:
 discretized_only:
   nodes: 3
   wiring_diagram: false
-  wiring_diagram_format: .gif
+  wiring_diagram_format: gif
   state_space: false
-  state_space_format: .gif
+  state_space_format: gif
   show_discretized: true
   show_functions: false 
   input_data: "1 2 3
@@ -33,13 +33,13 @@ discretized_only:
   update_schedule: ""
 
 # 9 none network, the last time I tried dot took very long and the website
-# returned with "data created successfully before the .gif was made
+# returned with "data created successfully before the gif was made
 nine_node_network:
   nodes: 9 
   wiring_diagram: false
-  wiring_diagram_format: .gif
+  wiring_diagram_format: gif
   state_space: false
-  state_space_format: .gif
+  state_space_format: gif
   show_discretized: false
   show_functions: false 
   input_data: "0 0 0 0 0 0 0 0 0
