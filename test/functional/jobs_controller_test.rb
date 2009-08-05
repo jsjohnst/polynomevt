@@ -1,5 +1,6 @@
 require 'test_helper'
 
+## Tests are run in alphabetical order
 class JobsControllerTest < ActionController::TestCase
   # Replace this with your real tests.
   test "the truth" do
@@ -48,14 +49,16 @@ class JobsControllerTest < ActionController::TestCase
     
   end
 
-  def run_test_on_job( job, filename )
+  def run_test_on_job( job, filename_list )
     result = JobsController.new.generate_output_of(job)
     prefix = "public/perl/" + job.file_prefix
 
     wait_until_completed( prefix )
-    file = prefix + filename
-    assert  FileTest.exists?(file), "#{file} does not exist"
-    assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    filename_list.each do |filename|  
+        file = prefix + filename
+        assert  FileTest.exists?(file), "#{file} does not exist"
+        assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+    end
   end
 
   test "should upload input.txt" do
@@ -80,5 +83,18 @@ class JobsControllerTest < ActionController::TestCase
     @job.state_space = true
     run_test_on_job( @job, ".out." + @job.state_space_format )
   end
+  
+  test "should generate all files" do
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+  end
+
+#  test "should not generate this file" do 
+#    assert !run_test_on_job( @job, "not-existing-file" )
+#  end
 
 end
