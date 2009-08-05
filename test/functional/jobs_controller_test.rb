@@ -42,11 +42,14 @@ class JobsControllerTest < ActionController::TestCase
         if line.match( /^var\sdone\s=\s1/ )
             #print "line did not match var done = 1"
             waiting = false
+        elsif line.match( /^var\sdone\s=\s2/ )
+           print "\nDone file var = 2"
+           return false
         else
             sleep 1 
         end
     end
-    
+    true
   end
 
   def run_test_on_job( job, filename_list )
@@ -105,7 +108,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
-  test "should generate wiring diagram for determinstic network but I think we
+  test "x should generate wiring diagram for determinstic network but I think we
   need to fix this bug" do
     @job.wiring_diagram = true
     @job.is_deterministic = true 
@@ -141,6 +144,17 @@ class JobsControllerTest < ActionController::TestCase
     @job.is_deterministic = true 
     run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
     @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
+  
+  
+  
+  test "should not allow stochastic model with sequential update" do
+    @job = jobs(:stochastic_with_sequential)
+    JobsController.new.generate_output_of(@job)
+    @prefix = "public/perl/" + @job.file_prefix
+    assert !wait_until_completed( @prefix ), "generate should have
+    returned an error"
   end
 
 #  test "should not generate this file" do 
