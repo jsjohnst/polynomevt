@@ -187,14 +187,14 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".functionfile.txt" )
   end
 
-  test "should generate function file with at least n lines for random sequential network" do
+  test "should generate function file with n lines for random sequential network" do
     @job.show_functions = true
     @job.is_deterministic = true 
     @job.sequential = true
     run_test_on_job( @job, ".functionfile.txt" )
     function_file = @prefix + ".functionfile.txt"
     number_of_functions = `wc -l < #{function_file}`
-    assert( @job.nodes <= number_of_functions.chop.to_i )
+    assert_equal( @job.nodes, number_of_functions.chop.to_i )
   end
 
   test "should generate state space for random sequential network" do
