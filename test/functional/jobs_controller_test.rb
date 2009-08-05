@@ -101,21 +101,25 @@ class JobsControllerTest < ActionController::TestCase
   end
   
   test "should discretize data for determinstic network" do
+    @job.is_deterministic = true 
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
   test "should generate wiring diagram for determinstic network" do
     @job.wiring_diagram = true
+    @job.is_deterministic = true 
     run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
   end
   
   test "should generate function file for determinstic network" do
     @job.show_functions = true
+    @job.is_deterministic = true 
     run_test_on_job( @job, ".functionfile.txt" )
   end
 
   test "should generate function file with n lines for determinstic network" do
     @job.show_functions = true
+    @job.is_deterministic = true 
     run_test_on_job( @job, ".functionfile.txt" )
     function_file = @prefix + ".functionfile.txt"
     number_of_functions = `wc -l < #{function_file}`
@@ -124,6 +128,7 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should generate state space for determinstic network" do
     @job.state_space = true
+    @job.is_deterministic = true 
     run_test_on_job( @job, ".out." + @job.state_space_format )
   end
   
@@ -132,6 +137,7 @@ class JobsControllerTest < ActionController::TestCase
     @job.wiring_diagram = true
     @job.show_functions = true
     @job.state_space = true
+    @job.is_deterministic = true 
     run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
     @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
   end
