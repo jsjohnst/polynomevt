@@ -15,6 +15,21 @@ one:
   sequential: false 
   update_schedule: ""
 
+deterministic_wiring_diagram_only:
+  nodes: 3
+  wiring_diagram: true 
+  wiring_diagram_format: gif
+  state_space: false
+  state_space_format: gif
+  show_discretized: false
+  show_functions: false 
+  input_data: "# First time course from testing\n 1.2  2.3  3.4\n 1.1  1.2  1.3\n 2.2  2.3  2.4\n 0.1  0.2  0.3\n"
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  is_deterministic: true
+  sequential: false 
+  update_schedule: ""
+
 stochastic_with_sequential:
   nodes: 3
   wiring_diagram: false

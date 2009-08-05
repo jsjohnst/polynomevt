@@ -165,7 +165,7 @@ class JobsController < ApplicationController
         return
       end
       
-      do_wiring_diagram_version = @job.wiring_diagram && !@job.show_functions
+      do_wiring_diagram_version = @job.wiring_diagram && !@job.show_functions && !@job.is_deterministic
       # if function file is not needed, then run shorter version of minset/sgfan
       #    which produces a wiring diagram but not a function file.
       
@@ -176,6 +176,7 @@ class JobsController < ApplicationController
           # todo: makeconsistent, minsets
           self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
           if do_wiring_diagram_version
+            logger.info "Do Wiring Diagram"
             self.minsets_generate_wiring_diagram(discretized_datafiles,
                 @job.wiring_diagram_format, @p_value, @job.nodes)
           else
@@ -183,9 +184,7 @@ class JobsController < ApplicationController
           end
         end
       else 
-        self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
         if @job.nodes <= n_stochastic_threshold
-          # do sgfan
           if do_wiring_diagram_version
             self.generate_wiring_diagram(discretized_datafiles,
                 @job.wiring_diagram_format, @p_value, @job.nodes)
