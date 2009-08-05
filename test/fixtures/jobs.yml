@@ -77,6 +77,25 @@ discretized_only:
   sequential: false 
   update_schedule: ""
 
+six_node_network:
+  nodes: 6 
+  wiring_diagram: false
+  wiring_diagram_format: gif
+  state_space: false
+  state_space_format: gif
+  show_discretized: false
+  show_functions: false 
+  input_data: "0 0 0 0 0 0\n
+  0 0 0 1 1 0\n
+  0 0 0 1 0 0\n
+  1 0 0 1 0 0\n
+  1 1 1 1 0 0\n
+  1 1 1 1 0 1\n"
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  is_deterministic: false 
+  sequential: false 
+  update_schedule: ""
 # 9 none network, the last time I tried dot took very long and the website
 # returned with "data created successfully before the gif was made
 nine_node_network:
@@ -87,15 +106,15 @@ nine_node_network:
   state_space_format: gif
   show_discretized: false
   show_functions: false 
-  input_data: "0 0 0 0 0 0 0 0 0
-  0 0 0 1 1 0 0 0 1
-  0 0 0 1 1 0 1 0 1
-  0 0 0 1 0 0 1 0 1
-  1 0 0 1 0 0 1 0 1
-  1 1 1 1 0 0 1 0 1
-  1 1 1 1 0 0 1 1 1
-  1 1 1 1 0 1 0 1 0
-  1 1 1 1 0 1 0 1 0"
+  input_data: "0 0 0 0 0 0 0 0 0\n
+  0 0 0 1 1 0 0 0 1\n
+  0 0 0 1 1 0 1 0 1\n
+  0 0 0 1 0 0 1 0 1\n
+  1 0 0 1 0 0 1 0 1\n
+  1 1 1 1 0 0 1 0 1\n
+  1 1 1 1 0 0 1 1 1\n
+  1 1 1 1 0 1 0 1 0\n
+  1 1 1 1 0 1 0 1 0\n"
   show_probabilities_wiring_diagram: false
   show_probabilities_state_space: false
   is_deterministic: false 

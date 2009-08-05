@@ -91,7 +91,7 @@ class JobsController < ApplicationController
     # create the dummy file to avoid RouteErrors
     self.write_done_file("0", "")
 
-    n_react_threshold = 10
+    n_react_threshold = 5 
     n_stochastic_threshold = 10
     
     ## All checking of any input should be done before we spawn, so the user

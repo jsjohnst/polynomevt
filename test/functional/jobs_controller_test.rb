@@ -154,6 +154,18 @@ class JobsControllerTest < ActionController::TestCase
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
   
+  test "should generate all files for large deterministic network" do
+    @job = jobs(:six_node_network)
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    @job.is_deterministic = true
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
+  
  ############ update sequential ############ 
   
   test "should not allow stochastic model with random sequential update" do
