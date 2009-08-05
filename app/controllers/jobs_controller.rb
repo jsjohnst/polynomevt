@@ -171,10 +171,9 @@ class JobsController < ApplicationController
       
       if @job.is_deterministic
         if @job.nodes <= n_react_threshold
-          # do react
           run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
         else
-          # do: makeconsistent, minsets
+          # todo: makeconsistent, minsets
           self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
           if do_wiring_diagram_version
             self.minsets_generate_wiring_diagram(discretized_datafiles,

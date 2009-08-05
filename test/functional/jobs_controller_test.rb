@@ -46,7 +46,7 @@ class JobsControllerTest < ActionController::TestCase
             #print "line did not match var done = 1"
             waiting = false
         elsif line.match( /^var\sdone\s=\s2/ )
-           print "\nDone matches file var = 2 (an error was printed to done
+           print "\nDone file matches file var = 2 (an error was printed to done
            file)\n"
            return false
         else
@@ -102,30 +102,30 @@ class JobsControllerTest < ActionController::TestCase
   
 
 
- test "should upload input.txt for determinstic network" do
+ test "should upload input.txt for deterministic network" do
     @job.is_deterministic = true
     run_test_on_job( @job, ".input.txt" )
   end
   
-  test "should discretize data for determinstic network" do
+  test "should discretize data for deterministic network" do
     @job.is_deterministic = true 
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
-  test "x should generate wiring diagram for determinstic network but I think we
+  test "x should generate wiring diagram for deterministic network but I think we
   need to fix this bug" do
     @job.wiring_diagram = true
     @job.is_deterministic = true 
     run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
   end
   
-  test "should generate function file for determinstic network" do
+  test "should generate function file for deterministic network" do
     @job.show_functions = true
     @job.is_deterministic = true 
     run_test_on_job( @job, ".functionfile.txt" )
   end
 
-  test "should generate function file with n lines for determinstic network" do
+  test "should generate function file with n lines for deterministic network" do
     @job.show_functions = true
     @job.is_deterministic = true 
     run_test_on_job( @job, ".functionfile.txt" )
@@ -134,13 +134,13 @@ class JobsControllerTest < ActionController::TestCase
     assert_equal( @job.nodes, number_of_functions.chop.to_i )
   end
 
-  test "should generate state space for determinstic network" do
+  test "should generate state space for deterministic network" do
     @job.state_space = true
     @job.is_deterministic = true 
     run_test_on_job( @job, ".out." + @job.state_space_format )
   end
   
-  test "should generate all files for determinstic network" do
+  test "should generate all files for deterministic network" do
     @job.show_discretized = true
     @job.wiring_diagram = true
     @job.show_functions = true
@@ -151,15 +151,75 @@ class JobsControllerTest < ActionController::TestCase
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
   
-  
+ ############ update sequential ############ 
   
   test "should not allow stochastic model with sequential update" do
     @job = jobs(:stochastic_with_sequential)
     JobsController.new.generate_output_of(@job)
     @prefix = "public/perl/" + @job.file_prefix
-    assert !wait_until_completed( @prefix ), "generate should have
-    returned an error"
+    assert !wait_until_completed( @prefix ), "generate should have returned an error"
   end
+ 
+ test "should upload input.txt for random sequential network" do
+    @job.is_deterministic = true
+    @job.sequential = true
+    run_test_on_job( @job, ".input.txt" )
+  end
+  
+  test "should discretize data for random sequential network" do
+    @job.is_deterministic = true 
+    @job.sequential = true
+    run_test_on_job( @job, ".discretized-input.txt" )
+  end
+  
+  test "should generate wiring diagram for random sequential network but I think we
+  need to fix this bug" do
+    @job.wiring_diagram = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
+  test "should generate function file for random sequential network" do
+    @job.show_functions = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    run_test_on_job( @job, ".functionfile.txt" )
+  end
+
+  test "should generate function file with at least n lines for random sequential network" do
+    @job.show_functions = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    run_test_on_job( @job, ".functionfile.txt" )
+    function_file = @prefix + ".functionfile.txt"
+    number_of_functions = `wc -l < #{function_file}`
+    assert( @job.nodes <= number_of_functions.chop.to_i )
+  end
+
+  test "should generate state space for random sequential network" do
+    @job.state_space = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    run_test_on_job( @job, ".out." + @job.state_space_format )
+  end
+  
+  test "should generate all files for random sequential network" do
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    @job.is_deterministic = true 
+    @job.sequential = true
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
+  
+  
+  
+
+
 
 #  test "should not generate this file" do 
 #    assert !run_test_on_job( @job, "not-existing-file" )
