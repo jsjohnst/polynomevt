@@ -50,12 +50,12 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   def run_test_on_job( job, filename_list )
-    result = JobsController.new.generate_output_of(job)
-    prefix = "public/perl/" + job.file_prefix
+    JobsController.new.generate_output_of(job)
+    @prefix = "public/perl/" + job.file_prefix
 
-    wait_until_completed( prefix )
+    wait_until_completed( @prefix )
     filename_list.each do |filename|  
-        file = prefix + filename
+        file = @prefix + filename
         assert  FileTest.exists?(file), "#{file} does not exist"
         assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
     end
@@ -85,6 +85,49 @@ class JobsControllerTest < ActionController::TestCase
   end
   
   test "should generate all files" do
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+  end
+  
+
+
+ test "should upload input.txt for determinstic network" do
+    @job.is_deterministic = true
+    run_test_on_job( @job, ".input.txt" )
+  end
+  
+  test "should discretize data for determinstic network" do
+    run_test_on_job( @job, ".discretized-input.txt" )
+  end
+  
+  test "should generate wiring diagram for determinstic network" do
+    @job.wiring_diagram = true
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
+  test "should generate function file for determinstic network" do
+    @job.show_functions = true
+    run_test_on_job( @job, ".functionfile.txt" )
+  end
+
+  test "should generate function file with n lines for determinstic network" do
+    @job.show_functions = true
+    run_test_on_job( @job, ".functionfile.txt" )
+    function_file = @prefix + ".functionfile.txt"
+    number_of_functions = `wc -l < #{function_file}`
+    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+  end
+
+  test "should generate state space for determinstic network" do
+    @job.state_space = true
+    run_test_on_job( @job, ".out." + @job.state_space_format )
+  end
+  
+  test "should generate all files for determinstic network" do
     @job.show_discretized = true
     @job.wiring_diagram = true
     @job.show_functions = true
