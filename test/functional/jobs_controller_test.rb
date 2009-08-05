@@ -60,7 +60,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should generate wiring diagram" do
     job = jobs(:one)
     job.wiring_diagram = true
-    run_test_on_job( job, ".wiring-diagram." + job.wiring_diagram_format )
+    run_test_on_job( job, ".wiring-diagram" + job.wiring_diagram_format )
   end
   
   test "should generate function file" do
@@ -72,7 +72,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should generate state space" do
     job = jobs(:one)
     job.state_space = true
-    run_test_on_job( job, ".out." + job.state_space_format )
+    run_test_on_job( job, ".out" + job.state_space_format )
   end
 
 end
