@@ -2,14 +2,17 @@ require 'test_helper'
 
 ## Tests are run in alphabetical order
 class JobsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
 
   # called before every single test 
   def setup 
+    # make sure files directory is there
+    `touch public/perl/files/`
     @job = jobs(:one)
+  end
+  
+  # Replace this with your real tests.
+  test "the truth" do
+    assert true
   end
 
   def teardown  
@@ -17,7 +20,6 @@ class JobsControllerTest < ActionController::TestCase
         prefix = "public/perl/" + @job.file_prefix
         `rm -r #{prefix}* 2> /dev/null`
     end
-    sleep 2 
   end
 
    test "should create dummy job" do 
@@ -44,7 +46,8 @@ class JobsControllerTest < ActionController::TestCase
             #print "line did not match var done = 1"
             waiting = false
         elsif line.match( /^var\sdone\s=\s2/ )
-           print "\nDone file var = 2"
+           print "\nDone matches file var = 2 (an error was printed to done
+           file)\n"
            return false
         else
             sleep 1 
