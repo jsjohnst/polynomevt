@@ -6,6 +6,18 @@ class JobsControllerTest < ActionController::TestCase
     assert true
   end
 
+  # called before every single test 
+  def setup 
+    @job = jobs(:one)
+  end
+
+  def teardown  
+    unless @job.file_prefix.nil?
+        prefix = "public/perl/" + @job.file_prefix
+        `rm -r #{prefix}* 2> /dev/null`
+    end
+  end
+
    test "should create dummy job" do 
     assert_difference('Job.count') do 
         get :index 
@@ -44,35 +56,29 @@ class JobsControllerTest < ActionController::TestCase
     file = prefix + filename
     assert  FileTest.exists?(file), "#{file} does not exist"
     assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
-    `rm -r #{prefix}*`
   end
 
   test "should upload input.txt" do
-    job = jobs(:one)
-    run_test_on_job( job, ".input.txt" )
+    run_test_on_job( @job, ".input.txt" )
   end
   
   test "should discretize data " do
-    job = jobs(:one)
-    run_test_on_job( job, ".discretized-input.txt" )
+    run_test_on_job( @job, ".discretized-input.txt" )
   end
   
   test "should generate wiring diagram" do
-    job = jobs(:one)
-    job.wiring_diagram = true
-    run_test_on_job( job, ".wiring-diagram." + job.wiring_diagram_format )
+    @job.wiring_diagram = true
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
   end
   
   test "should generate function file" do
-    job = jobs(:one)
-    job.show_functions = true
-    run_test_on_job( job, ".functionfile.txt" )
+    @job.show_functions = true
+    run_test_on_job( @job, ".functionfile.txt" )
   end
 
   test "should generate state space" do
-    job = jobs(:one)
-    job.state_space = true
-    run_test_on_job( job, ".out." + job.state_space_format )
+    @job.state_space = true
+    run_test_on_job( @job, ".out." + @job.state_space_format )
   end
 
 end
