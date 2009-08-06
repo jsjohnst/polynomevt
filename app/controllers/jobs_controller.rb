@@ -171,8 +171,13 @@ class JobsController < ApplicationController
       generate_picture = false
       if do_wiring_diagram_version 
         if @job.nodes <= n_react_threshold
-          run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
-          generate_picture = true
+          if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
+            run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+            generate_picture = true
+          else
+            self.generate_wiring_diagram(discretized_datafiles,
+                @job.wiring_diagram_format, @p_value, @job.nodes)
+          end
         else  
           if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
             self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
@@ -356,7 +361,12 @@ class JobsController < ApplicationController
 
   def make_data_consistent(discretized_data_files, p_value, n_nodes)
     logger.info("testing make_data_consistent ...")
-
+    macaulay2(
+      :m2_command => "ereadMat(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
+      :m2_file => "incons.m2",
+      :m2_wait => 1
+      )
+        
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)

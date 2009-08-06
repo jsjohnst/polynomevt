@@ -322,6 +322,115 @@ class JobsControllerTest < ActionController::TestCase
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
   
+######## inconsistent data #########
+
+  test "should upload inconsistent data" do
+    @job = jobs(:inconsistent_data)
+    run_test_on_job( @job, ".input.txt" )
+  end
+  
+  test "should discretize data for inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    run_test_on_job( @job, ".discretized-input.txt" )
+  end
+  
+  test "should generate wiring diagram for inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.wiring_diagram = true
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
+  test "should generate function file for inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.show_functions = true
+    run_test_on_job( @job, ".functionfile.txt" )
+  end
+
+  test "should generate state space for inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.state_space = true
+    run_test_on_job( @job, ".out." + @job.state_space_format )
+  end
+  
+  test "should generate all files for inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+  end
+  
+ test "should generate only wiring diagram for deterministic network for
+ inconsistent timecourse" do 
+    @job = jobs(:inconsistent_data)
+    @job.is_deterministic = true
+    @job.wiring_diagram = true
+    run_test_on_job(@job, ".wiring-diagram." + @job.wiring_diagram_format )
+ end
+
+ test "should upload input.txt for deterministic network for inconsistent
+ timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.is_deterministic = true
+    run_test_on_job( @job, ".input.txt" )
+  end
+  
+  test "should discretize data for deterministic network for inconsistent
+  timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.is_deterministic = true 
+    run_test_on_job( @job, ".discretized-input.txt" )
+  end
+  
+  test "x should generate wiring diagram for deterministic network for
+  inconsistent timecourse" do 
+    @job = jobs(:inconsistent_data)
+    @job.wiring_diagram = true
+    @job.is_deterministic = true 
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
+  test "should generate function file for deterministic network for
+  inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.show_functions = true
+    @job.is_deterministic = true 
+    run_test_on_job( @job, ".functionfile.txt" )
+  end
+
+  test "should generate function file with n lines for deterministic network
+  for inconsistent timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.show_functions = true
+    @job.is_deterministic = true 
+    run_test_on_job( @job, ".functionfile.txt" )
+    function_file = @prefix + ".functionfile.txt"
+    number_of_functions = `wc -l < #{function_file}`
+    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+  end
+
+  test "should generate state space for deterministic network for inconsistent
+  timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.state_space = true
+    @job.is_deterministic = true 
+    run_test_on_job( @job, ".out." + @job.state_space_format )
+  end
+  
+  test "should generate all files for deterministic network for inconsistent
+  timecourse" do
+    @job = jobs(:inconsistent_data)
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    @job.is_deterministic = true 
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
 #  test "should not generate this file" do 
 #    assert !run_test_on_job( @job, "not-existing-file" )
 #  end
