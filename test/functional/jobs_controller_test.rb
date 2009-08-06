@@ -64,7 +64,10 @@ class JobsControllerTest < ActionController::TestCase
     filename_list.each do |filename|  
         file = @prefix + filename
         assert  FileTest.exists?(file), "#{file} does not exist"
-        assert  !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
+        number_of_lines = `wc -l < #{file}`
+        number_of_lines = number_of_lines.chop.to_i
+        assert( 1 <= number_of_lines )
+        assert !FileTest.exists?("#{file}.dummy"), "#{file}.dummy does not exist"
     end
   end
 
