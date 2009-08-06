@@ -1,0 +1,35 @@
+Controllers
+-------------
+Jobs     -- form for creating jobs and putting them in the db
+Users    -- allows user creation 
+Results  -- shows the results from a job
+History  -- lists all jobs created by a user`
+Admin    -- shows lists of all users and jobs ever created and 
+performing cleanup tasks
+
+
+Views
+------
+Jobs
+Index -- the form which allows you to create a job
+Confirmation -- shows the link to the results page
+Results
+Show -- takes a job id as a parameter and if the job 
+is done, shows the results, otherwise shows 
+a progress indicator
+
+History -- Requires Login, without login redirects to /users/login
+Show -- Shows a list of all jobs the user has ever created
+
+Users
+Login -- Login/password, go figure?
+Registration -- Account creation
+Lost password -- For those silly people who forget their password
+Edit details -- For those who want to change their password, name, or email
+addy
+Admin
+Login -- For those special people
+User List -- Shows a list of all users
+User Editor -- Allows editing of user details, probably steal view from above
+Jobs List -- Shows a list of all jobs and allows deletion of old jobs
+Stats -- Shows access logs and other reporting information
