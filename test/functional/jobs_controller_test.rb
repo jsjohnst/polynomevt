@@ -115,8 +115,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
-  test "x should generate wiring diagram for deterministic network but I think we
-  need to fix this bug" do
+  test "x should generate wiring diagram for deterministic network" do 
     @job.wiring_diagram = true
     @job.is_deterministic = true 
     run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
@@ -154,13 +153,35 @@ class JobsControllerTest < ActionController::TestCase
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
   
-  test "should generate all files for large deterministic network" do
+  test "should generate all files for large deterministic network need to fix
+  this bug" do
     @job = jobs(:six_node_network)
     @job.show_discretized = true
     @job.wiring_diagram = true
     @job.show_functions = true
     @job.state_space = true
     @job.is_deterministic = true
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
+
+  test "should generate wiring diagram for large deterministic network" do
+    @job = jobs(:six_node_network)
+    @job.wiring_diagram = true
+    @job.is_deterministic = true 
+    run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
+    @job.wiring_diagram_format] )
+    assert wait_until_completed( @prefix ), "this should work without errors"
+  end
+
+  test "should generate all files for large network" do
+    @job = jobs(:six_node_network)
+    @job.show_discretized = true
+    @job.wiring_diagram = true
+    @job.show_functions = true
+    @job.state_space = true
+    @job.is_deterministic = false 
     run_test_on_job( @job, [ ".discretized-input.txt", ".wiring-diagram." +
     @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
     assert wait_until_completed( @prefix ), "this should work without errors"
@@ -195,8 +216,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
-  test "should generate wiring diagram for random sequential network but I think we
-  need to fix this bug" do
+  test "should generate wiring diagram for random sequential network" do 
     @job.wiring_diagram = true
     @job.is_deterministic = true 
     @job.sequential = true
@@ -254,8 +274,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".discretized-input.txt" )
   end
   
-  test "should generate wiring diagram for sequential network but I think we
-  need to fix this bug" do
+  test "should generate wiring diagram for sequential network" do 
     @job.wiring_diagram = true
     @job.is_deterministic = true 
     @job.sequential = true

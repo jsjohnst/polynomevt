@@ -129,12 +129,11 @@ class JobsController < ApplicationController
         self.write_done_file("0", "<font color=red>" +  @error_message+ "</font><br> ") 
     end
 
-
     spawn do
-        #TODO this will change to a single new filename, waiting for Brandy
-      discretized_datafiles = datafiles.collect { |datafile|
+      #TODO this will change to a single new filename, waiting for Brandy
+      discretized_datafiles = datafiles.collect do |datafile|
         datafile.gsub(/input/, 'discretized-input')
-      }
+      end
 
       self.discretize_data(datafiles, discretized_datafiles, @p_value)
 
@@ -165,79 +164,84 @@ class JobsController < ApplicationController
         return
       end
       
-      do_wiring_diagram_version = @job.wiring_diagram && !@job.show_functions && !@job.is_deterministic
+      do_wiring_diagram_version = @job.wiring_diagram && !@job.show_functions 
       # if function file is not needed, then run shorter version of minset/sgfan
       #    which produces a wiring diagram but not a function file.
-      
-      if @job.is_deterministic
+   
+      generate_picture = false
+      if do_wiring_diagram_version 
         if @job.nodes <= n_react_threshold
           run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
-        else
-          # todo: makeconsistent, minsets
-          self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
-          if do_wiring_diagram_version
-            logger.info "Do Wiring Diagram"
-            self.minsets_generate_wiring_diagram(discretized_datafiles,
-                @job.wiring_diagram_format, @p_value, @job.nodes)
-          else
-            self.minsets(discretized_datafiles, @p_value, @job.nodes)           
+          generate_picture = true
+        else  
+          if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
+            self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
           end
+          self.minsets_generate_wiring_diagram(discretized_datafiles,
+             @job.wiring_diagram_format, @p_value, @job.nodes)
         end
-      else 
-        if @job.nodes <= n_stochastic_threshold
-          if do_wiring_diagram_version
-            self.generate_wiring_diagram(discretized_datafiles,
-                @job.wiring_diagram_format, @p_value, @job.nodes)
+      else
+        if @job.is_deterministic
+          if @job.nodes <= n_react_threshold
+             run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+             generate_picture = true
           else
+             if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
+                self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+             end
+             # TODO for some reason minsets doesn't work 
+             # self.minsets(discretized_datafiles, @p_value, @job.nodes)           
+             run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+             generate_picture = true
+          end
+        else # stochastic model 
+          if @job.nodes <= n_stochastic_threshold
             self.sgfan(discretized_datafiles, @p_value, @job.nodes)
+            generate_picture = true
+          else
+            logger.warn("internal error: should not be here because we checked
+            for this error before")
           end
-        else
-          logger.warn("internal error: should not be here")
         end
       end
       
-      ### TODO: Why is this even here? We shouldn't be saying we are done until
-      # we are done and this was above the other code? Hmmm!?
-      #self.write_done_file("1", "") 
-      
-      if !do_wiring_diagram_version
-          # run simulation
-          logger.info "Starting simulation of state space."
-            
-          show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0"
-          wiring_diagram = @job.wiring_diagram ? "1" : "0"
-          state_space = @job.state_space ? "1" : "0"
-
-          # for synchronous updates or stochastic sequential updates
-          if (!@job.sequential || @job.update_schedule == "" )
-              @job.update_schedule ="0"
-          end
+      if generate_picture 
+        # run simulation
+        logger.info "Starting simulation of state space."
           
-          # for stochastic sequential updates, sequential has to be set to 0
-          # for dvd_stochastic_runner.pl to run correctly 
-          stochastic_sequential_update = "0"
-          if (@job.sequential && @job.update_schedule == "0")
-              stochastic_sequential_update = "1"
-              @job.sequential = false
-          end
-          
-          sequential = @job.sequential ? "1" : "0"
+        show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0"
+        wiring_diagram = @job.wiring_diagram ? "1" : "0"
+        state_space = @job.state_space ? "1" : "0"
 
-          # concatenate update schedule into one string with _ as separators
-          # so we can pass it to dvd_stochastic_runner.pl
-          @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
-          logger.info "Update Schedule :" + @job.update_schedule + ":"
+        # for synchronous updates or stochastic sequential updates
+        if (!@job.sequential || @job.update_schedule == "" )
+            @job.update_schedule ="0"
+        end
+        
+        # for stochastic sequential updates, sequential has to be set to 0
+        # for dvd_stochastic_runner.pl to run correctly 
+        stochastic_sequential_update = "0"
+        if (@job.sequential && @job.update_schedule == "0")
+            stochastic_sequential_update = "1"
+            @job.sequential = false
+        end
+        
+        sequential = @job.sequential ? "1" : "0"
 
-          @functionfile_name = self.functionfile_name(@job.file_prefix)
-          logger.info "Functionfile : " + @functionfile_name
+        # concatenate update schedule into one string with _ as separators
+        # so we can pass it to dvd_stochastic_runner.pl
+        @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
+        logger.info "Update Schedule :" + @job.update_schedule + ":"
 
-          logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}"
+        @functionfile_name = self.functionfile_name(@job.file_prefix)
+        logger.info "Functionfile : " + @functionfile_name
 
-          simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}` 
-          logger.info "simulation output: " + simulation_output 
-          simulation_output = simulation_output.gsub("\n", "") 
+        logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}"
+
+        simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}` 
+        logger.info "simulation output: " + simulation_output 
+        simulation_output = simulation_output.gsub("\n", "") 
       end
-      
       self.write_done_file("1",  simulation_output)
     end
   end
@@ -351,7 +355,8 @@ class JobsController < ApplicationController
   end
 
   def make_data_consistent(discretized_data_files, p_value, n_nodes)
-    logger.warn("make_data_consistent is not yet written: always just continues...")
+    logger.info("testing make_data_consistent ...")
+
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
@@ -366,6 +371,7 @@ class JobsController < ApplicationController
   
   def minsets(discretized_data_files, p_value, n_nodes)
     functionfile = self.functionfile_name(@job.file_prefix)
+    logger.info "in minsets: #{functionfile}"
     macaulay2(
       :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "minsets-web.m2",
