@@ -360,17 +360,17 @@ class JobsController < ApplicationController
   end
 
   def make_data_consistent(discretized_data_files, p_value, n_nodes)
-    logger.info("testing make_data_consistent ...")
-    macaulay2(
-      :m2_command => "ereadMat(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
-      :m2_file => "incons.m2",
-      :m2_wait => 1
-      )
-        
+    logger.info("testing make_data_consistent ... this is not working yet")
+#    macaulay2(
+#      :m2_command => "ereadMat(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
+#      :m2_file => "incons.m2",
+#      :m2_wait => 1
+#      )
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
     functionfile = self.functionfile_name(@job.file_prefix)
+    logger.info "calling sgfan!"
     macaulay2(
       :m2_command => "sgfan(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "func.m2",
