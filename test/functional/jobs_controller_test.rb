@@ -434,6 +434,23 @@ class JobsControllerTest < ActionController::TestCase
     @job.wiring_diagram_format, ".functionfile.txt", ".out." + @job.state_space_format] )
     assert wait_until_completed( @prefix ), "this should work without errors"
   end
+  
+  test "data should be consistent" do 
+    run_test_on_job(@job, ".discretized-input.txt")
+    
+    discretized_datafile = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
+    assert JobsController.new.data_consistent?(discretized_datafile, 2, @job.nodes)
+  end
+
+  test "data should not be consistent" do 
+    @job = jobs(:inconsistent_data)
+    run_test_on_job(@job, ".discretized-input.txt")
+    
+    discretized_datafile = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
+    controller = JobsController.new
+    assert !controller.data_consistent?(discretized_datafile, "2", @job.nodes)
+  end
+
 #  test "should not generate this file" do 
 #    assert !run_test_on_job( @job, "not-existing-file" )
 #  end
