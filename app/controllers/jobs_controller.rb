@@ -172,9 +172,11 @@ class JobsController < ApplicationController
       if do_wiring_diagram_version 
         if @job.nodes <= n_react_threshold
           if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
+            logger.info "inconsistent"
             run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
             generate_picture = true
           else
+            logger.info "consistent"
             self.generate_wiring_diagram(discretized_datafiles,
                 @job.wiring_diagram_format, @p_value, @job.nodes)
           end
@@ -354,9 +356,10 @@ class JobsController < ApplicationController
       )
     # 0 inconsistent
     # 1 consistent
-    logger.info "data is consistent returned " + ret_val + "0 inconsistent,
+    logger.info "data is consistent returned " + ret_val + ", 0 inconsistent,
     1 consistent"
-    return ( ret_val != "0" )
+    logger.info "return #{ret_val != "0"}"
+    ret_val != "0" 
   end
 
   def make_data_consistent(discretized_data_files, p_value, n_nodes)
