@@ -369,9 +369,9 @@ class JobsController < ApplicationController
     # 0 inconsistent
     # 1 consistent
     logger.info "data is consistent returned " + ret_val + ", 0 inconsistent,
-    1 consistent"
-    logger.info "return #{ret_val != "0"}"
-    ret_val != "0" 
+    42 consistent"
+    logger.info "return #{ret_val == "42"}"
+    ret_val == "42" 
   end
 
   def make_data_consistent(infiles, outfile, p_value, n_nodes)

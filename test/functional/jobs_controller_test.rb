@@ -466,6 +466,12 @@ class JobsControllerTest < ActionController::TestCase
     assert controller.data_consistent?(discretized_datafile, "2", @job.nodes), "Data should now be discretized"
   end
 
+  test "should not return true for isConsistent if passed nonexisting file" do
+    discretized_datafile = Dir.getwd + "/nonexisting.txt"
+    controller = JobsController.new
+    assert !controller.data_consistent?(discretized_datafile, "2", 3), "should not return true if file does not exist"
+  end
+
 #  test "should not generate this file" do 
 #    assert !run_test_on_job( @job, "not-existing-file" )
 #  end
