@@ -48,16 +48,19 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
     consistentTransitions = toList consistentTransitions;
     
     --Print each transitions in a single file
-    file = openOut outfile;
-    for i from 0 to #consistentTransitions-1 do 
-    ( 
-        file << "#TS" << toString(i+1) << endl;
-        for j from 0 to n-1 do (file << consistentTransitions#i#0#j << " "; );
-        file << endl;
-        for j from 0 to n-1 do (file << consistentTransitions#i#1#j << " "; );
-        file << endl;
-    );
-    file<<close;
+    file = openOut "testfile.txt";
+    file << "Blablabla" << endl;
+    file << close;
+    --file = openOut outfile;
+--    for i from 0 to #consistentTransitions-1 do 
+--    ( 
+--        file << "#TS" << toString(i+1) << endl;
+--        for j from 0 to n-1 do (file << consistentTransitions#i#0#j << " "; );
+--        file << endl;
+--        for j from 0 to n-1 do (file << consistentTransitions#i#1#j << " "; );
+--        file << endl;
+--    );
+--    file<<close;
 )
 
 makeConsistent(String, ZZ, String) := (infile, n, outfile) -> ( 
