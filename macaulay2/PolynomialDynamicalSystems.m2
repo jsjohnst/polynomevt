@@ -15,10 +15,12 @@ needs "Points.m2"
 export{getVars,
        makeVars,
        see,
---       separateRegexp,
        TimeSeriesData, 
        FunctionData, 
+       readMat,
+       readRealMat,
        readTSData,
+       readRealTSData,
        functionData,
        subFunctionData,
        minRep,
@@ -86,14 +88,6 @@ see(List) := (fs) -> scan(fs, (g -> (print g; print "")))
 ---------------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------------
--- A function defined in a previous version of Macaulay2
-
---separateRegexp = (sepregex, s) -> (
---     s = replace(" +"," ",s);
---     separate(" ",s)
---)
-
----------------------------------------------------------------------------------------------------
 -- Internal to "readTSData"
 -- Given a data file and a coefficient ring, readMat returns the (txn)-matrix of the data (t=time, n=vars). 
 
@@ -105,10 +99,20 @@ readMat(String,Ring) := (filename,R) -> (
                      select(t, x -> class x =!= Nothing))))
 )
 
+readRealMat = method(TypicalValue => Matrix)
+readRealMat(String,InexactFieldFamily) := (filename,R) -> (
+     ss := select(lines get filename, s -> length s > 0);
+     matrix(R, apply(ss, s -> (t := separateRegexp(" +", s);
+                 t = apply(t,value);
+                     select(t, x -> class x =!= Nothing))))
+)
+
+
+
 ---------------------------------------------------------------------------------------------------
 -- Given a list of wildtype and a list of knockout time series data files, as well as a coefficient ring,
 -- readTSData returns a TimeSeriesData hashtable of the data.
--- Uses "readMat"
+-- Uses "readMat", except for the last version
 
 readTSData = method(TypicalValue => TimeSeriesData)
 readTSData(List,List,Ring) := (wtfiles, knockouts, R) -> (
@@ -128,6 +132,64 @@ readTSData(List,List,Ring) := (wtfiles, knockouts, R) -> (
      H.WildType = wtmats;
      new TimeSeriesData from H
 )
+
+readTSData(String,Ring) := (filename, R) -> (
+    --filename contains several time series with a header of # preceding each one
+    WT := lines get filename;
+    WT = select(WT, l->#l>0);
+
+    i := 0; l := WT_i;
+    if match("#",l) then {i=i+1; l=WT_i;};
+    T := {};
+    while i < #(WT)-1 do
+    {
+        temp := {};
+        while not match("#",l) do
+        {
+                temp = append(temp,l);
+                if i == #(WT)-1 then break else
+                {i=i+1; l=WT_i;};
+        };
+        T = append(T,temp);
+        if i == #(WT)-1 then break else
+        {i=i+1; l=WT_i;};
+    };
+    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+    H := new MutableHashTable;
+    H.WildType = T;
+    new TimeSeriesData from H
+)
+
+readRealTSData = method(TypicalValue => TimeSeriesData)
+readRealTSData(String,InexactFieldFamily) := (filename, R) -> (
+    --filename contains several time series with a header of # preceding each one
+    WT := lines get filename;
+    WT = select(WT, l->#l>0);
+
+    i := 0; l := WT_i;
+    if match("#",l) then {i=i+1; l=WT_i;};
+    T := {};
+    while i < #(WT)-1 do
+    {
+        temp := {};
+        while not match("#",l) do
+        {
+                temp = append(temp,l);
+                if i == #(WT)-1 then break else
+                {i=i+1; l=WT_i;};
+        };
+        T = append(T,temp);
+        if i == #(WT)-1 then break else
+        {i=i+1; l=WT_i;};
+    };
+    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+    H := new MutableHashTable;
+    H.WildType = T;
+    new TimeSeriesData from H
+)
+
+
+
 
 ---------------------------------------------------------------------------------------------------
 -- Given time series data and an integer i, functionData returns the FunctionData hashtable for function i,
@@ -273,7 +335,7 @@ beginDocumentation()
 document { Key => PolynomialDynamicalSystems,
      Headline => "Utilities for polynomial dynamical systems",
      EM "PDS", " is a package for the algebraic manipulation of polynomial dynamical systems.",
-     PARA{},
+     PARA,
      "This package defines the following types:",
      UL {
       TO ""

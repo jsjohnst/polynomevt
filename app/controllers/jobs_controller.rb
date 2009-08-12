@@ -182,8 +182,9 @@ class JobsController < ApplicationController
           end
         else  
           if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-            self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+            discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
           end
+          logger.info "Minsets generate wiring diagram"
           self.minsets_generate_wiring_diagram(discretized_datafiles,
              @job.wiring_diagram_format, @p_value, @job.nodes)
         end
@@ -194,11 +195,11 @@ class JobsController < ApplicationController
              generate_picture = true
           else
              if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-                self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+                discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
              end
              # TODO for some reason minsets doesn't work 
-             # self.minsets(discretized_datafiles, @p_value, @job.nodes)           
-             run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+              self.minsets(discretized_datafiles, @job.wiring_diagram_format, @p_value, @job.nodes)           
+             #run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
              generate_picture = true
           end
         else # stochastic model 
@@ -339,6 +340,9 @@ class JobsController < ApplicationController
   def minsets_generate_wiring_diagram(discretized_data_files, file_format, p_value, n_nodes)
     dotfile = self.dotfile_name(@job.file_prefix)
     graphfile = self.graphfile_name(@job.file_prefix, file_format)
+    logger.info dotfile
+    logger.info graphfile
+    logger.info discretized_data_files 
 
     macaulay2(
       :m2_command => "minsetsWD(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
@@ -364,11 +368,12 @@ class JobsController < ApplicationController
 
   def make_data_consistent(discretized_data_files, p_value, n_nodes)
     logger.info("testing make_data_consistent ... this is not working yet")
-#    macaulay2(
-#      :m2_command => "ereadMat(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
-#      :m2_file => "incons.m2",
-#      :m2_wait => 1
-#      )
+    macaulay2(
+      :m2_command => "makeConsistent(#{m2_string(discretized_data_files)}, #{n_nodes}, ///../#{functionfile}///)",
+      :m2_file => "incons.m2",
+      :m2_wait => 1
+      )
+    discretized_data_files
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
@@ -382,14 +387,18 @@ class JobsController < ApplicationController
     functionfile
   end
   
-  def minsets(discretized_data_files, p_value, n_nodes)
-    functionfile = self.functionfile_name(@job.file_prefix)
-    logger.info "in minsets: #{functionfile}"
+  def minsets(discretized_data_files, file_format, p_value, n_nodes)
+    dotfile = self.dotfile_name(@job.file_prefix)
+    graphfile = self.graphfile_name(@job.file_prefix, file_format)
+    logger.info dotfile
+    logger.info graphfile
+    logger.info discretized_data_files 
+
     macaulay2(
-      :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
+      :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "minsets-web.m2",
+      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}",
       :m2_wait => 1
       )
-    functionfile
   end
 end
