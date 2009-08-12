@@ -102,8 +102,8 @@ makeConsistent(String, ZZ, String) := (infile, n, outfile) -> (
         file << endl;
     );
     file<<close;
-    file = openOut "testfile.txt";
-    file << "Blablabla second function" << endl;
+    file = openOut "testfile2.txt";
+    file << "Blablabla second function at the end" << endl;
     file << close;
 )
 end
