@@ -182,7 +182,11 @@ class JobsController < ApplicationController
           end
         else  
           if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-            discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+            consistent_datafiles = discretized_datafiles.collect do |datafile|
+              datafile.gsub(/input/, 'consistent-input')
+            end
+            self.make_data_consistent(discretized_datafiles, consistent_datafiles, @p_value, @job.nodes)
+            discretized_datafiles = consistent_datafiles
           end
           logger.info "Minsets generate wiring diagram"
           self.minsets_generate_wiring_diagram(discretized_datafiles,
@@ -195,7 +199,11 @@ class JobsController < ApplicationController
              generate_picture = true
           else
              if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-                discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+                consistent_datafiles = discretized_datafiles.collect do |datafile|
+                  datafile.gsub(/input/, 'consistent-input')
+                end
+                self.make_data_consistent(discretized_datafiles, consistent_datafiles, @p_value, @job.nodes)
+                discretized_datafiles = consistent_datafiles
              end
              # TODO for some reason minsets doesn't work 
               self.minsets(discretized_datafiles, @job.wiring_diagram_format, @p_value, @job.nodes)           
@@ -366,14 +374,13 @@ class JobsController < ApplicationController
     ret_val != "0" 
   end
 
-  def make_data_consistent(discretized_data_files, p_value, n_nodes)
-    logger.info("testing make_data_consistent ... this is not working yet")
+  def make_data_consistent(infiles, outfile, p_value, n_nodes)
+    logger.info("in make_data_consistent")
     macaulay2(
-      :m2_command => "makeConsistent(#{m2_string(discretized_data_files)}, #{n_nodes}, ///../#{functionfile}///)",
+      :m2_command => "makeConsistent(#{m2_string(infiles)}, #{n_nodes}, #{m2_string(outfile)})",
       :m2_file => "incons.m2",
       :m2_wait => 1
       )
-    discretized_data_files
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
