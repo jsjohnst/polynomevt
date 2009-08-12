@@ -216,7 +216,7 @@ class JobsController < ApplicationController
               consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent_data.txt"
               logger.info consistent_datafile
 
-              self.make_data_consistent(discretized_datafiles, consistent_datafile, @p_value, @job.nodes)
+              self.make_data_consistent("////Users/fhinkel/Documents/Research/Rails/polynomevt/public/perl/files/files-ee87783dac489ad70ee343e03e17340f.discretized-input0.txt///", consistent_datafile, @p_value, @job.nodes)
               discretized_datafiles = consistent_datafile
               data_consistent?(discretized_datafiles, @p_value, @job.nodes)
             end
@@ -385,7 +385,8 @@ class JobsController < ApplicationController
   def make_data_consistent(infiles, outfile, p_value, n_nodes)
     logger.info("in make_data_consistent")
     macaulay2(
-      :m2_command => "makeConsistent(#{m2_string(infiles)}, #{n_nodes}, ///../#{outfile}///)",
+      :m2_command => "makeConsistent(#{infiles}, #{n_nodes}, ///../#{outfile}///)",
+      #:m2_command => "makeConsistent(#{m2_string(infiles)}, #{n_nodes}, ///../#{outfile}///)",
       :m2_file => "incons.m2",
       :m2_wait => 1
       )

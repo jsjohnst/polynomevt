@@ -64,6 +64,9 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
 )
 
 makeConsistent(String, ZZ, String) := (infile, n, outfile) -> ( 
+    file = openOut "testfile.txt";
+    file << "Blablabla second function" << endl;
+    file << close;
 
     transitions := {}; --Contains every pair of transitions
     trouble := {};
@@ -99,6 +102,9 @@ makeConsistent(String, ZZ, String) := (infile, n, outfile) -> (
         file << endl;
     );
     file<<close;
+    file = openOut "testfile.txt";
+    file << "Blablabla second function" << endl;
+    file << close;
 )
 end
 ----------------------------------------------------- end of file---------------------------------------------------
