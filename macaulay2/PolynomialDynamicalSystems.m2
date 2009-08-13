@@ -94,17 +94,23 @@ see(List) := (fs) -> scan(fs, (g -> (print g; print "")))
 readMat = method(TypicalValue => Matrix)
 readMat(String,Ring) := (filename,R) -> (
      ss := select(lines get filename, s -> length s > 0);
-     matrix(R, apply(ss, s -> (t := separateRegexp(" +", s); 
-                 t = apply(t,value);
-                     select(t, x -> class x =!= Nothing))))
+     matrix(R, apply(ss, s -> (
+--		t := separateRegexp(" +", s); 
+		t := select(separateRegexp(" +", s), c->c!=""); 
+                t = apply(t,value);
+                select(t, x -> class x =!= Nothing)
+     )))
 )
 
 readRealMat = method(TypicalValue => Matrix)
 readRealMat(String,InexactFieldFamily) := (filename,R) -> (
      ss := select(lines get filename, s -> length s > 0);
-     matrix(R, apply(ss, s -> (t := separateRegexp(" +", s);
-                 t = apply(t,value);
-                     select(t, x -> class x =!= Nothing))))
+     matrix(R, apply(ss, s -> (
+--		t := separateRegexp(" +", s);
+		t := select(separateRegexp(" +", s), c->c!="");
+                t = apply(t,value);
+                select(t, x -> class x =!= Nothing))
+     ))
 )
 
 
@@ -154,7 +160,8 @@ readTSData(String,Ring) := (filename, R) -> (
         if i == #(WT)-1 then break else
         {i=i+1; l=WT_i;};
     };
-    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+--    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+    T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
     H := new MutableHashTable;
     H.WildType = T;
     new TimeSeriesData from H
@@ -182,7 +189,8 @@ readRealTSData(String,InexactFieldFamily) := (filename, R) -> (
         if i == #(WT)-1 then break else
         {i=i+1; l=WT_i;};
     };
-    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+--    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+    T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
     H := new MutableHashTable;
     H.WildType = T;
     new TimeSeriesData from H
