@@ -79,7 +79,10 @@ class JobsController < ApplicationController
     logger.info "@job.file_prefix: "+ @job.file_prefix 
 
     # split is also checking the input format
-    datafiles = self.split_data_into_files( @job.input_data )
+    datafile = "public/perl/" + @job.file_prefix + ".input.txt"
+    File.open(datafile, 'w') {|file| file.write(@job.input_data) }
+
+    datafiles = self.split_data_into_files(datafile)
     if (!datafiles)
         # TODO make this error message nice
         @error_message = "The data you entered is invalid."
@@ -285,10 +288,7 @@ class JobsController < ApplicationController
   # We won't need this function anymore as soon as Brandy has rewritten M2
   # code to accept single file with #
   # This should only do the error checking! 
-  def split_data_into_files(data)
-    datafile = "public/perl/" + @job.file_prefix + ".input.txt"
-
-    File.open(datafile, 'w') {|file| file.write(data) }
+  def split_data_into_files(datafile)
 
     datafiles = []
     output = NIL
