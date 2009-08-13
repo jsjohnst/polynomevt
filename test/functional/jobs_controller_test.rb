@@ -454,16 +454,18 @@ class JobsControllerTest < ActionController::TestCase
   test "should make data consistent" do 
     @job = jobs(:inconsistent_data)
     run_test_on_job(@job, ".discretized-input.txt")
-    
-    discretized_datafile = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
+    discretized_datafiles = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
     controller = JobsController.new
-    assert !controller.data_consistent?(discretized_datafile, "2", @job.nodes), "Data should not be consistent before making it consistent"
-    consistent_datafiles = discretized_datafile.collect do |datafile|
-      datafile.gsub(/input/, 'consistent-input')
+    controller.generate_output_of(@job)
+    assert !controller.data_consistent?(discretized_datafiles, "2", @job.nodes), "Data should not be consistent before making it consistent"
+    outfiles = controller.make_data_consistent(discretized_datafiles, "2", @job.nodes)
+    assert outfiles, "Make data consistent did not create any files"
+    puts "outfiles: " + outfiles.to_s
+    outfiles.each do |file|
+      puts file
+      puts File.open(file, 'r').read
     end
-    controller.make_data_consistent(discretized_datafile, consistent_datafiles, @p_value, @job.nodes)
-    discretized_datafile = consistent_datafiles
-    assert controller.data_consistent?(discretized_datafile, "2", @job.nodes), "Data should now be discretized"
+    assert controller.data_consistent?(outfiles, "2", @job.nodes), "Data should now be discretized"
   end
 
   test "should not return true for isConsistent if passed nonexisting file" do 

@@ -185,11 +185,10 @@ class JobsController < ApplicationController
           end
         else  
           if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-            consistent_datafiles = discretized_datafiles.collect do |datafile|
-              datafile.gsub(/input/, 'consistent-input')
-            end
-            self.make_data_consistent(discretized_datafiles, consistent_datafiles, @p_value, @job.nodes)
-            discretized_datafiles = consistent_datafiles
+               discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+               if (!discretized_datafiles)
+                 return 
+               end
           end
           logger.info "Minsets generate wiring diagram"
           self.minsets_generate_wiring_diagram(discretized_datafiles,
@@ -202,11 +201,10 @@ class JobsController < ApplicationController
              generate_picture = true
           else
              if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-                consistent_datafiles = discretized_datafiles.collect do |datafile|
-                  datafile.gsub(/input/, 'consistent-input')
-                end
-                self.make_data_consistent(discretized_datafiles, consistent_datafiles, @p_value, @job.nodes)
-                discretized_datafiles = consistent_datafiles
+               discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
+               if (!discretized_datafiles)
+                 return 
+               end
              end
              # TODO for some reason minsets doesn't work 
               self.minsets(discretized_datafiles, @job.wiring_diagram_format, @p_value, @job.nodes)           
@@ -216,14 +214,8 @@ class JobsController < ApplicationController
         else # stochastic model 
           if @job.nodes <= n_stochastic_threshold
             if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
-               consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
-               self.make_data_consistent(discretized_datafiles, consistent_datafile, @p_value, @job.nodes)
-               discretized_datafiles = self.split_data_into_files( consistent_datafile)
+               discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
                if (!discretized_datafiles)
-                 # TODO make this error message nice
-                 @error_message = "The data you entered is invalid."
-                 self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ") 
-                 @error_message = ""
                  return 
                end
             end
@@ -386,13 +378,29 @@ class JobsController < ApplicationController
     ret_val == "42" 
   end
 
-  def make_data_consistent(infiles, outfile, p_value, n_nodes)
+  def make_data_consistent(infiles, p_value, n_nodes)
     logger.info("in make_data_consistent")
+    consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
     macaulay2(
-      :m2_command => "makeConsistent(#{m2_string(infiles)}, #{n_nodes}, ///../#{outfile}///)",
+      :m2_command => "makeConsistent(#{m2_string(infiles)}, #{n_nodes}, ///../#{consistent_datafile}///)",
       :m2_file => "incons.m2",
       :m2_wait => 1
       )
+    outfiles = self.split_data_into_files(consistent_datafile)
+    if (!outfiles)
+      # TODO make this error message nice
+      @error_message = "The data you entered is invalid, after discretization data did not get split correclty."
+      self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ") 
+      @error_message = ""
+      return false 
+    end
+    logger.info "outfiles: " + outfiles.to_s
+    outfiles.each do |file|
+      logger.info file
+      logger.info File.open(file, 'r').read
+    end
+    logger.info "outfiles: " + outfiles.to_s 
+    outfiles
   end
 
   def sgfan(discretized_data_files, p_value, n_nodes)
