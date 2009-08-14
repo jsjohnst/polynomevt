@@ -94,13 +94,13 @@ class JobsController < ApplicationController
     self.write_done_file("0", "")
 
     n_react_threshold = 5 
-    n_stochastic_threshold = 10
+    n_simulation_threshold = 10
     
     ## All checking of any input should be done before we spawn, so the user
     #receives feedback about invalid options right away and not after some time
     # ( = everything) 
-    if !@job.is_deterministic && @job.nodes > n_stochastic_threshold
-      @error_message = "A stochastic model requires no more than #{n_stochastic_threshold} nodes.  Sorry!"
+    if !@job.is_deterministic && @job.nodes > n_simulation_threshold && @job.state_space
+      @error_message = "A stochastic model with more than #{n_simulation_threshold} nodes cannot be simulated.  Sorry!"
       self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ")
       @error_message = ""
       return
@@ -123,7 +123,7 @@ class JobsController < ApplicationController
     end
    
 
-    if ( @job.state_space && @job.nodes > 7 )
+    if ( @job.state_space && @job.nodes > n_simulation_threshold )
         logger.info "Too many variables to simulate"
         @error_message = "Too many variables to simulate, running all
         computations but the simulations. "
@@ -151,10 +151,8 @@ class JobsController < ApplicationController
           end
       }
 
-      # react: n <= n_threshold, is_deterministic
-      # minsets: n > n_threshold, is_deterministic
-      # sgfan: n <= n_threshold, !is_deterministic, data_consistent
-      # error: all other cases, i.e. n > n_threshold, !is_deterministic, !data_consistent
+      # react: n <= n_react_threshold, is_deterministic
+      # simulation of stochastic network n <= n_simulation_threshold 
 
       if @job.state_space
         @job.show_functions = true
@@ -211,7 +209,7 @@ class JobsController < ApplicationController
              generate_picture = true
           end
         else # stochastic model 
-          if @job.nodes <= n_stochastic_threshold
+          if @job.nodes <= n_simulation_threshold
             if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
                discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
                if (!discretized_datafiles)
