@@ -15,6 +15,35 @@ one:
   sequential: false 
   update_schedule: ""
 
+inconsistent_data_two_timecourses:
+  nodes: 3
+  wiring_diagram: false
+  wiring_diagram_format: gif
+  state_space: false
+  state_space_format: gif
+  show_discretized: false
+  show_functions: false 
+  input_data: "# Inconsistent time courses\n
+# TS1\n
+1 1 0\n
+1 0 1\n
+0 1 1\n
+1 1 1\n
+0 1 0\n
+0 1 1\n
+# TS2\n
+1 1 0\n
+1 1 1\n
+0 1 1\n
+0 0 0 \n
+1 1 1\n
+0 1 1\n"
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  is_deterministic: false 
+  sequential: false 
+  update_schedule: ""
+
 inconsistent_data:
   nodes: 3
   wiring_diagram: false
