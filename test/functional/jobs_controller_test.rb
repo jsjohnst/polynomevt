@@ -84,6 +84,18 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
   end
   
+  test "should generate 10 node wiring diagram" do
+    @job = jobs(:ten_node_network)
+    @job.wiring_diagram = true
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
+  test "should generate 40 node wiring diagram" do
+    @job = jobs(:forty_node_network)
+    @job.wiring_diagram = true
+    run_test_on_job( @job, ".wiring-diagram." + @job.wiring_diagram_format )
+  end
+  
   test "should generate function file" do
     @job.show_functions = true
     run_test_on_job( @job, ".functionfile.txt" )

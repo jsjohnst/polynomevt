@@ -104,6 +104,44 @@ deterministic_wiring_diagram_only:
   sequential: false 
   update_schedule: ""
 
+forty_node_network:
+  nodes: 40
+  wiring_diagram: true 
+  wiring_diagram_format: png
+  state_space: false
+  state_space_format: gif
+  show_discretized: false
+  show_functions: false 
+  input_data: "# 10 node network\n
+  1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n
+  0 0 1 1 0 0 4 2 5 1 0 0 1 1 0 0 4 2 5 1 0 0 1 1 0 0 4 2 5 1 0 0 1 1 0 0 4 2 5 1 \n
+  3 5 2 1 5 4 3 3 5 6 3 5 2 1 5 4 3 3 5 6 3 5 2 1 5 4 3 3 5 6 3 5 2 1 5 4 3 3 5 6\n
+  7 2 3 3 5 4 7 1 2 0 7 2 3 3 5 4 7 1 2 0 7 2 3 3 5 4 7 1 2 0 7 2 3 3 5 4 7 1 2 0\n"
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  is_deterministic: false 
+  sequential: false 
+  update_schedule: ""
+
+ten_node_network:
+  nodes: 10
+  wiring_diagram: true 
+  wiring_diagram_format: png
+  state_space: false
+  state_space_format: gif
+  show_discretized: false
+  show_functions: false 
+  input_data: "# 10 node network\n
+  1 1 1 1 1 1 1 1 1 1\n
+  0 0 1 1 0 0 4 2 5 1 \n
+  3 5 2 1 5 4 3 3 5 6\n
+  7 2 3 3 5 4 7 1 2 0\n"
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  is_deterministic: false 
+  sequential: false 
+  update_schedule: ""
+
 stochastic_with_sequential:
   nodes: 3
   wiring_diagram: false
