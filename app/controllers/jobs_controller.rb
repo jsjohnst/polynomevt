@@ -85,7 +85,6 @@ class JobsController < ApplicationController
     datafiles = self.split_data_into_files(datafile)
     if (!datafiles)
         # TODO make this error message nice
-        @error_message = "The data you entered is invalid."
         self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ") 
         @error_message = ""
         return 
@@ -310,7 +309,8 @@ class JobsController < ApplicationController
                     logger.info "write line" + line
                     something_was_written = TRUE
                 else
-                    logger.warn "Error: Input data not correct"
+                    @error_message = "The data you entered is invalid. This :#{line.chop!}: is not a correct line."
+                    logger.warn "Error: Input data not correct. This :#{line}: is not a correct line."
                     return NIL
                 end
             end
