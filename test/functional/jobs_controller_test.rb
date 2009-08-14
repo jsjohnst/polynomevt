@@ -453,6 +453,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should make data consistent" do 
     @job = jobs(:inconsistent_data)
     run_test_on_job(@job, ".discretized-input.txt")
+  
     discretized_datafiles = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
     controller = JobsController.new
     controller.generate_output_of(@job)
@@ -467,6 +468,32 @@ class JobsControllerTest < ActionController::TestCase
     assert controller.data_consistent?(outfiles, "2", @job.nodes), "Data should now be discretized"
   end
 
+  test "should create file after making the data consistent" do
+    @job = jobs(:inconsistent_data)
+    @job.show_discretized = true
+    run_test_on_job( @job,  ".discretized-input.txt" )
+    
+    discretized_datafile = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
+    controller = JobsController.new
+    controller.generate_output_of(@job)
+    assert !controller.data_consistent?(discretized_datafile, "2", @job.nodes)
+    assert controller.make_data_consistent(discretized_datafile, "2",
+    @job.nodes)
+  end
+  
+  test "should create empty file after making the data consistent and exit" do
+    @job = jobs(:bad_inconsistent_data)
+    @job.show_discretized = true
+    run_test_on_job( @job,  ".discretized-input.txt" )
+    
+    discretized_datafile = Dir.getwd + "/" + @prefix + ".discretized-input0.txt"
+    controller = JobsController.new
+    controller.generate_output_of(@job)
+    assert !controller.data_consistent?(discretized_datafile, "2", @job.nodes)
+    assert !controller.make_data_consistent(discretized_datafile, "2",
+    @job.nodes)
+  end
+  
   test "should make data consistent for two timecourses" do 
     @job = jobs(:inconsistent_data_two_timecourses)
     run_test_on_job(@job, ".discretized-input.txt")

@@ -386,20 +386,26 @@ class JobsController < ApplicationController
       :m2_file => "incons.m2",
       :m2_wait => 1
       )
+    if (File.zero?(consistent_datafile))
+       logger.info "Time course was bad and after througing out inconsistent time courses nothing was left. Maybe you need to choose a different type of model."
+       @error_message  = "Time course was bad and after througing out inconsistent time courses nothing was left. Maybe you need to choose a different type of model."
+       self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ") 
+       @error_message = ""
+       return NIL 
+    end
     outfiles = self.split_data_into_files(consistent_datafile)
     if (!outfiles)
       # TODO make this error message nice
       @error_message = "The data you entered is invalid, after discretization data did not get split correclty."
       self.write_done_file("2", "<font color=red>" +  @error_message + "</font><br> ") 
       @error_message = ""
-      return false 
+      return NIL
     end
     logger.info "outfiles: " + outfiles.to_s
     outfiles.each do |file|
       logger.info file
       logger.info File.open(file, 'r').read
     end
-    logger.info "outfiles: " + outfiles.to_s 
     outfiles
   end
 
