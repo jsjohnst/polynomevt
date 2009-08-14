@@ -21,26 +21,6 @@ file << "}" << endl << close;
 
 )
 
-minsets2 = method();
-minsets2(List,String,ZZ,ZZ) := (WT, outfile, p, n) -> (
-
-k=ZZ/p;
-R = k[makeVars n];
---TS = readTSData(WT,{},k);
---MS = apply(gens R, x->last minSetScoring(TS,x));
-
-file = openOut outfile;
---file << "digraph { \n";
-
---L = apply(MS, p->(keys first last p => first p))/toString;
---L = apply(L, s->replace("=>","->",s));
---L = apply(L, s->replace(",",";",s));
---L = apply(L, s->replace("=>","->",s));
-
---apply(L, l->(file << l << ";" << endl));
-file << "}" << endl << close;
-
-)
 
 
 minsets = method();
