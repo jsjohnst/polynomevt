@@ -472,10 +472,10 @@ class JobsControllerTest < ActionController::TestCase
     assert !controller.data_consistent?(discretized_datafiles, "2", @job.nodes), "Data should not be consistent before making it consistent"
     outfiles = controller.make_data_consistent(discretized_datafiles, "2", @job.nodes)
     assert outfiles, "Make data consistent did not create any files"
-    puts "outfiles: " + outfiles.to_s
+    #puts "outfiles: " + outfiles.to_s
     outfiles.each do |file|
-      puts file
-      puts File.open(file, 'r').read
+      #puts file
+      #puts File.open(file, 'r').read
     end
     assert controller.data_consistent?(outfiles, "2", @job.nodes), "Data should now be discretized"
   end
@@ -517,11 +517,6 @@ class JobsControllerTest < ActionController::TestCase
     assert !controller.data_consistent?(discretized_datafiles, "2", @job.nodes), "Data should not be consistent before making it consistent"
     outfiles = controller.make_data_consistent(discretized_datafiles, "2", @job.nodes)
     assert outfiles, "Make data consistent did not create any files"
-    puts "outfiles: " + outfiles.to_s
-    outfiles.each do |file|
-      puts file
-      puts File.open(file, 'r').read
-    end
     assert controller.data_consistent?(outfiles, "2", @job.nodes), "Data should now be discretized"
   end
 
