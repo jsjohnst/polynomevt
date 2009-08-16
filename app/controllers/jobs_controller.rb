@@ -43,7 +43,6 @@ class JobsController < ApplicationController
       return
     end
     
-    @job = Job.new(params[:job])
     
     # FBH if we use params and change them, then the new values will be
     # printed to the form, if we change a variable in @job, the variable on
@@ -54,6 +53,7 @@ class JobsController < ApplicationController
       params[:job][:input_data] = params[:job][:input_file].read
       params[:job].delete(:input_file)
     end
+    @job = Job.new(params[:job])
     if (@job.valid?)
         logger.info "job.valid? " + @job.valid?.to_s  
         # create the dummy file to avoid RouteErrors
@@ -156,7 +156,6 @@ class JobsController < ApplicationController
 
       if @job.state_space
         @job.show_functions = true
-        @functionfile_name = self.functionfile_name(@job.file_prefix)
       end
       
       if !@job.show_functions && !@job.wiring_diagram
@@ -192,6 +191,7 @@ class JobsController < ApplicationController
              @job.wiring_diagram_format, @p_value, @job.nodes)
         end
       else
+        @functionfile_name = self.functionfile_name(@job.file_prefix)
         if @job.is_deterministic
           if @job.nodes <= n_react_threshold
              run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
@@ -203,9 +203,7 @@ class JobsController < ApplicationController
                  return 
                end
              end
-             # TODO for some reason minsets doesn't work 
-              self.minsets(discretized_datafiles, @job.wiring_diagram_format, @p_value, @job.nodes)           
-             #run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+             self.minsets_generate_functionfile(discretized_datafiles, @functionfile_name, @p_value, @job.nodes)           
              generate_picture = true
           end
         else # stochastic model 
@@ -253,12 +251,12 @@ class JobsController < ApplicationController
         @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
         logger.info "Update Schedule :" + @job.update_schedule + ":"
 
-        @functionfile_name = self.functionfile_name(@job.file_prefix)
-        logger.info "Functionfile : " + @functionfile_name
+        functionfile_name = self.functionfile_name(@job.file_prefix)
+        logger.info "Functionfile : " + functionfile_name
 
-        logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}"
+        logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
 
-        simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{@functionfile_name}` 
+        simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}` 
         logger.info "simulation output: " + simulation_output 
         simulation_output = simulation_output.gsub("\n", "") 
       end
@@ -418,17 +416,13 @@ class JobsController < ApplicationController
     functionfile
   end
   
-  def minsets(discretized_data_files, file_format, p_value, n_nodes)
-    dotfile = self.dotfile_name(@job.file_prefix)
-    graphfile = self.graphfile_name(@job.file_prefix, file_format)
-    logger.info dotfile
-    logger.info graphfile
+  def minsets_generate_functionfile(discretized_data_files, functionfile, p_value, n_nodes)
     logger.info discretized_data_files 
+    logger.info functionfile + "in minsets_generate_functionfile"
 
     macaulay2(
-      :m2_command => "minsets(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
+      :m2_command => "minsetsPDS(#{m2_string(discretized_data_files)}, ///../#{functionfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "minsets-web.m2",
-      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}",
       :m2_wait => 1
       )
   end
