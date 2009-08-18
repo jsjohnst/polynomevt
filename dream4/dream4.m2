@@ -139,15 +139,15 @@ discretizeDream4 = (prefix, silicoName, p) -> (
      writeTimeSeriesData(prefix|"knockouts", KO, "knockout");
      )
 
-knockoutGraphDream4 = (prefix, silicoName, upthreshold, downthreshold) -> (
+knockoutGraphDream4 = (prefix, silicoName, downthreshold, upthreshold) -> (
      -- returns (filename, incidence matrix: with weights)
      H := readDream4 silicoName;
      E := entries H#"knockouts";
      W := first entries H#"wildtype";
      G := knockoutGraph(E,W,upthreshold,downthreshold);
      M := knockoutMatrix(E,W,upthreshold,downthreshold);
-     dotname := prefix | ".dot";
-     jpgname := prefix | ".jpg";
+     dotname := prefix | "-down" | toString downthreshold | "-up" | toString upthreshold | ".dot";
+     jpgname := prefix | "-down" | toString downthreshold | "-up" | toString upthreshold | ".jpg";
      displayGraph(dotname, jpgname, G);
      (dotname,jpgname,M)
      )
@@ -168,7 +168,7 @@ discretizeDream4("challenge2-discretized/output-100-3-", insilicoNames#"100-3", 
 discretizeDream4("challenge2-discretized/output-100-4-", insilicoNames#"100-4", 5)
 discretizeDream4("challenge2-discretized/output-100-5-", insilicoNames#"100-5", 5)
 
-knockoutGraphDream4("output-10-1", insilicoNames#"10-1", 1.5, .75)
+knockoutGraphDream4("challenge2-graphs/output-10-1", insilicoNames#"10-1", .75, 1.5)
 
 
 H = hashTable apply(files, f -> f => toMatrices(lines get(insilicoName|f|".tsv"), RR, f =!= "timeseries"));
