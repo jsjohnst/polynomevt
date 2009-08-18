@@ -19,6 +19,7 @@ needs "remove-repeat.m2"
 -- remove repeated state ( e.g. a -> a -> b changes to a -> b)
 -- split an inconsistent time course into two time courses and through out the
 -- inconsistent transition
+
 makeConsistent = method()
 makeConsistent(List, ZZ, String) := (WT, n, outfile) -> ( 
 
@@ -68,17 +69,13 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
     file<<close;
 )
 
-makeConsistent(String, ZZ, String) := (infile, n, outfile) -> ( 
-
-    mat := removeRepeatedStates( {infile}, 2, n);
-    mat = toList mat;
-    print mat;
+makeConsistent(String, String) := (infile, outfile) -> ( 
 
     transitions := {}; --Contains every pair of transitions
     m := {};
     trouble := {};
     
-    --mat := flatten values readTSData(infile,ZZ);
+    mat := flatten values readTSData(infile,ZZ);
     apply(mat, l->(
         m=entries l;
         for j from 0 to #m-2 do 
@@ -99,6 +96,7 @@ makeConsistent(String, ZZ, String) := (infile, n, outfile) -> (
     consistentTransitions = toList consistentTransitions;
     
     --Print each transitions in a single file
+    n := #(consistentTransitions#0#0);
     file = openOut outfile;
     for i from 0 to #consistentTransitions-1 do 
     ( 
