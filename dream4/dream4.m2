@@ -1,6 +1,7 @@
 -- This file reads in the raw data, as RR matrices
 -- and contains some basic analysis routines (which might move at some point)
 
+needs "incons.m2"
 needsPackage "Markov"
 needs "discretization.m2"
 
@@ -170,6 +171,8 @@ discretizeDream4("challenge2-discretized/output-100-5-", insilicoNames#"100-5", 
 
 knockoutGraphDream4("challenge2-graphs/output-10-1", insilicoNames#"10-1", .75, 1.5)
 
+
+makeConsistent("challenge2-discretized/output-10-1-time-series", 0, "challenge2-discretized/consistent-output-10-1-time-series")
 
 H = hashTable apply(files, f -> f => toMatrices(lines get(insilicoName|f|".tsv"), RR, f =!= "timeseries"));
 H = hashTable apply(pairs H, (k,v) -> if #v == 1 then (k,v#0) else (k,v))
