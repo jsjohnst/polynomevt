@@ -2,19 +2,20 @@
 -- and contains some basic analysis routines (which might move at some point)
 
 needsPackage "Markov"
+needs "discretization.m2"
 
 insilicoNames = hashTable {
-  "10-1" => "../dream4-data/challenge2/insilico_size10_1/insilico_size10_1_",
-  "10-2" => "../dream4-data/challenge2/insilico_size10_2/insilico_size10_2_",
-  "10-3" => "../dream4-data/challenge2/insilico_size10_3/insilico_size10_3_",
-  "10-4" => "../dream4-data/challenge2/insilico_size10_4/insilico_size10_4_",
-  "10-5" => "../dream4-data/challenge2/insilico_size10_5/insilico_size10_5_",
+  "10-1" => "challenge2-data/insilico_size10_1/insilico_size10_1_",
+  "10-2" => "challenge2-data/insilico_size10_2/insilico_size10_2_",
+  "10-3" => "challenge2-data/insilico_size10_3/insilico_size10_3_",
+  "10-4" => "challenge2-data/insilico_size10_4/insilico_size10_4_",
+  "10-5" => "challenge2-data/insilico_size10_5/insilico_size10_5_",
 
-  "100-1" => "../dream4-data/challenge2/insilico_size100_1/insilico_size100_1_",
-  "100-2" => "../dream4-data/challenge2/insilico_size100_2/insilico_size100_2_",
-  "100-3" => "../dream4-data/challenge2/insilico_size100_3/insilico_size100_3_",
-  "100-4" => "../dream4-data/challenge2/insilico_size100_4/insilico_size100_4_",
-  "100-5" => "../dream4-data/challenge2/insilico_size100_5/insilico_size100_5_"
+  "100-1" => "challenge2-data/insilico_size100_1/insilico_size100_1_",
+  "100-2" => "challenge2-data/insilico_size100_2/insilico_size100_2_",
+  "100-3" => "challenge2-data/insilico_size100_3/insilico_size100_3_",
+  "100-4" => "challenge2-data/insilico_size100_4/insilico_size100_4_",
+  "100-5" => "challenge2-data/insilico_size100_5/insilico_size100_5_"
 }
 
 insilicoName = insilicoNames#"10-1"
@@ -152,22 +153,20 @@ knockoutGraphDream4 = (prefix, silicoName, upthreshold, downthreshold) -> (
      )
 end
 
-
 restart
-load "read-data.m2"
-load "discretization.m2"
+load "dream4.m2"
 
-discretizeDream4("output-10-1-", insilicoNames#"10-1", 5)
-discretizeDream4("output-10-2-", insilicoNames#"10-2", 5)
-discretizeDream4("output-10-3-", insilicoNames#"10-3", 5)
-discretizeDream4("output-10-4-", insilicoNames#"10-4", 5)
-discretizeDream4("output-10-5-", insilicoNames#"10-5", 5)
+discretizeDream4("challenge2-discretized/output-10-1-", insilicoNames#"10-1", 5)
+discretizeDream4("challenge2-discretized/output-10-2-", insilicoNames#"10-2", 5)
+discretizeDream4("challenge2-discretized/output-10-3-", insilicoNames#"10-3", 5)
+discretizeDream4("challenge2-discretized/output-10-4-", insilicoNames#"10-4", 5)
+discretizeDream4("challenge2-discretized/output-10-5-", insilicoNames#"10-5", 5)
 
-discretizeDream4("output-100-1-", insilicoNames#"100-1", 5)
-discretizeDream4("output-100-2-", insilicoNames#"100-2", 5)
-discretizeDream4("output-100-3-", insilicoNames#"100-3", 5)
-discretizeDream4("output-100-4-", insilicoNames#"100-4", 5)
-discretizeDream4("output-100-5-", insilicoNames#"100-5", 5)
+discretizeDream4("challenge2-discretized/output-100-1-", insilicoNames#"100-1", 5)
+discretizeDream4("challenge2-discretized/output-100-2-", insilicoNames#"100-2", 5)
+discretizeDream4("challenge2-discretized/output-100-3-", insilicoNames#"100-3", 5)
+discretizeDream4("challenge2-discretized/output-100-4-", insilicoNames#"100-4", 5)
+discretizeDream4("challenge2-discretized/output-100-5-", insilicoNames#"100-5", 5)
 
 knockoutGraphDream4("output-10-1", insilicoNames#"10-1", 1.5, .75)
 
