@@ -181,6 +181,36 @@ discretizeDream4("challenge2-discretized/output-100-3-", insilicoNames#"100-3", 
 discretizeDream4("challenge2-discretized/output-100-4-", insilicoNames#"100-4", 5)
 discretizeDream4("challenge2-discretized/output-100-5-", insilicoNames#"100-5", 5)
 
+removeRepeatedStates("challenge2-discretized/output-10-1-time-series", "challenge2-discretized/no-repeats-10-1-time-series")
+makeConsistent("challenge2-discretized/no-repeats-10-1-time-series", "challenge2-discretized/consistent-output-10-1-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-10-2-time-series", "challenge2-discretized/no-repeats-10-2-time-series")
+makeConsistent("challenge2-discretized/no-repeats-10-2-time-series", "challenge2-discretized/consistent-output-10-2-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-10-3-time-series", "challenge2-discretized/no-repeats-10-3-time-series")
+makeConsistent("challenge2-discretized/no-repeats-10-3-time-series", "challenge2-discretized/consistent-output-10-3-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-10-4-time-series", "challenge2-discretized/no-repeats-10-4-time-series")
+makeConsistent("challenge2-discretized/no-repeats-10-4-time-series", "challenge2-discretized/consistent-output-10-4-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-10-5-time-series", "challenge2-discretized/no-repeats-10-5-time-series")
+makeConsistent("challenge2-discretized/no-repeats-10-5-time-series", "challenge2-discretized/consistent-output-10-5-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-100-1-time-series", "challenge2-discretized/no-repeats-100-1-time-series")
+makeConsistent("challenge2-discretized/no-repeats-100-1-time-series", "challenge2-discretized/consistent-output-100-1-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-100-2-time-series", "challenge2-discretized/no-repeats-100-2-time-series")
+makeConsistent("challenge2-discretized/no-repeats-100-2-time-series", "challenge2-discretized/consistent-output-100-2-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-100-3-time-series", "challenge2-discretized/no-repeats-100-3-time-series")
+makeConsistent("challenge2-discretized/no-repeats-100-3-time-series", "challenge2-discretized/consistent-output-100-3-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-100-4-time-series", "challenge2-discretized/no-repeats-100-4-time-series")
+makeConsistent("challenge2-discretized/no-repeats-100-4-time-series", "challenge2-discretized/consistent-output-100-4-time-series")
+
+removeRepeatedStates("challenge2-discretized/output-100-5-time-series", "challenge2-discretized/no-repeats-100-5-time-series")
+makeConsistent("challenge2-discretized/no-repeats-100-5-time-series", "challenge2-discretized/consistent-output-100-5-time-series")
+
 -----------------------------------------------------------
 knockoutGraphDream4("challenge2-graphs/output-10-1", insilicoNames#"10-1", .75, 1.5)
 
