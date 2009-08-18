@@ -2,6 +2,7 @@
 -- and contains some basic analysis routines (which might move at some point)
 
 needs "incons.m2"
+needs "remove-repeat.m2"
 needsPackage "Markov"
 needs "discretization.m2"
 
@@ -184,8 +185,8 @@ discretizeDream4("challenge2-discretized/output-100-5-", insilicoNames#"100-5", 
 knockoutGraphDream4("challenge2-graphs/output-10-1", insilicoNames#"10-1", .75, 1.5)
 
 
-
-makeConsistent("challenge2-discretized/output-10-1-time-series", 10, "challenge2-discretized/consistent-output-10-1-time-series")
+removeRepeatedStates("challenge2-discretized/output-10-1-time-series", "challenge2-discretized/no-repeats-10-1-time-series")
+makeConsistent("challenge2-discretized/no-repeats-10-1-time-series", "challenge2-discretized/consistent-output-10-1-time-series")
 
 H = readDream4(insilicoNames#"10-1")
 
