@@ -15,6 +15,9 @@
 
 needs "PolynomialDynamicalSystems.m2"
 
+-- remove repeated state ( e.g. a -> a -> b changes to a -> b)
+-- split an inconsistent time course into two time courses and through out the
+-- inconsistent transition
 makeConsistent = method()
 makeConsistent(List, ZZ, String) := (WT, n, outfile) -> ( 
 
@@ -35,6 +38,18 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
         );-- Record them as transitions
         m = {}; 
     ));
+
+    -- remove repeated states TODO
+--    select(transitions, i->(
+--        t := select (transitions, j->(i#0==j#0 and i#1!=j#1));
+--        if t != {} then trouble = append(trouble, t);
+--    ));
+--    trouble = flatten trouble;
+    
+    --Keep only the consistent transitions
+    consistentTransitions = set transitions-set trouble;
+    consistentTransitions = toList consistentTransitions;
+
     
     --Identify transitions that are inconsistent
     select(transitions, i->(
