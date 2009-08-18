@@ -1,0 +1,119 @@
+--*********************
+--File Name: func.m2
+--Author: Elena S. Dimitrova
+--Original Date: 3/5/2009
+--Descritpion: Generates file functs.txt that contains for each local polynomial all distinct normal forms and the corresponding proportion wrt all normal forms. Takes multiple time series data and generates 5*(number of variables) PDS models normalized wrt G. bases under monomial orderings defined by weight vectors that are randomly selected from the G. fan of the ideal of data points.
+--Input: Field characteristic; number of variables; time series files
+--Output: File functs.txt that contains for each local polynomial all distinct normal forms and the corresponding proportion wrt all normal forms.
+--Usage: sgfan(dataFiles, p, n)
+--********************* 
+
+needsPackage "PolynomialDynamicalSystems"
+needsPackage "Points"
+
+randomWeightVector = (nn) -> (
+     local permw;
+     while (
+        permw = apply(nn, i->random 100*nn);
+        sm := sum apply(permw, x -> x^2);
+	sm > (100*nn)^2) 
+     do ();
+     permw)
+
+randomWeightVector = (nn) -> (
+     --Choose a random radius in [0,1]
+     --m=20*nn;
+     m:=250;
+     onept:={}; 
+
+     --Get 10 normal numbers
+     for j from 1 to 5 do(
+	  x:=random 1.; y:=random 1.;
+	  onept=append(onept, sqrt(-2*log(x))*cos(2*pi*y));
+	  onept=append(onept, sqrt(-2*log(x))*sin(2*pi*y));
+	  );
+     --Get the 11th number
+     --t=random 2;
+     --if t==0 then onept=append(onept, sqrt(-2*log(x))*cos(2*pi*y)) else onept=append(onept, --sqrt(-2*log(x))*sin(2*pi*y));
+
+     r:=random 1.;
+     r=r^(1./nn);
+
+     q:=0;
+     for j from 0 to nn-1 do (q=q+(onept#j)^2);
+     q=sqrt(q);
+     normpts := for j from 0 to nn-1 list ((onept#j)*r/q);
+
+     --Convert spherical to rectangular coordinates
+     rectcoords={};
+     apply(nn, i-> (
+	       j:=1;
+	       while abs(normpts#i)>j/m do j=j+1;
+	       j-1))
+     )
+
+sgfan = method(Options => {Limit => 1200})
+sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
+    -- WTandKO: (WT, KO)
+    -- outfile:
+    -- p: number of states (prime number)
+    -- nvars: number of genes (columns of each matrix)
+    -- niterations: how many GB's to sample
+    (WT,KO) := WTandKO;
+    kk := ZZ/p; --Field
+    --TS is a hashtable of time series data WITH NO KO DATA
+    TS := readTSData(WT, kk);
+    
+    --FD is a list of hashtables, where each contains the input-vectors/output pairs for each node
+    FD := apply(nvars, i->functionData(TS, i+1));
+        
+    --IN is a matrix of input vectors
+    IN := transpose matrix keys first FD;
+    
+    -- All the normal forms will be placed in this ring:
+    S := kk[makeVars nvars];
+
+    F := matrix {apply(nvars, i-> time findFunction(FD_i, gens S))};
+    
+    --Sample randomly from the G. fan
+    setRandomSeed();
+    setRandomSeed processID();
+
+    allNFs := apply(opts.Limit, J -> time (
+        wtvec := randomWeightVector nvars;
+        print wtvec;
+        --Rr is a polynomial ring in nn variables; can declare a term order here
+        Rr := kk[gens S, Weights => wtvec];
+        
+        --SM is a list of standard monomials
+        --LT is an ideal of leading terms
+        --GB is a list of Grobner basis elements - THIS IS WHAT YOU WANT FOR GFAN
+        (SM, LT, GB) := points(IN, Rr);
+     	GB = matrix{GB};
+	forceGB GB;
+        --F is a list of interpolating functions, one for each node 
+	F1 := sub(F, Rr);
+	NF := F1 % GB;
+        flatten entries sub(NF,S)
+        ));
+    FF := allNFs//transpose/tally/pairs;
+
+    file = openOut outfile;
+    apply(nvars, i-> (
+	if #(FF#i)==1 then (file << "f" << i+1 << " = " << toString first FF#i#0 << endl)
+	else (
+		file << "f" << i+1 << " = {" << endl; 
+		apply(FF#i, q->(file << toString q#0 << "  #" << toString ((q#1)/opts.Limit) << endl)); 
+		file << "}" << endl
+	)
+    ));
+    file << close;
+    )
+     
+
+end
+
+restart
+load "sgfan.m2"
+randomWeightVector 10
+time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"outy",5,10,Limit=>1200)
