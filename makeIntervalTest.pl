@@ -56,8 +56,8 @@ sub make_threshold_with {
       }
     }
     elsif ( $max_interval - $min_interval == 2 ) {
-      $_array[$min_interval] = $my_min;
-      $_array[$max_interval-1] = $my_max;
+      $my_array[$min_interval] = $my_min;
+      $my_array[$max_interval-1] = $my_max;
     }
   # if (diff < $subIntervalLength)  but not within same interval
   } else { 
