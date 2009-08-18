@@ -20,7 +20,7 @@ insilicoNames = hashTable {
 }
 
 insilicoName = insilicoNames#"10-1"
-files = {"wildtype", "timeseries", "knockouts", "knockdowns"} -- add in "multifactorial"?
+files = {"wildtype", "timeseries", "knockouts"} -- add in "knockdowns", "multifactorial"?
 
 toMatrices = (S,R,keepfirstcol) -> (
      -- S is a list of strings
@@ -100,10 +100,11 @@ discretizeTimeSeries = (TS,wildtype,knockouts,nintervals) -> (
      (Tsi/first, Tsi/last, Info)
      )
 
-writeTimeSeriesData = (filename, T, heading) -> (
+writeTimeSeriesData = (filename, T, heading, nperturb) -> (
      -- T is a list: T_0 .. T_(N-1) one for each gene
      -- each T_i is a list of the time courses for gene (i+1).
      -- heading is a string
+     allzeros := (heading == "knockout");
      F := openOut filename;
      ngenes := #T;
      ntimeseries := #T#0; -- length of each list T#k
@@ -113,6 +114,12 @@ writeTimeSeriesData = (filename, T, heading) -> (
        for j from 0 to nrows-1 do (
          for k from 0 to ngenes-1 do
 	   F << T#k#i#j << " ";
+	 if allzeros or j >= 10 then (
+	   for m from 0 to nperturb-1 do
+	     F << "0 ")
+	 else (
+	   for m from 0 to nperturb-1 do
+	     F << if m == i then "1 " else "0 ");
 	 F << endl;
 	 );
        );
@@ -128,7 +135,11 @@ readDream4 = (insilicoName) -> (
      hashTable apply(pairs H, (k,v) -> if #v == 1 then (k,v#0) else (k,v))
      )
 
+-- main discretization function:
 discretizeDream4 = (prefix, silicoName, p) -> (
+     -- prefix: string, for all file names generated.
+     -- silicoName: insilicoName of the data
+     -- p: number of intervals in discretization
      -- steps:
      -- 1. read in data
      -- 2. discretize the data
@@ -136,8 +147,8 @@ discretizeDream4 = (prefix, silicoName, p) -> (
      H := readDream4 silicoName;
      (TS,KO,DiscInfo) := discretizeTimeSeries(H#"timeseries",H#"wildtype",H#"knockouts",p);
      (prefix|"disc-info") << DiscInfo << endl << close;
-     writeTimeSeriesData(prefix|"time-series", TS, "time series");
-     writeTimeSeriesData(prefix|"knockouts", KO, "knockout");
+     writeTimeSeriesData(prefix|"time-series", TS, "time series",#H#"timeseries");
+     writeTimeSeriesData(prefix|"knockouts", KO, "knockout", #H#"timeseries");
      )
 
 knockoutGraphDream4 = (prefix, silicoName, downthreshold, upthreshold) -> (
@@ -169,10 +180,14 @@ discretizeDream4("challenge2-discretized/output-100-3-", insilicoNames#"100-3", 
 discretizeDream4("challenge2-discretized/output-100-4-", insilicoNames#"100-4", 5)
 discretizeDream4("challenge2-discretized/output-100-5-", insilicoNames#"100-5", 5)
 
+-----------------------------------------------------------
 knockoutGraphDream4("challenge2-graphs/output-10-1", insilicoNames#"10-1", .75, 1.5)
 
 
+
 makeConsistent("challenge2-discretized/output-10-1-time-series", 10, "challenge2-discretized/consistent-output-10-1-time-series")
+
+H = readDream4(insilicoNames#"10-1")
 
 H = hashTable apply(files, f -> f => toMatrices(lines get(insilicoName|f|".tsv"), RR, f =!= "timeseries"));
 H = hashTable apply(pairs H, (k,v) -> if #v == 1 then (k,v#0) else (k,v))
