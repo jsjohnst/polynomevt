@@ -14,12 +14,17 @@
 --********************* 
 
 needs "PolynomialDynamicalSystems.m2"
+needs "remove-repeat.m2"
 
 -- remove repeated state ( e.g. a -> a -> b changes to a -> b)
 -- split an inconsistent time course into two time courses and through out the
 -- inconsistent transition
 makeConsistent = method()
 makeConsistent(List, ZZ, String) := (WT, n, outfile) -> ( 
+    
+    -- remove repeated states
+    m  = removeRepeatedStates(WT, 2, n);  
+    m = flatten m;
 
     transitions := {}; --Contains every pair of transitions
     m := {};
@@ -29,9 +34,11 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
         --mt is a hash table of points from one input file
         --m is a list of points from one input file
     
-        mt = apply({WT#i}, s -> readMat(s,ZZ));     
-        apply(#mt, s -> (m = append(m, entries mt#s))); 
-        m = flatten m; 
+--        mt = apply({WT#i}, s -> readMat(s,ZZ));     
+--        apply(#mt, s -> (m = append(m, entries mt#s))); 
+--        m = flatten m; 
+    
+
         for j from 0 to #m-2 do 
         ( 
             transitions = append(transitions, {m#j, m#(j+1)}) 
@@ -39,20 +46,10 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
         m = {}; 
     ));
 
-    -- remove repeated states TODO
---    select(transitions, i->(
---        t := select (transitions, j->(i#0==j#0 and i#1!=j#1));
---        if t != {} then trouble = append(trouble, t);
---    ));
---    trouble = flatten trouble;
-    
-    --Keep only the consistent transitions
-    consistentTransitions = set transitions-set trouble;
-    consistentTransitions = toList consistentTransitions;
 
     
     --Identify transitions that are inconsistent
-    scan(transitions, i->(
+    select(transitions, i->(
         t := select (transitions, j->(i#0==j#0 and i#1!=j#1));
         if t != {} then trouble = append(trouble, t);
     ));
@@ -90,7 +87,7 @@ makeConsistent(String, ZZ, String) := (infile, n, outfile) -> (
     ));
     
     --Identify transitions that are inconsistent
-    scan(transitions, i->(
+    select(transitions, i->(
         t := select (transitions, j->(i#0==j#0 and i#1!=j#1));
         if t != {} then trouble = append(trouble, t);
     ));
