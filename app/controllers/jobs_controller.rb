@@ -207,7 +207,7 @@ class JobsController < ApplicationController
              generate_picture = true
           end
         else # stochastic model 
-          if @job.nodes <= n_simulation_threshold
+          #if @job.nodes <= n_simulation_threshold
             if !data_consistent?(discretized_datafiles, @p_value, @job.nodes)
                discretized_datafiles = self.make_data_consistent(discretized_datafiles, @p_value, @job.nodes)
                if (!discretized_datafiles)
@@ -216,10 +216,10 @@ class JobsController < ApplicationController
             end
             self.sgfan(discretized_datafiles, @p_value, @job.nodes)
             generate_picture = true
-          else
+          #else
             logger.warn("internal error: should not be here because we checked
             for this error before")
-          end
+          #end
         end
       end
       
