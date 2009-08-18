@@ -45,7 +45,6 @@ randomWeightVector = (nn) -> (
      normpts := for j from 0 to nn-1 list ((onept#j)*r/q);
 
      --Convert spherical to rectangular coordinates
-     rectcoords={};
      apply(nn, i-> (
 	       j:=1;
 	       while abs(normpts#i)>j/m do j=j+1;
@@ -80,6 +79,7 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
     setRandomSeed processID();
 
     allNFs := apply(opts.Limit, J -> time (
+	if J % 100 == 0 then << J << "." << flush;
         wtvec := randomWeightVector nvars;
         print wtvec;
         --Rr is a polynomial ring in nn variables; can declare a term order here
@@ -98,12 +98,12 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
         ));
     FF := allNFs//transpose/tally/pairs;
 
-    file = openOut outfile;
+    file := openOut outfile;
     apply(nvars, i-> (
 	if #(FF#i)==1 then (file << "f" << i+1 << " = " << toString first FF#i#0 << endl)
 	else (
 		file << "f" << i+1 << " = {" << endl; 
-		apply(FF#i, q->(file << toString q#0 << "  #" << toString ((q#1)/opts.Limit) << endl)); 
+		apply(FF#i, q->(file << toString q#0 << "  # " << toString (0.0 + (q#1)/opts.Limit) << endl)); 
 		file << "}" << endl
 	)
     ));
@@ -116,4 +116,7 @@ end
 restart
 load "sgfan.m2"
 randomWeightVector 10
-time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"outy",5,10,Limit=>1200)
+time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"outy",5,10,Limit=>15)
+time sgfan(("toy.txt",null),"outy",5,4,Limit=>10)
+
+{16, 14, 90, 5, 67, 22, 38, 10, 211, 14}
