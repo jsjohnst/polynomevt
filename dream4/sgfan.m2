@@ -97,7 +97,7 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
         flatten entries sub(NF,S)
         ));
     FF := allNFs//transpose/tally/pairs;
-
+    
     file := openOut outfile;
     apply(nvars, i-> (
 	if #(FF#i)==1 then (file << "f" << i+1 << " = " << toString first FF#i#0 << endl)

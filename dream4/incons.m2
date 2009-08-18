@@ -46,7 +46,7 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
 
     
     --Identify transitions that are inconsistent
-    select(transitions, i->(
+    scan(transitions, i->(
         t := select (transitions, j->(i#0==j#0 and i#1!=j#1));
         if t != {} then trouble = append(trouble, t);
     ));
@@ -85,7 +85,7 @@ makeConsistent(String, String) := (infile, outfile) -> (
     ));
     
     --Identify transitions that are inconsistent
-    select(transitions, i->(
+    scan(transitions, i->(
         t := select (transitions, j->(i#0==j#0 and i#1!=j#1));
         if t != {} then trouble = append(trouble, t);
     ));
