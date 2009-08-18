@@ -21,10 +21,6 @@ needs "remove-repeat.m2"
 -- inconsistent transition
 makeConsistent = method()
 makeConsistent(List, ZZ, String) := (WT, n, outfile) -> ( 
-    
-    -- remove repeated states
-    m  = removeRepeatedStates(WT, 2, n);  
-    m = flatten m;
 
     transitions := {}; --Contains every pair of transitions
     m := {};
@@ -34,9 +30,9 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
         --mt is a hash table of points from one input file
         --m is a list of points from one input file
     
---        mt = apply({WT#i}, s -> readMat(s,ZZ));     
---        apply(#mt, s -> (m = append(m, entries mt#s))); 
---        m = flatten m; 
+        mt = apply({WT#i}, s -> readMat(s,ZZ));     
+        apply(#mt, s -> (m = append(m, entries mt#s))); 
+        m = flatten m; 
     
 
         for j from 0 to #m-2 do 
@@ -74,10 +70,15 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
 
 makeConsistent(String, ZZ, String) := (infile, n, outfile) -> ( 
 
+    mat := removeRepeatedStates( {infile}, 2, n);
+    mat = toList mat;
+    print mat;
+
     transitions := {}; --Contains every pair of transitions
+    m := {};
     trouble := {};
     
-    mat := flatten values readTSData(infile,ZZ);
+    --mat := flatten values readTSData(infile,ZZ);
     apply(mat, l->(
         m=entries l;
         for j from 0 to #m-2 do 
