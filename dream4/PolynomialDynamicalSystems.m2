@@ -16,11 +16,12 @@ export{getVars,
        makeVars,
        see,
        TimeSeriesData, 
-	   WildType,
+       WildType,
        FunctionData, 
        readMat,
        readRealMat,
        readTSData,
+       readKOData,
        readRealTSData,
        functionData,
        subFunctionData,
@@ -167,10 +168,50 @@ readTSData(String,Ring) := (filename, R) -> (
         if i == #(WT)-1 then break else
         {i=i+1; l=WT_i;};
     };
---    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
     T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
     H := new MutableHashTable;
     H.WildType = T;
+    new TimeSeriesData from H
+)
+
+getIndex = method(TypicalValue => ZZ)
+getIndex(String) := s -> (
+	ss := separate(" ", s);
+        if class value last ss === ZZ then
+        value last ss else
+        value ss_(#ss-2)
+)
+
+readKOData = method(TypicalValue => TimeSeriesData)
+readKOData(String,Ring) := (filename, R) -> (
+    --filename contains several time series with a header of # preceding each one
+    KO := lines get filename;
+    KO = select(KO, l->#l>0);
+
+    i := 0; l := KO_i;
+    if match("#",l) then {
+	n = getIndex(l);
+	i=i+1; l=KO_i;
+    };
+    T = {};
+    while i < #(KO)-1 do
+    {
+        temp := {};
+        while not match("#",l) do
+        {
+                temp = append(temp,l);
+                if i == #(KO)-1 then break else
+                {i=i+1; l=KO_i;};
+        };
+        T = append(T,(n,temp));
+        if i == #(KO)-1 then break else
+	n = getIndex(l);
+        {i=i+1; l=KO_i;};
+    };
+    T = apply(T, l->(l_0, matrix(R,apply(l_1, s->select(separateRegexp(" +",s), c->c!="")/value))));
+    H := new MutableHashTable;
+    scan(T, p -> if H#?(p_0) then H#(p_0) = append(H#(p_0), p_1)
+	else H#(p_0) = {p_1});
     new TimeSeriesData from H
 )
 
@@ -196,15 +237,13 @@ readRealTSData(String,InexactFieldFamily) := (filename, R) -> (
         if i == #(WT)-1 then break else
         {i=i+1; l=WT_i;};
     };
---    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
     T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
     H := new MutableHashTable;
     H.WildType = T;
     new TimeSeriesData from H
 )
 
-
-
+TimeSeriesData + TimeSeriesData := (A,B) -> merge(A,B,join)
 
 ---------------------------------------------------------------------------------------------------
 -- Given time series data and an integer i, functionData returns the FunctionData hashtable for function i,
