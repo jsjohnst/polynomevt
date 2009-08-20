@@ -27,7 +27,7 @@ randomWeightVector = (nn) -> (
      onept:={}; 
 
      --Get 10 normal numbers
-     for j from 1 to 5 do(
+     for j from 1 to ceiling(nn/2) do(
 	  x:=random 1.; y:=random 1.;
 	  onept=append(onept, sqrt(-2*log(x))*cos(2*pi*y));
 	  onept=append(onept, sqrt(-2*log(x))*sin(2*pi*y));
@@ -120,3 +120,14 @@ time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"o
 time sgfan(("toy.txt",null),"outy",5,4,Limit=>10)
 
 {16, 14, 90, 5, 67, 22, 38, 10, 211, 14}
+
+
+time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"challenge2-discretized/sgfan-10-1-n50",5,15,Limit=>50)
+load "../macaulay2/minsets-web.m2"     
+time minsetsWD("challenge2-discretized/consistent-output-10-1-time-series", "outy", 5, 15)
+
+loadPackage "PolynomialDynamicalSystems"
+R = ZZ/5[makeVars 15]
+TS = readTSData("challenge2-discretized/consistent-output-10-1-time-series", ZZ/5)
+minSets(TS,7,R)
+oo/print;
