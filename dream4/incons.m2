@@ -14,6 +14,11 @@
 --********************* 
 
 needs "PolynomialDynamicalSystems.m2"
+needs "remove-repeat.m2"
+
+-- remove repeated state ( e.g. a -> a -> b changes to a -> b)
+-- split an inconsistent time course into two time courses and through out the
+-- inconsistent transition
 
 makeConsistent = method()
 makeConsistent(List, ZZ, String) := (WT, n, outfile) -> ( 
@@ -29,12 +34,16 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
         mt = apply({WT#i}, s -> readMat(s,ZZ));     
         apply(#mt, s -> (m = append(m, entries mt#s))); 
         m = flatten m; 
+    
+
         for j from 0 to #m-2 do 
         ( 
             transitions = append(transitions, {m#j, m#(j+1)}) 
         );-- Record them as transitions
         m = {}; 
     ));
+
+
     
     --Identify transitions that are inconsistent
     scan(transitions, i->(
@@ -60,9 +69,10 @@ makeConsistent(List, ZZ, String) := (WT, n, outfile) -> (
     file<<close;
 )
 
-makeConsistent(String, ZZ, String) := (infile, n, outfile) -> ( 
+makeConsistent(String, String) := (infile, outfile) -> ( 
 
     transitions := {}; --Contains every pair of transitions
+    m := {};
     trouble := {};
     
     mat := flatten values readTSData(infile,ZZ);
@@ -80,12 +90,13 @@ makeConsistent(String, ZZ, String) := (infile, n, outfile) -> (
         if t != {} then trouble = append(trouble, t);
     ));
     trouble = flatten trouble;
-
+    
     --Keep only the consistent transitions
     consistentTransitions = set transitions-set trouble;
     consistentTransitions = toList consistentTransitions;
     
     --Print each transitions in a single file
+    n := #(consistentTransitions#0#0);
     file = openOut outfile;
     for i from 0 to #consistentTransitions-1 do 
     ( 
