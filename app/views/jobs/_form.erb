@@ -3,7 +3,7 @@
     <div id="tipDiv" style="position:absolute; visibility:hidden; z-index:100"></div>
     <table background="/perl/gradient.gif" width="100%"  border="0" cellpadding="0" cellspacing="10">
         <tr><td align="center" colspan="2"><b><font size="5">Polynome: Discrete System Identification</font></b>
-            <p>If this is your first time, please read the <a href="/perl/tutorial.html" target="_blank">tutorial</a>.
+            <p>If this is your first time, please read the <a href="/perl/tutorial-new.html" target="_blank">tutorial</a>.
             It is important that you follow the format specified in the tutorial.<br>
             Make your selections and provide inputs (if any) in the form below and click Generate to run the software.<br>
         </td></tr>
@@ -17,11 +17,11 @@
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">Number of nodes: </font>
 							<%= form.text_field :nodes, :size => 2, :maxlength => 2 %>
-							<a href="tutorial.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()"><font size="1">what is this?</font></a>
+							<a href="tutorial-new.html#N" onmouseover="doTooltip(event,0)" onmouseout="hideTip()"><font size="1">what is this?</font></a>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Model</strong></font>
-                            <a href="tutorial.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
+                            <a href="tutorial-new.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
                             <font size="1">what is this?</font></a>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
@@ -34,7 +34,7 @@
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2"><strong>Type of Simulation</strong></font>
-                            <a href="tutorial.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
+                            <a href="tutorial-new.html#U" onmouseover="doTooltip(event,4)" onmouseout="hideTip()">
                             <font size="1">what is this?</font></a>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
@@ -43,8 +43,8 @@
             			    <br><ul><li>Enter update schedule separated by spaces
 							<%= form.text_field :update_schedule, :size => 20 %></li>
 			                <li>If none is entered, then the nodes will be
-                            simulated in parallel.<br> (FBH Shouldn't this be random
-                            sequential updates? )</li></ul></font>
+                            simulated in parallel.<br> 
+                            </li></ul></font>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td bgcolor="#FF8000" nowrap>
@@ -53,7 +53,7 @@
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap>
                             <font size="2">Select output to view and file format.&nbsp;</font>
-                            <a href="tutorial.html#G" onmouseover="doTooltip(event,6)" onmouseout="hideTip()">
+                            <a href="tutorial-new.html#G" onmouseover="doTooltip(event,6)" onmouseout="hideTip()">
                             <font size="1">what is this?</font></a><br>
 							<table width="100%" style="font-size: 13">
 								<tr><td colspan="4">
@@ -105,7 +105,7 @@
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
                         <tr valign="top"><td nowrap><font size="2">Upload data file: </font>
                             <%= form.file_field :input_file %>&nbsp;
-                            <a href="tutorial.html#F" onmouseover="doTooltip(event,2)" onmouseout="hideTip()">
+                            <a href="tutorial-new.html#F" onmouseover="doTooltip(event,2)" onmouseout="hideTip()">
                             <font size="1">what is this?</font></a>
                         </td></tr>
                         <tr><td BGCOLOR="#DCDCDC" HEIGHT="1"></td></tr>
