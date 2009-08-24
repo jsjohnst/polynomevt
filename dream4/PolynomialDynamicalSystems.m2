@@ -1,7 +1,7 @@
 newPackage(
     "PolynomialDynamicalSystems",
-        Version => "0.1", 
-        Date => "August 14, 2009",
+        Version => "0.11", 
+        Date => "August 23, 2009",
         Authors => {
          {Name => "Brandy Stigler", Email => "bstigler@smu.edu", HomePage => "http://users.mbi.ohio-state.edu/bstigler"},
          {Name => "Mike Stillman", Email => "mike@math.cornell.edu", HomePage => "http://www.math.cornell.edu/~mike"}
@@ -16,12 +16,11 @@ export{getVars,
        makeVars,
        see,
        TimeSeriesData, 
-       WildType,
+	   WildType,
        FunctionData, 
        readMat,
        readRealMat,
        readTSData,
-       readKOData,
        readRealTSData,
        functionData,
        subFunctionData,
@@ -34,7 +33,10 @@ export{getVars,
        minSetWeightedScoring,
        outDegrees,
        makeDotFile,
-       Avoid
+       Avoid,
+	Include,
+--Alan added next line
+	Output
 }
 
 
@@ -141,7 +143,7 @@ readTSData(List,List,Ring) := (wtfiles, knockouts, R) -> (
      scan(knockouts, x -> (
            m := readMat(x#1,R);
            i := x#0;
-           if H#?i then H#i = append(H#i,m)
+           if H#?i then H#i = append(H#i,m)TypicalValue
            else H#i = {m}));
      H.WildType = wtmats;
      new TimeSeriesData from H
@@ -168,50 +170,10 @@ readTSData(String,Ring) := (filename, R) -> (
         if i == #(WT)-1 then break else
         {i=i+1; l=WT_i;};
     };
+--    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
     T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
     H := new MutableHashTable;
     H.WildType = T;
-    new TimeSeriesData from H
-)
-
-getIndex = method(TypicalValue => ZZ)
-getIndex(String) := s -> (
-	ss := separate(" ", s);
-        if class value last ss === ZZ then
-        value last ss else
-        value ss_(#ss-2)
-)
-
-readKOData = method(TypicalValue => TimeSeriesData)
-readKOData(String,Ring) := (filename, R) -> (
-    --filename contains several time series with a header of # preceding each one
-    KO := lines get filename;
-    KO = select(KO, l->#l>0);
-
-    i := 0; l := KO_i;
-    if match("#",l) then {
-	n = getIndex(l);
-	i=i+1; l=KO_i;
-    };
-    T = {};
-    while i < #(KO)-1 do
-    {
-        temp := {};
-        while not match("#",l) do
-        {
-                temp = append(temp,l);
-                if i == #(KO)-1 then break else
-                {i=i+1; l=KO_i;};
-        };
-        T = append(T,(n,temp));
-        if i == #(KO)-1 then break else
-	n = getIndex(l);
-        {i=i+1; l=KO_i;};
-    };
-    T = apply(T, l->(l_0, matrix(R,apply(l_1, s->select(separateRegexp(" +",s), c->c!="")/value))));
-    H := new MutableHashTable;
-    scan(T, p -> if H#?(p_0) then H#(p_0) = append(H#(p_0), p_1)
-	else H#(p_0) = {p_1});
     new TimeSeriesData from H
 )
 
@@ -237,13 +199,15 @@ readRealTSData(String,InexactFieldFamily) := (filename, R) -> (
         if i == #(WT)-1 then break else
         {i=i+1; l=WT_i;};
     };
+--    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
     T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
     H := new MutableHashTable;
     H.WildType = T;
     new TimeSeriesData from H
 )
 
-TimeSeriesData + TimeSeriesData := (A,B) -> merge(A,B,join)
+
+
 
 ---------------------------------------------------------------------------------------------------
 -- Given time series data and an integer i, functionData returns the FunctionData hashtable for function i,
@@ -393,21 +357,24 @@ mesdual MonomialIdeal := (J) -> (if J == 0
   else if ideal J == 1 then monomialIdeal 0_(ring J)
   else mesintersect (monomialIdeal @@ support \ first entries generators J))
 
-
-minSets = method(Options => {Output => null,
-                         Avoid => null}
-                 )
+--Alan added "Included=>null"
+minSets = method(Options => {Output => null, 
+				Avoid => null, 
+				Include => null} 
+		)
 minSets(TimeSeriesData, ZZ, Ring) := opts -> (T, i, R) -> (
         d := functionData(T,i);
         I := minRep(d,R);
     if instance(I,ZZ) then I = monomialIdeal(0_R); -- because I can be the zero element
 --    I = I + monomialIdeal(R_(i-1));
-    if opts.Avoid =!= null then (
+    if opts.Avoid =!= null and opts.Avoid =!= {} and flatten {opts.Avoid}=!={1} then (
          J1= saturate(I,product flatten {opts.Avoid});
          globalI = J1;
          I = J1;
          );
+
     J := flatten entries gens mesdual I;
+
     if opts.Output =!= null
     then (
       fil := openOut opts.Output;
@@ -415,7 +382,16 @@ minSets(TimeSeriesData, ZZ, Ring) := opts -> (T, i, R) -> (
       displayMinSets(fil, J);
       close fil;
       );
-    J /sort @@ support
+
+--added by Alan from here
+	if opts.Include =!= null and opts.Include =!= {}
+	then (P:=product flatten {opts.Include};
+	if J=={} then J={P} else
+	(JJ:={};for j to #J-1 do JJ=append(JJ,J_j*P);J=JJ);
+	);
+--added by Alan to here
+
+J /sort @@ support
     )
 
 
@@ -462,7 +438,8 @@ T2 = (S,F) -> (sum apply(F, xi -> S xi)) / #F
 
 Model = new Type of HashTable
 
-minSetScoring = method(Options => {Output => null, Avoid => null})
+--Alan added Include=>null
+minSetScoring = method(Options => {Output => null, Avoid => null, Include=>null})
 minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     i := index xi;
     << "##### variable " << xi << " ################" << endl;
@@ -474,7 +451,8 @@ minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     if i === null then error "expected a ring variable";
     i = i+1;
     R := ring xi;
-    J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid);
+-- Alan modified: J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid) to:
+    J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid, Include=> opts.Include);
     -- now we determine the (S1,T1)-scores of 
     -- each variable and each set in J
     (Z1,Ws1) := Ws J;
@@ -493,7 +471,8 @@ minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     );
 -- changed next line to return the var-score function S: 3-31-08
 --     (sets, result)
-    (sets, S, result)
+--changed again by Alan to deal with "empty" cases
+if sets=={} or (not sets=!={null}) then ({},S,xi=>{hashTable{}}) else (sets, S, result)  
 )
 
 minSetScoring(List, RingElement) := opts -> (L, xi) -> (
@@ -510,7 +489,8 @@ minSetScoring(List, RingElement) := opts -> (L, xi) -> (
         fil << net result << endl;
         close fil;
     );
-    (sets, S, result)    
+--changed by Alan to deal with "empty" cases
+if sets=={} or (not sets=!={null}) then ({},S,xi=>{hashTable{}}) else (sets, S, result)    
 )
 
 findBestMinsets = (J, weights) -> (
