@@ -23,7 +23,7 @@ randomWeightVector = (nn) -> (
 randomWeightVector = (nn) -> (
      --Choose a random radius in [0,1]
      --m=20*nn;
-     m:=250;
+     m:=100;
      onept:={}; 
 
      --Get 10 normal numbers
@@ -79,7 +79,7 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
     F := matrix {apply(nvars, i-> time findFunction(FD_i, gens S))};
     
     --Sample randomly from the G. fan
-    setRandomSeed();
+    --setRandomSeed();
     setRandomSeed processID();
 
     allNFs := apply(opts.Limit, J -> time (
