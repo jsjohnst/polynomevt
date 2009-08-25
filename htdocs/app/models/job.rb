@@ -9,7 +9,9 @@ class Job < ActiveRecord::Base
   validate :check_update_schedule
   
   def check_update_schedule
-    errors.add_to_base("Update schedule not valid") unless
-    update_schedule.match( /^\s*((\d+\s*){#{nodes}})?\s*$/ ) != nil;
+    if update_schedule
+      errors.add_to_base("Update schedule not valid " + update_schedule) unless
+      update_schedule.match( /^\s*((\d+\s*){#{nodes}})?\s*$/ )
+    end
   end
 end
