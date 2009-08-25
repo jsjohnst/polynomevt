@@ -68,6 +68,18 @@
     <%= f.check_box :deleted %>
   </p>
   <p>
+    <%= f.label :log %><br />
+    <%= f.text_area :log %>
+  </p>
+  <p>
+    <%= f.label :failed %><br />
+    <%= f.check_box :failed %>
+  </p>
+  <p>
+    <%= f.label :file_prefix %><br />
+    <%= f.text_field :file_prefix %>
+  </p>
+  <p>
     <%= f.label :user_id %><br />
     <%= f.collection_select :user_id, User.all, :id, :login %>
   </p>

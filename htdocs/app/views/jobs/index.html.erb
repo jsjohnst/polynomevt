@@ -17,7 +17,9 @@
     <th>Update type</th>
     <th>Update schedule</th>
     <th>Completed</th>
+	<th>Failed</th>
     <th>Deleted</th>
+    <th>File Prefix</th>
     <th>User</th>
 	<th colspan="3">Actions</th>
   </tr>
@@ -39,7 +41,9 @@
     <td><%=h job.update_type %></td>
     <td><%=h job.update_schedule %></td>
     <td><%=h job.completed %></td>
+	<td><%=h job.failed %></td>
     <td><%=h job.deleted %></td>
+ 	<td><%=h job.file_prefix %></td>
     <td><%=h job.user.login %></td>
     <td><%= link_to 'Show', job %></td>
     <td><%= link_to 'Edit', edit_job_path(job) %></td>
