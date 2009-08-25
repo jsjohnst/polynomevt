@@ -60,9 +60,13 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
     -- niterations: how many GB's to sample
     (WT,KO) := WTandKO;
     kk := ZZ/p; --Field
-    --TS is a hashtable of time series data WITH NO KO DATA
-    TS := readTSData(WT, kk);
-    
+    --TSW is a hashtable of WT time series data
+    --TSK is a hashtable of KO time series data 
+    --TS is a hashtable of ALL time series data 
+    TSW := readTSData(WT, kk);
+    TSK := readKOData(KO, kk);
+    TS := TSW + TSK;
+
     --FD is a list of hashtables, where each contains the input-vectors/output pairs for each node
     FD := apply(nvars, i->functionData(TS, i+1));
         
@@ -116,7 +120,8 @@ end
 restart
 load "sgfan.m2"
 randomWeightVector 10
-time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"outy",5,10,Limit=>15)
+--time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"outy",5,15,Limit=>15)
+time sgfan(("challenge2-discretized/consistent-output-10-1-time-series","challenge2-discretized/output-10-1-knockouts"),"outy",5,15,Limit=>15)
 time sgfan(("toy.txt",null),"outy",5,4,Limit=>10)
 
 {16, 14, 90, 5, 67, 22, 38, 10, 211, 14}
