@@ -14,7 +14,7 @@ one:
   show_probabilities_state_space: false
   make_deterministic_model: false
   update_type: MyString
-  update_schedule: ""
+  update_schedule: "1 2 3"
   completed: false
   deleted: false
   user_id: 1
@@ -33,7 +33,7 @@ two:
   show_probabilities_state_space: false
   make_deterministic_model: false
   update_type: MyString
-  update_schedule: ""
+  update_schedule: "1 2 3"
   completed: false
   deleted: false
   user_id: 1

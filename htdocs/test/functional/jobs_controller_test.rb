@@ -31,7 +31,7 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should update job" do
-    put :update, :id => jobs(:one).to_param, :job => { :user_id => 1, :nodes => 5, :pvalue => 2 }
+    put :update, :id => jobs(:one).to_param, :job => { :user_id => 1, :nodes => 5, :pvalue => 2, :update_schedule => "1 2 3 4 5" }
     assert_redirected_to job_path(assigns(:job))
   end
 
