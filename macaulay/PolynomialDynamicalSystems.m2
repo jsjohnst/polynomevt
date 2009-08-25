@@ -1,12 +1,12 @@
 newPackage(
     "PolynomialDynamicalSystems",
         Version => "0.1", 
-        Date => "November 21, 2005",
+        Date => "August 14, 2009",
         Authors => {
-         {Name => "Brandy Stigler", Email => "bstigler@mbi.osu.edu", HomePage => "http://users.mbi.ohio-state.edu/bstigler"},
+         {Name => "Brandy Stigler", Email => "bstigler@smu.edu", HomePage => "http://users.mbi.ohio-state.edu/bstigler"},
          {Name => "Mike Stillman", Email => "mike@math.cornell.edu", HomePage => "http://www.math.cornell.edu/~mike"}
          },
-        Headline => "Utilities for polynomial dynamical systems",
+        Headline => "Utilities for polynomial dynamical systems - mostly combined with RevEng package",
         DebuggingMode => true
         )
 
@@ -15,16 +15,25 @@ needs "Points.m2"
 export{getVars,
        makeVars,
        see,
---       separateRegexp,
        TimeSeriesData, 
+	   WildType,
        FunctionData, 
+       readMat,
+       readRealMat,
        readTSData,
+       readRealTSData,
        functionData,
        subFunctionData,
        minRep,
+       minSets,
        findFunction,
        checkFunction,
-	WildType
+       Ws,
+       minSetScoring,
+       minSetWeightedScoring,
+       outDegrees,
+       makeDotFile,
+       Avoid
 }
 
 
@@ -86,29 +95,37 @@ see(List) := (fs) -> scan(fs, (g -> (print g; print "")))
 ---------------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------------
--- A function defined in a previous version of Macaulay2
-
---separateRegexp = (sepregex, s) -> (
---     s = replace(" +"," ",s);
---     separate(" ",s)
---)
-
----------------------------------------------------------------------------------------------------
 -- Internal to "readTSData"
 -- Given a data file and a coefficient ring, readMat returns the (txn)-matrix of the data (t=time, n=vars). 
 
 readMat = method(TypicalValue => Matrix)
 readMat(String,Ring) := (filename,R) -> (
      ss := select(lines get filename, s -> length s > 0);
-     matrix(R, apply(ss, s -> (t := separateRegexp(" +", s); 
-                 t = apply(t,value);
-                     select(t, x -> class x =!= Nothing))))
+     matrix(R, apply(ss, s -> (
+--		t := separateRegexp(" +", s); 
+		t := select(separateRegexp(" +", s), c->c!=""); 
+                t = apply(t,value);
+                select(t, x -> class x =!= Nothing)
+     )))
 )
+
+readRealMat = method(TypicalValue => Matrix)
+readRealMat(String,InexactFieldFamily) := (filename,R) -> (
+     ss := select(lines get filename, s -> length s > 0);
+     matrix(R, apply(ss, s -> (
+--		t := separateRegexp(" +", s);
+		t := select(separateRegexp(" +", s), c->c!="");
+                t = apply(t,value);
+                select(t, x -> class x =!= Nothing))
+     ))
+)
+
+
 
 ---------------------------------------------------------------------------------------------------
 -- Given a list of wildtype and a list of knockout time series data files, as well as a coefficient ring,
 -- readTSData returns a TimeSeriesData hashtable of the data.
--- Uses "readMat"
+-- Uses "readMat", except for the last version
 
 readTSData = method(TypicalValue => TimeSeriesData)
 readTSData(List,List,Ring) := (wtfiles, knockouts, R) -> (
@@ -128,6 +145,66 @@ readTSData(List,List,Ring) := (wtfiles, knockouts, R) -> (
      H.WildType = wtmats;
      new TimeSeriesData from H
 )
+
+readTSData(String,Ring) := (filename, R) -> (
+    --filename contains several time series with a header of # preceding each one
+    WT := lines get filename;
+    WT = select(WT, l->#l>0);
+
+    i := 0; l := WT_i;
+    if match("#",l) then {i=i+1; l=WT_i;};
+    T := {};
+    while i < #(WT)-1 do
+    {
+        temp := {};
+        while not match("#",l) do
+        {
+                temp = append(temp,l);
+                if i == #(WT)-1 then break else
+                {i=i+1; l=WT_i;};
+        };
+        T = append(T,temp);
+        if i == #(WT)-1 then break else
+        {i=i+1; l=WT_i;};
+    };
+--    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+    T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
+    H := new MutableHashTable;
+    H.WildType = T;
+    new TimeSeriesData from H
+)
+
+readRealTSData = method(TypicalValue => TimeSeriesData)
+readRealTSData(String,InexactFieldFamily) := (filename, R) -> (
+    --filename contains several time series with a header of # preceding each one
+    WT := lines get filename;
+    WT = select(WT, l->#l>0);
+
+    i := 0; l := WT_i;
+    if match("#",l) then {i=i+1; l=WT_i;};
+    T := {};
+    while i < #(WT)-1 do
+    {
+        temp := {};
+        while not match("#",l) do
+        {
+                temp = append(temp,l);
+                if i == #(WT)-1 then break else
+                {i=i+1; l=WT_i;};
+        };
+        T = append(T,temp);
+        if i == #(WT)-1 then break else
+        {i=i+1; l=WT_i;};
+    };
+--    T = apply(T, l->matrix(R,apply(l, s->separateRegexp(" +",s)/value)));
+    T = apply(T, l->matrix(R,apply(l, s->select(separateRegexp(" +",s), c->c!="")/value)));
+    H := new MutableHashTable;
+    H.WildType = T;
+    new TimeSeriesData from H
+)
+
+
+
 
 ---------------------------------------------------------------------------------------------------
 -- Given time series data and an integer i, functionData returns the FunctionData hashtable for function i,
@@ -222,6 +299,231 @@ minRep(FunctionData, Ring) := (fcndata,R) -> (
      sum Ls
 )
 
+displayMinRep = (fil,I) -> (
+     -- show: tally of degree of min gens
+     -- if any of size 1,2,3, display them
+     g := flatten entries gens I;
+     h := tally apply(g, f -> first degree f);
+     fil << #g << " min rep elements " << h << endl;
+     h1 := select(g, f -> first degree f == 1);
+     h2 := select(g, f -> first degree f == 2);
+     h3 := select(g, f -> first degree f == 3);
+     h4 := select(g, f -> first degree f == 4);
+     if #h1 > 0 then fil << "min rep length 1 = " << toString h1 << endl;
+     if #h2 > 0 then fil << "min rep length 2 = " << toString h2 << endl;
+     if #h3 > 0 then fil << "min rep length 3 = " << toString h3 << endl;
+     if #h3 > 0 then fil << "min rep length 4 = " << toString h4 << endl;
+     )
+
+displayMinSets = (fil,J) -> (
+     -- show: tally of degree of min gens
+     -- if any of size 1,2,3, display them
+     g := J;
+     h := tally apply(g, f -> first degree f);
+     fil << #g << " min set elements " << h << endl;
+     hlo := min keys h;
+     h1 := select(g, f -> first degree f == 1);
+     h2 := select(g, f -> first degree f == 2);
+     h3 := select(g, f -> first degree f == 3);
+     if #h1 > 0 and #h1 < 10 then fil << "min sets length 1 = " << toString h1 << endl;
+     if #h2 > 0 and #h2 < 10 then fil << "min sets length 2 = " << toString h2 << endl;
+     if #h3 > 0 and #h3 < 10 then fil << "min sets length 3 = " << toString h3 << endl;
+     if hlo > 3 and (true or h#hlo < 8) then (
+          hhlo := select(g, f -> first degree f == hlo);
+          fil << "min sets length " << hlo << " = " << netList hhlo << endl;
+      );
+     )
+
+debug Core
+mesintersect = (L) -> (
+     -- L is a list of monomial ideals
+    M := L#0;
+    R := ring M;
+    i := 1;
+    << #L << " generators" << endl;
+    while i < #L do (
+     << "doing " << i << endl;
+     M = newMonomialIdeal(R, rawIntersect(raw M, raw L#i));
+     i = i+1;
+     );
+    M)
+
+mesdual = method()
+mesdual MonomialIdeal := (J) -> (if J == 0 
+  then monomialIdeal 1_(ring J) 
+  else if ideal J == 1 then monomialIdeal 0_(ring J)
+  else mesintersect (monomialIdeal @@ support \ first entries generators J))
+
+
+minSets = method(Options => {Output => null,
+                         Avoid => null}
+                 )
+minSets(TimeSeriesData, ZZ, Ring) := opts -> (T, i, R) -> (
+        d := functionData(T,i);
+        I := minRep(d,R);
+    if instance(I,ZZ) then I = monomialIdeal(0_R); -- because I can be the zero element
+--    I = I + monomialIdeal(R_(i-1));
+    if opts.Avoid =!= null then (
+         J1= saturate(I,product flatten {opts.Avoid});
+         globalI = J1;
+         I = J1;
+         );
+    J := flatten entries gens mesdual I;
+    if opts.Output =!= null
+    then (
+      fil := openOut opts.Output;
+      displayMinRep(fil, I);
+      displayMinSets(fil, J);
+      close fil;
+      );
+    J /sort @@ support
+    )
+
+
+-- The following functions implement the scoring of edges found in 
+-- Jarrah, Laubenbacher, Stigler, and Stillman
+
+Ws = method()
+Ws List := (J) -> (
+     -- J should be a list of subsets of variables
+     -- returns (Z1, Ws1):
+     --  Z1 is a hashtable whose keys are the sizes of the supports, 
+     --    and the value is the list of those support sets of that size
+     --  Ws1 is a hash table, whose keys are the sizes of the sets, and 
+     --    the value Ws1#s is a tally of the number of occurences
+     --    of each variable xi in the sets Z1#s.
+     Z := partition(length, J);
+     Ws := applyPairs(Z, (k,v) -> (k, tally flatten v));
+     (Z, Ws)
+     )
+
+--the following are variable scoring functions with xi as input and score as output
+
+S1 = (Z,Ws) -> (xi) -> (
+     sum apply(keys Z, s -> (k := Ws#s; if k#?xi then 1.0 * k#xi / s / #Z#s else 0.0))
+     )
+
+S2 = (Z,Ws) -> (xi) -> (
+     sum apply(keys Z, s -> (k := Ws#s; if k#?xi then 1.0 * k#xi / s else 0.0))
+     )
+
+S3 = (Z,Ws) -> (xi) -> (
+     sum apply(keys Z, s -> (k := Ws#s; if k#?xi then 1.0 * k#xi else 0.0))
+     )
+
+--changed the T1 function to include a multiplier bio (2.0) if YAP1 is a var
+bio = 1.0;
+logT1 = (S,F) -> (
+    --sum apply(F, xi -> log S(xi))
+    sum apply(F, xi -> if xi==(first gens ring xi) then log bio*S(xi) else log S(xi))
+    -- S is either S1, S2, or S3 (or other scoring function)
+)
+
+T2 = (S,F) -> (sum apply(F, xi -> S xi)) / #F
+
+Model = new Type of HashTable
+
+minSetScoring = method(Options => {Output => null, Avoid => null})
+minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
+    i := index xi;
+    << "##### variable " << xi << " ################" << endl;
+    if opts.Output =!= null then (
+    fil := openOut opts.Output;
+    fil << "##### variable " << xi << " ################" << endl;
+    close fil;
+    );
+    if i === null then error "expected a ring variable";
+    i = i+1;
+    R := ring xi;
+    J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid);
+    -- now we determine the (S1,T1)-scores of 
+    -- each variable and each set in J
+    (Z1,Ws1) := Ws J;
+    S := S1(Z1,Ws1);
+    scores := apply(J, F -> logT1(S,F));
+    sets := apply(J, F -> (F,logT1(S,F)));
+    maxscore := max scores;
+-- made next line return the first best score - for web apps
+    Jbest := J _ (positions(scores, x -> x === maxscore));
+--    Jbest := J _ (position(scores, x -> x === maxscore));
+    result := (xi => apply(Jbest, F -> hashTable apply(F, x -> x => S x)));
+    if opts.Output =!= null then (
+        fil = openOut opts.Output;
+        fil << net result << endl;
+        close fil;
+    );
+-- changed next line to return the var-score function S: 3-31-08
+--     (sets, result)
+    (sets, S, result)
+)
+
+minSetScoring(List, RingElement) := opts -> (L, xi) -> (
+    --L is a list of minsets for variable xi
+    (Z1,Ws1) := Ws L;
+    S := S1(Z1,Ws1);
+    scores := apply(L, F -> logT1(S,F));
+    sets := apply(L, F -> (F,logT1(S,F)));
+    maxscore := max scores;
+    Lbest := L _ (positions(scores, x -> x === maxscore));
+    result := (xi => apply(Lbest, F -> hashTable apply(F, x -> x => S x)));
+    if opts.Output =!= null then (
+        fil = openOut opts.Output;
+        fil << net result << endl;
+        close fil;
+    );
+    (sets, S, result)    
+)
+
+findBestMinsets = (J, weights) -> (
+     score := (F) -> (sum(weights_(apply(F,index)))/#F);
+     Js := partition(length,J);
+     minlen := min keys Js;
+     bestminlenscore := max apply(Js#minlen, score);
+     bestscore := max apply(J, score);
+     Jbest := select(J, F -> (s := score F;
+           s == bestscore or (#F === minlen) and s == bestminlenscore));
+     reverse apply(sort apply(Jbest, F -> (score F,F)), x -> x#1))
+
+minSetWeightedScoring = method(Options => {Output => null, Avoid => null})
+minSetWeightedScoring(TimeSeriesData, RingElement, List) := opts -> (T, xi, weights) -> (
+     i := index xi;
+     weights = weights#i; -- only need the ones for this xi.
+     << "##### variable " << xi << " ################" << endl;
+     if opts.Output =!= null then (
+      fil := openOut opts.Output;
+      fil << "##### variable " << xi << " ################" << endl;
+      if opts.Avoid =!= null then fil << "avoid List = " << opts.Avoid << endl;
+      close fil;
+      );
+     if i === null then error "expected a ring variable";
+     i = i+1;
+     R := ring xi;
+     J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid);
+     if length J  == 0 then 
+       if opts.Output =!= null then (
+      fil = openOut opts.Output;
+      fil << "the data is not consistent" << endl;
+      close fil;
+      return (xi => null);
+      );
+     Jbest := findBestMinsets(J,weights);
+     result := (xi => apply(Jbest, F -> hashTable apply(F, x -> x => weights#(index x))));
+     if opts.Output =!= null then (
+      fil = openOut opts.Output;
+      fil << netList join({xi}, pack(5,result#1)) << endl;
+      close fil;
+      );
+     result
+     )
+
+minSetWeightedScoring(TimeSeriesData,Ring,List) := opts -> (T,R,W) ->
+     new Model from apply(gens R, xi -> time minSetWeightedScoring(T,xi,W,Output=>opts.Output, Avoid=>opts.Avoid))
+
+minSetScoring(TimeSeriesData,Ring) := opts -> (T,R) ->
+     new Model from apply(gens R, xi -> time minSetScoring(T,xi,Output=>opts.Output))
+
+
+
 ---------------------------------------------------------------------------------------------------
 -- Uses subFunctionData
 -- Given function data D for f_i and a list L of variables xi, i=1..n, (returned from minRep)
@@ -235,16 +537,19 @@ findFunction(FunctionData, List) := o -> (fcndata,L) -> (
 -- in this case, perhaps "findFunction" should be redefined to accept only one input (FunctionData) 
 -- need to check if the order of variables given matters.
 
-     if #L === 0 then error "expected positive number of variables";
-     R := ring L#0;
-     Lindices := apply(L, x -> index x + 1);
-     F := subFunctionData(fcndata,Lindices);
-     S := (coefficientRing R)(monoid [L]);
-     pts := transpose matrix keys F;
-     vals := transpose matrix {values F};
-     (A,stds) := pointsMat(pts,S);
-     f := ((transpose stds) * (vals // A))_(0,0);
-     substitute(f,R)
+--     if #L === 0 then error "expected positive number of variables";
+     if #L === 0 then return first values fcndata
+     else (
+         R := ring L#0;
+         Lindices := apply(L, x -> index x + 1);
+         F := subFunctionData(fcndata,Lindices);
+         S := (coefficientRing R)(monoid [L]);
+         pts := transpose matrix keys F;
+         vals := transpose matrix {values F};
+         (A,stds) := pointsMat(pts,S);
+         f := ((transpose stds) * (vals // A))_(0,0);
+         substitute(f,R)
+    )
 )
 
 ---------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ isConsistent(List, ZZ, ZZ) := (WT, p, n) -> (
     ct:=0;
     apply(n, i->(ct=ct+efunctionData(TS, i+1)));
 --    if ct>0 then return false else return true;
-    if ct>0 then exit 0 else exit 1;
+    if ct>0 then exit 0 else exit 42;
 )
 
 end
