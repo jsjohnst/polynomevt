@@ -17,9 +17,11 @@ class Job < ActiveRecord::Base
   end
   
   def check_stochastic_state_space_size
-    if make_deterministic_model && show_probabilities_state_space
+    if !make_deterministic_model && show_probabilities_state_space
       errors.add_to_base("A stochastic model with more than 10 nodes cannot be simulated.  Sorry!") unless
       nodes <= 10 # if you update this, be sure and update the error message above too
     end
   end
+  
+  
 end
