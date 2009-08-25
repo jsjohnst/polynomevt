@@ -44,6 +44,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
+        Delayed::Job.enqueue ComputationJob.new(@job.id)
         flash[:notice] = 'Job was successfully created.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
