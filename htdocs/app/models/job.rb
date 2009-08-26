@@ -14,6 +14,13 @@ class Job < ActiveRecord::Base
   validates_numericality_of :pvalue, :equal_to => 2
   validate :check_update_schedule
   validate :check_stochastic_options
+  validate :check_state_space
+  
+  def check_state_space
+    if self.show_state_space
+      errors.add("show_functions", "must also be selected if you want to show state space.") unless show_functions
+    end
+  end
   
   def check_update_schedule
     if update_schedule
