@@ -10,24 +10,15 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test "should not create job with too many/few nodes" do
-    assert !Job.new({ :user_id => 1, :nodes => 1000, :pvalue => 2}).save
-    assert !Job.new({ :user_id => 1, :nodes => 12, :pvalue => 2}).save
-    assert !Job.new({ :user_id => 1, :nodes => 0, :pvalue => 2}).save
-    assert !Job.new({ :user_id => 1, :nodes => -1000, :pvalue => 2}).save
+    for i in [1000, 12, 0, -1000] do 
+      assert !Job.new({ :user_id => 1, :nodes => i, :pvalue => 2}).save
+    end
   end
   
   test "should create job with between 1-11 nodes" do
-    assert Job.new({ :user_id => 1, :nodes => 1, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 2, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 4, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 6, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 7, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 8, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 9, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 10, :pvalue => 2}).save
-    assert Job.new({ :user_id => 1, :nodes => 11, :pvalue => 2}).save
+    for i in 1 .. 11 do 
+      assert Job.new({ :user_id => 1, :nodes => i, :pvalue => 2}).save
+    end
   end
 
   test "should not create job with pvalue other than two" do 
@@ -66,7 +57,7 @@ class JobTest < ActiveSupport::TestCase
     assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
       :update_schedule => '1 4'}).save
     assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
-      :update_schedule => '1 2 1'}).save
+      :update_schedule => '1 2 1'}).save, "we need to fix this, 1 2 1 should not be allowed as valid update schedule"
     assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
       :update_schedule => '1 2 3 4'}).save
     assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,

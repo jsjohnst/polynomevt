@@ -1,6 +1,21 @@
 require 'test_helper'
 
 class JobsControllerTest < ActionController::TestCase
+  
+  # called before every single test 
+  def setup 
+    # make sure files directory is there
+    `touch public/files/`
+  end
+  
+  def teardown  
+    unless @job.file_prefix.nil?
+        prefix = "public/" + @job.file_prefix
+        `rm -r #{prefix}* 2> /dev/null`
+    end
+  end
+
+
   test "should get index" do
     get :index
     assert_response :success
