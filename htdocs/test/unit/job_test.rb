@@ -13,10 +13,6 @@ class JobTest < ActiveSupport::TestCase
     for i in [1000, 12, 0, -1000] do 
       assert !Job.new({ :user_id => 1, :nodes => i, :pvalue => 2}).save
     end
-    assert !Job.new({ :user_id => 1, :nodes => 1000, :pvalue => 2}).save
-    assert !Job.new({ :user_id => 1, :nodes => 12, :pvalue => 2}).save
-    assert !Job.new({ :user_id => 1, :nodes => 0, :pvalue => 2}).save
-    assert !Job.new({ :user_id => 1, :nodes => -1000, :pvalue => 2}).save
   end
   
   test "should create job with between 1-11 nodes" do
