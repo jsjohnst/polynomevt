@@ -53,19 +53,43 @@ class JobTest < ActiveSupport::TestCase
     :show_state_space => true, :show_functions => true}).save
   end
   test "should not create job with show statespace but not functions" do 
-    assert !Job.new(  { :user_id => 1, :nodes => 3, :pvalue => 2,
+    assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
     :show_state_space => true, :show_functions => false}).save
   end
 
+  test "should create job with empty update schedule" do 
+    assert Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :update_schedule => '  '}).save
+  end
+
   test "should not create job with invalid update schedule" do 
+    assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :update_schedule => '1 4'}).save
+    assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :update_schedule => '1 2 1'}).save
+    assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :update_schedule => '1 2 3 4'}).save
+    assert !Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :update_schedule => 'invalid schedule'}).save
   end
 
   test "should not create state space for stochastic job with too many nodes" do 
+    assert !Job.new({ :user_id => 1, :nodes => 11, :pvalue => 2,
+      :make_deterministic_model => false, :show_state_space => true}).save
+    assert !Job.new({ :user_id => 1, :nodes => 50, :pvalue => 2,
+      :make_deterministic_model => false, :show_state_space => true}).save
   end
 
   test "should not create stochastic job with sequential updates" do 
+    assert !Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2,
+      :make_deterministic_model => false, :update_type => 'sequential'}).save
+    assert !Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2,
+      :make_deterministic_model => false, :update_type => 'sequential',
+      :update_schedule => '1 2 3 4 5'}).save
   end
 
   test "should allow large number of nodes if not simulated" do 
+    assert !Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2,
+      :make_deterministic_model => false, :update_type => 'sequential'}).save
   end
 end
