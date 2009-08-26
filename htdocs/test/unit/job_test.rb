@@ -9,12 +9,31 @@ class JobTest < ActiveSupport::TestCase
     assert Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2} ).save
   end
 
-  test "should not create job with too many nodes" do
+  test "should not create job with too many/few nodes" do
     assert !Job.new({ :user_id => 1, :nodes => 1000, :pvalue => 2}).save
+    assert !Job.new({ :user_id => 1, :nodes => 12, :pvalue => 2}).save
+    assert !Job.new({ :user_id => 1, :nodes => 0, :pvalue => 2}).save
+    assert !Job.new({ :user_id => 1, :nodes => -1000, :pvalue => 2}).save
+  end
+  
+  test "should create job with between 1-11 nodes" do
+    assert Job.new({ :user_id => 1, :nodes => 1, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 2, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 4, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 6, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 7, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 8, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 9, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 10, :pvalue => 2}).save
+    assert Job.new({ :user_id => 1, :nodes => 11, :pvalue => 2}).save
   end
 
   test "should not create job with pvalue other than two" do 
     assert !Job.new({ :user_id => 1, :nodes => 1000, :pvalue => 17}).save
+    assert !Job.new({ :user_id => 1, :nodes => 1000, :pvalue => 1}).save
+    assert !Job.new({ :user_id => 1, :nodes => 1000, :pvalue => 3}).save
   end
   
   test "should not create job with pvalue not integer" do 
