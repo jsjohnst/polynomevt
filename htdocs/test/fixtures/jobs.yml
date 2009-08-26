@@ -13,7 +13,7 @@ one:
   show_probabilities_wiring_diagram: false
   show_probabilities_state_space: false
   make_deterministic_model: false
-  update_type: MyString
+  update_type: ""
   update_schedule: "1 2 3"
   completed: false
   deleted: false
@@ -32,7 +32,7 @@ two:
   show_probabilities_wiring_diagram: false
   show_probabilities_state_space: false
   make_deterministic_model: false
-  update_type: MyString
+  update_type: ""
   update_schedule: "1 2 3"
   completed: false
   deleted: false

@@ -6,6 +6,10 @@ class Job < ActiveRecord::Base
   # by having this, we get the handy sequential? check among other things
   enum_field :update_type, [ 'sequential', '' ]
   
+  # default_value_for information can be found at the following URL:
+  # http://blog.phusion.nl/2008/10/03/47/
+  default_value_for :update_type, ''
+  
   validates_presence_of :user
   validates_presence_of :nodes
   validates_numericality_of :nodes, :only_integer => true, :message => "Number of nodes must be an integer between 1 and 11"
@@ -17,6 +21,7 @@ class Job < ActiveRecord::Base
   validate :check_state_space
   
   def check_state_space
+    # TODO: We should try to just force this on instead of erroring
     if self.show_state_space
       errors.add("show_functions", "must also be selected if you want to show state space.") unless show_functions
     end
