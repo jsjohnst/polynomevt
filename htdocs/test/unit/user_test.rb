@@ -48,11 +48,4 @@ class UserTest < ActiveSupport::TestCase
     assert my_user2.save, "second user without email address should have been saved"
   end
 
-  test "should create user" do
-    assert_difference('User.count') do
-      post :create, :user => { :login => "useronlywithpassword", :password => "fubarbaz" }
-    end
-
-    assert_redirected_to user_path(assigns(:user))
-  end
 end
