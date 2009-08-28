@@ -6,6 +6,12 @@ class JobsControllerTest < ActionController::TestCase
   def setup 
     # make sure files directory is there
     `mkdir -p public/files`
+    running_processes = `ps ax | grep delayed_job | grep -v "grep" | wc -l`
+    unless running_processes.to_i >= 1
+      puts "starting delayed_job server"
+      `mkdir -p tmp/pids`
+      `ruby script/delayed_job -e development -n 2 start`
+    end
   end
   
   def teardown  
