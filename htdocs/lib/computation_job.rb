@@ -19,7 +19,28 @@ class ComputationJob < Struct.new(:job_id)
     
     logger = Logger.new(File.join(RAILS_ROOT, 'log', 'computation_job.log'))
     logger.info "Discretized_file => " + discretized_file
-    
+   
+    # clean file of extra white spaces before discretizing
+    File.open(datafile, 'r') do |file|
+      output  = File.open("public/tmp.txt", 'w') 
+      while line = file.gets
+        my_array = line.split
+        first = true
+        my_array.each do |number|
+          puts number
+          if first
+            output.print number
+            first = false
+          else
+            output.print " " + number
+          end
+        end
+        output.print "\n"
+      end
+      output.close
+    end
+    File.copy( "public/tmp.txt", datafile)
+
     # discretize files
     logger.info "pwd => " + Dir.getwd
     logger.info "cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent -q -e \"discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///); exit 0;\"; cd ../htdocs;"
