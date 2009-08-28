@@ -1,25 +1,32 @@
 require 'test_helper'
 
-class JobsControllerTest < ActionController::TestCase
-  
+class JobsControllerTest < ActionController::TestCase 
+  @@my_delayed_pid = nil
+   
   # called before every single test 
   def setup 
     # make sure files directory is there
     `mkdir -p public/files`
-    running_processes = `ps ax | grep delayed_job | grep -v "grep" | wc -l`
-    unless running_processes.to_i >= 1
+    
+    # start up our delayed_job server and/or kill an existing one first
+    unless @@my_delayed_pid
+      if FileTest.exists?("tmp/pids/delayed_job.pid")
+        puts "killing existing delayed_job server"
+        pid = `cat tmp/pids/delayed_job.pid`
+        `kill #{pid}`
+        until `ps ax | grep delayed_job | grep -v grep`.length < 1
+          puts "Waiting on delayed_job server to quit..."
+          sleep(1)
+        end
+      end
       puts "starting delayed_job server"
-      `mkdir -p tmp/pids`
-      `ruby script/delayed_job -e development -n 2 start`
+      `ruby script/delayed_job -e test -n 1 start`
+      @@my_delayed_pid = `cat tmp/pids/delayed_job.pid`
     end
   end
   
   def teardown  
     ## TODO maybe want to kill delayed_job ...
-#    unless @job.file_prefix.nil?
-#        prefix = "public/" + @job.file_prefix
-#        `rm -r #{prefix}* 2> /dev/null`
-#    end
   end
 
 
@@ -59,14 +66,13 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should create file with discretized data" do
     assert !FileTest.exists?("public/discretized_input.txt")
-    post :create,  :job => { :user_id => 1, :nodes => 3, :pvalue => 2,
-      :input_data => "# First time course from testing\n 1.2  2.3  3.4\n 1.1  1.2
-      1.3\n 2.2  2.3  2.4\n 0.1  0.2  0.3\n" }
-    my_job = Job.find(jobs(:simple).to_param)
-    until my_job.completed? do 
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
+    assert my_job.save
+    assert Delayed::Job.enqueue(ComputationJob.new(my_job.id))
+    until my_job.completed? do
       sleep(1)
-      puts ":"
-      my_job = Job.find(my_job.id)
+      my_job.reload
     end
     assert FileTest.exists?("public/" + my_job.file_prefix + ".discretized_input.txt")
   end
