@@ -15,6 +15,13 @@ class ComputationJob < Struct.new(:job_id)
     datafile = "public/" + @job.file_prefix + ".input.txt"
     File.open(datafile, 'w') {|file| file.write(@job.input_data) }
     
+    # discretize files
+    
+    
+    # if wiring diagram and !show_functions
+    
+    
+    
     # we succeeded if we got to here!
     self.success()
   end  
