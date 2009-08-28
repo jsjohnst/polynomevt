@@ -17,11 +17,14 @@ class ComputationJob < Struct.new(:job_id)
 
     discretized_file = datafile.gsub(/input/, 'discretized_input')
     
+    logger = Logger.new(File.join(RAILS_ROOT, 'log', 'computation_job.log'))
+    logger.info "Discretized_file => " + discretized_file
+    
     # discretize files
-    logger.info "cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent
-      -q -e \"discretize(#{datafile}, 0, #{discretized_file}); exit 0;\"; cd
-      ../htdocs;"
-    `cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent -q -e "discretize(#{datafile}, 0, #{discretized_file}); exit 0;"; cd ../htdocs;`
+    logger.info "pwd => " + Dir.getwd
+    logger.info "cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent -q -e \"discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///); exit 0;\"; cd ../htdocs;"
+    logger.info "starting macaulay"
+    logger.info `cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent -q -e "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///); exit 0;"; cd ../htdocs;`
     
     
     # if wiring diagram and !show_functions
