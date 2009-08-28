@@ -10,12 +10,18 @@ class ComputationJob < Struct.new(:job_id)
     
     # now we setup a unique path to this job's data
     @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.id.to_s )
-    
-    # split is also checking the input format
+   
+    # save input data TODO read from file
     datafile = "public/" + @job.file_prefix + ".input.txt"
     File.open(datafile, 'w') {|file| file.write(@job.input_data) }
+
+    discretized_file = datafile.gsub(/input/, 'discretized_input')
     
     # discretize files
+    logger.info "cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent
+      -q -e \"discretize(#{datafile}, 0, #{discretized_file}); exit 0;\"; cd
+      ../htdocs;"
+    `cd ../macaulay/; M2 Discretize.m2 --stop --no-debug --silent -q -e "discretize(#{datafile}, 0, #{discretized_file}); exit 0;"; cd ../htdocs;`
     
     
     # if wiring diagram and !show_functions
