@@ -15,6 +15,7 @@ class JobsControllerTest < ActionController::TestCase
   end
   
   def teardown  
+    ## TODO maybe want to kill delayed_job ...
 #    unless @job.file_prefix.nil?
 #        prefix = "public/" + @job.file_prefix
 #        `rm -r #{prefix}* 2> /dev/null`
@@ -54,6 +55,20 @@ class JobsControllerTest < ActionController::TestCase
   test "should update job" do
     put :update, :id => jobs(:one).to_param, :job => { :user_id => 1, :nodes => 5, :pvalue => 2, :update_schedule => "1 2 3 4 5" }
     assert_redirected_to job_path(assigns(:job))
+  end
+
+  test "should create file with discretized data" do
+    assert !FileTest.exists?("public/discretized_input.txt")
+    post :create,  :job => { :user_id => 1, :nodes => 3, :pvalue => 2,
+      :input_data => "# First time course from testing\n 1.2  2.3  3.4\n 1.1  1.2
+      1.3\n 2.2  2.3  2.4\n 0.1  0.2  0.3\n" }
+    my_job = Job.find(jobs(:simple).to_param)
+    until my_job.completed? do 
+      sleep(1)
+      puts ":"
+      my_job = Job.find(my_job.id)
+    end
+    assert FileTest.exists?("public/" + my_job.file_prefix + ".discretized_input.txt")
   end
 
   test "should destroy job" do
