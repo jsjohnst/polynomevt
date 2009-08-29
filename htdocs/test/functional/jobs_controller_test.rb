@@ -74,8 +74,8 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should create file with discretized data" do
-    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
-      :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2, 
+    :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
     wait_for_completion(my_job)
     discretized_file_name = "public/" + my_job.file_prefix + ".discretized_input.txt"
     assert FileTest.exists?(discretized_file_name)
@@ -83,6 +83,37 @@ class JobsControllerTest < ActionController::TestCase
     # make sure file content is what we expect
     expected_data = ["#TS1", "0 1 1 ", "0 0 0 ", "1 1 1 ", "0 0 0 "]
     compare_content(discretized_file_name, expected_data)
+  end
+
+  test "should create wiring diagram" do
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2
+      1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n", 
+      :show_wiring_diagram => true, :wiring_diagram_format => "gif" })
+    wait_for_completion(my_job)
+
+    wiring_diagram = "public/" + my_job.file_prefix + ".wiring-diagram."
+    assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format),
+    "picture for wiring diagram missing"
+    wiring_diagram = wiring_diagram + "dot" 
+    assert FileTest.exists?(wiring_diagram), "dot file for wiring diagram
+    missing"
+
+    # make sure file content is what we expect
+    expected_data = [
+      "digraph {",
+      "x1",
+      "x2",
+      "x3",
+      "x2->x1 [label=\".333333\"];",
+      "x3->x1 [label=\".666667\"];",
+      "x2->x2 [label=\".333333\"];",
+      "x3->x2 [label=\".666667\"];",
+      "x2->x3 [label=\".333333\"];",
+      "x3->x3 [label=\".666667\"];",
+      "}"
+    ]
+    compare_content(wiring_diagram, expected_data)
   end
 
   test "should destroy job" do
