@@ -92,6 +92,7 @@ class ComputationJob < Struct.new(:job_id)
   def macaulay(m2_file, m2_command)
     @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command} exit 0;\"; cd ../htdocs;"
     @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command} exit 0;"; cd ../htdocs;`
+    $? == 0
   end
   
   def abort
