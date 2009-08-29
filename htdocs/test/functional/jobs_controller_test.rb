@@ -17,9 +17,15 @@ class JobsControllerTest < ActionController::TestCase
         puts "killing existing delayed_job server"
         pid = `cat tmp/pids/delayed_job.pid`
         `kill #{pid}`
+        count = 0;
         until `ps ax | grep delayed_job | grep -v grep`.length < 1
           puts "Waiting on delayed_job server to quit..."
           sleep(1)
+          count = count + 1;
+          if count > 5
+            puts "trying to kill again"
+            `killall delayed_job`
+          end
         end
       end
       puts "starting delayed_job server"
@@ -29,7 +35,7 @@ class JobsControllerTest < ActionController::TestCase
   end
   
   def teardown  
-    ## TODO maybe want to kill delayed_job ...
+    ## TODO maybe want to kill delayed_job? ...
   end
 
 
@@ -74,9 +80,11 @@ class JobsControllerTest < ActionController::TestCase
     assert my_job.save
     assert Delayed::Job.enqueue(ComputationJob.new(my_job.id))
     until my_job.completed? do
+      print "|"
       sleep(1)
       my_job.reload
     end
+    puts "|"
     assert FileTest.exists?("public/" + my_job.file_prefix + ".discretized_input.txt")
   end
 

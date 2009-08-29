@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'ftools'
 
 class ComputationJob < Struct.new(:job_id)  
   def perform  
@@ -22,7 +23,7 @@ class ComputationJob < Struct.new(:job_id)
    
     # clean file of extra white spaces before discretizing
     File.open(datafile, 'r') do |file|
-      output  = File.open("public/tmp.txt", 'w') 
+      output  = File.open("public/" + @job.file_prefix + ".tmp.txt", 'w') 
       while line = file.gets
         my_array = line.split
         first = true
@@ -39,7 +40,7 @@ class ComputationJob < Struct.new(:job_id)
       end
       output.close
     end
-    File.copy( "public/tmp.txt", datafile)
+    File.copy("public/" + @job.file_prefix + ".tmp.txt", datafile)
 
     # discretize files
     logger.info "pwd => " + Dir.getwd
