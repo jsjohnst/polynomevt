@@ -89,13 +89,8 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(discretized_file_name)
 
     # make sure file content is what we expect
-    discretized_file = File.open( discretized_file_name, "r")
     expected_data = ["#TS1", "0 1 1 ", "0 0 0 ", "1 1 1 ", "0 0 0 "]
-    for data in expected_data do 
-      line = discretized_file.gets
-      line = line.chop
-      assert_equal( data, line, "#{line} is not what we expected (#{data}), discretization faild") 
-    end
+    compare_content(discretized_file_name, expected_data)
   end
 
   test "should destroy job" do
@@ -104,5 +99,15 @@ class JobsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to jobs_path
+  end
+
+
+  def compare_content(file_name, expected_data)
+    my_file = File.open( file_name, "r")
+    for data in expected_data do 
+      line = my_file.gets
+      line = line.chop
+      assert_equal( data, line)
+    end
   end
 end
