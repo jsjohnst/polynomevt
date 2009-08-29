@@ -89,30 +89,40 @@ class ComputationJob < Struct.new(:job_id)
       end
     end
     
-    
-        
-    # m2 code in no particular order, need to move where appropriate
-    
-    # 
-    # 
-    
-    # macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
-    # `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
-    
-    # macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
-    # `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
-    
-    # 
-    
-    # macaulay("minsets-web.m2", "minsetsPDS(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
-    
-    
-    # macaulay("func.m2", "sgfan(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
-    
-    
-    
-    
-    
+    if generate_picture
+      @logger.info "Starting simulation of state space."
+      
+      show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0" 
+      wiring_diagram = @job.show_wiring_diagram ? "1" : "0" 
+      state_space = @job.show_state_space ? "1" : "0" 
+
+      # for synchronous updates or stochastic sequential updates
+      if (!@job.sequential? || @job.update_schedule == "" )
+          @job.update_schedule = "0"
+      end 
+      
+      # for stochastic sequential updates, sequential has to be set to 0        
+      # for dvd_stochastic_runner.pl to run correctly 
+      stochastic_sequential_update = "0" 
+      if (@job.sequential? && @job.update_schedule == "0")            
+        stochastic_sequential_update = "1"             
+        @job.update_type = ''
+      end 
+  
+      sequential = @job.sequential? ? "1" : "0" 
+
+      # concatenate update schedule into one string with _ as separators
+      # so we can pass it to dvd_stochastic_runner.pl
+      @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
+      @logger.info "Update Schedule :" + @job.update_schedule + ":"
+      @logger.info "Functionfile : " + functionfile
+
+      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}"
+
+      simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
+      @logger.info "simulation output: " + simulation_output
+    end
+      
     # we succeeded if we got to here!
     self.success()
   end  
