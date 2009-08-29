@@ -90,7 +90,7 @@ class JobsControllerTest < ActionController::TestCase
 
     # make sure file content is what we expect
     discretized_file = File.open( discretized_file_name, "r")
-    expected_data = ["#TS1", "0 1 1", "0 0 0", "1 1 1", "0 0 0"]
+    expected_data = ["#TS1", "0 1 1 ", "0 0 0 ", "1 1 1 ", "0 0 0 "]
     for data in expected_data do 
       line = discretized_file.gets
       line = line.chop
