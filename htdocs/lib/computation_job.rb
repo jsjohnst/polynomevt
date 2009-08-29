@@ -51,10 +51,10 @@ class ComputationJob < Struct.new(:job_id)
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
-      dotfile = "public/perl/" + @job.file_prefix + ".wiring-diagram.txt"
-      graphfile = "public/perl/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
-      functionfile = "public/perl/" + @job.file_prefix + ".functionfile.txt"
-      consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
+      dotfile = "public/" + @job.file_prefix + ".wiring-diagram.txt"
+      graphfile = "public/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
+      functionfile = "public/" + @job.file_prefix + ".functionfile.txt"
+      consistent_datafile = "public/" + @job.file_prefix + ".consistent-input.txt"
       
       if @job.show_wiring_diagram && !@job.show_functions
         if @job.nodes <= n_react_threshold
@@ -68,6 +68,7 @@ class ComputationJob < Struct.new(:job_id)
           end
         else
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
+          @logger.info "running minsetsWD"
           macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
           `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
         end
@@ -117,9 +118,9 @@ class ComputationJob < Struct.new(:job_id)
       @logger.info "Update Schedule :" + @job.update_schedule + ":"
       @logger.info "Functionfile : " + functionfile
 
-      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}"
+      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}"
 
-      simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
+      simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
       @logger.info "simulation output: " + simulation_output
     end
       
