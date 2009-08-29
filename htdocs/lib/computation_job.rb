@@ -51,10 +51,10 @@ class ComputationJob < Struct.new(:job_id)
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
-      dotfile = "public/perl/" + @job.file_prefix + ".wiring-diagram.txt"
-      graphfile = "public/perl/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
-      functionfile = "public/perl/" + @job.file_prefix + ".functionfile.txt"
-      consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
+      dotfile = "public/" + @job.file_prefix + ".wiring-diagram.txt"
+      graphfile = "public/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
+      functionfile = "public/" + @job.file_prefix + ".functionfile.txt"
+      consistent_datafile = "public/" + @job.file_prefix + ".consistent-input.txt"
       
       if @job.show_wiring_diagram && !@job.show_functions
         if @job.nodes <= n_react_threshold
