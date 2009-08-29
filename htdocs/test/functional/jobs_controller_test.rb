@@ -84,8 +84,18 @@ class JobsControllerTest < ActionController::TestCase
       sleep(1)
       my_job.reload
     end
-    puts "|"
-    assert FileTest.exists?("public/" + my_job.file_prefix + ".discretized_input.txt")
+    #puts "|"
+    discretized_file_name = "public/" + my_job.file_prefix + ".discretized_input.txt"
+    assert FileTest.exists?(discretized_file_name)
+
+    # make sure file content is what we expect
+    discretized_file = File.open( discretized_file_name, "r")
+    expected_data = ["#TS1", "0 1 1", "0 0 0", "1 1 1", "0 0 0"]
+    for data in expected_data do 
+      line = discretized_file.gets
+      line = line.chop
+      assert_equal( data, line, "#{line} is not what we expected (#{data}), discretization faild") 
+    end
   end
 
   test "should destroy job" do
