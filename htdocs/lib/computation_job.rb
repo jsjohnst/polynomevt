@@ -50,6 +50,39 @@ class ComputationJob < Struct.new(:job_id)
     
     # if wiring diagram and !show_functions
     
+    # m2 code in no particular order, need to move where appropriate
+    
+    # macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})")
+    
+    # dotfile = "public/perl/" + @job.file_prefix + ".wiring-diagram.txt"
+    # graphfile = "public/perl/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
+    
+    # macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
+    # `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
+    
+    # macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
+    # `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
+    
+    # functionfile = "public/perl/" + @job.file_prefix + ".functionfile.txt"
+    
+    # macaulay("minsets-web.m2", "minsetsPDS(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
+    
+    
+    # macaulay("func.m2", "sgfan(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
+    
+    
+    
+    # consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
+    # macaulay("incons.m2", "makeConsistent(///../htdocs/#{datafile}///, #{@job.nodes}, ///../htdocs/#{consistent_datafile}///)")
+    # if (File.zero?(consistent_datafile))
+    #    TODO: make a way to store errors into the job for the user to see
+    #    self.abort()
+    # end
+    # File.copy(datafile, "public/" + @job.file_prefix + ".original-input.txt")
+    # File.copy(datafile, "public/" + @job.file_prefix + ".input.txt")
+    # TODO need to rediscretize now
+    
+    
     
     
     # we succeeded if we got to here!
