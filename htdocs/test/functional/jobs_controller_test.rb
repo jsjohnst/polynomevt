@@ -18,7 +18,7 @@ class JobsControllerTest < ActionController::TestCase
         pid = `cat tmp/pids/delayed_job.pid`
         `kill #{pid}`
         count = 0;
-        until `ps ax | grep delayed_job | grep -v grep`.length < 1
+        until `ps ax | grep delayed_job | grep -v grep | grep -v tail`.length < 1
           puts "Waiting on delayed_job server to quit..."
           sleep(1)
           count = count + 1;
