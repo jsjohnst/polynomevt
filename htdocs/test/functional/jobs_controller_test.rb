@@ -8,6 +8,9 @@ class JobsControllerTest < ActionController::TestCase
     # make sure files directory is there
     `mkdir -p public/files`
     
+    # make sure this directory exists otherwise the delayed_job server fails
+    `mkdir -p tmp/pids`
+    
     # start up our delayed_job server and/or kill an existing one first
     unless @@my_delayed_pid
       if FileTest.exists?("tmp/pids/delayed_job.pid")
