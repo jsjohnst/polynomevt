@@ -50,42 +50,46 @@ class ComputationJob < Struct.new(:job_id)
     n_react_threshold = -1; # disabling this for now since we don't have it coded yet
     generate_picture = false
     
-    dotfile = "public/perl/" + @job.file_prefix + ".wiring-diagram.txt"
-    graphfile = "public/perl/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
-    functionfile = "public/perl/" + @job.file_prefix + ".functionfile.txt"
-    consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
-    
-    if @job.show_wiring_diagram && !@job.show_functions
-      if @job.nodes <= n_react_threshold
-        if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})")
-          @logger.info "Running react"
-          # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
-          generate_picture = true
+    if @job.show_wiring_diagram || @job.show_functions
+      dotfile = "public/perl/" + @job.file_prefix + ".wiring-diagram.txt"
+      graphfile = "public/perl/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
+      functionfile = "public/perl/" + @job.file_prefix + ".functionfile.txt"
+      consistent_datafile = "public/perl/" + @job.file_prefix + ".consistent-input.txt"
+      
+      if @job.show_wiring_diagram && !@job.show_functions
+        if @job.nodes <= n_react_threshold
+          if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})")
+            @logger.info "Running react"
+            # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+            generate_picture = true
+          else
+            macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
+            `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
+          end
         else
-          macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
+          self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
+          macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
           `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
         end
       else
-        self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-        macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
-        `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
-      end
-    else
-      if @job.make_deterministic_model
-        if @job.nodes <= n_react_threshold
-          # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
-          generate_picture = true
-        else
+        if @job.make_deterministic_model
+          if @job.nodes <= n_react_threshold
+            # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+            generate_picture = true
+          else
+            self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
+            macaulay("minsets-web.m2", "minsetsPDS(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
+            generate_picture = true
+          end
+        else # stochastic
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-          macaulay("minsets-web.m2", "minsetsPDS(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
+          macaulay("func.m2", "sgfan(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
           generate_picture = true
         end
-      else # stochastic
-        self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-        macaulay("func.m2", "sgfan(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
-        generate_picture = true
       end
     end
+    
+    
         
     # m2 code in no particular order, need to move where appropriate
     
