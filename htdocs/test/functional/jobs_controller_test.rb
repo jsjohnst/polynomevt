@@ -99,6 +99,7 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(wiring_diagram), "dot file for wiring diagram
     missing"
 
+
     # make sure file content is what we expect
     expected_data = [
       "digraph {",
