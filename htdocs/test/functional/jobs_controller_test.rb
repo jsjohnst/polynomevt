@@ -74,18 +74,15 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should create file with discretized data" do
-    assert !FileTest.exists?("public/discretized_input.txt")
     my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
       :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
-    assert my_job.save
-    assert Delayed::Job.enqueue(ComputationJob.new(my_job.id))
-    until my_job.completed? do
-      print "|"
-      sleep(1)
-      my_job.reload
-    end
-    puts "|"
-    assert FileTest.exists?("public/" + my_job.file_prefix + ".discretized_input.txt")
+    wait_for_completion(my_job)
+    discretized_file_name = "public/" + my_job.file_prefix + ".discretized_input.txt"
+    assert FileTest.exists?(discretized_file_name)
+
+    # make sure file content is what we expect
+    expected_data = ["#TS1", "0 1 1 ", "0 0 0 ", "1 1 1 ", "0 0 0 "]
+    compare_content(discretized_file_name, expected_data)
   end
 
   test "should destroy job" do
@@ -94,5 +91,26 @@ class JobsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to jobs_path
+  end
+
+  def wait_for_completion(my_job)
+    assert my_job.save
+    assert Delayed::Job.enqueue(ComputationJob.new(my_job.id))
+    until my_job.completed? do
+      print "-"
+      sleep(1)
+      my_job.reload
+    end
+    puts "|"
+  end
+
+
+  def compare_content(file_name, expected_data)
+    my_file = File.open( file_name, "r")
+    for data in expected_data do 
+      line = my_file.gets
+      line = line.chop
+      assert_equal( data, line)
+    end
   end
 end
