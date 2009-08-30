@@ -91,9 +91,9 @@ class JobsControllerTest < ActionController::TestCase
       :show_wiring_diagram => true, :wiring_diagram_format => "gif" })
     wait_for_completion(my_job)
 
-    wiring_diagram = "public/" + my_job.file_prefix + ".wiring-diagram."
-    assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format),
-    "picture for wiring diagram missing"
+    wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
+    puts wiring_diagram + my_job.wiring_diagram_format
+    assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
     wiring_diagram = wiring_diagram + "dot" 
     assert FileTest.exists?(wiring_diagram), "dot file for wiring diagram
     missing"
@@ -101,7 +101,7 @@ class JobsControllerTest < ActionController::TestCase
 
     # make sure file content is what we expect
     expected_data = [
-      "digraph {",
+      "digraph { ",
       "x1",
       "x2",
       "x3",

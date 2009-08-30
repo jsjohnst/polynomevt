@@ -47,27 +47,32 @@ class ComputationJob < Struct.new(:job_id)
     
     macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///)")
     
-    n_react_threshold = -1; # disabling this for now since we don't have it coded yet
+    n_react_threshold = 10;
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
-      dotfile = "public/" + @job.file_prefix + ".wiring-diagram.dot"
-      graphfile = "public/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
+      dotfile = "public/" + @job.file_prefix + ".wiring_diagram.dot"
+      graphfile = "public/" + @job.file_prefix + ".wiring_diagram." + @job.wiring_diagram_format
       functionfile = "public/" + @job.file_prefix + ".functionfile.txt"
-      consistent_datafile = "public/" + @job.file_prefix + ".consistent-input.txt"
+      consistent_datafile = "public/" + @job.file_prefix + ".consistent_input.txt"
       
       if @job.show_wiring_diagram && !@job.show_functions
         if @job.nodes <= n_react_threshold
           if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})")
-            @logger.info "Running react"
+            @logger.info "Running react ... not implemented yet"
             # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
             generate_picture = true
           else
+            # TODO
+            @logger.info "judging from the flow chart we're supposed to use
+            wd, but wd has not been rewritten to use a file with hashes
+            instead of a list"
             macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
             `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
           end
         else
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
+          @logger.info "running minsetsWD"
           macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
           `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
         end
@@ -117,9 +122,9 @@ class ComputationJob < Struct.new(:job_id)
       @logger.info "Update Schedule :" + @job.update_schedule + ":"
       @logger.info "Functionfile : " + functionfile
 
-      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}"
+      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}"
 
-      simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
+      simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
       @logger.info "simulation output: " + simulation_output
     end
       
@@ -143,8 +148,8 @@ class ComputationJob < Struct.new(:job_id)
   end
   
   def macaulay(m2_file, m2_command)
-    @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command} exit 0;\"; cd ../htdocs;"
-    @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command} exit 0;"; cd ../htdocs;`
+    @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;"
+    @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; cd ../htdocs;`
     $? == 0
   end
   
