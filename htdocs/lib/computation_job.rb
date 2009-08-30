@@ -45,13 +45,13 @@ class ComputationJob < Struct.new(:job_id)
     # discretize files
     @logger.info "pwd => " + Dir.getwd
     
-    macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///);")
+    macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///)")
     
     n_react_threshold = -1; # disabling this for now since we don't have it coded yet
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
-      dotfile = "public/" + @job.file_prefix + ".wiring-diagram.txt"
+      dotfile = "public/" + @job.file_prefix + ".wiring-diagram.dot"
       graphfile = "public/" + @job.file_prefix + ".wiring-diagram." + @job.wiring_diagram_format
       functionfile = "public/" + @job.file_prefix + ".functionfile.txt"
       consistent_datafile = "public/" + @job.file_prefix + ".consistent-input.txt"
@@ -138,7 +138,7 @@ class ComputationJob < Struct.new(:job_id)
       File.copy(datafile, "public/" + @job.file_prefix + ".original-input.txt") 
       # copy consistent data into input and rediscretize
       File.copy(consistent_datafile, "public/" + @job.file_prefix + ".input.txt") 
-      self.macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///);")
+      self.macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///)")
     end
   end
   
