@@ -28,6 +28,12 @@
   <%=h @user.organization %>
 </p>
 
+<p>
+  <b>Jobs:</b>
+  <% @user.job.each do |j| %>
+  	<%= link_to j.id, j %>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
