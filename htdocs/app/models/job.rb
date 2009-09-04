@@ -12,6 +12,7 @@ class Job < ActiveRecord::Base
   
   validates_presence_of :user
   validates_presence_of :nodes
+  validates_length_of :input_data, :minimum => 1
   validates_numericality_of :nodes, :only_integer => true, :message => "Number of nodes must be an integer between 1 and 11"
   validates_numericality_of :nodes, :less_than => 12, :message => "Number of nodes is too big!"
   validates_numericality_of :nodes, :greater_than => 0, :message => "Number of nodes is too small!"
@@ -19,6 +20,7 @@ class Job < ActiveRecord::Base
   validate :check_update_schedule
   validate :check_stochastic_options
   validate :check_state_space
+  
   
   def check_state_space
     # TODO: We should try to just force this on instead of erroring

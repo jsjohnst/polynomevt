@@ -1,6 +1,6 @@
 <h1>New job</h1>
 
-<% form_for(@job) do |f| %>
+<% form_for(@job, :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -38,6 +38,10 @@
   <p>
     <%= f.label :input_data %><br />
     <%= f.text_area :input_data %>
+  </p>
+  <p>
+    <%= f.label :input_file %><br />
+    <%= f.file_field :input_file %>
   </p>
   <p>
     <%= f.label :show_probabilities_wiring_diagram %><br />

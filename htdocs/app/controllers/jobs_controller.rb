@@ -40,6 +40,11 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
+    if params[:job][:input_file]
+      params[:job][:input_data] = params[:job][:input_file].read
+      params[:job].delete(:input_file)
+    end
+    
     @job = Job.new(params[:job])
 
     respond_to do |format|

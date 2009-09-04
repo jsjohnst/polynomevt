@@ -52,10 +52,26 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should create job" do
     assert_difference('Job.count') do
-      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2 }
+      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_data => "3 2 1\n2 1 1\n1 1 0"  }
     end
 
     assert_redirected_to job_path(assigns(:job))
+  end
+  
+  test "should create job with file upload" do
+    data_file = fixture_file_upload('files/data.txt','text/plain')
+    assert_difference('Job.count') do
+      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file }
+    end
+
+    assert_redirected_to job_path(assigns(:job))
+  end
+  
+  test "should not create job with empty file upload" do
+    data_file = fixture_file_upload('files/empty_data.txt','text/plain')
+    assert_no_difference('Job.count') do
+      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file }
+    end
   end
 
   test "should show job" do
