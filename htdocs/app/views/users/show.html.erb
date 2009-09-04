@@ -29,9 +29,9 @@
 </p>
 
 <p>
-  <b>Jobs:</b>
+  <b>Jobs:</b><br/>
   <% @user.job.each do |j| %>
-  	<%= link_to j.id, j %>
+  	<%= link_to j.created_at, j %><br/>
   <% end %>
 </p>
 
