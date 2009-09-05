@@ -38,6 +38,25 @@ two:
   deleted: false
   user_id: 1
 
+job_with_invalid_user:
+  nodes: 3
+  pvalue: 2
+  show_wiring_diagram: false
+  wiring_diagram_format: "gif"
+  show_state_space: false
+  state_space_format: "gif"
+  show_discretized: true
+  show_functions: false
+  input_data: "# First time course from testing\n 1.2  2.3  3.4\n 1.1  1.2  1.3\n 2.2  2.3  2.4\n 0.1  0.2  0.3\n"
+  show_probabilities_wiring_diagram: false
+  show_probabilities_state_space: false
+  make_deterministic_model: false
+  update_type: ""
+  update_schedule: ""
+  completed: false
+  deleted: false
+  user_id: 42
+
 job_without_user:
   nodes: 3
   pvalue: 2
