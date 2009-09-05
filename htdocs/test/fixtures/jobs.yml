@@ -9,7 +9,8 @@ one:
   state_space_format: MyString
   show_discretized: false
   show_functions: false
-  input_data: MyText
+  input_data: ".2 .5 .11\n
+    .3 .6 1.2"
   show_probabilities_wiring_diagram: false
   show_probabilities_state_space: false
   make_deterministic_model: false
@@ -28,7 +29,8 @@ two:
   state_space_format: MyString
   show_discretized: false
   show_functions: false
-  input_data: MyText
+  input_data: ".2 .5 .11\n
+      .3 .6 1.2"
   show_probabilities_wiring_diagram: false
   show_probabilities_state_space: false
   make_deterministic_model: false
@@ -55,7 +57,7 @@ job_with_invalid_user:
   update_schedule: ""
   completed: false
   deleted: false
-  user_id: 42
+  user_id: -1 
 
 job_without_user:
   nodes: 3

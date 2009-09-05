@@ -2,11 +2,11 @@ require 'test_helper'
 
 class JobTest < ActiveSupport::TestCase
   test "create simple job and save it" do 
-    my_job = Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2,
-    :update_schedule => "1 2 3 4 5", :input_data => "3 2 1\n2 1 1\n1 1 0" } )
-    assert my_job.save
+    assert Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2, :update_schedule => "1 2 3 4 5", 
+      :input_data => "3 2 1 1 1\n2 2 2 1 1\n1 0 0 1 0" } ).save
     
-    assert Job.new({ :user_id => 1, :nodes => 5, :pvalue => 2, :input_data => "3 2 1\n2 1 1\n1 1 0" } ).save
+    assert Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2, :input_data =>
+    ".3 0.2 1.\n2.0001\t  1.11 1\n1.333 .1 0" } ).save
   end
 
   test "should not create job with too many/few nodes" do
@@ -15,9 +15,38 @@ class JobTest < ActiveSupport::TestCase
     end
   end
   
+  test "should create job with correct data" do
+    valid_data = [
+      "1 1\n2 2", 
+      "1 1\n2  2", 
+      "#This seperates a timecourse \n 1 1\n2  2", 
+      "#This seperates a timecourse 1 1\n2  2", 
+      "#This seperates a timecourse 1 1\n2  2\n\n\n", 
+      "1\t\t 1\n2  2", 
+      "1 1\n2  2", 
+      "1 1\n2  2\n1 2\n3 1\n#another timecourse\n 1 1\n 3 2", 
+    ]
+    for data in valid_data do 
+      assert Job.new({ :user_id => 1, :nodes => 2, :pvalue => 2, 
+        :input_data => data }).save, "failed with this data\n:#{data}:"
+    end
+  end
+
+  test "should not create job with incorrect data" do
+    invalid_data = [
+      "1 1 1\n2 2", 
+      "1 1\n2 ", 
+    ]
+    for data in invalid_data do 
+      assert !Job.new({ :user_id => 1, :nodes => 2, :pvalue => 2, 
+        :input_data => data }).save, "passed with this data\n:#{data}:" 
+    end
+  end
+
   test "should create job with between 1-11 nodes" do
-    for i in 1 .. 11 do 
-      assert Job.new({ :user_id => 1, :nodes => i, :pvalue => 2, :input_data => "3 2 1\n2 1 1\n1 1 0" }).save
+    for i in 2 .. 11 do 
+      assert Job.new({ :user_id => 1, :nodes => i, :pvalue => 2, 
+        :input_data => (1..i).to_a.join(" ") + "\n" + (i..1).to_a.join(" ") }).save, "failed with #{i} nodes"
     end
   end
 

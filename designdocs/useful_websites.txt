@@ -1,2 +1,5 @@
 http://asciicasts.com/episodes/171-delayed-job
 http://www.aidanf.net/rails_user_authentication_tutorial
+
+testing:
+http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html
