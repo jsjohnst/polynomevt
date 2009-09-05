@@ -22,16 +22,11 @@ class Job < ActiveRecord::Base
   validate :check_state_space
   validate :check_input_data 
 
-  # remove blank lines from data before working with it
+  # remove blank lines from end of data before working with it
+  # We don't remove blank lines in the middle, because the correct and only
+  # way to enter multiplte time courses is with hash symbols
   def input_data=(data)
-    tmp = []
-    data.each_line do |line| 
-      line.strip!
-      if !line.empty?
-        tmp.push line
-      end
-    end
-    data = tmp.join "\n"
+    data.strip!
     write_attribute(:input_data, data)
   end
 
