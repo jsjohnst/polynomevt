@@ -44,7 +44,12 @@
 	<td><%=h job.failed %></td>
     <td><%=h job.deleted %></td>
  	<td><%=h job.file_prefix %></td>
-    <td><%=h job.user.login %></td>
+    <td><% if job.user %>
+      <%= job.user.login %>
+    <% else %>
+      User not known - maybe deleted?
+    <% end %>
+    </td>
     <td><%= link_to 'Show', job %></td>
     <td><%= link_to 'Edit', edit_job_path(job) %></td>
     <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
