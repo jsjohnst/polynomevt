@@ -46,6 +46,24 @@ class UserTest < ActiveSupport::TestCase
       :first_name => "Second",
       :last_name => "User"})
     assert my_user2.save, "second user without email address should have been saved"
+    
+    my_user1 = User.new({ :login => "firstwithoutemailempty",
+      :password => "simpleuserspassword",
+      :first_name => "First",
+      :last_name => "User", :email => ""})
+    assert my_user1.save, "first user with empty email address should have been saved" 
+    my_user2 = User.new({ :login => "secondwithoutemailempty",
+      :password => "simpleuserspassword",
+      :first_name => "Second",
+      :last_name => "User", :email => ""})
+    assert my_user2.save, "second user with empty email address should have been saved"
+
+    my_user1 = User.new({ :login => "firstwithoutemail1",
+      :password => "simpleuserspassword"})
+    assert my_user1.save, "first user without email address or name should have been saved" 
+    my_user2 = User.new({ :login => "secondwithoutemail1",
+      :password => "simpleuserspassword"})
+    assert my_user2.save, "second user without email address or name should have been saved"
   end
 
 end

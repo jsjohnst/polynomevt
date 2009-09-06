@@ -20,8 +20,35 @@ class Job < ActiveRecord::Base
   validate :check_update_schedule
   validate :check_stochastic_options
   validate :check_state_space
-  
-  
+  validate :check_input_data 
+
+  # remove blank lines from end of data before working with it
+  # We don't remove blank lines in the middle, because the correct and only
+  # way to enter multiplte time courses is with hash symbols
+  def input_data=(data)
+    data.strip!
+    write_attribute(:input_data, data)
+  end
+
+  def check_input_data
+    if !input_data 
+      errors.add("input_data", "You didn't enter any data") 
+      return
+    end
+    nodes_minus_one = (nodes - 1)
+    #puts "Nodes-1 " + nodes_minus_one.to_s
+    input_data.each_line do |line| 
+      line.strip!
+      if nodes_minus_one > 0
+        errors.add("input_data", "The data you entered is invalid. This :#{line.chop!}: is not a correct line.") unless 
+          (line.match( /^\s*\#+/ ) ||  line.match( /^\s*(\.?\d+\.?\d*\s+){#{nodes_minus_one.to_s}}\.?\d+\.?\d*\s*$/ ))
+      else
+        errors.add("input_data", "The data you entered is invalid. This :#{line.chop!}: is not a correct line.") unless 
+          (line.match( /^\s*\#+/) || line.match( /^\s*\.?\d+\.?\d*\s*$/ ))
+      end
+    end
+  end
+
   def check_state_space
     # TODO: We should try to just force this on instead of erroring
     if self.show_state_space
