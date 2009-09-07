@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       
       if(params[:user][:login].strip.empty? || params[:user][:password].strip.empty?) 
         flash[:notice] = 'Authentication failed. Login and/or password can not be blank'
-      elsif
+      elsif params[:user][:password] != @user.password
         flash[:notice] = 'Authentication failed. Invalid login / password'
       else
         session[:user] = @user.id
