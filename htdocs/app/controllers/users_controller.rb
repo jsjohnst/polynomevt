@@ -36,9 +36,10 @@ class UsersController < ApplicationController
       @user = User.new(params[:user])
       if @user.save
         flash[:notice] = 'User was successfully created.'
-        redirect_to :action => :authenticate
+        session[:user] = @user.id
+        redirect_to :action => :profile
       else
-        format.html { render :action => "register" }
+        render :action => :register
       end
     end
   end
