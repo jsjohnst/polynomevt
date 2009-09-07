@@ -2,56 +2,41 @@
 
 <table cellpadding="3" cellspacing="3" bgcolor="#C3C3C3">
   <tr bgcolor="#E3E3E3">
-    <th>Nodes</th>
-    <th>Pvalue</th>
-    <th>Show wiring diagram</th>
-    <th>Wiring diagram format</th>
-    <th>Show state space</th>
-    <th>State space format</th>
-    <th>Show discretized</th>
-    <th>Show functions</th>
-    <th>Input data</th>
-    <th>Show probabilities wiring diagram</th>
-    <th>Show probabilities state space</th>
-    <th>Make deterministic model</th>
-    <th>Update type</th>
-    <th>Update schedule</th>
-    <th>Completed</th>
-	<th>Failed</th>
-    <th>Deleted</th>
-    <th>File Prefix</th>
-    <th>User</th>
-	<th colspan="3">Actions</th>
+	<th>Date</th>
+	<th>Meta</th>
+	<th>Input Data</th>
+	<th>Log</th>
+	<th>Results</th>
+	<th colspan="2">Actions</th>
   </tr>
 
 <% @jobs.each do |job| %>
-  <tr bgcolor="#FFFFFF">
-    <td><%=h job.nodes %></td>
-    <td><%=h job.pvalue %></td>
-    <td><%=h job.show_wiring_diagram %></td>
-    <td><%=h job.wiring_diagram_format %></td>
-    <td><%=h job.show_state_space %></td>
-    <td><%=h job.state_space_format %></td>
-    <td><%=h job.show_discretized %></td>
-    <td><%=h job.show_functions %></td>
-    <td><%=h job.input_data %></td>
-    <td><%=h job.show_probabilities_wiring_diagram %></td>
-    <td><%=h job.show_probabilities_state_space %></td>
-    <td><%=h job.make_deterministic_model %></td>
-    <td><%=h job.update_type %></td>
-    <td><%=h job.update_schedule %></td>
-    <td><%=h job.completed %></td>
-	<td><%=h job.failed %></td>
-    <td><%=h job.deleted %></td>
- 	<td><%=h job.file_prefix %></td>
-    <td><% if job.user %>
-      <%= job.user.login %>
-    <% else %>
-      User not known - maybe deleted?
-    <% end %>
-    </td>
+  <tr bgcolor="<% if job.completed %>#57E964<% elsif job.failed %>#800517<% else %>#FFFFFF<% end %>">
+    <td><%=h job.created_at %></td>
+    <td>
+		<b>Nodes:</b> <%=h job.nodes %><br>
+		<b>Pvalue:</b> <%=h job.pvalue %><br>
+		<b>Deterministic:</b> <%=h job.make_deterministic_model %><br>
+		<b>Update Type:</b> <%=h job.update_type %><br>
+	</td>
+    <td><pre><%=h job.input_data %></pre></td>
+ 	<td><pre><%=h job.log %></pre></td>
+	<td>
+		<% if job.completed %>
+			<a href="/<%= job.file_prefix %>.input.txt">Input Data</a><br/>
+			<a href="/<%= job.file_prefix %>.discretized_input.txt">Discretized Data</a><br/>
+			
+			<% if job.show_wiring_diagram %>
+				<a href="/<%= job.file_prefix %>.wiring_diagram.dot">Dot File</a><br/>
+				<a href="/<%= job.file_prefix %>.wiring_diagram.<%= job.wiring_diagram_format %>">Wiring Diagram</a><br/>
+			<% end %>
+			
+			<% if job.show_functions %>
+				<a href="/<%= job.file_prefix %>.functionfile.txt">Show Functions</a><br/>
+			<% end %>
+		<% end %>
+	</td>
     <td><%= link_to 'Show', job %></td>
-    <td><%= link_to 'Edit', edit_job_path(job) %></td>
     <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
