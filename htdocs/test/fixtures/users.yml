@@ -10,13 +10,18 @@ one:
   organization: MyString
 
 two:
-  id: 2
+  id: 2 
   login: MyString
   password: MyString
   email: foo2@bar.com
   first_name: MyString
   last_name: MyString
   organization: MyString
+
+UserWithoutEmail:
+  login: UserWithoutEmail 
+  password: MyString
+  email: ""
 
 valid_user:
   login: simpleuser

@@ -69,9 +69,33 @@ class UsersControllerTest < ActionController::TestCase
       post :register, :user => { :login => "anothersimpleuserfirst", :password => "simpleuserspassword"}
     end
     assert_response :success
-    
+  end
+
+  test "should send user email with password" do 
+    ActionMailer::Base.delivery_method = :test 
+    my_user = users(:valid_user)
+    assert_difference 'ActionMailer::Base.deliveries.size', +1 do  
+      post :lostcredentials, :user => my_user
+    end  
+    password_reminder_email = ActionMailer::Base.deliveries.first
+
+    assert_equal password_reminder_email.subject, 'Polynome - Lost credentials information'
+    assert_equal [my_user.email] , password_reminder_email.to 
+    assert_match /#{my_user.password}/, password_reminder_email.body 
+    assert_match /#{my_user.login}/, password_reminder_email.body 
   end
   
+  test "should not send unknown user email with password" do 
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do  
+      post :lostcredentials, :user => { :email => "thisisnot@anemail.com" }
+      post :lostcredentials, :user => { :email => "thisisinvalid" }
+      post :lostcredentials, :user => { :email => "" }
+    end  
+
+    assert_equal 'No account was found for that email address.', flash[:notice]
+    assert_response :success
+  end
+
   test "should show profile if logged in" do
     session[:user] = 1
     get :profile
