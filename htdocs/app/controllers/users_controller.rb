@@ -7,10 +7,14 @@ class UsersController < ApplicationController
     if request.post?
       @user = User.find_by_login(params[:user][:login])
       
-      if(@user.password != params[:user][:password]) 
+      if(params[:user][:login].strip.empty? || params[:user][:password].strip.empty?) 
+        flash[:notice] = 'Authentication failed. Login and/or password can not be blank'
+      elsif
         flash[:notice] = 'Authentication failed. Invalid login / password'
       else
         session[:user] = @user.id
+        
+        flash[:notice] = "Logged in successfully!"
         
         # TODO: Find a cleaner way to do the below 4 lines of code
         redirect_action = session[:intended_action]
