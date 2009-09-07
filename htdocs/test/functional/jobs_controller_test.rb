@@ -32,6 +32,7 @@ class JobsControllerTest < ActionController::TestCase
       `ruby script/delayed_job -e test -n 1 start`
       @@my_delayed_pid = `cat tmp/pids/delayed_job.pid`
     end
+    session[:user] = 1
   end
   
   def teardown  
