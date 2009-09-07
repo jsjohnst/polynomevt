@@ -72,10 +72,6 @@
     <%= f.check_box :deleted %>
   </p>
   <p>
-    <%= f.label :user_id %><br />
-    <%= f.collection_select :user_id, User.all, :id, :login %>
-  </p>
-  <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>

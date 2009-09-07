@@ -1,85 +1,66 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.xml
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
-  end
-
-  # GET /users/1
-  # GET /users/1.xml
-  def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
-
-  # GET /users/new
-  # GET /users/new.xml
-  def new
+  before_filter :check_authentication, :only => :profile
+  
+  def authenticate
     @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
+    if request.post?
+      @user = User.find_by_login(params[:user][:login])
+      
+      if(@user.password != params[:user][:password]) 
+        flash[:notice] = 'Authentication failed. Invalid login / password'
+      else
+        session[:user] = @user.id
+        
+        # TODO: Find a cleaner way to do the below 4 lines of code
+        redirect_action = session[:intended_action]
+        session[:intended_action] = nil
+        redirect_controller = session[:intended_controller]
+        session[:intended_controller] = nil
+        
+        if !redirect_action || !redirect_controller
+          redirect_action = :profile
+          redirect_controller = :users
+        end
+        
+        redirect_to :action => redirect_action, :controller => redirect_controller
+      end
     end
   end
-
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
+  
+  def register
+    # We set this to nil, otherwise when we redirect we are already 
+    # logged in as the previous user
+    session[:user] = nil
+    @user = User.new
+    if request.post?
+      @user = User.new(params[:user])
       if @user.save
         flash[:notice] = 'User was successfully created.'
-        format.html { redirect_to(@user) }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+        redirect_to :action => :authenticate
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.html { render :action => "register" }
       end
     end
   end
-
-  # PUT /users/1
-  # PUT /users/1.xml
-  def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to(@user) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
+  
+  def logout
+    session[:user] = nil
+    redirect_to :action => :authenticate
+  end
+  
+  def profile
+    @user = User.find(session[:user])
+  end
+  
+  def lostpassword
+    
+  end
+  
+  def lostlogin
+    
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
-    end
+  def edit
+    
   end
 end

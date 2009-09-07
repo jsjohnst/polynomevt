@@ -1,0 +1,22 @@
+<div style="background-color: #e3e3e3">
+<% if session[:user] %>
+	<span style="padding: 3px 10px 3px 10px">
+		[&nbsp;<a href="/jobs">Jobs List</a>&nbsp;]
+	</span>
+	<span style="padding: 3px 10px 3px 10px">
+		[&nbsp;<a href="/jobs/new">New Job</a>&nbsp;]
+	</span>
+	<span style="padding: 3px 10px 3px 10px">
+		[&nbsp;<a href="/users/profile">My Profile</a>&nbsp;]
+	</span>
+	<span style="padding: 3px 10px 3px 10px">
+		[&nbsp;<a href="/users/logout">Logout</a>&nbsp;]
+	</span>
+<% else %>
+	<span style="padding: 3px 10px 3px 10px">
+		[&nbsp;<a href="/users/register">Register</a>&nbsp;]
+	</span>
+<% end %>
+</div>
+
+	

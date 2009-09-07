@@ -1,8 +1,10 @@
 class JobsController < ApplicationController
+  before_filter :check_authentication, :except => :show
+  
   # GET /jobs
   # GET /jobs.xml
   def index
-    @jobs = Job.all
+    @jobs = Job.find(:all, :conditions => { :user_id => session[:user] })
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,6 +46,8 @@ class JobsController < ApplicationController
       params[:job][:input_data] = params[:job][:input_file].read
       params[:job].delete(:input_file)
     end
+    
+    params[:job][:user_id] = session[:user]
     
     @job = Job.new(params[:job])
 

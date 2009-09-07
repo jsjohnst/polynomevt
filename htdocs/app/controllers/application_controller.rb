@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  def check_authentication
+    unless session[:user]
+      session[:intended_action] = action_name
+      session[:intended_controller] = controller_name
+      redirect_to :action => "authenticate", :controller => "users"
+    end
+  end
 end
