@@ -17,6 +17,19 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to :action => :profile
     assert_not_nil session[:user]
   end
+ 
+  test "should not authenticate without login or password" do 
+    post :authenticate, :user => { :login => "", :password => "" }
+    assert_response :success
+    assert_nil session[:user]
+  end
+
+  test "should not authenticate with empty password" do
+    my_user = users(:valid_user)
+    post :authenticate, :user => { :login => my_user.login, :password => "" }
+    assert_response :success
+    assert_nil session[:user]
+  end
   
   test "should not authenticate with bad login/password" do
     my_user = users(:valid_user)
@@ -77,7 +90,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do  
       post :lostcredentials, :user => my_user
     end  
-    password_reminder_email = ActionMailer::Base.deliveries.first
+    password_reminder_email = ActionMailer::Base.deliveries.last
 
     assert_equal password_reminder_email.subject, 'Polynome - Lost credentials information'
     assert_equal [my_user.email] , password_reminder_email.to 
