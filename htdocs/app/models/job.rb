@@ -60,6 +60,8 @@ class Job < ActiveRecord::Base
     if update_schedule
       errors.add("update_schedule", "not valid! " + update_schedule) unless
       update_schedule.match( /^\s*((\d+\s*){#{nodes}})?\s*$/ )
+      errors.add("update_schedule", "non-unique functions in schedule") unless
+      update_schedule.strip.length < 1 || update_schedule.strip.split( /\s*/ ).uniq.length == nodes
     end
   end
   
