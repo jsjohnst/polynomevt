@@ -6,7 +6,7 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
-#menubar {
+.menubar {
   background-color: #FF9900;
 }
 
