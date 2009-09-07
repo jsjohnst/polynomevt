@@ -1,0 +1,17 @@
+<h1>Destroy your account</h1>
+
+<% form_for :user, :url => { :action => "destroy" }, :html => { :method => :delete } do |f| %>
+  <%= f.error_messages %>
+  <p>
+	Destroying your account will permanently remove all your user information <br/>
+	from the system and will remove all jobs you have created. This is a <br/>
+	permanent change and can not be undone (even by an administrator), so <br/>
+	please make real sure this is what you want to do.
+  </p>
+  <h3>Are you really sure you want to delete your account?</h3>
+  <p>
+    <%= f.submit 'Permanently destroy my account', :confirm => "Are you really _really_ sure?" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :action => "profile" %>
