@@ -137,6 +137,9 @@ class UsersControllerTest < ActionController::TestCase
     session[:user] = users(:one).to_param
     put :edit, :id => users(:one).to_param, :user => { :login => "user", :password => "fubarbaz" }
     assert_redirected_to :action => :profile
+    my_user = User.find(users(:one).to_param)
+    assert_equal "user", my_user.login
+    assert_equal "fubarbaz", my_user.password
   end
 
   test "should get destroy" do
