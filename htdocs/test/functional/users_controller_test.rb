@@ -140,6 +140,11 @@ class UsersControllerTest < ActionController::TestCase
     my_user = User.find(users(:one).to_param)
     assert_equal "user", my_user.login
     assert_equal "fubarbaz", my_user.password
+    
+    # fail with too short pass
+    put :edit, :id => users(:one).to_param, :user => { :password => "1"}
+    assert_response :success
+    assert_match /is too short/, assigns(:user).errors.on(:password)
   end
 
   test "should get destroy" do
