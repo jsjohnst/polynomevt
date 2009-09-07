@@ -1,20 +1,23 @@
 <div style="background-color: #e3e3e3">
 <% if session[:user] %>
 	<span style="padding: 3px 10px 3px 10px">
-		[&nbsp;<a href="/jobs">Jobs List</a>&nbsp;]
+		[&nbsp;<%= link_to 'Jobs List', :action => :index, :controller => :jobs %>&nbsp;]
 	</span>
 	<span style="padding: 3px 10px 3px 10px">
-		[&nbsp;<a href="/jobs/new">New Job</a>&nbsp;]
+		[&nbsp;<%= link_to 'New Job', :action => :new, :controller => :jobs %>&nbsp;]
 	</span>
 	<span style="padding: 3px 10px 3px 10px">
-		[&nbsp;<a href="/users/profile">My Profile</a>&nbsp;]
+		[&nbsp;<%= link_to 'My Profile', :action => :profile, :controller => :users %>&nbsp;]
 	</span>
 	<span style="padding: 3px 10px 3px 10px">
-		[&nbsp;<a href="/users/logout">Logout</a>&nbsp;]
+		[&nbsp;<%= link_to 'Logout', :action => :logout, :controller => :users %>&nbsp;]
 	</span>
 <% else %>
 	<span style="padding: 3px 10px 3px 10px">
-		[&nbsp;<a href="/users/register">Register</a>&nbsp;]
+		[&nbsp;<%= link_to 'Login', :action => :authenticate, :controller => :users %>&nbsp;]
+	</span>
+	<span style="padding: 3px 10px 3px 10px">
+		[&nbsp;<%= link_to 'Register', :action => :register, :controller => :users %>&nbsp;]
 	</span>
 <% end %>
 </div>
