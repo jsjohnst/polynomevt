@@ -49,6 +49,10 @@ class UsersController < ApplicationController
     redirect_to :action => :authenticate
   end
   
+  def index
+    redirect_to :action => :profile
+  end
+  
   def profile
     @user = User.find(session[:user])
   end
