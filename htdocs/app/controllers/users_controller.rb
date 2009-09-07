@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   def lostcredentials
     if request.post?
       @user = User.find_by_email(params[:user][:email])
-      if(@user)
+      if @user && !@user.email.empty?
         Emailer.deliver_credentials(@user.email, @user.login, @user.password)
         flash[:notice] = 'Your account information has been sent to the email address you provided.'
         redirect_to :action => :authenticate
