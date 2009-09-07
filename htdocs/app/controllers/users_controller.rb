@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :check_authentication, :only => :profile
+  before_filter :check_authentication, :only => [:profile, :edit, :destroy]
   
   def authenticate
+    session[:user] = nil # force logout
     @user = User.new
     if request.post?
       @user = User.find_by_login(params[:user][:login])
@@ -28,8 +29,8 @@ class UsersController < ApplicationController
   end
   
   def register
-    # We set this to nil, otherwise when we redirect we are already 
-    # logged in as the previous user
+    # We set this to nil, otherwise when we redirect we could be 
+    # logged in still as the previous user
     session[:user] = nil
     @user = User.new
     if request.post?
@@ -66,6 +67,21 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+    @user = User.find(session[:user])
+    if request.put?
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'User was successfully updated.'
+        redirect_to :action => :profile
+      end
+    end
+  end
+  
+  def destroy
+    @user = User.find(session[:user])
+    if request.delete?
+      session[:user] = nil
+      @user.destroy
+      redirect_to :action => :logout
+    end
   end
 end

@@ -1,6 +1,6 @@
-<h1>Editing user</h1>
+<h1>Editing your profile</h1>
 
-<% form_for(@user) do |f| %>
+<% form_for :user, :url => { :action => "edit" }, :html => { :method => :put } do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -32,5 +32,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', :action => "profile" %>
