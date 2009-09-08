@@ -775,7 +775,7 @@ sub count_comps_final_all_trajectories {
     #we create a file ip.out.dot describing the state space
 
     ########### what to do here?
-    $dot_filename = _get_filelocation("$file_prefix.out.dot");
+    $dot_filename = _get_filelocation("$file_prefix.state_space.dot");
 
   #print ("Got dot_filename as $dot_filename WHERE Session_on = $Session_on");
     open( $Dot_file, ">$dot_filename" )
@@ -985,7 +985,7 @@ sub create_output {
         if ( -e $dot_filename ) {
             ## debug: print "dot -T$fileformat -o $file_prefix.out.$fileformat $file_prefix.out.dot";
             $statespace_filename
-                = _get_filelocation("$file_prefix.out.$ss_format");
+                = _get_filelocation("$file_prefix.state_space.$ss_format");
 
             #print "<br>\$statespace_filename $statespace_filename<br>";
             _log($statespace_filename);
@@ -1242,7 +1242,7 @@ sub regulatory {
         error_check(@Function_data) or return $Output_array;
     }
 
-    my $dot_filename = _get_filelocation("$file_prefix.wiring-diagram.dot");
+    my $dot_filename = _get_filelocation("$file_prefix.wiring_diagram.dot");
     #my $dot_filename = _get_filelocation("$file_prefix.out1.dot");
     _log ("Right here<br><br>");
     _log (getcwd);
@@ -1291,7 +1291,7 @@ sub regulatory {
     print $Dot_file "}";
     close($Dot_file);
 
-    $dot_filename2 = _get_filelocation("$file_prefix.out2.dot");
+    $dot_filename2 = _get_filelocation("$file_prefix.wiring_diagram.dot");
     _log("`sort -u $dot_filename > $dot_filename2`");
     _log("Removing double arrows from $dot_filename2");
     `sort -u $dot_filename > $dot_filename2`;
@@ -1326,7 +1326,7 @@ sub regulatory {
     # make the graph
     if ( -e $dot_filename ) {
         #$digraph_filename = _get_filelocation("$file_prefix.out1.$dg_format");
-        $digraph_filename = _get_filelocation("$file_prefix.wiring-diagram.$dg_format");
+        $digraph_filename = _get_filelocation("$file_prefix.wiring_diagram.$dg_format");
         _log("dot -T$dg_format -o $digraph_filename $dot_filename");
         `dot -T$dg_format -o $digraph_filename $dot_filename`;
 
