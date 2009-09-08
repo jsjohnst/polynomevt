@@ -27,8 +27,13 @@
 			<a href="/<%= job.file_prefix %>.discretized_input.txt">Discretized Data</a><br/>
 			
 			<% if job.show_wiring_diagram %>
-				<a href="/<%= job.file_prefix %>.wiring_diagram.dot">Dot File</a><br/>
 				<a href="/<%= job.file_prefix %>.wiring_diagram.<%= job.wiring_diagram_format %>">Wiring Diagram</a><br/>
+				<a href="/<%= job.file_prefix %>.wiring_diagram.dot">WD Dot File</a><br/>
+			<% end %>
+			
+			<% if job.show_state_space %>
+				<a href="/<%= job.file_prefix %>.state_space.<%= job.state_space_format %>">State Space</a><br/>
+				<a href="/<%= job.file_prefix %>.state_space.dot">SS Dot File</a><br/>
 			<% end %>
 			
 			<% if job.show_functions %>
