@@ -17,7 +17,12 @@
   </p>
   <p>
     <%= f.label :wiring_diagram_format %><br />
-    <%= f.text_field :wiring_diagram_format %>
+	<%= f.select :wiring_diagram_format, [ 
+			["*.gif", "gif"],
+			["*.jpg", "jpg"],
+			["*.png", "png"],
+			["*.ps", "ps"],
+		] %>
   </p>
   <p>
     <%= f.label :show_state_space %><br />
@@ -25,7 +30,12 @@
   </p>
   <p>
     <%= f.label :state_space_format %><br />
-    <%= f.text_field :state_space_format %>
+	<%= f.select :state_space_format, [ 
+			["*.gif", "gif"],
+			["*.jpg", "jpg"],
+			["*.png", "png"],
+			["*.ps", "ps"],
+		] %>
   </p>
   <p>
     <%= f.label :show_discretized %><br />
