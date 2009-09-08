@@ -88,7 +88,7 @@ class ComputationJob < Struct.new(:job_id)
           end
         else # stochastic
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-          macaulay("func.m2", "sgfan(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
+          macaulay("sgfan.m2", "sgfan((///../htdocs/#{discretized_file}///, null), ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
           generate_picture = true
         end
       end
