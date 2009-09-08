@@ -8,131 +8,95 @@
 --Usage: sgfan(dataFiles, p, n)
 --********************* 
 
-needsPackage "PolynomialDynamicalSystems"
-needsPackage "Points"
+load  "PolynomialDynamicalSystems.m2"
+load  "Points.m2"
 
-randomWeightVector = (nn) -> (
-     local permw;
-     while (
-        permw = apply(nn, i->random 100*nn);
-        sm := sum apply(permw, x -> x^2);
-	sm > (100*nn)^2) 
-     do ();
-     permw)
+sgfan = method();
+sgfan(String, String, ZZ, ZZ) := (WT, outfile, pp, nn) -> (
 
-randomWeightVector = (nn) -> (
-     --Choose a random radius in [0,1]
-     --m=20*nn;
-     m:=250;
-     onept:={}; 
-
-     --Get 10 normal numbers
-     for j from 1 to ceiling(nn/2) do(
-	  x:=random 1.; y:=random 1.;
-	  onept=append(onept, sqrt(-2*log(x))*cos(2*pi*y));
-	  onept=append(onept, sqrt(-2*log(x))*sin(2*pi*y));
-	  );
-     --Get the 11th number
-     --t=random 2;
-     --if t==0 then onept=append(onept, sqrt(-2*log(x))*cos(2*pi*y)) else onept=append(onept, --sqrt(-2*log(x))*sin(2*pi*y));
-
-     r:=random 1.;
-     r=r^(1./nn);
-
-     q:=0;
-     for j from 0 to nn-1 do (q=q+(onept#j)^2);
-     q=sqrt(q);
-     normpts := for j from 0 to nn-1 list ((onept#j)*r/q);
-
-     --Convert spherical to rectangular coordinates
-     apply(nn, i-> (
-	       j:=1;
-	       while abs(normpts#i)>j/m do j=j+1;
-	       j-1))
-     )
-
-sgfan = method(Options => {Limit => 1200})
-sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
-    -- WTandKO: (WT, KO)
-    -- outfile:
-    -- p: number of states (prime number)
-    -- nvars: number of genes (columns of each matrix)
-    -- niterations: how many GB's to sample
-    (WT,KO) := WTandKO;
-    kk := ZZ/p; --Field
-    --TSW is a hashtable of WT time series data
-    --TSK is a hashtable of KO time series data 
-    --TS is a hashtable of ALL time series data 
-    TSW := readTSData(WT, kk);
-    TSK := readKOData(KO, kk);
-    TS := TSW + TSK;
-
-    --FD is a list of hashtables, where each contains the input-vectors/output pairs for each node
-    FD := apply(nvars, i->functionData(TS, i+1));
-        
-    --IN is a matrix of input vectors
-    IN := transpose matrix keys first FD;
+    kk = ZZ/pp; --Field
+    --WT={"transition-1.txt","transition-2.txt","transition-3.txt","transition-4.txt","transition-5.txt","transition-6.txt","transition-7.txt","transition-8.txt","transition-9.txt","transition-10.txt","transition-11.txt","transition-12.txt","transition-13.txt"}; --(MUST come as input)
     
-    -- All the normal forms will be placed in this ring:
-    S := kk[makeVars nvars];
-
-    F := matrix {apply(nvars, i-> time findFunction(FD_i, gens S))};
+    --TS is a hashtable of time series data WITH NO KO DATA
+    TS = readTSData(WT, kk);
+    
+    --FD is a list of hashtables, where each contains the input-vectors/output pairs for each node
+    FD = apply(nn, II->functionData(TS, II+1));
+    
+    --IN is a matrix of input vectors
+    IN = matrix keys first FD;
+    
+    allNFs={};
+    functs={};
+    allFuncts={};
     
     --Sample randomly from the G. fan
-    setRandomSeed();
     setRandomSeed processID();
+    apply(5*nn, J -> (
+        permw= apply(nn, i->random 100*nn);    
+        sm=0;
+        apply(nn, i->(sm=sm+(permw#i)^2));
+        
+        while sm > (100*nn)^2 do (permw= apply(nn, i->random 100*nn); sm=0; apply(nn, i->(sm=sm+(permw#i)^2))  );
 
-    allNFs := apply(opts.Limit, J -> time (
-	if J % 100 == 0 then << J << "." << flush;
-        wtvec := randomWeightVector nvars;
-        print wtvec;
         --Rr is a polynomial ring in nn variables; can declare a term order here
-        Rr := kk[gens S, Weights => wtvec];
+        Rr = kk[vars(53..52+nn), Weights => permw];
         
         --SM is a list of standard monomials
         --LT is an ideal of leading terms
         --GB is a list of Grobner basis elements - THIS IS WHAT YOU WANT FOR GFAN
-        (SM, LT, GB) := points(IN, Rr);
-     	GB = matrix{GB};
-	forceGB GB;
+        (SM, LT, GB) = points(transpose IN, Rr);
+        
         --F is a list of interpolating functions, one for each node 
-	F1 := sub(F, Rr);
-	NF := F1 % GB;
-        flatten entries sub(NF,S)
-        ));
-    FF := allNFs//transpose/tally/pairs;
+        FF = apply(nn, II->findFunction(FD_II, gens Rr));
+        use Rr;
+        GG = {matrix{GB}};
+        NF = apply(nn, II->apply(GG, gb->(FF_II)%gb));
+        
+        temp={};
+        temp=apply(nn, II->append(temp,NF#II#0));
+        allNFs=append(allNFs,flatten temp);
+    ));
     
-    file := openOut outfile;
-    apply(nvars, i-> (
+    allCounts={};
+    FF={};
+    apply(nn, JJ->(
+        s={};
+        apply(5*nn, II->(
+            s=append(s, allNFs#II#JJ);
+        ));
+
+        --Count how many times a normal form is repeated for each local polynomial
+        st={};
+        apply(#s, i->(st=append(st,sub(s#i,ring s#0))));
+        
+        s=st;
+        st=set st;
+        st=toList st;
+        fns={};
+        c=0;
+        apply(#st, i->(
+            apply(#s, j->(if st#i==s#j then c=c+1)),
+            fns=append(fns,{st#i,c});
+            c=0;
+        )); 
+        FF=append(FF,fns);
+    ));
+    
+    --For each local polynomial f_i, print f_i={all distinct normal forms and the corresponding proportion wrt all normal forms}
+--    file = openOut "functs.txt";
+--    file = openOut concatenate("functions-", first WT);
+    file = openOut outfile; --concatenate(last separate("l-", first separate(".", first WT)), ".functionfile.txt");
+
+    apply(nn, i->(
 	if #(FF#i)==1 then (file << "f" << i+1 << " = " << toString first FF#i#0 << endl)
 	else (
 		file << "f" << i+1 << " = {" << endl; 
-		apply(FF#i, q->(file << toString q#0 << "  # " << toString (0.0 + (q#1)/opts.Limit) << endl)); 
+		apply(FF#i, q->(file << toString q#0 << "  #" << toString ((q#1)/(5.0*nn)) << endl)); 
 		file << "}" << endl
 	)
     ));
     file << close;
-    )
-     
-
+)
 end
-
-restart
-load "sgfan.m2"
-randomWeightVector 10
---time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"outy",5,15,Limit=>15)
-time sgfan(("challenge2-discretized/consistent-output-10-1-time-series","challenge2-discretized/output-10-1-knockouts"),"outy",5,15,Limit=>15)
-time sgfan(("toy.txt",null),"outy",5,4,Limit=>10)
-
-{16, 14, 90, 5, 67, 22, 38, 10, 211, 14}
-
-
-time sgfan(("challenge2-discretized/consistent-output-10-1-time-series",null),"challenge2-discretized/sgfan-10-1-n50",5,15,Limit=>50)
-load "../macaulay2/minsets-web.m2"     
-time minsetsWD("challenge2-discretized/consistent-output-10-1-time-series", "outy", 5, 15)
-
-loadPackage "PolynomialDynamicalSystems"
-R = ZZ/5[makeVars 15]
-TS = readTSData("challenge2-discretized/consistent-output-10-1-time-series", ZZ/5)
-minSets(TS,7,R)
-oo/print;
+----------------------------------------------------- end of file---------------------------------------------------
