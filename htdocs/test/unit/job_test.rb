@@ -80,6 +80,7 @@ class JobTest < ActiveSupport::TestCase
     assert Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
     :show_state_space => true, :show_functions => true, :input_data => "3 2 1\n2 1 1\n1 1 0" }).save
   end
+
   test "should create job with show statespace but not functions" do 
     assert Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
     :show_state_space => true, :show_functions => false, :input_data => "3 2 1\n2 1 1\n1 1 0" }).save
