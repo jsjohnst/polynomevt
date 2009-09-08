@@ -47,7 +47,7 @@ class ComputationJob < Struct.new(:job_id)
     
     macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///)")
     
-    n_react_threshold = 10;
+    n_react_threshold = 2;
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
@@ -78,15 +78,19 @@ class ComputationJob < Struct.new(:job_id)
         end
       else
         if @job.make_deterministic_model
+          @logger.info "deterministic"
           if @job.nodes <= n_react_threshold
+            @logger.info "Running react ... not implemented yet"
             # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
             generate_picture = true
           else
             self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
+            @logger.info "running minsetsPDS"
             macaulay("minsets-web.m2", "minsetsPDS(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
             generate_picture = true
           end
         else # stochastic
+          @logger.info "stochastic"
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
           macaulay("sgfan.m2", "sgfan((///../htdocs/#{discretized_file}///, null), ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
           generate_picture = true
@@ -126,6 +130,7 @@ class ComputationJob < Struct.new(:job_id)
 
       simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
       @logger.info "simulation output: " + simulation_output
+      @job.log = simulation_output
     end
       
     # we succeeded if we got to here!
