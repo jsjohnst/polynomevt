@@ -834,12 +834,12 @@ sub create_output {
     # Initialize client side mapping variables needed for commmand
     # line calls
     my $client_wd = _get_filelocation($file_prefix);
-    `mkdir $client_wd`;
-    `chmod 777 $client_wd`;
-    `mkdir $client_wd/tmp`;
-    `chmod 777 $client_wd/tmp`;
-    `mkdir $client_wd/dev`;
-    `chmod 777 $client_wd/dev`;
+    `mkdir -p $client_wd`;
+    `chmod 755 $client_wd`;
+    `mkdir -p $client_wd/tmp`;
+    `chmod 755 $client_wd/tmp`;
+    `mkdir -p $client_wd/dev`;
+    `chmod 755 $client_wd/dev`;
 
     #$pres = `pwd`;
     #chomp($pres);
