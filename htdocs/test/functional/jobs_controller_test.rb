@@ -111,11 +111,8 @@ class JobsControllerTest < ActionController::TestCase
 
     wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
     puts wiring_diagram + my_job.wiring_diagram_format
+    assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring diagram missing"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
-    wiring_diagram = wiring_diagram + "dot" 
-    assert FileTest.exists?(wiring_diagram), "dot file for wiring diagram
-    missing"
-
 
     # make sure file content is what we expect
     expected_data = [
@@ -131,7 +128,7 @@ class JobsControllerTest < ActionController::TestCase
       "x3->x3 [label=\".666667\"];",
       "}"
     ]
-    compare_content(wiring_diagram, expected_data)
+    compare_content(wiring_diagram + "dot", expected_data)
   end
 
   test "should destroy job" do
