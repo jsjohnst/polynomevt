@@ -1242,7 +1242,7 @@ sub regulatory {
         error_check(@Function_data) or return $Output_array;
     }
 
-    my $dot_filename = _get_filelocation("$file_prefix.wiring-diagram.dot");
+    my $dot_filename = _get_filelocation("$file_prefix.wiring_diagram.dot");
     #my $dot_filename = _get_filelocation("$file_prefix.out1.dot");
     _log ("Right here<br><br>");
     _log (getcwd);
@@ -1326,7 +1326,7 @@ sub regulatory {
     # make the graph
     if ( -e $dot_filename ) {
         #$digraph_filename = _get_filelocation("$file_prefix.out1.$dg_format");
-        $digraph_filename = _get_filelocation("$file_prefix.wiring-diagram.$dg_format");
+        $digraph_filename = _get_filelocation("$file_prefix.wiring_diagram.$dg_format");
         _log("dot -T$dg_format -o $digraph_filename $dot_filename");
         `dot -T$dg_format -o $digraph_filename $dot_filename`;
 
