@@ -4,9 +4,10 @@ module React
     managerfile = "public/perl/" + file_prefix +".fileman.txt"
     modelfile = "public/perl/" + file_prefix +".model.txt"
     functionfile = "public/perl/" + file_prefix +".functionfile.txt"
+    multiplefunctionfile = "public/perl/" + file_prefix +".multiplefunctionfile.txt"
     write_manager_file(managerfile, n_nodes, file_prefix, datafiles)
     run(managerfile, modelfile)
-    parse_output(modelfile, functionfile)
+    parse_output(modelfile, functionfile, multiplefunctionfile)
   end
 
   def run(managerfile, modelfile)
@@ -16,29 +17,38 @@ module React
     return "Successfully calling react lib"
   end
   
-  def parse_output(infile, outfile)
-    File.open(outfile, 'w') do |out_file|
-      File.open(infile, 'r') do |file|
-        line = file.gets
-        logger.info "model.txt \# #{line}"
-        unless (line.match( /^Model/ ))
-            logger.info "ERROR: React did not create a model file starting with Model."
-            return
-        end
-        while line = file.gets
+  def parse_output(infile, outfile, long_outfile)
+    File.open(long_outfile, 'w') do |long_out_file|
+      File.open(outfile, 'w') do |out_file|
+        File.open(infile, 'r') do |file|
+          # write the top 10 models into the file
+          for i in 1..10 do 
+            line = file.gets
             logger.info "model.txt \# #{line}"
-            if (line.match( /^\s*f/ ))
-                logger.info "Line matches fx"
-                out_file.write(line)
-            elsif (line.match( /^\s*H/ ))
-                logger.info "Line matches H"
-            elsif (line.match( /^\s*$/))
-                logger.info "Line matches newline"
-                break
-            else
-                logger.info "ERROR: Reacht parsing models file: Line doesn't match anything"
+            unless (line.match( /^Model/ ))
+                logger.info "ERROR: React did not create a model file starting with Model."
                 return
             end
+            while line = file.gets
+                logger.info "model.txt Model #{i}"
+                if (line.match( /^\s*f/ ))
+                    logger.info "Line matches fx"
+                    long_out_file.write(line)
+                    if i == 1
+                      out_file.write(line)
+                    end
+                elsif (line.match( /^\s*H/ ))
+                    logger.info "Line matches H"
+                elsif (line.match( /^\s*$/))
+                    logger.info "Line matches newline"
+                    long_out_file.write(line)
+                    break
+                else
+                    logger.info "ERROR: Reacht parsing models file: Line doesn't match anything"
+                    return
+                end
+            end
+          end
         end
       end
     end
