@@ -92,7 +92,7 @@ class ComputationJob < Struct.new(:job_id)
         else # stochastic
           @logger.info "stochastic"
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-          macaulay("sgfan.m2", "sgfan((///../htdocs/#{discretized_file}///, null), ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
+          macaulay("sgfan.m2", "sgfan(///../htdocs/#{discretized_file}///, ///../htdocs/#{functionfile}///, #{@job.pvalue}, #{@job.nodes})")
           generate_picture = true
         end
       end
@@ -101,34 +101,40 @@ class ComputationJob < Struct.new(:job_id)
     if generate_picture
       @logger.info "Starting simulation of state space."
       
-      show_probabilities_state_space = @job.show_probabilities_state_space ?  "1" : "0" 
-      wiring_diagram = @job.show_wiring_diagram ? "1" : "0" 
-      state_space = @job.show_state_space ? "1" : "0" 
+      show_probabilities_state_space = @job.show_probabilities_state_space ?
+      "-show_probabilities_state_space" : "" 
+      wiring_diagram = @job.show_wiring_diagram ? "-show_wiring_diagram" : "" 
+      state_space = @job.show_state_space ? "-show_statespace" : "" 
 
-      # for synchronous updates or stochastic sequential updates
-      if (!@job.sequential? || @job.update_schedule == "" )
-          @job.update_schedule = "0"
-      end 
       
       # for stochastic sequential updates, sequential has to be set to 0        
       # for dvd_stochastic_runner.pl to run correctly 
-      stochastic_sequential_update = "0" 
-      if (@job.sequential? && @job.update_schedule == "0")            
-        stochastic_sequential_update = "1"             
+      stochastic_sequential_update = "" 
+      if (@job.sequential? && @job.update_schedule == "")            
+        stochastic_sequential_update = "-update_stochastic"             
         @job.update_type = ''
       end 
   
-      sequential = @job.sequential? ? "1" : "0" 
+      sequential = @job.sequential? ? "-update_sequential" : "" 
 
       # concatenate update schedule into one string with _ as separators
       # so we can pass it to dvd_stochastic_runner.pl
-      @job.update_schedule = @job.update_schedule.gsub(/\s+/, "_" )
-      @logger.info "Update Schedule :" + @job.update_schedule + ":"
+      update_schedule = ""
+      if @job.update_schedule 
+        @job.update_schedule.gsub!(/\s+/, "_" )
+        update_schedule = !@job.update_schedule.empty? ? "-update_schedule " + @job.update_schedule : ""; 
+        @logger.info "Update Schedule :" + @job.update_schedule + ":"
+      end
       @logger.info "Functionfile : " + functionfile
+      unless File.exists?(functionfile) 
+        @logger.info "Functionfile has not been written so we can't run dvd_stochastic_runner on it. "
+        self.abort()
+        
+      end
+      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update}"
 
-      @logger.info "perl ../perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}"
+      simulation_output = `perl ../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update} `
 
-      simulation_output = `perl ../perl/dvd_stochastic_runner.pl #{@job.nodes} #{@job.pvalue} 1 #{stochastic_sequential_update} public/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile}`
       @logger.info "simulation output: " + simulation_output
       @job.log = simulation_output
     end

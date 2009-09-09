@@ -50,9 +50,8 @@ class Job < ActiveRecord::Base
   end
 
   def check_state_space
-    # TODO: We should try to just force this on instead of erroring
     if self.show_state_space
-      errors.add("show_functions", "must also be selected if you want to show state space.") unless show_functions
+      write_attribute(:show_functions, true)
     end
   end
   

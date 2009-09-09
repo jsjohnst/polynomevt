@@ -5,23 +5,6 @@
 # This module must be symlinked to /etc/perl/DVDCore.pm
 package DVDCore;
 use Cwd;
-BEGIN {
-    use Exporter ();
-    our ( $VERSION, @ISA, @EXPORT, @EXPORT_OK, %EXPORT_TAGS );
-    @ISA         = qw(Exporter);
-    @EXPORT      = qw(&dvd_session $Use_log);
-    %EXPORT_TAGS = ();
-
-    $VERSION = "0.12.1";
-
-    @EXPORT_OK
-        = qw(&translator &count_comps_final &sim, &regulatory $N_nodes $P_value $Clientip $Function_data $Function_file $Pwd @Output_array &error_check &_log $Polynome $Stochastic);
-
-# functions that the user may want to include in their namespace, but only if they don't want to use the
-# dvd_session method (i.e. they want to manually input/keep track of their variables)
-}
-
-our @EXPORT_OK;
 
 # exportable variables
 our $N_nodes;
@@ -85,8 +68,7 @@ END { }
 
 # dvd_session serves as a wrapper for the DVD interface (think new_dvd11.pl), providing a
 # single method for specifying all of the needed runtime variables
-sub dvd_session {
-
+sub dvd_session { 
     #set path for graphviz for the server to use, this is necessary, because
     # PATH variable on polymath does not include /usr
     #$ENV{'PATH'}            = '/usr/local/bin:/bin:/etc:/usr/bin';
@@ -109,14 +91,16 @@ sub dvd_session {
         $all_trajectories_flag, $statespace,        $ss_format,
         $regulatory,            $dg_format,         $all_trajectories,
         $initial_state,         $update_stochastic, $stochastic, $debug
-    ) = @_[ 0 .. 14 ];
+    ) = @_[ 0 .. 15 ];
+    $all_trajectories = !$all_trajectories;
     $Use_log         = $debug;
+    _log ("\$debug: $stochastic\n");
+    _log ("\$debug: $debug\n");
     $Current_program = "dvd_session";
 
-    #print "\$regulatory $regulatory,";
     _log("all trajectories: $All_trajectories<br>");
     _log( "Argument length: " . $count );
-    _log( "Arguments: " . join( ", ", @_[ 0 .. 13 ] ) );
+    _log( "Arguments: " . join( ", ", @_[ 0 .. 15 ] ) );
     @Output_array  = [];
     $Function_file = $_[-1];
     $Clientip      = $file_prefix;
@@ -137,7 +121,7 @@ sub dvd_session {
 
     _log("\$Update_stochastic: $Update_stochastic");
     $Session_on = 1;
-    $Stochastic = $stochastic;
+    $Show_probabilities_in_state_space = $stochastic;
 
     # begin evaluation of input
     if ( ( !$p_value ) & ( !$n_nodes ) ) {
@@ -189,7 +173,7 @@ sub dvd_session {
     $Current_program = "dvd_session";
     if ( $regulatory == 1 ) {
 
-        #print "In regulatory \$dg_format $dg_format<br>";
+        print "In regulatory \$dg_format $dg_format<br>";
         my ( $success, $message )
             = regulatory($dg_format);    #create dependency graph
         return _package_error($message) unless ($success);
@@ -243,7 +227,7 @@ sub dvd_session {
     @Function_data = ();
     $Function_file = "";
 
-    return 1;    # user should then read $Output_array...
+    return [1, $Output_array];    # user should then read $Output_array...
 }
 
 #identity has to be added to simulate a delay and the probabilites
@@ -636,7 +620,7 @@ sub error_check {
         $found = 1;
     }
 
-    #  if ($Stochastic) {
+    #  if ($Show_probabilities_in_state_space) {
     #    shift(@Functions);
     #  }
 ### I changed the indexing above, therefore there should always be a shift
@@ -803,7 +787,7 @@ sub count_comps_final_all_trajectories {
                                      # add state number and probability
                     push( @fixed_points, [ $x, $Adj[$x][$y] ] );
                 }
-                if ( !$Stochastic ) {    #make an edge from @y to @ans
+                if ( !$Show_probabilities_in_state_space ) {    #make an edge from @y to @ans
                         # graph with arrows without probablities
                     print $Dot_file "node$x -> node$y\n";
                 }
@@ -816,7 +800,7 @@ sub count_comps_final_all_trajectories {
             else {        #print("0 \t");
             }
         }
-        print("\n");
+        #print("\n");
     }
 
     shift(@fixed_points);
@@ -1242,7 +1226,7 @@ sub regulatory {
         error_check(@Function_data) or return $Output_array;
     }
 
-    my $dot_filename = _get_filelocation("$file_prefix.wiring_diagram.dot");
+    my $dot_filename = _get_filelocation("$file_prefix.wiring_diagram.dot.tmp");
     #my $dot_filename = _get_filelocation("$file_prefix.out1.dot");
     _log ("Right here<br><br>");
     _log (getcwd);
@@ -1292,8 +1276,10 @@ sub regulatory {
     close($Dot_file);
 
     $dot_filename2 = _get_filelocation("$file_prefix.wiring_diagram.dot");
+    $Use_log = 1; 
     _log("`sort -u $dot_filename > $dot_filename2`");
     _log("Removing double arrows from $dot_filename2");
+    $Use_log = 0; 
     `sort -u $dot_filename > $dot_filename2`;
     `rm -f $dot_filename`;
     $dot_filename = $dot_filename2;
