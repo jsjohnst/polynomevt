@@ -10,11 +10,6 @@ class JobsControllerTest < ActionController::TestCase
     @job = jobs(:one)
   end
   
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
-
   def teardown  
     unless @job.file_prefix.nil?
         prefix = "public/perl/" + @job.file_prefix
