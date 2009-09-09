@@ -3,6 +3,7 @@
 <% form_for(@job, :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 
+<div style="float: left; padding-right: 25px;">
   <p>
     <%= f.label :nodes %><br />
     <%= f.text_field :nodes %>
@@ -12,60 +13,6 @@
     <%= f.text_field :pvalue %>
   </p>
   <p>
-    <%= f.label :show_wiring_diagram %><br />
-    <%= f.check_box :show_wiring_diagram %>
-  </p>
-  <p>
-    <%= f.label :wiring_diagram_format %><br />
-	<%= f.select :wiring_diagram_format, [ 
-			["*.gif", "gif"],
-			["*.jpg", "jpg"],
-			["*.png", "png"],
-			["*.ps", "ps"],
-		] %>
-  </p>
-  <p>
-    <%= f.label :show_state_space %><br />
-    <%= f.check_box :show_state_space %>
-  </p>
-  <p>
-    <%= f.label :state_space_format %><br />
-	<%= f.select :state_space_format, [ 
-			["*.gif", "gif"],
-			["*.jpg", "jpg"],
-			["*.png", "png"],
-			["*.ps", "ps"],
-		] %>
-  </p>
-  <p>
-    <%= f.label :show_discretized %><br />
-    <%= f.check_box :show_discretized %>
-  </p>
-  <p>
-    <%= f.label :show_functions %><br />
-    <%= f.check_box :show_functions %>
-  </p>
-  <p>
-    <%= f.label :input_data %><br />
-    <%= f.text_area :input_data %>
-  </p>
-  <p>
-    <%= f.label :input_file %><br />
-    <%= f.file_field :input_file %>
-  </p>
-  <p>
-    <%= f.label :show_probabilities_wiring_diagram %><br />
-    <%= f.check_box :show_probabilities_wiring_diagram %>
-  </p>
-  <p>
-    <%= f.label :show_probabilities_state_space %><br />
-    <%= f.check_box :show_probabilities_state_space %>
-  </p>
-  <p>
-    <%= f.label :make_deterministic_model %><br />
-    <%= f.check_box :make_deterministic_model %>
-  </p>
-  <p>
     <%= f.label :update_type %><br />
     <%= f.text_field :update_type %>
   </p>
@@ -73,14 +20,61 @@
     <%= f.label :update_schedule %><br />
     <%= f.text_field :update_schedule %>
   </p>
+</div>
+<div style="float: left; padding-right: 25px;">
   <p>
-    <%= f.label :completed %><br />
-    <%= f.check_box :completed %>
+	<%= f.check_box :show_wiring_diagram %>&nbsp;<%= f.label :show_wiring_diagram %><br />
+    <%= f.label "Format: " %>
+	<%= f.select :wiring_diagram_format, [ 
+			["*.gif", "gif"],
+			["*.jpg", "jpg"],
+			["*.png", "png"],
+			["*.ps", "ps"],
+		] %><br />
+	<%= f.check_box :show_probabilities_wiring_diagram %>&nbsp;<%= f.label :show_probabilities_wiring_diagram %>
   </p>
   <p>
-    <%= f.label :deleted %><br />
-    <%= f.check_box :deleted %>
+    <%= f.check_box :show_state_space %>&nbsp;<%= f.label :show_state_space %><br />
+    <%= f.label "Format: " %>
+	<%= f.select :state_space_format, [ 
+			["*.gif", "gif"],
+			["*.jpg", "jpg"],
+			["*.png", "png"],
+			["*.ps", "ps"],
+		] %><br />
+	<%= f.check_box :show_probabilities_state_space %>&nbsp;<%= f.label :show_probabilities_state_space %>
   </p>
+  <p>
+    <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized %>
+  </p>
+  <p>
+    <%= f.check_box :show_functions %>&nbsp;<%= f.label :show_functions %>
+  </p>
+  <p>
+    <%= f.check_box :make_deterministic_model %>&nbsp;<%= f.label :make_deterministic_model %>
+  </p>
+</div>
+<div style="float: left; padding-right: 25px;">
+  <p>
+    <%= f.label :input_data %><br />
+    <%= f.text_area :input_data, :cols => 30, :rows => 15 %>
+  </p>
+  <p>
+    <%= f.label :input_file %><br />
+    <%= f.file_field :input_file %>
+  </p>
+</div>
+<div style="float: left">
+  <p>
+    <%= f.label :known_functions %><br />
+    <%= f.text_area :known_functions, :cols => 30, :rows => 15 %>
+  </p>
+  <p>
+    <%= f.label :known_functions_file %><br />
+    <%= f.file_field :known_functions_file %>
+  </p>
+</div>
+<div style="clear: both"></div>
   <p>
     <%= f.submit 'Create' %>
   </p>

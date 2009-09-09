@@ -47,6 +47,11 @@ class JobsController < ApplicationController
       params[:job].delete(:input_file)
     end
     
+    if params[:job][:known_functions_file]
+      params[:job][:known_functions] = params[:job][:known_functions_file].read
+      params[:job].delete(:known_functions_file)
+    end
+    
     params[:job][:user_id] = session[:user]
     
     @job = Job.new(params[:job])
