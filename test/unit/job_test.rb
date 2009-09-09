@@ -3,11 +3,6 @@ require 'test_helper'
 class JobTest < ActiveSupport::TestCase
   fixtures :jobs
   
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
-  
   def test_show_index
   #  get :index
   #  assert_response :success
@@ -27,6 +22,9 @@ class JobTest < ActiveSupport::TestCase
     assert job.valid?
 
     job = Job.create({:nodes => "12"})
+    assert job.valid?
+    
+    job = Job.create({:nodes => "1002"})
     assert !job.valid?
 
     job = Job.create({:nodes => "1.3"})

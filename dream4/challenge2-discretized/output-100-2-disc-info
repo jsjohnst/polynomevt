@@ -319,9 +319,9 @@ min, max values: .0017795 .657295
 min, max steady: .148424 .262346
 interval boundaries: {.0017795, .132883, .263986, .395089, .526192, .657295}
 ---discretizing gene 81 ----
-min, max values: .0023343 .543492
+min, max values: .183882 .543492
 min, max steady: .26687 .372857
-interval boundaries: {.0023343, .110566, .218797, .373939, .43526, .543492}
+interval boundaries: {.183882, .266151, .373576, .429735, .486613, .543492}
 ---discretizing gene 82 ----
 min, max values: .156329 .720425
 min, max steady: .195617 .274935
