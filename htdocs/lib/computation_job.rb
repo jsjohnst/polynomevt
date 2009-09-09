@@ -58,7 +58,7 @@ class ComputationJob < Struct.new(:job_id)
       
       if @job.show_wiring_diagram && !@job.show_functions
         if @job.nodes <= n_react_threshold
-          if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})")
+          if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})", true)
             @logger.info "Running react ... not implemented yet"
             # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
             generate_picture = true
@@ -145,7 +145,7 @@ class ComputationJob < Struct.new(:job_id)
   end  
   
   def check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-    if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})")
+    if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})", true)
       self.macaulay("incons.m2", "makeConsistent(///../htdocs/#{datafile}///, #{@job.nodes}, ///../htdocs/#{consistent_datafile}///)")
       if (File.zero?(consistent_datafile))
         # TODO: make a way to store errors into the job for the user to see
@@ -158,11 +158,14 @@ class ComputationJob < Struct.new(:job_id)
       self.macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///)")
     end
   end
-  
-  def macaulay(m2_file, m2_command)
+ 
+  # we do the continue_on_error optionally because we want to sometimes
+  # check the return value of a command normally (ie isConsistent) but
+  # in most cases we want to just exit on m2 failure
+  def macaulay(m2_file, m2_command, continue_on_error = false)
     @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;"
     @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; cd ../htdocs;`
-    unless $? == 0
+    if continue_on_error && $? != 0
        @logger.info "Macaulay (#{m2_file}) (#{m2_command}) returned a non-zero exit code (#{$?}), aborting."
        self.abort
     end
