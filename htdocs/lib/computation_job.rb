@@ -126,11 +126,12 @@ class ComputationJob < Struct.new(:job_id)
         @logger.info "Update Schedule :" + @job.update_schedule + ":"
       end
       @logger.info "Functionfile : " + functionfile
+
       unless File.exists?(functionfile) 
         @logger.info "Functionfile has not been written so we can't run dvd_stochastic_runner on it. "
         self.abort()
-        
       end
+
       @logger.info "perl ../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update}"
 
       simulation_output = `perl ../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update} `
@@ -161,6 +162,10 @@ class ComputationJob < Struct.new(:job_id)
   def macaulay(m2_file, m2_command)
     @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;"
     @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; cd ../htdocs;`
+    unless $? == 0
+       @logger.info "Macaulay (#{m2_file}) (#{m2_command}) returned a non-zero exit code (#{$?}), aborting."
+       self.abort
+    end
     $? == 0
   end
   
