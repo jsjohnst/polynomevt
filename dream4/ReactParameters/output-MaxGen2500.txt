@@ -1,0 +1,1840 @@
+Model:	1
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x6*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x8 + x3*x9 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	2
+  f1 = x1*x2*x3 + x1*x3*x4 + x1*x3*x10 + x1*x6*x8 + x1*x9*x10 + x2*x3*x4 + x2*x4*x9 + x2*x5*x10 + x2*x10 + x5*x6*x9*x10 + x6*x9*x10 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x6 + x4 + x6*x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x3*x4*x7*x8*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4 + x1*x2*x9 + x1*x4*x10 + x1*x6 + x2*x3*x10 + x2*x4*x5*x6*x9 + x5*x8 + x5 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	3
+  f1 = x2*x5 + x3*x4*x5*x8 + x3*x4*x10 + x3*x5*x9 + x4 + x5*x8 + x7*x9 + x8*x10 + x9 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x4*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x3*x6 + x1*x3 + x1*x4 + x1*x6 + x2*x3*x6*x8 + x2*x4*x6 + x2*x4*x7*x9 + x2*x4*x10 + x2*x5*x7 + x2*x6*x8 + x2*x7 + x3*x4*x6 + x3*x5*x6*x7 + x3*x5 + x3*x7*x9 + x3*x8*x9 + x3 + x5*x6*x7 + x5*x10 + x6*x8*x9 + x6*x8 + x6*x9 + x6*x10 + x6 + x7*x9*x10 + x8*x9 + x8*x10 + x9 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x3*x5*x8 + x3*x8*x9 + x4*x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	4
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x7 + x1*x9 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x3*x5*x8 + x3*x8*x9 + x4*x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	5
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x5 + x2*x6*x8 + x3*x4 + x3*x5*x6*x10 + x3*x5*x7 + x4*x5 + x4*x8*x9 + x5*x6*x10 + x6*x9 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x4*x6 + x1*x2*x6*x7 + x1*x2*x6*x8 + x1*x2*x9 + x1*x3*x4*x6*x8 + x1*x3*x5*x6 + x1*x3*x8 + x1*x3 + x1*x4 + x1*x5*x6*x7 + x1*x7*x8 + x1*x7 + x1*x8 + x1*x9 + x1*x10 + x1 + x2*x7*x9 + x2*x7 + x2*x9 + x2 + x3*x4*x5*x6 + x3*x4*x8*x9 + x3*x4 + x3*x5 + x3*x6*x7*x9 + x3*x6*x10 + x3*x7 + x3*x10 + x3 + x4*x6 + x5*x8*x10 + x5*x8 + x6*x10 + x6 + x7 + x8 + x9 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	6
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x4*x7 + x1*x4*x9 + x1*x4 + x1*x10 + x2*x3*x6 + x2 + x3*x4*x6 + x3*x4*x10 + x5*x6*x7*x9 + x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x6*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5*x7 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7*x8 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x3*x6*x9 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x8 + x3*x9 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	7
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x8*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x3*x7*x9*x10 + x4*x9 + x4*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x3*x6 + x1*x4*x6 + x3*x5 + x3*x8 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x3*x6 + x1*x3 + x1*x4 + x1*x6 + x2*x3*x6*x8 + x2*x4*x6 + x2*x4*x7*x9 + x2*x4*x10 + x2*x5*x7 + x2*x6*x8 + x2*x7 + x3*x4*x6 + x3*x5*x6*x7 + x3*x5 + x3*x7*x9 + x3*x8*x9 + x3 + x5*x6*x7 + x5*x10 + x6*x8*x9 + x6*x8 + x6*x9 + x6*x10 + x6 + x7*x9*x10 + x8*x9 + x8*x10 + x9 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x4 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	8
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x4*x10 + x1*x2*x4 + x1*x2*x6*x10 + x1*x2*x9 + x1*x3*x6*x9 + x1*x3*x10 + x1*x5*x6*x7 + x1*x5*x7*x10 + x1*x8*x9*x10 + x1*x10 + x2*x3*x6*x10 + x2*x3*x9 + x2*x4*x10 + x2*x5*x6*x7 + x2*x5*x6 + x2*x6 + x2 + x3*x4*x5 + x3*x4*x6*x8*x10 + x3*x5*x7*x9 + x3*x6*x8*x9 + x3*x7 + x3*x8 + x3*x10 + x4*x5*x7*x8 + x4*x5*x7*x10 + x4*x6*x10 + x4*x6 + x4*x8 + x4*x10 + x4 + x5*x6 + x5*x7*x9*x10 + x5*x8*x9 + x5*x10 + x6*x8 + x7*x8 + x7*x9 + x8*x9 + x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x5 + x2*x6*x8 + x3*x4 + x3*x5*x6*x10 + x3*x5*x7 + x4*x5 + x4*x8*x9 + x5*x6*x10 + x6*x9 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8*x9 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	9
+  f1 = x2*x7 + x3*x5 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x3*x4*x7*x8*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x7 + x1*x9 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	10
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x2*x8 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x2*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2*x6 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7*x10 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x3*x4 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	11
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x3 + x4*x8
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x10 + x2*x3*x5*x10 + x7
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	12
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7*x8 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x4*x6*x9 + x1*x2*x4*x9 + x1*x2*x4 + x1*x2*x6 + x1*x2*x9 + x1*x3*x4*x9 + x1*x4*x5 + x1*x4*x7*x9 + x1*x4 + x1*x5 + x1*x6*x7*x9 + x1*x6*x8 + x1*x6 + x1*x7 + x1*x9 + x1*x10 + x1 + x2*x3*x5*x10 + x2*x4*x8 + x2*x6 + x2*x7 + x2*x9*x10 + x2*x10 + x3*x4 + x3*x5 + x3*x7*x10 + x3*x10 + x3 + x4*x5 + x4*x6*x7 + x4*x6*x8 + x4*x7*x8*x10 + x4*x9*x10 + x4*x9 + x5*x6*x7*x9 + x5*x7*x10 + x5*x8 + x5 + x6*x7*x8*x9 + x6*x7*x8 + x6*x7*x9*x10 + x6*x7 + x6 + x7*x8 + x7*x9*x10 + x8 + x9*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7*x10 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	13
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x8*x10 + x1*x7*x9 + x2*x9 + x3*x4*x10 + x3*x5*x8*x10 + x3*x5 + x4*x6*x9*x10 + x4*x7*x9 + x4*x9*x10 + x5*x7*x8*x10 + x5*x8*x9 + x6*x7*x9 + x6*x9*x10 + x6 + x8 + x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7*x10 + x1 + x2*x4*x6*x10 + x2*x5*x10 + x7*x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	14
+  f1 = x2*x5 + x3*x4*x5*x8 + x3*x4*x10 + x3*x5*x9 + x4 + x5*x8 + x7*x9 + x8*x10 + x9 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x3*x9*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	15
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x3 + x4*x8
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	16
+  f1 = x2*x7*x8 + x2*x10 + x2 + x4*x5*x6*x9 + x4*x10 + x5*x7*x9 + x5*x9 + x6*x7*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x3 + x2*x5*x9 + x3*x4 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x2*x7*x9 + x1*x10 + x2*x3*x6 + x2*x5*x10 + x2*x6*x8 + x2*x6 + x2*x9 + x3*x7 + x4*x7*x8 + x4*x7*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x4*x6 + x1*x2*x6*x7 + x1*x2*x6*x8 + x1*x2*x9 + x1*x3*x4*x6*x8 + x1*x3*x5*x6 + x1*x3*x8 + x1*x3 + x1*x4 + x1*x5*x6*x7 + x1*x7*x8 + x1*x7 + x1*x8 + x1*x9 + x1*x10 + x1 + x2*x7*x9 + x2*x7 + x2*x9 + x2 + x3*x4*x5*x6 + x3*x4*x8*x9 + x3*x4 + x3*x5 + x3*x6*x7*x9 + x3*x6*x10 + x3*x7 + x3*x10 + x3 + x4*x6 + x5*x8*x10 + x5*x8 + x6*x10 + x6 + x7 + x8 + x9 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	17
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x2*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x5 + x2*x6*x8 + x3*x4 + x3*x5*x6*x10 + x3*x5*x7 + x4*x5 + x4*x8*x9 + x5*x6*x10 + x6*x9 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x4*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x4*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x2*x7 + x1*x2 + x1*x3*x4 + x1*x3 + x1*x4*x6 + x1*x4*x8*x9 + x1*x5*x7 + x1*x5*x9*x10 + x1*x6*x7*x10 + x1*x7*x10 + x1*x7 + x1 + x2*x3*x7 + x2*x4*x5*x10 + x2*x4*x8 + x2*x5*x9 + x2*x6*x8 + x2*x7*x8*x10 + x2*x8 + x2*x9*x10 + x2*x10 + x3*x4*x9*x10 + x3*x4*x9 + x3*x4 + x3*x6*x7 + x3*x8 + x3*x9 + x3*x10 + x3 + x4*x5 + x4*x6*x9 + x4*x7*x8 + x4 + x5*x7 + x5*x8*x9 + x5*x9*x10 + x6*x7*x9 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x7 + x8*x9 + x8*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	18
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8*x9 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	19
+  f1 = x2*x7*x8 + x2*x10 + x2 + x4*x5*x6*x9 + x4*x10 + x5*x7*x9 + x5*x9 + x6*x7*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7*x8 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x5 + x1*x5*x9 + x1*x5*x10 + x2*x5*x8*x10 + x2 + x3*x5*x9 + x3*x5*x10 + x3 + x4*x7 + x7*x8 + x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	20
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x2*x8 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x3*x5*x9 + x2*x3 + x3*x4 + x3*x9
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x4*x8*x10 + x5*x7*x8 + x6*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x5*x7 + x1*x5*x10 + x2*x3*x8*x10 + x2*x3*x8 + x2*x5*x6*x10 + x2*x5*x6 + x2*x5*x7*x8 + x2*x7*x9*x10 + x3*x4*x9 + x3*x8*x10 + x4*x7*x8*x9 + x4*x7*x9 + x4*x7 + x4 + x7*x8*x9 + x7 + x8*x10 + x8 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	21
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x6*x7*x8 + x1*x6*x9 + x1*x6 + x1*x9 + x3*x5 + x4*x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x7 + x5*x8 + x5 + x6 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x3*x5*x10 + x2*x4*x9*x10 + x2*x7 + x3*x6 + x3*x9 + x3 + x6 + x7*x8*x10 + x7*x9 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7*x10 + x1 + x2*x4*x6*x10 + x2*x5*x10 + x7*x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	22
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x3*x4*x7*x8*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	23
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x6*x7*x8 + x1*x7 + x2*x6*x9 + x2*x10 + x2 + x3*x8*x9 + x4*x7 + x4*x9 + x4
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x3 + x4*x8
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x3*x6 + x1*x2*x7 + x1*x2*x8 + x1*x2*x9 + x1*x3*x8*x9 + x1*x4*x5*x8 + x1*x4 + x1*x5*x8*x9 + x1*x5*x9 + x1*x5*x10 + x1*x7*x9 + x1*x7 + x1*x8 + x1 + x2*x4*x6*x8 + x2*x4*x7 + x2*x4*x9 + x2*x5*x10 + x2*x6*x9*x10 + x2*x7*x8*x9 + x2*x9 + x3*x4*x5 + x3*x5*x7*x10 + x3*x5*x9 + x3*x5 + x3*x6 + x3*x7 + x3*x8*x10 + x3*x9 + x3*x10 + x4*x5*x9 + x4*x6*x7 + x4*x9 + x4 + x5*x7 + x5*x10 + x5 + x6*x8*x9 + x6*x8*x10 + x7*x9*x10 + x7*x10 + x8 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x3*x6 + x1*x4*x6 + x3*x5 + x3*x8 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7*x10 + x1 + x2*x4*x6*x10 + x2*x5*x10 + x7*x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	24
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x3 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x3*x6 + x1*x2*x7 + x1*x2*x8 + x1*x2*x9 + x1*x3*x8*x9 + x1*x4*x5*x8 + x1*x4 + x1*x5*x8*x9 + x1*x5*x9 + x1*x5*x10 + x1*x7*x9 + x1*x7 + x1*x8 + x1 + x2*x4*x6*x8 + x2*x4*x7 + x2*x4*x9 + x2*x5*x10 + x2*x6*x9*x10 + x2*x7*x8*x9 + x2*x9 + x3*x4*x5 + x3*x5*x7*x10 + x3*x5*x9 + x3*x5 + x3*x6 + x3*x7 + x3*x8*x10 + x3*x9 + x3*x10 + x4*x5*x9 + x4*x6*x7 + x4*x9 + x4 + x5*x7 + x5*x10 + x5 + x6*x8*x9 + x6*x8*x10 + x7*x9*x10 + x7*x10 + x8 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	25
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x6*x10 + x1*x2*x7 + x2*x3*x10 + x2*x5*x9 + x2*x9 + x3*x5 + x4*x9 + x5*x6 + x5*x7*x10 + x5 + x6*x8 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + x2 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x7*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7 + x1*x7*x8 + x2*x3*x6*x7*x8 + x2*x6*x9 + x2*x7*x8 + x2*x8*x9 + x3*x5*x7 + x3*x8*x10 + x3*x10 + x3 + x5*x9*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	26
+  f1 = x2*x5 + x3*x4*x5*x8 + x3*x4*x10 + x3*x5*x9 + x4 + x5*x8 + x7*x9 + x8*x10 + x9 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x3*x6*x8 + x2*x5*x10 + x2*x5 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x4*x7*x8*x9*x10 + x4
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x7 + x1*x9 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	27
+  f1 = x1*x4*x7*x10 + x1*x4*x9 + x1*x4 + x1*x10 + x3*x4*x6 + x4*x5 + x4*x7*x8*x9 + x4*x7*x8 + x4*x10 + x5*x6 + x5 + x6*x7*x9 + x6*x10 + x8 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x8*x10 + x1*x7*x9 + x2*x9 + x3*x4*x10 + x3*x5*x8*x10 + x3*x5 + x4*x6*x9*x10 + x4*x7*x9 + x4*x9*x10 + x5*x7*x8*x10 + x5*x8*x9 + x6*x7*x9 + x6*x9*x10 + x6 + x8 + x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x7 + x1*x9 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	28
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7 + x1 + x2*x3*x10 + x2*x5*x10 + x2 + x3*x9*x10 + x7*x8 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x8 + x2*x4 + x8*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	29
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8 + x2*x3*x7*x8 + x2*x3*x10 + x2*x4*x7 + x2*x10 + x4*x8*x10 + x4 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x7 + x1*x9 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	30
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x5 + x2*x6*x8 + x3*x4 + x3*x5*x6*x10 + x3*x5*x7 + x4*x5 + x4*x8*x9 + x5*x6*x10 + x6*x9 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x4*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x6*x7*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x8 + x3*x9 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	31
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x4*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7*x10 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	32
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x5 + x2*x6*x8 + x3*x4 + x3*x5*x6*x10 + x3*x5*x7 + x4*x5 + x4*x8*x9 + x5*x6*x10 + x6*x9 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x3 + x4*x8
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7 + x1*x7*x8 + x2*x3*x6*x7*x8 + x2*x6*x9 + x2*x7*x8 + x2*x8*x9 + x3*x5*x7 + x3*x8*x10 + x3*x10 + x3 + x5*x9*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	33
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x4*x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x5 + x1*x2*x3*x10 + x1*x2 + x1*x3*x5 + x1*x3*x10 + x1*x5*x7*x8*x10 + x1*x5*x10 + x1*x5 + x1*x6*x9 + x1*x7 + x1*x9 + x2*x3*x5*x9 + x2*x3*x7*x10 + x2*x3 + x2*x4*x5*x7 + x2*x4*x8 + x2*x4*x9 + x2*x4 + x2*x5*x7 + x2*x5 + x2*x8 + x2 + x3*x4 + x3*x5*x7*x10 + x3*x6 + x3*x9*x10 + x4*x5*x6*x7 + x4*x7 + x4 + x5*x6*x9 + x5*x8*x10 + x6*x8 + x8*x9 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	34
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	35
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x6 + x4 + x6*x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x7 + x1*x6*x8 + x1*x6 + x1 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x4*x6 + x1*x2*x6*x7 + x1*x2*x6*x8 + x1*x2*x9 + x1*x3*x4*x6*x8 + x1*x3*x5*x6 + x1*x3*x8 + x1*x3 + x1*x4 + x1*x5*x6*x7 + x1*x7*x8 + x1*x7 + x1*x8 + x1*x9 + x1*x10 + x1 + x2*x7*x9 + x2*x7 + x2*x9 + x2 + x3*x4*x5*x6 + x3*x4*x8*x9 + x3*x4 + x3*x5 + x3*x6*x7*x9 + x3*x6*x10 + x3*x7 + x3*x10 + x3 + x4*x6 + x5*x8*x10 + x5*x8 + x6*x10 + x6 + x7 + x8 + x9 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	36
+  f1 = x3*x5*x8 + x3*x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	37
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x7 + x1*x6*x8 + x1*x6 + x1 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x3 + x4*x8
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x8*x9 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x5*x7 + x1*x5*x10 + x2*x3*x8*x10 + x2*x3*x8 + x2*x5*x6*x10 + x2*x5*x6 + x2*x5*x7*x8 + x2*x7*x9*x10 + x3*x4*x9 + x3*x8*x10 + x4*x7*x8*x9 + x4*x7*x9 + x4*x7 + x4 + x7*x8*x9 + x7 + x8*x10 + x8 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	38
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7 + x1 + x2*x3*x10 + x2*x5*x10 + x2 + x3*x9*x10 + x7*x8 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x4*x7*x8*x9*x10 + x4
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7*x10 + x1 + x2*x4*x6*x10 + x2*x5*x10 + x7*x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	39
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5*x7 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7*x8 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5*x7 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x3*x5*x8 + x3*x8*x9 + x4*x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	40
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x5
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x3*x5*x9 + x2*x3 + x3*x4 + x3*x9
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3*x5 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7*x10 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	41
+  f1 = x1*x7*x8*x10 + x1*x9 + x2*x4*x8*x9 + x4*x6*x10 + x4*x7*x9 + x5*x7 + x5*x10 + x5 + x6*x8*x10 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7 + x1 + x2*x3*x10 + x2*x5*x10 + x2 + x3*x9*x10 + x7*x8 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x7 + x1*x6*x8 + x1*x6 + x1 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x3 + x4*x8
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x7 + x5*x8 + x5 + x6 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x3*x6 + x1*x3 + x1*x4 + x1*x6 + x2*x3*x6*x8 + x2*x4*x6 + x2*x4*x7*x9 + x2*x4*x10 + x2*x5*x7 + x2*x6*x8 + x2*x7 + x3*x4*x6 + x3*x5*x6*x7 + x3*x5 + x3*x7*x9 + x3*x8*x9 + x3 + x5*x6*x7 + x5*x10 + x6*x8*x9 + x6*x8 + x6*x9 + x6*x10 + x6 + x7*x9*x10 + x8*x9 + x8*x10 + x9 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	42
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	43
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x5*x7 + x3*x6 + x4*x5*x6*x7*x10 + x4*x6 + x7*x9*x10
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x8*x10 + x1*x7*x9 + x2*x9 + x3*x4*x10 + x3*x5*x8*x10 + x3*x5 + x4*x6*x9*x10 + x4*x7*x9 + x4*x9*x10 + x5*x7*x8*x10 + x5*x8*x9 + x6*x7*x9 + x6*x9*x10 + x6 + x8 + x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x3*x6 + x1*x3 + x1*x4 + x1*x6 + x2*x3*x6*x8 + x2*x4*x6 + x2*x4*x7*x9 + x2*x4*x10 + x2*x5*x7 + x2*x6*x8 + x2*x7 + x3*x4*x6 + x3*x5*x6*x7 + x3*x5 + x3*x7*x9 + x3*x8*x9 + x3 + x5*x6*x7 + x5*x10 + x6*x8*x9 + x6*x8 + x6*x9 + x6*x10 + x6 + x7*x9*x10 + x8*x9 + x8*x10 + x9 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7 + x1*x7*x8 + x2*x3*x6*x7*x8 + x2*x6*x9 + x2*x7*x8 + x2*x8*x9 + x3*x5*x7 + x3*x8*x10 + x3*x10 + x3 + x5*x9*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	44
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x2*x6 + x1*x3*x7 + x2*x3*x8 + x2*x3 + x2*x4*x8 + x2*x5*x8 + x2*x6*x9*x10 + x2*x6*x9 + x2*x7 + x2*x9 + x3*x4*x6 + x3*x6*x8 + x4*x5 + x4*x6*x8*x10 + x5 + x6 + x7*x8*x9 + x7 + x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x10 + x1*x3*x4 + x1*x3*x5*x10 + x1*x3*x7*x10 + x1*x3*x9 + x1*x3 + x1*x4*x6 + x1*x4*x9 + x1*x5*x8 + x1*x6*x10 + x1*x7*x8 + x1*x7*x9 + x1*x9 + x1*x10 + x1 + x2*x3*x5*x6 + x2*x3 + x2*x4*x5*x9*x10 + x2*x4*x7*x8*x10 + x2*x4 + x2*x5*x7 + x2*x6*x9 + x2*x6 + x2*x7*x8 + x2*x8 + x2 + x3*x4*x6 + x3*x4*x8*x10 + x3*x4*x9 + x3*x6*x7 + x3*x6 + x3*x9 + x3*x10 + x4*x5*x10 + x4*x6 + x4*x8*x9 + x4*x8 + x4*x10 + x4 + x5*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x7*x8*x10 + x7 + x8*x9*x10 + x8*x10 + x8 + x9*x10 + x9 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	45
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x5
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x2*x4*x6*x7 + x2*x5*x8 + x2*x6 + x3*x4*x6 + x3*x4*x7*x8 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	46
+  f1 = x1*x4*x7*x10 + x1*x4*x9 + x1*x4 + x1*x10 + x3*x4*x6 + x4*x5 + x4*x7*x8*x9 + x4*x7*x8 + x4*x10 + x5*x6 + x5 + x6*x7*x9 + x6*x10 + x8 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x7*x9 + x2*x5*x8*x10 + x2*x5*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x5 + x2*x6*x8 + x3*x4 + x3*x5*x6*x10 + x3*x5*x7 + x4*x5 + x4*x8*x9 + x5*x6*x10 + x6*x9 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x4*x8*x10 + x5*x7*x8 + x6*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	47
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x2*x8 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x4*x7*x8*x9*x10 + x4
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	48
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x5
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8*x10 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x3*x4*x7*x8*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7*x10 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	49
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x2*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x4*x6 + x1*x2*x6*x7 + x1*x2*x6*x8 + x1*x2*x9 + x1*x3*x4*x6*x8 + x1*x3*x5*x6 + x1*x3*x8 + x1*x3 + x1*x4 + x1*x5*x6*x7 + x1*x7*x8 + x1*x7 + x1*x8 + x1*x9 + x1*x10 + x1 + x2*x7*x9 + x2*x7 + x2*x9 + x2 + x3*x4*x5*x6 + x3*x4*x8*x9 + x3*x4 + x3*x5 + x3*x6*x7*x9 + x3*x6*x10 + x3*x7 + x3*x10 + x3 + x4*x6 + x5*x8*x10 + x5*x8 + x6*x10 + x6 + x7 + x8 + x9 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x3*x6 + x1*x3 + x1*x4 + x1*x6 + x2*x3*x6*x8 + x2*x4*x6 + x2*x4*x7*x9 + x2*x4*x10 + x2*x5*x7 + x2*x6*x8 + x2*x7 + x3*x4*x6 + x3*x5*x6*x7 + x3*x5 + x3*x7*x9 + x3*x8*x9 + x3 + x5*x6*x7 + x5*x10 + x6*x8*x9 + x6*x8 + x6*x9 + x6*x10 + x6 + x7*x9*x10 + x8*x9 + x8*x10 + x9 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	50
+  f1 = x2*x5 + x3*x4*x5*x8 + x3*x4*x10 + x3*x5*x9 + x4 + x5*x8 + x7*x9 + x8*x10 + x9 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x6 + x4 + x6*x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x5 + x1*x2*x3*x10 + x1*x2 + x1*x3*x5 + x1*x3*x10 + x1*x5*x7*x8*x10 + x1*x5*x10 + x1*x5 + x1*x6*x9 + x1*x7 + x1*x9 + x2*x3*x5*x9 + x2*x3*x7*x10 + x2*x3 + x2*x4*x5*x7 + x2*x4*x8 + x2*x4*x9 + x2*x4 + x2*x5*x7 + x2*x5*x8 + x2*x8 + x2 + x3*x4 + x3*x5*x7*x10 + x3*x6 + x3*x9*x10 + x4*x5*x6*x7 + x4*x7 + x4 + x5*x6*x9 + x5*x10 + x6*x8 + x8*x9 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	51
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x6 + x4 + x6*x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x6*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x6*x7*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	52
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7 + x1 + x2*x3*x10 + x2*x5*x10 + x2 + x3*x9*x10 + x7*x8 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x3*x4*x8 + x1*x3*x6 + x1*x3 + x1*x4 + x1*x6 + x1*x7*x8*x9*x10 + x1*x9 + x2*x3*x4*x9 + x2*x3 + x2*x4*x6 + x2*x8 + x2 + x3*x7*x9 + x3*x9 + x3 + x4*x6*x9 + x4*x7*x9*x10 + x4 + x5*x6*x8 + x5 + x7*x8*x9 + x7 + x8*x9*x10 + x9*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x6*x7*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	53
+  f1 = x2*x7*x8 + x2*x10 + x2 + x4*x5*x6*x9 + x4*x10 + x5*x7*x9 + x5*x9 + x6*x7*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x8*x9 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x7*x8 + x1*x6*x7 + x2*x9 + x2*x10 + x3*x7*x8 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	54
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x4 + x2*x5*x6 + x4*x9 + x8*x9*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	55
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x2*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x7*x10 + x2*x5 + x2*x6 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x2 + x1 + x3*x10 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	56
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x2*x8*x10 + x1*x4 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x5 + x1*x2*x3*x10 + x1*x2 + x1*x3*x5 + x1*x3*x10 + x1*x5*x7*x8*x10 + x1*x5*x10 + x1*x5 + x1*x6*x9 + x1*x7 + x1*x9 + x2*x3*x5*x9 + x2*x3*x7*x10 + x2*x3 + x2*x4*x5*x7 + x2*x4*x8 + x2*x4*x9 + x2*x4 + x2*x5*x7 + x2*x5 + x2*x8 + x2 + x3*x4 + x3*x5*x6*x9 + x3*x5*x7*x10 + x3*x6 + x3*x9*x10 + x4*x5*x6*x7 + x4*x7 + x4 + x5*x8*x10 + x6*x8 + x8*x9 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x5 + x1*x5*x9 + x1*x5*x10 + x2*x5*x8*x10 + x2 + x3*x5*x9 + x3*x5*x10 + x3 + x4*x7 + x7*x8 + x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	57
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x3*x6 + x2*x3*x7 + x6*x8 + x8 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	58
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x2*x8 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x6 + x4 + x6*x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	59
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x8 + x1*x9*x10 + x2*x3*x5*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x8*x9 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3*x5 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x3*x8*x10 + x1*x4 + x8*x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	60
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x4*x5*x6 + x1*x2 + x2*x3*x10 + x2*x8*x10 + x3*x7*x10 + x3*x7 + x3 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x7 + x5*x8 + x5 + x6 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3*x5 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x2*x7 + x1*x2 + x1*x3*x4 + x1*x3 + x1*x4*x6 + x1*x4*x8*x9 + x1*x5*x7 + x1*x5*x9*x10 + x1*x6*x7*x10 + x1*x7*x10 + x1*x7 + x1 + x2*x3*x7 + x2*x4*x5*x10 + x2*x4*x8 + x2*x5*x9 + x2*x6*x8 + x2*x7*x8*x10 + x2*x8 + x2*x9*x10 + x2*x10 + x3*x4*x9*x10 + x3*x4*x9 + x3*x4 + x3*x6*x7 + x3*x8 + x3*x9 + x3*x10 + x3 + x4*x5 + x4*x6*x9 + x4*x7*x8 + x4 + x5*x7 + x5*x8*x9 + x5*x9*x10 + x6*x7*x9 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x7 + x8*x9 + x8*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	61
+  f1 = x1*x7*x8*x10 + x1*x9 + x2*x4*x8*x9 + x4*x6*x10 + x4*x7*x9 + x5*x7 + x5*x10 + x5 + x6*x8*x10 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x6*x10 + x1*x2*x7 + x2*x3*x10 + x2*x5*x9 + x2*x9 + x3*x5 + x4*x9 + x5*x6 + x5*x7*x10 + x5 + x6*x8 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x3*x6 + x2*x3*x7 + x6*x8 + x8 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x5 + x1*x2*x3*x10 + x1*x2 + x1*x3*x5 + x1*x3*x10 + x1*x5*x7*x8*x10 + x1*x5*x10 + x1*x5 + x1*x6*x9 + x1*x7 + x1*x9 + x2*x3*x5*x9 + x2*x3*x7*x10 + x2*x3 + x2*x4*x5*x7 + x2*x4*x8 + x2*x4*x9 + x2*x4 + x2*x5*x7 + x2*x5 + x2*x8 + x2 + x3*x4 + x3*x5*x7*x10 + x3*x6 + x3*x9*x10 + x4*x5*x6*x7 + x4*x7 + x4 + x5*x6*x9 + x5*x8*x10 + x6*x8 + x8*x9 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	62
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x6 + x4 + x6*x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x9*x10 + x2*x5 + x2*x6*x10 + x3*x10 + x4*x7 + x4*x8 + x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x8*x9 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x7*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x4*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	63
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x5*x7 + x3*x6 + x4*x5*x6*x7*x10 + x6 + x7*x9*x10
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x3*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2 + x4*x7*x8*x9*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x10 + x2*x9*x10 + x3*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7*x10 + x1 + x2*x4*x6*x10 + x2*x5*x10 + x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	64
+  f1 = x1*x4*x7*x10 + x1*x4*x9 + x1*x4 + x1*x10 + x3*x4*x6 + x4*x5 + x4*x7*x8*x9 + x4*x7*x8 + x4*x10 + x5*x6 + x5 + x6*x7*x9 + x6*x10 + x8 + x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x3*x8*x9*x10 + x3*x9 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x4 + x2*x5*x6 + x4*x9 + x8*x9*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7 + x1*x7*x8 + x2*x3*x6*x7*x8 + x2*x6*x9 + x2*x7*x8 + x2*x8*x9 + x3*x5*x7 + x3*x8*x10 + x3*x10 + x3 + x5*x9*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	65
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7*x8 + x1*x7 + x2*x6*x9 + x2*x10 + x2 + x3*x8*x9 + x4*x7 + x4*x9 + x4
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x3 + x2*x5*x9 + x3*x4 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x3*x4*x8 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x6 + x1*x3 + x1*x4*x7*x9 + x1*x4*x9 + x1*x6*x10 + x1*x7 + x1*x10 + x2*x5 + x2*x7 + x3*x10 + x3 + x4*x5*x6 + x4*x7 + x4*x8*x9 + x4 + x5*x7 + x6*x10 + x7*x8*x9 + x7 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	66
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x7 + x1*x6*x8 + x1*x6 + x1 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x2 + x1 + x3*x7*x10 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x7 + x5*x8 + x5 + x6 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x8*x9 + x1*x3 + x1*x4*x10 + x2*x5*x10 + x2 + x3*x5*x8 + x3*x7*x8 + x4*x8*x9 + x4*x10 + x4 + x5*x7*x8*x9 + x8*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	67
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x8*x10 + x1*x3*x6 + x1*x7 + x2*x5 + x2*x10 + x2 + x3*x7 + x7*x9 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x10 + x1*x4 + x1 + x2*x3*x10 + x2*x7 + x5*x7*x8 + x5*x8*x9 + x7 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x4*x6 + x1*x2*x6*x7 + x1*x2*x6*x8 + x1*x2*x9 + x1*x3*x4*x6*x8 + x1*x3*x5*x6 + x1*x3*x8 + x1*x3 + x1*x4 + x1*x5*x6*x7 + x1*x7*x8 + x1*x7 + x1*x8 + x1*x9 + x1*x10 + x1 + x2*x7*x9 + x2*x7 + x2*x9 + x2 + x3*x4*x5*x6 + x3*x4*x8*x9 + x3*x4 + x3*x5 + x3*x6*x7*x9 + x3*x6*x10 + x3*x7 + x3*x10 + x3 + x4*x6 + x5*x8*x10 + x5*x8 + x6*x10 + x6 + x7 + x8 + x9 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x4 + x2*x5*x6 + x4*x9 + x8*x9 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x4*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	68
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x6*x7*x8 + x1*x6*x9 + x1*x6 + x1*x9 + x3*x5 + x4*x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x4*x7*x8*x9*x10 + x4
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2*x6 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7*x9 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	69
+  f1 = x1*x7*x8*x10 + x1*x9 + x2*x4*x8*x9 + x4*x6*x10 + x4*x7*x9 + x5*x7 + x5*x10 + x5 + x6*x8*x10 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7 + x1 + x2*x3*x10 + x2*x5*x10 + x2 + x3*x9*x10 + x7*x8 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x6*x9 + x2*x4*x9 + x3*x4*x9 + x4*x5*x6*x9 + x4*x5 + x4*x6*x10 + x4 + x5*x9 + x5*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x3*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x4*x7*x8*x9*x10 + x4
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x4*x6 + x1*x4*x5*x9 + x1*x5*x7 + x1*x6 + x1*x9 + x2*x3*x7 + x2*x4*x10 + x2*x8 + x3*x5*x7*x9 + x3*x8 + x4*x9 + x4 + x5*x6 + x6*x7*x9 + x8 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x7*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8*x9 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	70
+  f1 = x1*x2*x3*x5 + x1*x6*x8 + x1*x7 + x2*x6 + x2*x9*x10 + x3*x5*x7 + x6*x9*x10 + x6*x10 + 1
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x6*x7*x8 + x1*x7 + x2*x6*x9 + x2*x10 + x2 + x3*x8*x9 + x4*x7 + x4*x9 + x4
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x7 + x1*x2*x8*x10 + x1*x2 + x2*x4*x5*x6 + x2*x4*x6 + x2*x4*x9 + x2 + x3*x5 + x3*x7*x8 + x3*x8 + x4*x6*x10 + x5*x9*x10 + x5*x10 + x5 + x6*x7*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x6*x7*x9 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x3*x5*x10 + x2*x4*x9*x10 + x2*x7 + x3*x6 + x3*x9 + x3 + x6 + x7*x8*x10 + x7*x9 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	71
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x4*x7 + x1*x4*x9 + x1*x4 + x1*x10 + x2*x3*x6 + x2 + x3*x4*x6 + x3*x4*x10 + x5*x6*x7*x9 + x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x7 + x1*x6*x8 + x1*x6 + x1 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2 + x4*x7*x8*x9*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x2*x4*x6*x7 + x2*x5*x8 + x2*x6 + x3*x4*x6 + x3*x4*x7*x8 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	72
+  f1 = x3*x5*x8 + x3*x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x5
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x7 + x1*x6*x8 + x1*x6 + x1 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7*x8 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x2*x10 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x7 + x10
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x10 + x2*x3*x5*x10 + x7
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	73
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x2 + x3*x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x8*x9 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x10 + x5*x8 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	74
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x4 + x1*x6*x9*x10 + x1*x6 + x1*x8*x9 + x1*x9 + x1*x10 + x2*x3 + x2*x6*x8 + x3*x5*x8 + x3*x6*x8 + x3*x6 + x3 + x4*x8 + x5*x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x2 + x1 + x3*x7*x10 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x6 + x2*x7*x8*x10 + x2*x7*x9*x10 + x3*x4*x7*x9 + x3*x5 + x5*x7*x8 + x6*x9 + x8*x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x3*x6*x7 + x1*x4 + x1*x5*x9 + x1*x5 + x2*x3*x10 + x2*x4*x6 + x2*x6 + x3*x7*x10 + x3*x8 + x3 + x4 + x5*x6*x9 + x5 + x6*x8*x9 + x6*x9 + x6*x10 + x7 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x3*x5 + x1*x4*x7 + x1*x6*x8 + x2*x5 + x2*x6*x8*x9 + x4*x5*x7*x10 + x4*x5 + x4*x6*x10 + x4*x8*x9 + x6*x7*x10 + x7*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x5*x7*x10 + x1*x5 + x1*x6*x10 + x1*x7*x8 + x2*x4*x7*x9 + x2*x5 + x6*x8*x10 + x6 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x4*x7*x10 + x1 + x2*x4*x6*x10 + x2*x5*x10 + x7*x9*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	75
+  f1 = x3*x5*x8 + x3*x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x2*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x3*x4*x9 + x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4*x10 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x4*x6*x7 + x1*x4*x7 + x2*x4 + x2*x6*x8 + x3*x4*x6 + x3*x4*x7*x8 + x3*x6 + x3*x7 + x4*x6 + x4*x7 + x5*x8 + x5 + x7 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x9 + x3 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	76
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x2*x9 + x2*x5*x8*x10 + x2*x5*x9 + x2*x7*x9 + x4*x8*x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x5*x6 + x3*x4 + x4*x9 + x4*x10 + x7*x9*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x3*x5*x7 + x1*x5*x6*x7*x9 + x2*x3*x4*x9 + x2*x3*x8 + x3*x5*x6*x8 + x4*x5*x8 + x6*x8*x9 + x7*x8*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x2*x8*x9 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2*x6 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x8*x9 + x1*x8 + x3*x5*x9 + x3*x8*x10 + x4*x5*x7 + x4*x5*x9*x10 + x4*x6*x7*x10 + x4*x6*x7 + x5*x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x3 + x1*x2*x7 + x1*x2 + x1*x3*x4 + x1*x3 + x1*x4*x6 + x1*x4*x8*x9 + x1*x5*x7 + x1*x5*x9*x10 + x1*x6*x7*x10 + x1*x7*x10 + x1*x7 + x1 + x2*x3*x7 + x2*x4*x5*x10 + x2*x4*x8 + x2*x5*x9 + x2*x6*x8 + x2*x7*x8*x10 + x2*x8 + x2*x9*x10 + x2*x10 + x3*x4*x9*x10 + x3*x4*x9 + x3*x4 + x3*x6*x7 + x3*x8 + x3*x9 + x3*x10 + x3 + x4*x5 + x4*x6*x9 + x4*x7*x8 + x4 + x5*x7 + x5*x8*x9 + x5*x9*x10 + x6*x7*x9 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x7 + x8*x9 + x8*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x2*x4 + x1*x2*x6*x7 + x1*x6*x7 + x1*x8 + x1*x9*x10 + x1 + x2*x4*x8 + x4 + x7 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	77
+  f1 = x3*x5*x8 + x8
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x5
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x2*x3*x5*x9 + x2*x3 + x3*x4 + x9
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x2*x8 + x1*x3*x4 + x1*x3 + x1*x4*x9*x10 + x1*x9 + x2*x3*x5*x7 + x2*x3*x9*x10 + x2*x3 + x2*x4*x5*x6*x8 + x2*x4*x5*x7 + x2*x4 + x2*x6*x8*x10 + x2*x7 + x2*x8 + x3*x5*x6 + x3*x6*x7*x9 + x3*x8*x10 + x3*x8 + x3*x9*x10 + x3*x9 + x4*x6 + x5*x9 + x6*x7 + x6*x9 + x6 + x7*x9*x10 + x7*x10 + x7 + x8 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x3*x6 + x1*x2*x7 + x1*x2*x8 + x1*x2*x9 + x1*x3*x8*x9 + x1*x4*x5*x8 + x1*x4 + x1*x5*x8*x9 + x1*x5*x9 + x1*x5*x10 + x1*x7*x9 + x1*x7 + x1*x8 + x1 + x2*x4*x6*x8 + x2*x4*x7 + x2*x4*x9 + x2*x5*x10 + x2*x6*x9*x10 + x2*x7*x8*x9 + x2*x9 + x3*x4*x5 + x3*x5*x7*x10 + x3*x5*x9 + x3*x5 + x3*x6 + x3*x7 + x3*x8*x10 + x3*x9 + x3*x10 + x4*x5*x9 + x4*x6*x7 + x4*x9 + x4 + x5*x7 + x5*x10 + x5 + x6*x8*x9 + x6*x8*x10 + x7*x9*x10 + x7*x10 + x8 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x5 + x1*x2*x3*x10 + x1*x2 + x1*x3*x5 + x1*x3*x10 + x1*x5*x7*x8*x10 + x1*x5*x10 + x1*x5 + x1*x6*x9 + x1*x7 + x1*x9 + x2*x3*x5*x9 + x2*x3*x7*x10 + x2*x3 + x2*x4*x5*x7 + x2*x4*x8 + x2*x4*x9 + x2*x4 + x2*x5*x7 + x2*x5 + x2*x8 + x2 + x3*x4 + x3*x5*x7*x10 + x3*x6 + x3*x9*x10 + x4*x5*x6*x7 + x4*x7 + x4 + x5*x6*x9 + x5*x8*x10 + x6*x8 + x8*x9 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x10 + x1*x9 + x1 + x2*x4*x5*x8 + x2*x9 + x3*x4*x7*x10 + x4*x6 + x4*x8*x9 + x4 + x5*x6 + x5*x7*x8 + x6*x7 + x6*x10 + x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	78
+  f1 = x1*x3*x6*x8 + x1*x4 + x1*x5*x7*x10 + x1*x5*x10 + x1*x9*x10 + x1 + x2*x5*x9 + x2*x8 + x3*x7 + x3*x9*x10 + x4*x5 + x4*x8*x10 + x5*x8*x9 + x5*x8 + x6*x8 + x6*x10 + x7*x8 + x7*x10 + x8*x10 + x8 + 0
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7*x8 + x1*x7 + x2*x6*x9 + x2*x10 + x2 + x3*x8*x9 + x4*x7 + x4*x9 + x4
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x2*x6*x10 + x1*x2*x7 + x2*x3*x10 + x2*x5*x9 + x2*x9 + x3*x5 + x4*x9 + x5*x6 + x5*x7*x10 + x5 + x6*x8 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x6*x8 + x1*x6 + x1*x7 + x1*x8 + x2*x5 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x7*x9 + x2*x5*x9 + x2*x9 + x4*x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x4*x7*x8*x9*x10 + x4
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x2*x6 + x2*x7*x10 + x8 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	79
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x3*x6*x7*x8 + x1*x6*x9 + x1*x6 + x1*x9 + x3*x5 + x4*x5 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f3 = x1*x8*x9 + x1*x8*x10 + x1*x10 + x1 + x2*x5*x10 + x2*x5 + x2*x6*x8 + x2*x8*x10 + x3*x5*x10 + x3*x6*x7*x9 + x3*x7 + x3*x9 + x4*x5*x6*x9 + x4*x5*x7 + x4*x5 + x4*x6 + x4*x7*x9*x10 + x4*x7*x10 + x4*x8*x9 + x4*x10 + x5*x7*x10 + x5*x8*x10 + x5*x9*x10 + x5*x9 + x6 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x3*x6*x8*x9 + x1*x4 + x2*x4*x5*x8 + x3*x4*x8*x10 + x3*x4*x8 + x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x8 + x1*x2 + x1*x3*x4*x7*x10 + x1*x7*x10 + x2*x4*x6*x7 + x2*x4*x8*x10 + x2*x4*x9*x10 + x2*x5*x10 + x2*x7 + x2*x9 + x3*x5*x7*x10 + x3*x5 + x3*x6*x9 + x3*x7 + x3*x10 + x4*x6*x7 + x4*x7 + x5*x8 + x5 + x6*x9 + x6*x10 + x6 + x7*x9 + x7*x10 + x9*x10 + x10 + 1
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x1*x2*x3*x10 + x1*x2 + x2*x3 + x2*x4 + x2*x7*x8*x10 + x2 + x3*x4*x5 + x4*x5 + x7*x10 + x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7*x10 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = x1*x2*x4*x7 + x1*x3*x8 + x1*x4*x5*x9 + x1*x5 + x1*x8 + x1*x9 + x1 + x2*x5*x6 + x2*x5 + x2*x6*x7 + x2*x6*x9 + x2*x7*x8 + x2*x9*x10 + x3*x6*x8 + x3*x6*x10 + x3*x7*x9 + x3*x7 + x3*x8 + x3*x9 + x4*x5*x7 + x4*x5*x8 + x5*x7*x8 + x5*x7*x10 + x6*x7*x8 + x6*x9 + x7*x10 + x8*x10 + x9 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x2*x3*x4*x7*x10 + x2*x3*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+
+Model:	80
+  f1 = x3*x5*x8 + x8*x10
+		H: 0.8	C: 0	R: 0	B: 0
+  f2 = x1*x6*x7 + x1 + x2*x3*x10 + x2*x5*x10 + x2 + x3*x9*x10 + x7*x8 + x8 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f3 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f4 = x1*x3*x6*x8*x9 + x1*x4 + x2*x4*x5*x8 + x3*x4*x8*x10 + x3*x4*x8 + x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f5 = x1*x4 + x2*x8*x10 + 1
+		H: 1	C: 0	R: 0	B: 0
+  f6 = x1*x2*x5*x6 + x1*x2*x7 + x1*x2*x9 + x1*x4*x7 + x1*x5*x7 + x1*x5 + x1*x7 + x2*x4*x9 + x2*x8*x10 + x2 + x3*x10 + x4*x5*x6*x7 + x4*x6*x9 + x5*x6 + x5*x7 + x5 + x6*x7 + x6*x8 + x6*x10 + x7*x8*x10 + x7*x10 + x7 + x8*x10 + x8 + x10 + 0
+		H: 0.95	C: 0	R: 0	B: 0
+  f7 = x2*x5 + x2 + x7 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f8 = x1*x9 + x1 + x2*x5*x7*x9 + x2*x5*x10 + x3 + x5*x7*x10 + x5*x8*x10 + 0
+		H: 1	C: 0	R: 0	B: 0
+  f9 = 1
+		H: 1	C: 0	R: 0	B: 0
+  f10 = x1*x3 + x1*x4*x6 + x9*x10 + x9 + 1
+		H: 1	C: 0	R: 0	B: 0
+	H: 0.905 	 T: 0.8175
+

@@ -20,4 +20,4 @@ REV = {};
 CMPLX = {};
 BIO = {};
 MODEL = {};
-PARAMS = {"params-size10-1.txt"};
+PARAMS = {"params-size10-1-manyGenerations.txt"};
