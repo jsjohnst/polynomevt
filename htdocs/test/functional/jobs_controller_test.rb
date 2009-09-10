@@ -154,7 +154,7 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should create state space of deterministic network using react" do
     my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
-      :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n", 
+      :input_data => "1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n", 
       :show_wiring_diagram => true, :wiring_diagram_format => "gif",
       :show_state_space => true, :state_space_format => "gif",
       :make_deterministic_model => true })

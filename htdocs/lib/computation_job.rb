@@ -83,7 +83,7 @@ class ComputationJob < Struct.new(:job_id)
         if @job.make_deterministic_model
           @logger.info "deterministic"
           if @job.nodes <= n_react_threshold
-            @logger.info "Running react ... not implemented yet"
+            @logger.info "Running react for deterministic model"
             # TODO: make this work 
             run_react(@job.nodes, @job.file_prefix, discretized_file)
             generate_picture = true
