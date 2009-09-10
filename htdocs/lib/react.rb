@@ -6,15 +6,17 @@ module React
     functionfile = "public/perl/" + file_prefix +".functionfile.txt"
     multiplefunctionfile = "public/perl/" + file_prefix +".multiplefunctionfile.txt"
     write_manager_file(managerfile, n_nodes, file_prefix, datafiles)
-    run(managerfile, modelfile)
-    parse_output(modelfile, functionfile, multiplefunctionfile)
+    if run(managerfile, modelfile)
+       parse_output(modelfile,functionfile,multiplefunctionfile)
+       return true
+    end
   end
 
   def run(managerfile, modelfile)
     logger.info "Successfully calling react lib:"
     logger.info "../EA/React #{managerfile} #{modelfile}"
     `../EA/React #{managerfile} #{modelfile}`
-    return "Successfully calling react lib"
+    $? == 0
   end
   
   def parse_output(infile, outfile, long_outfile)
