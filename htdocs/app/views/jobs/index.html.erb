@@ -20,20 +20,26 @@
 		<b>Update Type:</b> <%=h job.update_type %><br>
 	</td>
     <td><pre><%=h job.input_data %></pre></td>
- 	<td><pre><%=h job.log %></pre></td>
+ 	<td><div style="overflow: auto; width: 150px;"><pre><%=h job.log %></pre></div></td>
 	<td>
 		<% if job.completed %>
 			<a href="/<%= job.file_prefix %>.input.txt">Input Data</a><br/>
 			<a href="/<%= job.file_prefix %>.discretized_input.txt">Discretized Data</a><br/>
 			
+
 			<% if job.show_wiring_diagram %>
-				<a href="/<%= job.file_prefix %>.wiring_diagram.<%= job.wiring_diagram_format %>">Wiring Diagram</a><br/>
+        <%= make_lightbox_link(
+        "/#{job.file_prefix}.wiring_diagram.#{job.wiring_diagram_format}", 
+        "Wiring Diagram", "[job#{job.id.to_s}]") %>
+      <br/>
 				<a href="/<%= job.file_prefix %>.wiring_diagram.dot">WD Dot File</a><br/>
 			<% end %>
 			
 			<% if job.show_state_space %>
-				<a href="/<%= job.file_prefix %>.state_space.<%= job.state_space_format %>">State Space</a><br/>
-				<a href="/<%= job.file_prefix %>.state_space.dot">SS Dot File</a><br/>
+        <%= make_lightbox_link(
+        "/#{job.file_prefix}.state_space.#{job.state_space_format}", 
+        "State Space", "[job#{job.id.to_s}]") %>
+      <br/>
 			<% end %>
 			
 			<% if job.show_functions %>

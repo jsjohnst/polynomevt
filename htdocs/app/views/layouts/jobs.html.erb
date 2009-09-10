@@ -5,6 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Jobs: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'lightbox' %>
   <%= stylesheet_link_tag 'polynome' %>
 </head>
 <body>
@@ -16,4 +17,8 @@
 <%= yield %>
 
 </body>
+<script type="text/javascript" src="javascripts/prototype.js"></script>
+<script type="text/javascript"
+src="javascripts/scriptaculous.js?load=effects,builder"></script>
+<script type="text/javascript" src="javascripts/lightbox.js"></script>
 </html>
