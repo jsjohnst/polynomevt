@@ -14,8 +14,6 @@ module React
     end
   end
 
-  end
-
   def run(managerfile, modelfile)
     @react_logger.info "Successfully calling react lib in run:"
     @react_logger.info "../EA/React #{managerfile} #{modelfile}"
