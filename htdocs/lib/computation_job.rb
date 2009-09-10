@@ -1,6 +1,8 @@
 require 'digest/md5'
 require 'ftools'
 
+include React
+
 class ComputationJob < Struct.new(:job_id)  
   def perform  
     # here is where we will handle the background Macaulay processing  
@@ -47,7 +49,7 @@ class ComputationJob < Struct.new(:job_id)
     
     macaulay("Discretize.m2", "discretize(///../htdocs/#{datafile}///, 0, ///../htdocs/#{discretized_file}///)")
     
-    n_react_threshold = 2;
+    n_react_threshold = 5;
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
@@ -60,7 +62,8 @@ class ComputationJob < Struct.new(:job_id)
         if @job.nodes <= n_react_threshold
           if !macaulay("isConsistent.m2", "isConsistent(///../htdocs/#{discretized_file}///, #{@job.pvalue}, #{@job.nodes})", true)
             @logger.info "Running react ... not implemented yet"
-            # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+            # TODO: maybe make this better?
+            run_react(@job.nodes, @job.file_prefix, discretized_file)
             generate_picture = true
           else
             # TODO
@@ -81,7 +84,8 @@ class ComputationJob < Struct.new(:job_id)
           @logger.info "deterministic"
           if @job.nodes <= n_react_threshold
             @logger.info "Running react ... not implemented yet"
-            # TODO: make this work -- run_react(@job.nodes, @job.file_prefix, discretized_datafiles)
+            # TODO: make this work 
+            run_react(@job.nodes, @job.file_prefix, discretized_file)
             generate_picture = true
           else
             self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)

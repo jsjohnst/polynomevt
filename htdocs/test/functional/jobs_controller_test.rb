@@ -152,6 +152,30 @@ class JobsControllerTest < ActionController::TestCase
     compare_content(state_space + "dot", expected_data)
   end
 
+  test "should create state space of deterministic network using react" do
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n", 
+      :show_wiring_diagram => true, :wiring_diagram_format => "gif",
+      :show_state_space => true, :state_space_format => "gif",
+      :make_deterministic_model => true })
+    wait_for_completion(my_job)
+
+    wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
+    puts wiring_diagram + my_job.wiring_diagram_format
+    assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring diagram missing"
+    assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
+    
+    state_space = "public/" + my_job.file_prefix + ".state_space."
+    puts state_space + my_job.state_space_format
+    assert FileTest.exists?(state_space + "dot"), "dot file for state space missing"
+    assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
+
+    expected_data = [
+      "false"
+    ]
+    compare_content(state_space + "dot", expected_data)
+  end
+
   test "should destroy job" do
     assert_difference('Job.count', -1) do
       delete :destroy, :id => jobs(:one).to_param
