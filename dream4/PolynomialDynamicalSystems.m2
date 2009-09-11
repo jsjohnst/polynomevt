@@ -216,7 +216,7 @@ readKOData(String,Ring) := (filename, R) -> (
     T = apply(T, l->(l_0, matrix(R,apply(l_1, s->select(separateRegexp(" +",s), c->c!="")/value))));
     H := new MutableHashTable;
     scan(T, p -> if H#?(p_0) then H#(p_0) = append(H#(p_0), p_1)
-	else H#(p_0) = {p_1});
+	else H#(p_0) = {p_1});print T;
     new TimeSeriesData from H
 )
 
