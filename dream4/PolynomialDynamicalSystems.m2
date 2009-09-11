@@ -5,8 +5,8 @@ newPackage(
         Authors => {
          {Name => "Brandy Stigler", Email => "bstigler@smu.edu", HomePage => "http://users.mbi.ohio-state.edu/bstigler"},
          {Name => "Mike Stillman", Email => "mike@math.cornell.edu", HomePage => "http://www.math.cornell.edu/~mike"}
---Edited by:	Alan Veliz-Cuba
---Edit Date:	8/26/09
+--Edited by: 	Alan Veliz-Cuba
+--Edit Date: 	8/31/09
          },
         Headline => "Utilities for polynomial dynamical systems - mostly combined with RevEng package",
         DebuggingMode => true
