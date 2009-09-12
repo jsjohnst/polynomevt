@@ -74,6 +74,13 @@ class JobsControllerTest < ActionController::TestCase
       post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file }
     end
   end
+  
+  test "should not create job with all empty fields" do
+    assert_no_difference('Job.count') do
+      post :create, :job => { }
+    end
+    assert_redirected_to job_path(assigns(:job))
+  end
 
   test "should show job" do
     get :show, :id => jobs(:one).to_param
