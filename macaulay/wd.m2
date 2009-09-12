@@ -11,11 +11,11 @@ load "PolynomialDynamicalSystems.m2"
 load "Points.m2"
 
 wd = method();
-wd(List, String, ZZ, ZZ) := (WT, outfile, pp, nn) -> (
+wd(String, String, ZZ, ZZ) := (WT, outfile, pp, nn) -> (
     kk = ZZ/pp; --Field
     
     --TS is a hashtable of time series data WITH NO KO DATA
-    TS = readTSData(WT, {}, kk);
+    TS = readTSData(WT, kk);
     
     --FD is a list of hashtables, where each contains the input-vectors/output pairs for each node
     FD = apply(nn, II->functionData(TS, II+1));
@@ -82,7 +82,7 @@ wd(List, String, ZZ, ZZ) := (WT, outfile, pp, nn) -> (
 --    file = openOut concatenate("graph-",first WT,".dot");
     file = openOut outfile;
     file << "digraph {" << endl;
-    apply(v, q->(file << toString q << endl));
+    apply(v, q->(file << toString q << " [shape=\"box\"];"<< endl));
     apply(nn, j->(apply(nn, i->(if allCounts#j#i != 0 then (file << v#i << "->" << v#j << " [label=\"" << (allCounts#j#i)/(5*nn*1.) << "\"];" << endl)))));
     file << "}";
     file << close;

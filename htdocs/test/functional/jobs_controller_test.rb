@@ -117,23 +117,13 @@ class JobsControllerTest < ActionController::TestCase
 
     wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
     puts wiring_diagram + my_job.wiring_diagram_format
-    assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring
-    diagram missing, because wd not working"
+    assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
 
     expected_data = [
-      "digraph { ",
-      "x1",
-      "x2",
-      "x3",
-      "x2->x1 [label=\".333333\"];",
-      "x3->x1 [label=\".666667\"];",
-      "x2->x2 [label=\".333333\"];",
-      "x3->x2 [label=\".666667\"];",
-      "x2->x3 [label=\".333333\"];",
-      "x3->x3 [label=\".666667\"];",
-      "}",
-      "for now this still fails"
+      "digraph {", 
+      "for now this still fails",
+      "}"
     ]
     compare_content(wiring_diagram + "dot", expected_data)
   end
