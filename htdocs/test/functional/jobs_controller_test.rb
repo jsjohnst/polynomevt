@@ -110,7 +110,8 @@ class JobsControllerTest < ActionController::TestCase
 
     wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
     puts wiring_diagram + my_job.wiring_diagram_format
-    assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring diagram missing"
+    assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring
+    diagram missing, because wd not working"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
 
     expected_data = [
@@ -124,7 +125,8 @@ class JobsControllerTest < ActionController::TestCase
       "x3->x2 [label=\".666667\"];",
       "x2->x3 [label=\".333333\"];",
       "x3->x3 [label=\".666667\"];",
-      "}"
+      "}",
+      "for now this still fails"
     ]
     compare_content(wiring_diagram + "dot", expected_data)
   end
@@ -141,13 +143,22 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring diagram missing"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
     
+    expected_data = [
+      "digraph test {", 
+      "for now this still fails",
+      "}"
+    ]
+    compare_content(wiring_diagram + "dot", expected_data)
+    
     state_space = "public/" + my_job.file_prefix + ".state_space."
     puts state_space + my_job.state_space_format
     assert FileTest.exists?(state_space + "dot"), "dot file for state space missing"
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
     expected_data = [
-      "false"
+      "digraph test {", 
+      "for now this still fails",
+      "}"
     ]
     compare_content(state_space + "dot", expected_data)
   end
@@ -171,7 +182,9 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
     expected_data = [
-      "false"
+      "digraph test {", 
+      "for now this still fails",
+      "}"
     ]
     compare_content(state_space + "dot", expected_data)
   end
@@ -197,11 +210,15 @@ class JobsControllerTest < ActionController::TestCase
 
 
   def compare_content(file_name, expected_data)
+    # check that the file has at least as many lines as the dummy data, so
+    # that we don't generate empty graphs anymore
+    number_of_lines = `wc -l < #{file_name}`
+    assert expected_data.length <= number_of_lines.to_i, "data should have a least #{expected_data.length} lines, but only has #{number_of_lines}"
     my_file = File.open( file_name, "r")
     for data in expected_data do 
       line = my_file.gets
       line = line.chop
-      assert_equal( data, line)
+      assert_equal( data, line ) 
     end
   end
 end
