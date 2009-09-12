@@ -11,7 +11,7 @@
   </tr>
 
 <% @jobs.each do |job| %>
-  <tr bgcolor="<% if job.completed %>#57E964<% elsif job.failed %>#800517<% else %>#FFFFFF<% end %>">
+  <tr bgcolor="<% if job.completed %>#CCFFCC<% elsif job.failed %>#800517<% else %>#FFFFFF<% end %>">
     <td><%=h job.created_at %></td>
     <td>
 		<b>Nodes:</b> <%=h job.nodes %><br>
