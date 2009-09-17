@@ -1,8 +1,8 @@
 Interpret this as: 
-x_j shows up f_j in A_ij % of all networks generated with react 
+there is an edge from x_j to x_i in A_ij % of all networks generated with react 
 
-For example in f1 every variable shows up in every model, 
-in f2, x1 shows up in 8% of all models
+For example there's an edge from every variable to x1 in every model, there's
+an edge from x1 to x2 in 8% of all models. 
 
 The last 5 rows should be ignored (they would indicate by which variables the
 perturbations are affected). 
