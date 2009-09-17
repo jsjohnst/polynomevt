@@ -77,11 +77,12 @@ for k in 1..5 do
         outfile.print sum[i][j] * 100 / 130
         outfile.print "\t"
       end
-      puts ""
+      outfile.puts ""
     end
   outfile.close
 end
 
+cp public/files/*edges.txt ~/Sites/polynome-master/dream4/React/
 
 sum
 a = Array.new(2)
