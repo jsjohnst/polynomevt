@@ -60,10 +60,7 @@ require "lib/dvdcore.rb"
 for k in 1..5 do 
   sum = Array.new()
   output = Array.new()
-  functionfiles =
-  split_data_into_files("/Users/fhinkel/Sites/github/htdocs/public/files/output-#{k}.txt")
-
-
+  functionfiles = split_data_into_files("/Users/fhinkel/Sites/github/htdocs/public/files/output-#{k}.txt")
   functionfiles.each do |functionfile|
     file_prefix = functionfile.sub(/\.functionfile\.txt/, "")
     file_prefix.sub!(/\/Users\/fhinkel\/Sites\/github\/htdocs\//,"")
@@ -74,9 +71,7 @@ for k in 1..5 do
     output = dvd.observe_dependencies_in_array
     add_componentwise(sum, output)
   end
-
-  outfile =
-  File.new("/Users/fhinkel/Sites/github/htdocs/public/files/output-#{k}-edges.txt", "w")
+  outfile = File.new("/Users/fhinkel/Sites/github/htdocs/public/files/output-#{k}-edges.txt", "w")
     for i in 0..sum.length-1 do 
       for j in 0..sum[i].length-1 do
         outfile.print sum[i][j] * 100 / 130
