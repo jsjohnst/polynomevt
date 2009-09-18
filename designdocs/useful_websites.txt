@@ -7,3 +7,8 @@ http://www.aidanf.net/rails_user_authentication_tutorial
 
 testing:
 http://api.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html
+
+zipfile:
+http://www.superwick.com/archives/2007/06/14/generating-zip-file-archives-via-ruby-on-rails/
+http://rubyzip.sourceforge.net/
+http://bibapp.googlecode.com/svn/trunk/config/environment.rb
