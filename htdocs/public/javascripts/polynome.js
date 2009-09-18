@@ -12,4 +12,8 @@ function close_hidden_panels() {
 	closed_panels.invoke('onclick');
 }
 
+
 Event.observe(window, 'load', close_hidden_panels);
+Event.observe(window,"load",function() {
+var my_tooltip = new Tooltip('product_1', 'tooltip');
+});
