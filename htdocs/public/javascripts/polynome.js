@@ -8,13 +8,40 @@ function toggle_panel(element) {
 	});
 }
 
-function show_modal(id, title) {
+function show_input_modal(id, title) {
 	Modalbox.show( $(id), {title: title, width: 300, overlayDuration: 0.1, slideDownDuration: 0.1,
 			slideUpDuration: 0.1, autoFocusing: false, resizeDuration: 0.1, afterLoad: function() {
 		$('dialog_' + id).value = $('hidden_' + id).value;
 	}, beforeHide: function() {
 		$('hidden_' + id).value = $('dialog_' + id).value;
-	}});
+	}, beforeResize: function(scope) {
+                scope.MBcontent.insert(Builder.node("button", { onclick: "Modalbox.hide();" }, 'Close Window'));
+        }});
+}
+
+function show_content_with_dl_modal(id, url, title) {
+	Modalbox.show( $(id), { title: title, overlayDuration: 0.1, slideDownDuration: 0.1,
+			    slideUpDuration: 0.1, autoFocusing: false, resizeDuration: 0.1, beforeResize: function(scope) {
+				scope.MBcontent.insert(Builder.node("a", { href: url }, 'Download File'));
+				scope.MBcontent.insert(Builder.node("span", {}, " "));
+				scope.MBcontent.insert(Builder.node("button", { onclick: "Modalbox.hide();" }, 'Close Window'));
+			} });
+}
+
+function show_url_content_modal(url, title) {
+	Modalbox.show(url, { title: title, overlayDuration: 0.1, slideDownDuration: 0.1,
+			    slideUpDuration: 0.1, autoFocusing: false, resizeDuration: 0.1, beforeResize: function(scope) {
+				scope.MBcontent.insert(Builder.node("a", { href: scope.content }, 'Download File'));
+				scope.MBcontent.insert(Builder.node("span", {}, " "));
+				scope.MBcontent.insert(Builder.node("button", { onclick: "Modalbox.hide();" }, 'Close Window'));
+			} });
+}
+
+function show_content_modal(id, title) {
+	Modalbox.show( $(id), { title: title, overlayDuration: 0.1, slideDownDuration: 0.1, 
+                            slideUpDuration: 0.1, autoFocusing: false, resizeDuration: 0.1, beforeResize: function(scope) {
+                                scope.MBcontent.insert(Builder.node("button", { onclick: "Modalbox.hide();" }, 'Close Window'));
+                        } });
 }
 
 function close_hidden_panels() {

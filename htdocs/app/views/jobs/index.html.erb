@@ -4,9 +4,8 @@
   <tr class="menubar">
 	<th>Meta</th>
 	<th>Input Data</th>
-	<th>Log</th>
 	<th>Results</th>
-	<th colspan="2">Actions</th>
+	<th>Actions</th>
   </tr>
 
 <% @jobs.each do |job| %>
@@ -20,41 +19,45 @@
 		<b>Update Type:</b> <%=h job.update_type %><br>
 	</td>
     <td><pre><%=h job.input_data %></pre></td>
- 	<td><div style="overflow: auto; width: 150px;"><pre><%=h job.log %></pre></div></td>
 	<td>
+		<div style="display:none"><div id="job<%=h job.id %>-log"><pre><%=h job.log %></pre></div></div>
+	 	<a href="#" onclick="show_content_modal('job<%=h job.id %>-log', 'Log Output'); return false;">Log Output</a><br/>	
 		<% if job.completed %>
-			<a href="/<%= job.file_prefix %>.input.txt">Input Data</a><br/>
-			<a href="/<%= job.file_prefix %>.discretized_input.txt">Discretized Data</a><br/>
-			
+			<a href="/<%= job.file_prefix %>.input.txt" onclick="show_url_content_modal('/<%= job.file_prefix %>.input.txt', 'Input Data'); return false;">Input Data</a><br/>
 
+			<a href="/<%= job.file_prefix %>.discretized_input.txt" onclick="show_url_content_modal('/<%= job.file_prefix %>.discretized_input.txt', 'Discretized Data'); return false;">Discretized Data</a><br/>
+			
 			<% if job.show_wiring_diagram %>
-        <%= make_lightbox_link(
-        "/#{job.file_prefix}.wiring_diagram.#{job.wiring_diagram_format}", 
-        "Wiring Diagram", "[job#{job.id.to_s}]") %>
-      <br/>
-				<a href="/<%= job.file_prefix %>.wiring_diagram.dot">WD Dot File</a><br/>
+        			<div style="display:none"><div id="job<%=h job.id %>-wd">
+					<img src="/<%= job.file_prefix %>.wiring_diagram.<%= job.wiring_diagram_format %>">
+				</div></div>
+
+				<a href="/<%= job.file_prefix %>.wiring_diagram.<%= job.wiring_diagram_format %>" onclick="show_content_with_dl_modal('job<%=h job.id %>-wd', '/<%= job.file_prefix %>.wiring_diagram.<%= job.wiring_diagram_format %>', 'Wiring Diagram'); return false;">Wiring Diagram</a><br/>
+				
+				<a href="/<%= job.file_prefix %>.wiring_diagram.dot" onclick="show_url_content_modal('/<%= job.file_prefix %>.wiring_diagram.dot', 'WD Dot File'); return false">WD Dot File</a><br/>
 			<% end %>
 			
 			<% if job.show_state_space %>
-        <%= make_lightbox_link(
-        "/#{job.file_prefix}.state_space.#{job.state_space_format}", 
-        "State Space", "[job#{job.id.to_s}]") %>
-      <br/>
+				<div style="display:none"><div id="job<%=h job.id %>-ss">
+                                        <img src="/<%= job.file_prefix %>.state_space.<%= job.state_space_format %>">
+                                </div></div>
+
+                                <a href="/<%= job.file_prefix %>.state_space.<%= job.state_space_format %>" onclick="show_content_with_dl_modal('job<%=h job.id %>-ss', '/<%= job.file_prefix %>.state_space.<%= job.state_space_format %>', 'State Space Diagram'); return false;">State Space Diagram</a><br/>
+                                
+                                <a href="/<%= job.file_prefix %>.state_space.dot" onclick="show_url_content_modal('/<%= job.file_prefix %>.state_space.dot', 'SS Dot File'); return false">SS Dot File</a><br/>
 			<% end %>
 			
 			<% if job.show_functions %>
-				<a href="/<%= job.file_prefix %>.functionfile.txt">Show Functions</a><br/>
+				<a href="#" onclick="show_url_content_modal('/<%= job.file_prefix %>.functionfile.txt', 'Function Data'); return false;">Show Functions</a><br/>
 			<% end %>
 
 			<a href="/<%= job.file_prefix %>.job.zip">Download zip of all files</a><br />
 		<% end %>
 	</td>
-    <td><%= link_to 'Show', job %></td>
-    <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', job %><br/>
+    <%= link_to 'Clone', edit_job_path(job) %><br/>
+    <%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New job', new_job_path %>
