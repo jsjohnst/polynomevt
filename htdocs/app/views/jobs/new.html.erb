@@ -1,4 +1,3 @@
-<% render :partial => "tooltips" %>
 <h1>Start Parameter Estimation</h1>
 
 
@@ -7,16 +6,6 @@
   <%= f.error_messages %>
 
 <div style="float: left;">
-
-<div id="pvalue_tooltip" class="tooltip" style="display:none;">
-<b>pvalue:</b><br/>
-pvalue is used in fancy mathematical<br/>
-worlds to indicate some value which<br/>
-anyone not already familiar with the term<br/>
-would probably not understand anyway<br/>
-so why would you be needing help here?<br/>
-</div>
-
   <div style="display:none">
     <div id="input_data">
       <p>
@@ -157,3 +146,4 @@ so why would you be needing help here?<br/>
 <% end %>
 
 <%= link_to 'Back', jobs_path %>
+<%= render :partial => "jobs/tooltips" %>
