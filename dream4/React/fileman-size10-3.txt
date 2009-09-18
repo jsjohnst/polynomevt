@@ -1,23 +1,23 @@
 P=2; N=15;
 WT ={
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_TS1.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_TS2.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_TS3.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_TS4.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_TS5.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_TS6.txt"
+"3_TS1.txt",
+"3_TS2.txt",
+"3_TS3.txt",
+"3_TS4.txt",
+"3_TS5.txt",
+"3_TS6.txt"
 };
 KO ={
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO1.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO2.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO3.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO4.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO5.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO6.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO7.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO8.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO9.txt",
-"/Users/fhinkel/Sites/polynome-master/dream4/React/3_KO10.txt"
+(1,"3_KO1.txt"),
+(2,"3_KO2.txt"),
+(3,"3_KO3.txt"),
+(4,"3_KO4.txt"),
+(5,"3_KO5.txt"),
+(6,"3_KO6.txt"),
+(7,"3_KO7.txt"),
+(8,"3_KO8.txt"),
+(9,"3_KO9.txt"),
+(10,"3_KO10.txt")
 };
 REV = {};
 CMPLX = {};
