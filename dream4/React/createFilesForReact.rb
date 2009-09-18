@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'FileUtils'
 # ruby script to run with C-c C-c
 
 # 5 timecourses with perturbation, 1 steady state 
