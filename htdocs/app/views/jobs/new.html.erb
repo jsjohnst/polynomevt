@@ -16,7 +16,7 @@
   </p>
   <p>
     <%= f.label :update_type %><br />
-	<%= f.select :update_type, [ 
+    <%= f.select :update_type, [ 
 			["synchronous", ""],
       ["sequential", "sequential"],
 		] %><br />
@@ -27,7 +27,7 @@
       <%= f.text_field :update_schedule %>
     </p>
   </p>
-  <a href="#" title="Update Schedule" onclick="Modalbox.show( (document.getElementById('update_schedule')).innerHTML, {title: this.title, width: 300}); return false;">here</a>
+  <a href="#" title="Update Schedule" onclick="Modalbox.show( $('update_schedule'), {title: this.title, width: 300}); return false;">here</a>
 </div>
 
 <div style="float: left; padding-right: 25px;">
