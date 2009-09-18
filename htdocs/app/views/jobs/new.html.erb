@@ -25,7 +25,7 @@
 
 
 <a href="#" onclick="Effect.toggle('wiring_diagram', 'blind'); return
-false;">Wiring diagram options</a>
+false;">Wiring diagram options</a><br>
   <div id="wiring_diagram">
   <div>
 	<%= f.check_box :show_wiring_diagram %>&nbsp;<%= f.label :show_wiring_diagram %><br />
@@ -39,7 +39,11 @@ false;">Wiring diagram options</a>
 	<%= f.check_box :show_probabilities_wiring_diagram %>&nbsp;<%= f.label :show_probabilities_wiring_diagram %>
   </div>
   </div>
-  <p>
+
+<a href="#" onclick="Effect.toggle('state_space', 'blind'); return
+false;">State Space Options</a><br>
+  <div id="state_space">
+  <div>
     <%= f.check_box :show_state_space %>&nbsp;<%= f.label :show_state_space %><br />
     <%= f.label "Format: " %>
 	<%= f.select :state_space_format, [ 
@@ -49,10 +53,25 @@ false;">Wiring diagram options</a>
 			["*.ps", "ps"],
 		] %><br />
 	<%= f.check_box :show_probabilities_state_space %>&nbsp;<%= f.label :show_probabilities_state_space %>
-  </p>
-  <p>
+  </div>
+  </div>
+
+<a href="#" onclick="Effect.toggle('discretization', 'blind'); return
+false;">Discretization options</a><br>
+  <div id="discretization">
+  <div>
     <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized %>
-  </p>
+  </div>
+  </div>
+
+<a href="#" onclick="Effect.toggle('algorithm', 'blind'); return
+false;">Parameter estimation algorithm options</a><br>
+  <div id="algorithm">
+  <div>
+  Here should be options for minsets, sgfan, react (and the options for react)
+  </div>
+  </div>
+  
   <p>
     <%= f.check_box :show_functions %>&nbsp;<%= f.label :show_functions %>
   </p>
