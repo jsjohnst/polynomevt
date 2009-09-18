@@ -22,7 +22,7 @@
     <div>
       <a href="/tutorial.html"><%= f.label :job_name, nil, :id => "job_name_label" %></a>:<%= f.text_field :job_name %><br/>
       <a href="/tutorial.html"><%= f.label :nodes, nil, :id => "nodes_label" %></a>: <%= f.text_field :nodes, :size => 10 %>&nbsp;
-      &nbsp;<a href="/tutorial.html"><%= f.label :pvalue, nil, :id => "pvalue_label" %></a>: <%= f.text_field :pvalue, :size => 10 %><br/>
+      &nbsp;<a href="/tutorial.html"><%= f.label "Number of states per node", nil, :id => "pvalue_label" %></a>: <%= f.text_field :pvalue, :size => 10 %><br/>
       <%= f.hidden_field :input_data, :id => "hidden_input_data", :value => "# First time course 
 1.2  2.3  3.4
 1.1  1.2  1.3
