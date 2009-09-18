@@ -216,7 +216,7 @@ Modalbox.Methods = {
 		Element.extend(this.MBcontent);
 		this.MBcontent.update("");
 		if(typeof content == 'string')
-			this.MBcontent.hide().update(content);
+			this.MBcontent.hide().update("<pre>" + content + "</pre>");
 		else if (typeof this.content == 'object') { // HTML Object is given
 			var _htmlObj = content.cloneNode(true); // If node already a part of DOM we'll clone it
 			// If clonable element has ID attribute defined, modifying it to prevent duplicates
@@ -229,6 +229,7 @@ Modalbox.Methods = {
 	},
 	
 	_putContent: function(){
+		this.event("beforeResize");
 		// Prepare and resize modal box for content
 		if(this.options.height == this._options.height)
 			Modalbox.resize(0, this.MBcontent.getHeight() - Element.getHeight(this.MBwindow) + Element.getHeight(this.MBheader), {
@@ -442,7 +443,7 @@ Modalbox.Methods = {
 	},
 	event: function(eventName) {
 		if(this.options[eventName]) {
-			var returnValue = this.options[eventName](); // Executing callback
+			var returnValue = this.options[eventName](this); // Executing callback
 			this.options[eventName] = null; // Removing callback after execution
 			if(returnValue != undefined) 
 				return returnValue;
