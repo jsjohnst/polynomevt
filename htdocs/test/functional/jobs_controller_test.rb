@@ -95,7 +95,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should update job" do
     put :update, :id => jobs(:one).to_param, :job => { :user_id => 1, :nodes => 5, 
       :input_data => "1 1 1 1 1\n2 2 1 2 1\n2 1 2 2 1", :pvalue => 2, :update_schedule => "1 2 3 4 5" }
-    assert_redirected_to job_path(assigns(:job))
+    assert_redirected_to jobs_path
   end
 
   test "should not create file with pvalue not 2" do
