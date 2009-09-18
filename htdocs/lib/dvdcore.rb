@@ -117,7 +117,8 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     f.puts "}"
     f.close
   end
-  
+ 
+
   def generate_wiring_diagram_dot_file
     # put output in an array so we can sort/uniq it
     output = Array.new 
@@ -175,6 +176,65 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     f = File.new(file_prefix + WIRINGDIAGRAM_DOT_SUFFIX, "w")
     f.puts output.join("\n")
     f.close
+  end
+  
+  ## observe wiring diagram dependencies in 2 d array. The array can be used to
+  ## find union/intersection of edges for multiple models 
+  # output[fi][xj] = 1 if there's an edge in the dependency graph xj ->
+  # xi
+  # for multiple models output[fi] can be added up to find the variables
+  # that show up for fi in every model
+  # FBH
+  def observe_dependencies_in_array
+   
+    # initialize double array with 0s
+    output = Array.new(@functions.length)
+    for i in 1 .. @functions.length do 
+      output[i-1] = Array.new(@functions.length, 0)
+    end
+    
+    
+    # loop over all functions and create a list of all transitions
+    ind = 1
+    @functions.each do |function_family|
+      function_family.each do |function|
+        vars = Hash.new
+        
+        # find all x\d variables in the raw function
+        matches = function[:raw].scan(/x(\d+)/)
+        if ( matches.size ) 
+          # store the max added to the hash so we can 
+          # simulate what scalar(@var) would do in Perl
+          max = 0
+          matches.each do |match|
+            i = match[0].to_i
+            vars[ i ] = i
+            max = i > max ? i : max
+          end
+          
+          # we add +1 here as scalar(@var) in Perl is the
+          # largest index in the array + 1
+          for j in (0..max+1)
+            if !vars[ j ].nil?
+              from = vars[ j ]
+             output[ind-1][from-1] = 1
+              #output.push "node#{from} -> node#{ind};"
+            end
+          end # end for loop
+          
+        end  # end if matches.size
+        
+      end # end function_family.each
+      
+      ind = ind + 1
+      
+    end # end @functions.each
+
+    output.each do |function|
+      print function 
+      puts ""
+    end
+    output
   end
 
   def valid_data?
@@ -307,7 +367,8 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     # make the code ready for eval
     eval_func.gsub!(/x(\d+)/, "x[\\1]")
   end
-  
+ 
+  # 
   def load_function_data
     f = File.new(file_prefix + FUNCTIONFILE_SUFFIX)
     in_backet = false
