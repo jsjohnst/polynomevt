@@ -15,7 +15,6 @@
 # run react
 
 irb
- require 'fileutils'
 
 def split_data_into_files(datafile, number)
   datafiles = []
@@ -77,14 +76,12 @@ def write_fileman( k )
     end
     file.puts "\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_TS#{6}.txt\""
     file.puts "};"
-
     file.puts "KO ={"
     for i in 1 .. 9 do 
-      file.puts "\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_KO#{i}.txt\","
+      file.puts "(#{i},\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_KO#{i}.txt\"),"
     end
-    file.puts "\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_KO#{10}.txt\""
+    file.puts "(10,\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_KO#{10}.txt\")"
     file.puts "};"
-
     file.puts "REV = {};"
     file.puts "CMPLX = {};"
     file.puts "BIO = {};"
