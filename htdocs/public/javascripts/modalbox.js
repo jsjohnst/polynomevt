@@ -299,9 +299,9 @@ Modalbox.Methods = {
 	},
 	
 	_findFocusableElements: function(){ // Collect form elements or links from MB content
-		var els = this.MBcontent.getElementsBySelector('input:not([type~=hidden]), select, textarea, button, a[href]');
+		var els = this.MBcontent.select('input:not([type~=hidden]), select, textarea, button');
 		els.invoke('addClassName', 'MB_focusable');
-		return this.MBcontent.getElementsByClassName('MB_focusable');
+		return $$('.MB_focusable');
 	},
 	
 	kbdHandler: function(e) {
@@ -370,6 +370,7 @@ Modalbox.Methods = {
 	},
 	
 	_removeElements: function () {
+		this.event("beforeHide");
 		if (navigator.appVersion.match(/\bMSIE\b/)) {
 			this._prepareIE("", ""); // If set to auto MSIE will show horizontal scrolling
 			window.scrollTo(this.initScrollX, this.initScrollY);
