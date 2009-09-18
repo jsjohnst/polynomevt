@@ -35,6 +35,10 @@ class Job < ActiveRecord::Base
       errors.add("input_data", "You didn't enter any data") 
       return
     end
+    if !nodes
+      errors.add("nodes", "You didn't specify any nodes")
+      return
+    end
     nodes_minus_one = (nodes - 1)
     #puts "Nodes-1 " + nodes_minus_one.to_s
     input_data.each_line do |line| 
