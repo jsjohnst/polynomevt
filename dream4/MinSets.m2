@@ -2,7 +2,7 @@ newPackage(  "MinSets" ,
         Version => "0.11", 
 --Edited by:	Alan Veliz-Cuba
 --Edit Date:	8/26/09
-        Date => "August 26, 2009")
+        Date => "August 31, 2009")
 
 needs "PolynomialDynamicalSystems.m2"
 export{AvoidL,

@@ -5,8 +5,8 @@ newPackage(
         Authors => {
          {Name => "Brandy Stigler", Email => "bstigler@smu.edu", HomePage => "http://users.mbi.ohio-state.edu/bstigler"},
          {Name => "Mike Stillman", Email => "mike@math.cornell.edu", HomePage => "http://www.math.cornell.edu/~mike"}
---Edited by:	Alan Veliz-Cuba
---Edit Date:	8/26/09
+--Edited by: 	Alan Veliz-Cuba
+--Edit Date: 	8/31/09
          },
         Headline => "Utilities for polynomial dynamical systems - mostly combined with RevEng package",
         DebuggingMode => true
@@ -216,7 +216,7 @@ readKOData(String,Ring) := (filename, R) -> (
     T = apply(T, l->(l_0, matrix(R,apply(l_1, s->select(separateRegexp(" +",s), c->c!="")/value))));
     H := new MutableHashTable;
     scan(T, p -> if H#?(p_0) then H#(p_0) = append(H#(p_0), p_1)
-	else H#(p_0) = {p_1});
+	else H#(p_0) = {p_1});print T;
     new TimeSeriesData from H
 )
 
