@@ -12,6 +12,8 @@ class Job < ActiveRecord::Base
   default_value_for :pvalue, 2
   default_value_for :show_wiring_diagram, true
   default_value_for :show_state_space, true
+  default_value_for :wiring_diagram_format, "gif"
+  default_value_for :state_space_format, "gif"
   
   validates_presence_of :user
   validates_presence_of :nodes
