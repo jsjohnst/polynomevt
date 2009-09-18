@@ -32,7 +32,7 @@
 
 <div style="float: left; padding-right: 25px;">
 
-  <div onclick="Effect.toggle('wiring_diagram', 'blind');" class="panel_header">Wiring Diagram Options</div>
+  <div onclick="toggle_panel(this, 'wiring_diagram');" class="panel_header open">Wiring Diagram Options</div>
   <div id="wiring_diagram" class="panel_body"> 
     <div>
     <%= f.check_box :show_wiring_diagram %>&nbsp;<%= f.label :show_wiring_diagram %><br />
@@ -49,8 +49,18 @@
   
   <br>
 
-  <div onclick="Effect.toggle('state_space', 'blind');" class="panel_header">
-    State Space Options
+  <div onclick="toggle_panel(this, 'state_space');" class="panel_header open">State Space Options</div>
+  <div id="state_space" class="panel_body"> 
+  <div>
+    <%= f.check_box :show_state_space %>&nbsp;<%= f.label :show_state_space %><br />
+    <%= f.label "Format: " %>
+	<%= f.select :state_space_format, [ 
+			["*.gif", "gif"],
+			["*.jpg", "jpg"],
+			["*.png", "png"],
+			["*.ps", "ps"],
+		] %><br />
+	<%= f.check_box :show_probabilities_state_space %>&nbsp;<%= f.label :show_probabilities_state_space %>
   </div>
   <div id="state_space" class="panel_body"> 
     <div>
@@ -68,8 +78,10 @@
 
   <br>
 
-  <div onclick="Effect.toggle('discretization', 'blind');" class="panel_header">
-    Discretization Options
+  <div onclick="toggle_panel(this, 'discretization');" class="panel_header open">Discretization Options</div>
+  <div id="discretization" class="panel_body"> 
+  <div>
+    <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized %>
   </div>
   <div id="discretization" class="panel_body"> 
     <div>
@@ -79,7 +91,7 @@
 
   <br>
 
-  <div onclick="Effect.toggle('algorithm', 'blind');" class="panel_header">Parameter estimation algorithm options</div>
+  <div onclick="toggle_panel(this, 'algorithm');" class="panel_header open">Parameter estimation algorithm options</div>
   <div id="algorithm" class="panel_body"> 
     <div>
     Here should be options for <br>
