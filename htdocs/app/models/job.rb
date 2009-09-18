@@ -9,6 +9,9 @@ class Job < ActiveRecord::Base
   # default_value_for information can be found at the following URL:
   # http://blog.phusion.nl/2008/10/03/47/
   default_value_for :update_type, ''
+  default_value_for :pvalue, 2
+  default_value_for :show_wiring_diagram, true
+  default_value_for :show_state_space, true
   
   validates_presence_of :user
   validates_presence_of :nodes
