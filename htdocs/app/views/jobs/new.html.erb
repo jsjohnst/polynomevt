@@ -13,20 +13,26 @@
     <div id="input_data">
       <p>
         <label for="dialog_input_data">Input Data:</label><br />
-        <textarea cols="30" rows="15" id="dialog_input_data" onChange="$('hidden_input_data').value = this.value;"></textarea>
+        <textarea cols="30" rows="15" id="dialog_input_data"></textarea>
       </p>
+      <button type="button" title="Close window" onclick="Modalbox.hide();">Close</button>
     </div>
   </div>
-  <div onclick="toggle_panel(this, 'input_data_panel');" class="panel_header open">Input Data</div>
+  <div id="input_data_header" onclick="toggle_panel(this);" class="panel_header open">Input Data</div>
   <div id="input_data_panel" class="panel_body">
     <div>
-      <%= f.label :nodes %>: <%= f.text_field :nodes, :size => 10, :id => "nodes" %>&nbsp;
-      &nbsp;<%= f.label :pvalue %>: <%= f.text_field :pvalue, :size => 10, :id => "pvalue" %><br/>
-      <%= f.hidden_field :input_data, :id => "hidden_input_data" %>
+      <a href="/turial.html"><%= f.label :nodes, nil, :id => "nodes_label" %></a>: <%= f.text_field :nodes, :size => 10 %>&nbsp;
+      &nbsp;<a href="/tutorial.html"><%= f.label :pvalue, nil, :id => "pvalue_label" %></a>: <%= f.text_field :pvalue, :size => 10 %><br/>
+      <%= f.hidden_field :input_data, :id => "hidden_input_data", :value => "# First time course 
+1.2  2.3  3.4
+1.1  1.2  1.3
+2.2  2.3  2.4
+0.1  0.2  0.3
+" %>
       <%= f.label :input_file %>:
       <%= f.file_field :input_file %>
       <br />
-      <button type="button" onclick="Modalbox.show( $('input_data'), {title: this.title, width: 300});">Manually Enter Input Data</button>
+      <button type="button" onclick="show_modal('input_data', 'Enter Input Data');">Manually Enter Input Data</button>
     </div>
   </div>
 <br/><br/>
@@ -36,25 +42,26 @@
         <label for="dialog_known_functions">Known Functions:</label><br />
         <textarea cols="30" rows="15" id="dialog_known_functions" onChange="$('hidden_known_functions').value = this.value;"></textarea>
       </p>
+      <button type="button" title="Close window" onclick="Modalbox.hide();">Close</button>
     </div>
   </div>
-  <div onclick="toggle_panel(this, 'known_functions_panel');" class="panel_header closed">Known Functions Data</div>
+  <div id="known_functions_header" onclick="toggle_panel(this);" class="panel_header closed">Known Functions Data</div>
   <div id="known_functions_panel" class="panel_body">
     <div>
       <%= f.hidden_field :known_functions, :id => "hidden_known_functions" %>
       <%= f.label :known_functions_file %>:
       <%= f.file_field :known_functions_file %>
       <br />
-      <button type="button" onclick="Modalbox.show( $('known_functions'), {title: 'Known Functions', width: 300});">Manually Enter Known Functions</button>
+      <button type="button" onclick="show_modal('known_functions', 'Enter Known Functions');">Manually Enter Known Functions</button>
     </div>
   </div>
   <br/>
-  <div onclick="toggle_panel(this, 'algorithm');" class="panel_header closed">Parameter estimation algorithm options</div>
-  <div id="algorithm" class="panel_body"> 
+  <div id="algorithm_header" onclick="toggle_panel(this);" class="panel_header closed">Parameter estimation algorithm options</div>
+  <div id="algorithm_panel" class="panel_body"> 
     <div>
       <%= f.check_box :show_functions %>&nbsp;<%= f.label :show_functions, "Generate Functions" %><br/>
       <%= f.check_box :make_deterministic_model %>&nbsp;<%= f.label :make_deterministic_model %><br/>
-      <%= f.label "Algorithm: " %>
+      <a href="/tutorial.html"><%= f.label :algorithm, nil, :id => "algorithm_label" %></a>:
       <%= f.select :algorithm, [
         ["default", "default"],
         ["Minsets", "minsets"],
@@ -70,14 +77,29 @@
       <%= f.file_field :react_param_data %>
     </div>
   </div>
+
+  <br/>
+
+  <div id="discretization_header" onclick="toggle_panel(this);" class="panel_header closed">Discretization Options</div>
+  <div id="discretization_panel" class="panel_body"> 
+    <div>
+      <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized
+      %> <br />
+      <%= f.label :discretization_threshold %>:
+      <%= f.text_field :discretization_threshold, :size => 10 %>
+      <br>
+      Can we give the user other options to discretize his data?
+    </div>
+  </div>
+
 </div>
 
 
 <div class="new_job_empty_column">&nbsp;</div>
 
 <div class="new_job_content_column">
-  <div onclick="toggle_panel(this, 'wiring_diagram');" class="panel_header closed">Wiring Diagram Options</div>
-  <div id="wiring_diagram" class="panel_body"> 
+  <div id="wiring_diagram_header" onclick="toggle_panel(this);" class="panel_header open">Wiring Diagram Options</div>
+  <div id="wiring_diagram_panel" class="panel_body"> 
     <div>
     <%= f.check_box :show_wiring_diagram %>&nbsp;<%= f.label :show_wiring_diagram, "Generate Wiring Diagram" %><br />
       <%= f.label "Format: " %>
@@ -93,8 +115,8 @@
   
   <br>
 
-  <div onclick="toggle_panel(this, 'state_space');" class="panel_header open">Simulation Options</div>
-  <div id="state_space" class="panel_body"> 
+  <div id="simulation_header" onclick="toggle_panel(this);" class="panel_header open">Simulation Options</div>
+  <div id="simulation_panel" class="panel_body"> 
   <div>
     <%= f.check_box :show_state_space %>&nbsp;<%= f.label :show_state_space, "Generate State Space" %><br />
     <%= f.label "Format: " %>
@@ -113,33 +135,20 @@
 		["synchronous", ""],
 		["sequential", "sequential"],
 	] %><br />
-	<button type="button" onclick="Modalbox.show( $('update_schedule'), {title: 'Update Schedule', width: 300});">Enter Update Schedule</button>
+	<button type="button" onclick="show_modal('update_schedule', 'Enter Update Schedule');">Enter Update Schedule</button>
 	<%= f.hidden_field :update_schedule, :id => "hidden_update_schedule" %>
     </div>
   </div>
-<div style="display:none">
-   <p id="update_schedule">
-     <label for="dialog_update_schedule">Update Schedule:</label><br>
-     <textarea id="dialog_update_schedule" cols="30" rows="3" onChange="$('hidden_update_schedule').value = this.value;"></textarea>
-   </p>
-</div>
-
-  <br>
-
-  <div onclick="toggle_panel(this, 'discretization');" class="panel_header closed">Discretization Options</div>
-  <div id="discretization" class="panel_body"> 
-    <div>
-      <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized
-      %> <br />
-      <%= f.label :discretization_threshold %>:
-      <%= f.text_field :discretization_threshold, :size => 10 %>
-      <br>
-      Can we give the user other <br>
-      options to discretize his data?
-    </div>
+  <div style="display:none">
+	   <div id="update_schedule">
+	     <p>
+		<label for="dialog_update_schedule">Update Schedule:</label><br>
+	     	<textarea id="dialog_update_schedule" cols="30" rows="3"></textarea>
+	     </p>
+	     <button type="button" title="Close window" onclick="Modalbox.hide();">Close</button>
+	   </div>
   </div>
 
-  <br>
 
 </div>
   
@@ -149,5 +158,4 @@
   </p>
 <% end %>
 </div>
-<%= link_to 'Back', jobs_path %>
 <%= render :partial => "jobs/tooltips" %>

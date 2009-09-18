@@ -1,9 +1,10 @@
-function toggle_panel(element, id) {
-	Effect.toggle(id, 'blind', { 
+function toggle_panel(element) {
+	Effect.toggle(element.id.substr(0, element.id.length - 6) + "panel", 'blind', { 
 		afterFinish: function(effect) { 
 			element.className = effect.factor == -1 ? 'panel_header closed' : 'panel_header open'; 
 		},
-		duration: 0.5 
+		duration: 0.1,
+		delay: 0 
 	});
 }
 
@@ -18,7 +19,7 @@ function show_modal(id, title) {
 
 function close_hidden_panels() {
 	closed_panels = $$('.panel_header.closed');
-	closed_panels.invoke('onclick');
+	closed_panels.each(function(element) { Element.hide(element.id.substr(0, element.id.length - 6) + "panel"); });
 }
 
 
