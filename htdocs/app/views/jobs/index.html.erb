@@ -2,7 +2,6 @@
 
 <table cellpadding="3" cellspacing="3" bgcolor="#C3C3C3">
   <tr class="menubar">
-	<th>Date</th>
 	<th>Meta</th>
 	<th>Input Data</th>
 	<th>Log</th>
@@ -12,8 +11,9 @@
 
 <% @jobs.each do |job| %>
   <tr bgcolor="<% if job.completed %>#CCFFCC<% elsif job.failed %>#800517<% else %>#FFFFFF<% end %>">
-    <td><%=h job.created_at %></td>
     <td>
+		<b>Name:</b> <%=h job.job_name %><br>
+		<b>Date:</b> <%=h job.created_at %><br>
 		<b>Nodes:</b> <%=h job.nodes %><br>
 		<b>Pvalue:</b> <%=h job.pvalue %><br>
 		<b>Deterministic:</b> <%=h job.make_deterministic_model %><br>
