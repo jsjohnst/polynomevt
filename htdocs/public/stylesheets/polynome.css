@@ -8,6 +8,18 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
+.panel_header {
+  width: 100%; 
+  background-color: #ccc; 
+  border: 1px solid #000;
+}
+
+.panel_body {
+  background-color: #eee; 
+  border: 1px solid #000;
+  border-top: 0;
+}
+
 .menubar {
   background-color: #ffffff;
 }

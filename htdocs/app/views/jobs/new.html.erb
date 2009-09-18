@@ -24,9 +24,8 @@
 <div style="float: left; padding-right: 25px;">
 
 
-<a href="#" onclick="Effect.toggle('wiring_diagram', 'blind'); return
-false;">Wiring diagram options</a>
-  <div id="wiring_diagram">
+  <div onclick="Effect.toggle('wiring_diagram', 'blind');" class="panel_header">Wiring Diagram Options</div>
+  <div id="wiring_diagram" class="panel_body"> 
   <div>
 	<%= f.check_box :show_wiring_diagram %>&nbsp;<%= f.label :show_wiring_diagram %><br />
     <%= f.label "Format: " %>
