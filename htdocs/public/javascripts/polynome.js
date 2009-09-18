@@ -13,3 +13,11 @@ function close_hidden_panels() {
 }
 
 Event.observe(window, 'load', close_hidden_panels);
+
+Event.observe(window,"load",function() {
+       $$("*").findAll(function(node){
+         return $(node.id + "_tooltip");
+       }).each(function(node){
+         new Tooltip(node,node.id + "_tooltip");
+       });
+     });
