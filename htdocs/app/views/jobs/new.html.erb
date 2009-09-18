@@ -49,10 +49,18 @@
   <div onclick="toggle_panel(this, 'algorithm');" class="panel_header closed">Parameter estimation algorithm options</div>
   <div id="algorithm" class="panel_body"> 
     <div>
-    <%= f.check_box :show_functions %>&nbsp;<%= f.label :show_functions, "Generate Functions" %><br/>
-    <%= f.check_box :make_deterministic_model %>&nbsp;<%= f.label :make_deterministic_model %><br/>
-    Here should be options for which algo<br>
-    and the options for react
+      <%= f.check_box :show_functions %>&nbsp;<%= f.label :show_functions, "Generate Functions" %><br/>
+      <%= f.check_box :make_deterministic_model %>&nbsp;<%= f.label :make_deterministic_model %><br/>
+      <%= f.label "Algorithm: " %>
+      <%= f.select :algorithm, [
+        ["Minsets", "minsets"],
+        ["Gfan", "gfan"],
+        ["React", "react"],
+      ] %><br />
+      <%= f.hidden_field :react_param_data, :id => "hidden_param_data" %>
+      <%= f.label :react_param_data %>:
+      <%= f.file_field :react_param_data %>
+      <br />
     </div>
   </div>
 </div>
@@ -88,6 +96,8 @@
 			["*.png", "png"],
 			["*.ps", "ps"],
 		] %><br />
+  <%= f.label :probability_threshold %>:
+  <%= f.text_field :probability_threshold, :size => 10 %><br />
 	<%= f.check_box :show_probabilities_state_space %>&nbsp;<%= f.label :show_probabilities_state_space %>
 	<br/>
 	<%= f.label :update_type %>:
@@ -111,7 +121,13 @@
   <div onclick="toggle_panel(this, 'discretization');" class="panel_header closed">Discretization Options</div>
   <div id="discretization" class="panel_body"> 
     <div>
-      <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized %>
+      <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized
+      %> <br />
+      <%= f.label :discretization_threshold %>:
+      <%= f.text_field :discretization_threshold, :size => 10 %>
+      <br>
+      Can we give the user other <br>
+      options to discretize his data?
     </div>
   </div>
 
