@@ -118,7 +118,7 @@ class ComputationJob < Struct.new(:job_id)
       stochastic_sequential_update = "" 
       if (@job.sequential? && @job.update_schedule == "")            
         stochastic_sequential_update = "-update_stochastic"             
-        @job.update_type = ''
+        @job.update_type = 'synchronous'
       end 
   
       sequential = @job.sequential? ? "-update_sequential" : "" 

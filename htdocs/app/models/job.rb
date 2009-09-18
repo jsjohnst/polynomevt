@@ -4,11 +4,11 @@ class Job < ActiveRecord::Base
   # enum_field information can be found at the following URL:
   # http://giraffesoft.ca/blog/2009/02/17/floss-week-day-2-the-enum-field-rails-plugin.html
   # by having this, we get the handy sequential? check among other things
-  enum_field :update_type, [ 'sequential', '' ]
+  enum_field :update_type, [ 'sequential', 'synchronous' ]
   
   # default_value_for information can be found at the following URL:
   # http://blog.phusion.nl/2008/10/03/47/
-  default_value_for :update_type, ''
+  default_value_for :update_type, 'synchronous'
   default_value_for :pvalue, 2
   default_value_for :show_wiring_diagram, true
   default_value_for :show_state_space, true
