@@ -1,4 +1,9 @@
-body { background-color: #fff; color: #333; }
+body { 
+  background-color: #fff; 
+  color: #333; 
+}
+
+img#background { height: 100%; width: 100%; z-index: -33; position:absolute; color: white; }
 
 body{ margin: 0; padding: 0; }
 
@@ -35,13 +40,44 @@ div.tooltip {
 }
 
 .panel_body {
+  padding: 5px;
+  margin-left: 18px;
   background-color: #eee; 
   border: 1px solid #000;
   border-top: 0;
 }
 
+#new_job_content_wrapper {
+  margin-left: 15px;
+  padding-left: 5px;
+  border: 3px solid #000;
+  width: 95%;
+  background-color: #FFFFCC;
+}
+
+#new_job_content_wrapper h1 {
+  text-align: center;
+}
+
+.new_job_content_column {
+  float: left;
+  width: 45%;
+}
+
+.new_job_empty_column {
+  float: left;
+  width: 5%;
+}
+
 .menubar {
-  background-color: #ffffff;
+  background-color: #bbb;
+  padding-bottom: 2px;
+  font-weight: bold;
+}
+
+.menubar a,
+.menubar a:visited {
+  color: #000;
 }
 
 pre {

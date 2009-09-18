@@ -1,3 +1,5 @@
+<img id="background" src="/images/background.jpg" />
+<div id="new_job_content_wrapper">
 <h1>Start Parameter Estimation</h1>
 
 
@@ -5,7 +7,7 @@
 <% form_for(@job, :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 
-<div style="float: left; width: 40%">
+<div class="new_job_content_column">
   <div style="display:none">
     <div id="input_data">
       <p>
@@ -69,9 +71,9 @@
 </div>
 
 
-<div style="float: left; width: 5%;">&nbsp;</div>
+<div class="new_job_empty_column">&nbsp;</div>
 
-<div style="float: left; width: 40%">
+<div class="new_job_content_column">
   <div onclick="toggle_panel(this, 'wiring_diagram');" class="panel_header closed">Wiring Diagram Options</div>
   <div id="wiring_diagram" class="panel_body"> 
     <div>
@@ -144,6 +146,6 @@
     <%= f.submit 'Start Computation' %>
   </p>
 <% end %>
-
+</div>
 <%= link_to 'Back', jobs_path %>
 <%= render :partial => "jobs/tooltips" %>
