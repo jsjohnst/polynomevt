@@ -1,4 +1,4 @@
-<h1>New job</h1>
+<h1>Start Parameter Estimation</h1>
 
 
 
@@ -6,6 +6,19 @@
   <%= f.error_messages %>
 
 <div style="float: left;">
+
+<div id='tooltip' style="display:none; margin: 5px; background-color: red">
+Detail infos on product 1....<br />
+</div>
+
+<div id='product_1'>
+This is product 1
+</div>
+
+<script type="text/javascript">
+var my_tooltip = new Tooltip('product_1', 'tooltip')
+</script>
+
   <div style="display:none">
     <div id="input_data">
       <p>
@@ -137,7 +150,7 @@
   
 <div style="clear: both"></div>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Start Computation' %>
   </p>
 <% end %>
 
