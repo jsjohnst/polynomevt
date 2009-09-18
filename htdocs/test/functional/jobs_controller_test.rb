@@ -79,6 +79,7 @@ class JobsControllerTest < ActionController::TestCase
     assert_no_difference('Job.count') do
       post :create, :job => { }
     end
+    assert_response :success
   end
 
   test "should show job" do
