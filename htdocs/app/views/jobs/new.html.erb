@@ -18,10 +18,11 @@
       <button type="button" title="Close window" onclick="Modalbox.hide();">Close</button>
     </div>
   </div>
-  <div id="input_data_header" onclick="toggle_panel(this);" class="panel_header open">Input Data</div>
-  <div id="input_data_panel" class="panel_body">
+  <div id="job_data_header" onclick="toggle_panel(this);" class="panel_header open">Job Data</div>
+  <div id="job_data_panel" class="panel_body">
     <div>
-      <a href="/turial.html"><%= f.label :nodes, nil, :id => "nodes_label" %></a>: <%= f.text_field :nodes, :size => 10 %>&nbsp;
+      <a href="/tutorial.html"><%= f.label :job_name, nil, :id => "job_name_label" %></a>:<%= f.text_field :job_name %><br/>
+      <a href="/tutorial.html"><%= f.label :nodes, nil, :id => "nodes_label" %></a>: <%= f.text_field :nodes, :size => 10 %>&nbsp;
       &nbsp;<a href="/tutorial.html"><%= f.label :pvalue, nil, :id => "pvalue_label" %></a>: <%= f.text_field :pvalue, :size => 10 %><br/>
       <%= f.hidden_field :input_data, :id => "hidden_input_data", :value => "# First time course 
 1.2  2.3  3.4
@@ -29,7 +30,7 @@
 2.2  2.3  2.4
 0.1  0.2  0.3
 " %>
-      <%= f.label :input_file %>:
+      <a href="/tutorial.html"><%= f.label :input_file, nil, :id => "input_file_label" %></a>:
       <%= f.file_field :input_file %>
       <br />
       <button type="button" onclick="show_modal('input_data', 'Enter Input Data');">Manually Enter Input Data</button>

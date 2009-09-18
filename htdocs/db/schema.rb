@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090918073206) do
+ActiveRecord::Schema.define(:version => 20090918184111) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20090918073206) do
     t.integer  "discretization_threshold"
     t.integer  "probability_threshold"
     t.string   "react_param_data"
+    t.string   "job_name"
   end
 
   create_table "users", :force => true do |t|
