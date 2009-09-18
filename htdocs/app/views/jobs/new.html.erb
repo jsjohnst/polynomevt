@@ -1,5 +1,7 @@
 <h1>New job</h1>
 
+
+
 <% form_for(@job, :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 
@@ -14,15 +16,21 @@
   </p>
   <p>
     <%= f.label :update_type %><br />
-    <%= f.text_field :update_type %>
+	<%= f.select :update_type, [ 
+			["synchronous", ""],
+      ["sequential", "sequential"],
+		] %><br />
   </p>
-  <p>
-    <%= f.label :update_schedule %><br />
-    <%= f.text_field :update_schedule %>
+  <p style="display:none" id="update_schedule">
+    <p> 
+      <%= f.label :update_schedule %><br /> 
+      <%= f.text_field :update_schedule %>
+    </p>
   </p>
+  <a href="#" title="Update Schedule" onclick="Modalbox.show( (document.getElementById('update_schedule')).innerHTML, {title: this.title, width: 300}); return false;">here</a>
 </div>
-<div style="float: left; padding-right: 25px;">
 
+<div style="float: left; padding-right: 25px;">
 
   <div onclick="Effect.toggle('wiring_diagram', 'blind');" class="panel_header">Wiring Diagram Options</div>
   <div id="wiring_diagram" class="panel_body"> 
