@@ -21,17 +21,16 @@
       ["sequential", "sequential"],
 		] %><br />
   </p>
-  <p>
-    <%= f.label :update_schedule %><br />
-    <%= f.text_field :update_schedule %>
+  <p style="display:none" id="update_schedule">
+    <p> 
+      <%= f.label :update_schedule %><br /> 
+      <%= f.text_field :update_schedule %>
+    </p>
   </p>
+  <a href="#" title="Update Schedule" onclick="Modalbox.show( (document.getElementById('update_schedule')).innerHTML, {title: this.title, width: 300}); return false;">here</a>
 </div>
+
 <div style="float: left; padding-right: 25px;">
-
-<a href="#" title="Simple form" onclick="
-Modalbox.show('<div class=\'warning\'><p>Are you sure to delete this item?</p> <input type=\'button\' value=\'Yes, delete!\' onclick=\'Modalbox.hide()\' /> or <input type=\'button\' value=\'No, leave it!\' onclick=\'Modalbox.hide()\' /></div>', {title: this.title, width: 300});
-return false;">here</a>
-
 
   <div onclick="Effect.toggle('wiring_diagram', 'blind');" class="panel_header">Wiring Diagram Options</div>
   <div id="wiring_diagram" class="panel_body"> 
