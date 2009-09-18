@@ -1,3 +1,5 @@
+require 'ftools'
+
 class JobsController < ApplicationController
   before_filter :check_authentication, :except => :show
   
@@ -108,6 +110,18 @@ class JobsController < ApplicationController
   # DELETE /jobs/1.xml
   def destroy
     @job = Job.find(params[:id])
+ 	
+    if @job.file_prefix
+    	Dir.glob("public/" + @job.file_prefix + "*") { |filename|
+		logger.info("Deleting file: " + filename);
+		if File.directory?(filename) 
+			FileUtils.rm_rf(filename)
+		else 
+			FileUtils.rm(filename)
+		end
+	}  
+    end
+
     @job.destroy
 
     respond_to do |format|
