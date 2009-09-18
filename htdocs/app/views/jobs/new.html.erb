@@ -56,14 +56,18 @@
         ["Minsets", "minsets"],
         ["Gfan", "gfan"],
         ["React", "react"],
-      ] %><br />
+      ], {}, { :onchange => "if(this.options[this.selectedIndex].value == 'react') Modalbox.show( $('react_param'), {title: 'React Parameters', width: 300});" } %><br />
       <%= f.hidden_field :react_param_data, :id => "hidden_param_data" %>
+    </div>
+  </div>
+  <div style="display:none;">
+    <div id="react_param">
       <%= f.label :react_param_data %>:
       <%= f.file_field :react_param_data %>
-      <br />
     </div>
   </div>
 </div>
+
 
 <div style="float: left; width: 50px;">&nbsp;</div>
 
