@@ -56,7 +56,7 @@ class JobsControllerTest < ActionController::TestCase
       post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_data => "3 2 1\n2 1 1\n1 1 0"  }
     end
 
-    assert_redirected_to job_path(assigns(:job))
+    assert_redirected_to jobs_path
   end
   
   test "should create job with file upload" do
@@ -65,7 +65,7 @@ class JobsControllerTest < ActionController::TestCase
       post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file }
     end
 
-    assert_redirected_to job_path(assigns(:job))
+    assert_redirected_to jobs_path
   end
   
   test "should not create job with empty file upload" do
@@ -101,7 +101,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should not create file with pvalue not 2" do
     my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 3, 
     :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
-    assert_not_redirected_to job_path(assigns(:job))
+    assert_response :success
   end
 
   test "should create file with discretized data" do

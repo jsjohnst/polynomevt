@@ -29,7 +29,7 @@ class SimpleUserJobInteractionTest < ActionController::IntegrationTest
       post "/jobs/create", :job => { :nodes => 3, :pvalue => 2, :input_file => data_file }
     end
     
-    assert_redirected_to job_path(assigns(:job))
+    assert_redirected_to jobs_path
   end
   
   test "Should show existing jobs for logged in user" do
