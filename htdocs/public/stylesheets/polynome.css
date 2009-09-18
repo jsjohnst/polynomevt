@@ -9,9 +9,22 @@ body, p, ol, ul, td {
 }
 
 .panel_header {
+  padding-left: 18px;
   width: 100%; 
   background-color: #ccc; 
   border: 1px solid #000;
+}
+
+.panel_header.open {
+  background-image: url(/images/minus-icon.gif);
+  background-position: center left;
+  background-repeat: no-repeat;
+}
+
+.panel_header.closed {
+  background-image: url(/images/plus-icon.gif);
+  background-position: center left;
+  background-repeat: no-repeat;
 }
 
 .panel_body {
