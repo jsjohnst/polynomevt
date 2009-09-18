@@ -14,6 +14,11 @@ function close_hidden_panels() {
 
 
 Event.observe(window, 'load', close_hidden_panels);
+
 Event.observe(window,"load",function() {
-var my_tooltip = new Tooltip('product_1', 'tooltip');
+	$$("*").findAll(function(node){
+		return $(node.id + "_tooltip");
+	}).each(function(node){
+		new Tooltip(node,node.id + "_tooltip");
+	});
 });
