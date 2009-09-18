@@ -53,6 +53,7 @@
       <%= f.check_box :make_deterministic_model %>&nbsp;<%= f.label :make_deterministic_model %><br/>
       <%= f.label "Algorithm: " %>
       <%= f.select :algorithm, [
+        ["default", "default"],
         ["Minsets", "minsets"],
         ["Gfan", "gfan"],
         ["React", "react"],
