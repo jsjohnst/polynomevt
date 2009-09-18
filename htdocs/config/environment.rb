@@ -22,6 +22,8 @@ Rails::Initializer.run do |config|
   config.gem "giraffesoft-enum_field", :lib => "enum_field", 
     :source => "http://gems.github.com"
 
+  config.gem "rubyzip", :lib=>"zip/zip", :version=>"~>0.9.1"
+  
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

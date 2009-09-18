@@ -1,5 +1,7 @@
 require 'digest/md5'
 require 'ftools'
+require 'zip/zip'
+require 'zip/zipfilesystem'
 
 include React
 
@@ -180,8 +182,28 @@ class ComputationJob < Struct.new(:job_id)
     @job.failed = true
     self.completed
   end
+
+  def create_zip
+    zip_filename = "public/" + @job.file_prefix + ".job.zip"
+
+    # check to see if the file exists already, and if it does, delete it.
+    if File.file?(zip_filename)
+    	File.delete(zip_filename)
+    end
+
+    Zip::ZipFile.open(zip_filename, Zip::ZipFile::CREATE) { |zipfile|
+	zipfile.mkdir("job-" + @job.id.to_s)
+	Dir.glob("public/" + @job.file_prefix + ".*") { |filename|
+		zipfile.add(filename.gsub(/public\/#{@job.file_prefix}\./, "job-" + @job.id.to_s + "/"), filename);
+	}	
+    }
+
+    # set read permissions on the file
+    File.chmod(0644, zip_filename)
+  end
   
   def success
+    self.create_zip
     @job.failed = false
     self.completed
   end
