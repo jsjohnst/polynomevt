@@ -81,6 +81,10 @@ div.tooltip {
   color: #000;
 }
 
+.menubar a:hover {
+  color: #fff;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
