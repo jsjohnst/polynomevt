@@ -74,8 +74,10 @@ class Job < ActiveRecord::Base
   def check_stochastic_options
     if !make_deterministic_model
       if show_state_space
-        errors.add_to_base("A stochastic model with more than 10 nodes cannot be simulated.") unless
-        nodes.nil? || nodes <= 10 # if you update this, be sure and update the error message above too
+        if !nodes.nil?
+		errors.add_to_base("A stochastic model with more than 11 nodes cannot be simulated.") unless
+        		nodes <= 11 # if you update this, be sure and update the error message above too
+	end
       end
       
       errors.add_to_base("Sequential updates can only be chosen for deterministic models.") unless !sequential?
