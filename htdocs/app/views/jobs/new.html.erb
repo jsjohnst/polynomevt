@@ -1,5 +1,7 @@
 <h1>New job</h1>
 
+
+
 <% form_for(@job, :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 
@@ -14,7 +16,10 @@
   </p>
   <p>
     <%= f.label :update_type %><br />
-    <%= f.text_field :update_type %>
+	<%= f.select :update_type, [ 
+			["synchronous", ""],
+      ["sequential", "sequential"],
+		] %><br />
   </p>
   <p>
     <%= f.label :update_schedule %><br />
@@ -22,6 +27,10 @@
   </p>
 </div>
 <div style="float: left; padding-right: 25px;">
+
+<a href="#" title="Simple form" onclick="
+Modalbox.show('<div class=\'warning\'><p>Are you sure to delete this item?</p> <input type=\'button\' value=\'Yes, delete!\' onclick=\'Modalbox.hide()\' /> or <input type=\'button\' value=\'No, leave it!\' onclick=\'Modalbox.hide()\' /></div>', {title: this.title, width: 300});
+return false;">here</a>
 
 
   <div onclick="Effect.toggle('wiring_diagram', 'blind');" class="panel_header">Wiring Diagram Options</div>
@@ -70,7 +79,8 @@
   <div onclick="Effect.toggle('algorithm', 'blind');" class="panel_header">Parameter estimation algorithm options</div>
   <div id="algorithm" class="panel_body"> 
   <div>
-  Here should be options for minsets, sgfan, react (and the options for react)
+  Here should be options for <br>
+  minsets, sgfan, react (and the options for react)
   </div>
   </div>
   
