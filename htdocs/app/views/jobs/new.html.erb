@@ -35,7 +35,7 @@
       </p>
     </div>
   </div>
-  <div onclick="toggle_panel(this, 'known_functions_panel');" class="panel_header open">Known Functions Data</div>
+  <div onclick="toggle_panel(this, 'known_functions_panel');" class="panel_header closed">Known Functions Data</div>
   <div id="known_functions_panel" class="panel_body">
     <div>
       <%= f.hidden_field :known_functions, :id => "hidden_known_functions" %>
@@ -46,7 +46,7 @@
     </div>
   </div>
   <br/>
-  <div onclick="toggle_panel(this, 'algorithm');" class="panel_header open">Parameter estimation algorithm options</div>
+  <div onclick="toggle_panel(this, 'algorithm');" class="panel_header closed">Parameter estimation algorithm options</div>
   <div id="algorithm" class="panel_body"> 
     <div>
     <%= f.check_box :show_functions %>&nbsp;<%= f.label :show_functions, "Generate Functions" %><br/>
@@ -60,7 +60,7 @@
 <div style="float: left; width: 50px;">&nbsp;</div>
 
 <div style="float: left;">
-  <div onclick="toggle_panel(this, 'wiring_diagram');" class="panel_header open">Wiring Diagram Options</div>
+  <div onclick="toggle_panel(this, 'wiring_diagram');" class="panel_header closed">Wiring Diagram Options</div>
   <div id="wiring_diagram" class="panel_body"> 
     <div>
     <%= f.check_box :show_wiring_diagram %>&nbsp;<%= f.label :show_wiring_diagram, "Generate Wiring Diagram" %><br />
@@ -108,7 +108,7 @@
 
   <br>
 
-  <div onclick="toggle_panel(this, 'discretization');" class="panel_header open">Discretization Options</div>
+  <div onclick="toggle_panel(this, 'discretization');" class="panel_header closed">Discretization Options</div>
   <div id="discretization" class="panel_body"> 
     <div>
       <%= f.check_box :show_discretized %>&nbsp;<%= f.label :show_discretized %>
