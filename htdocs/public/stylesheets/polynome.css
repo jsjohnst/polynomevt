@@ -40,8 +40,7 @@ div.tooltip {
 }
 
 .panel_body {
-  padding-bottom: 5px;
-  padding-left: 18px;
+  padding: 5px 0px 5px 18px;
   width: 100%;
   background-color: #eee; 
   border: 1px solid #000;
