@@ -7,16 +7,13 @@
 
 <div style="float: left;">
 
-<div id='tooltip' style="display:none; margin: 5px; background-color: green">
-This is what the tooltip help looks like<br />
-</div>
-
-<div id='product_1'>
-Help
-</div>
-
-<div id="input_data_tooltip">
-Great help on input data!<br />
+<div id="pvalue_tooltip" class="tooltip" style="display:none;">
+<b>pvalue:</b><br/>
+pvalue is used in fancy mathematical<br/>
+worlds to indicate some value which<br/>
+anyone not already familiar with the term<br/>
+would probably not understand anyway<br/>
+so why would you be needing help here?<br/>
 </div>
 
   <div style="display:none">
@@ -30,8 +27,8 @@ Great help on input data!<br />
   <div onclick="toggle_panel(this, 'input_data_panel');" class="panel_header open">Input Data</div>
   <div id="input_data_panel" class="panel_body">
     <div>
-      <%= f.label :nodes %>: <%= f.text_field :nodes, :size => 10 %>&nbsp;
-      &nbsp;<%= f.label :pvalue %>: <%= f.text_field :pvalue, :size => 10 %><br/>
+      <%= f.label :nodes %>: <%= f.text_field :nodes, :size => 10, :id => "nodes" %>&nbsp;
+      &nbsp;<%= f.label :pvalue %>: <%= f.text_field :pvalue, :size => 10, :id => "pvalue" %><br/>
       <%= f.hidden_field :input_data, :id => "hidden_input_data" %>
       <%= f.label :input_file %>:
       <%= f.file_field :input_file %>

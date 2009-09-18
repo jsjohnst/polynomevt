@@ -8,6 +8,13 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
+div.tooltip {
+	padding: 10px;
+        margin: 10px;
+        background-color: #FFF;
+	border: 1px solid #F33;
+}
+
 .panel_header {
   padding-left: 18px;
   width: 100%; 
