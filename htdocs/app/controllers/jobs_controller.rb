@@ -37,6 +37,11 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
+    
+    respond_to do |format|
+      format.html { render :action => "new" }
+      format.xml { render :xml => @job }
+    end
   end
 
   # POST /jobs
@@ -72,15 +77,28 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.xml
   def update
-    @job = Job.find(params[:id])
+    if params[:job][:input_file]
+      params[:job][:input_data] = params[:job][:input_file].read
+      params[:job].delete(:input_file)
+    end
+    
+    if params[:job][:known_functions_file]
+      params[:job][:known_functions] = params[:job][:known_functions_file].read
+      params[:job].delete(:known_functions_file)
+    end
+    
+    params[:job][:user_id] = session[:user]
+    
+    @job = Job.new(params[:job])
 
     respond_to do |format|
-      if @job.update_attributes(params[:job])
-        flash[:notice] = 'Job was successfully updated.'
-        format.html { redirect_to(@job) }
-        format.xml  { head :ok }
+      if @job.save
+        Delayed::Job.enqueue ComputationJob.new(@job.id)
+        flash[:notice] = 'Job was successfully created.'
+        format.html { redirect_to(jobs_url) }
+        format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "new" }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
       end
     end
