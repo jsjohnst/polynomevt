@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'FileUtils'
+require 'rubygems'
+require 'fileutils'
+
 # ruby script to run with C-c C-c
 
 # 5 timecourses with perturbation, 1 steady state 
@@ -75,15 +77,15 @@ def write_fileman( k )
     file.puts "P=2; N=15;"
     file.puts "WT ={"
     for i in 1 .. 5 do 
-      file.puts "\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_TS#{i}.txt\","
+      file.puts "\"#{k}_TS#{i}.txt\","
     end
-    file.puts "\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_TS#{6}.txt\""
+    file.puts "\"#{k}_TS#{6}.txt\""
     file.puts "};"
     file.puts "KO ={"
     for i in 1 .. 9 do 
-      file.puts "(#{i},\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_KO#{i}.txt\"),"
+      file.puts "(#{i},\"#{k}_KO#{i}.txt\"),"
     end
-    file.puts "(10,\"/Users/fhinkel/Sites/polynome-master/dream4/React/#{k}_KO#{10}.txt\")"
+    file.puts "(10,\"#{k}_KO#{10}.txt\")"
     file.puts "};"
     file.puts "REV = {};"
     file.puts "CMPLX = {};"
@@ -109,6 +111,6 @@ for k in 1 .. 5 do
   end
   write_fileman( k) 
   puts "run react for network #{k}"
-  `./React fileman-size10-#{k}.txt output-#{k}.txt`
+  puts `./React fileman-size10-#{k}.txt output-#{k}.txt`
 end
 
