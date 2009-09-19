@@ -118,4 +118,4 @@ REV = {};
 CMPLX = {};
 BIO = {};
 MODEL = {};
-PARAMS = {"params-size100-1.txt"};
+PARAMS = {"params-size100.txt"};

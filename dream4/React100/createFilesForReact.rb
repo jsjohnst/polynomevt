@@ -5,15 +5,17 @@ require 'fileutils'
 
 # ruby script to run with C-c C-c
 
-# 10 timecourses with perturbation, 1 steady state 
+# 10 timecourses with perturbation
 # 100 knockout time courses
+# 1 steady state 
 
 # split timecourses in one file separated by # into multiple files. Add to
 
 # each timecourse the appropriate perturbation, for TS1-10 that is perturbation
-# 1-5, for all other no perturbation
+# 1-10, for all other no perturbation
 
-# rename TS 1-111 into KO 1-100
+# rename TS 11-110 into KO 1-100
+# rename steady state wildtype 111 to TS 11
 
 # write fileman to have TS and KO data it in
 
@@ -91,7 +93,7 @@ def write_fileman( k )
     file.puts "CMPLX = {};"
     file.puts "BIO = {};"
     file.puts "MODEL = {};"
-    file.puts "PARAMS = {\"params-size100-1.txt\"};"
+    file.puts "PARAMS = {\"params-size100.txt\"};"
   end
 end
 
@@ -105,14 +107,15 @@ for k in 1 .. 5 do
     add_pertubation_timecourse("#{k}_TS#{i}.txt", arr.to_s)
     arr[i] = " 0"
   end
-  add_pertubation_timecourse("#{k}_TS11.txt", arr.to_s)
-  for i in 12 .. 111 do 
+  for i in 11 .. 110 do 
     add_pertubation_timecourse("#{k}_TS#{i}.txt", arr.to_s)
-    j = i - 11
+    j = i - 10
     FileUtils.mv("#{k}_TS#{i}.txt", "#{k}_KO#{j}.txt") 
   end
+  add_pertubation_timecourse("#{k}_TS111.txt", arr.to_s)
+  FileUtils.mv("#{k}_TS111.txt", "#{k}_TS11.txt") 
   write_fileman(k) 
   puts "run react for network #{k}"
-  puts `./React fileman-size100-#{k}.txt output-#{k}.txt`
+  #puts `./React fileman-size100-#{k}.txt output-#{k}.txt`
 end
 
