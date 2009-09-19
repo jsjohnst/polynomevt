@@ -65,8 +65,7 @@ for k in 1..5 do
     file_prefix = functionfile.sub(/\.functionfile\.txt/, "")
     file_prefix.sub!(/\/Users\/fhinkel\/Sites\/github\/htdocs\//,"")
     puts file_prefix
-    dvd = DVDCore.new(file_prefix, 15, 2)
-    #dvd = DVDCore.new(file_prefix, 15, 2)
+    dvd = DVDCore.new(file_prefix, 110, 2)
     dvd.run
     output = dvd.observe_dependencies_in_array
     add_componentwise(sum, output)
@@ -82,27 +81,6 @@ for k in 1..5 do
   outfile.close
 end
 
-cp public/files/*edges.txt ~/Sites/polynome-master/dream4/React/
-
-sum
-a = Array.new(2)
-a[0] = [1,2,3]
-a[1] = [55,66,77]
-b = Array.new(2)
-b[0] = [1000,2000,30000]
-b[1] = [50000,60000,7000]
-sum = a
-output = b
-
-functionfile = "/Users/fhinkel/Documents/Research/Rails/polynomevt/htdocs/public/files/output-1-120.functionfile.txt"
-functionfile = "/Users/fhinkel/Sites/github/htdocs/public/files/output-1-120.functionfile.txt"
-
-  functionfile = functionfiles.first
-  file_prefix = functionfile.sub(/\.functionfile\.txt/, "")
-  file_prefix.sub!(/\/Users\/fhinkel\/Sites\/github\/htdocs\//,"")
-
-add_componentwise(a,b)
-sum
 
 
 quit
