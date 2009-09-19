@@ -113,6 +113,6 @@ for k in 1 .. 5 do
   end
   write_fileman(k) 
   puts "run react for network #{k}"
-  puts `./React fileman-size10-#{k}.txt output-#{k}.txt`
+  puts `./React fileman-size100-#{k}.txt output-#{k}.txt`
 end
 
