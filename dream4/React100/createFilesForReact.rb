@@ -103,9 +103,9 @@ for k in 1 .. 5 do
 
   arr = Array.new(10, " 0")
   for i in 1..10 do 
-    arr[i] = " 1"
+    arr[i-1] = " 1"
     add_pertubation_timecourse("#{k}_TS#{i}.txt", arr.to_s)
-    arr[i] = " 0"
+    arr[i-1] = " 0"
   end
   for i in 11 .. 110 do 
     add_pertubation_timecourse("#{k}_TS#{i}.txt", arr.to_s)
