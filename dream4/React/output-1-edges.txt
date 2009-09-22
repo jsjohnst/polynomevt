@@ -1,3 +1,19 @@
+Interpret this as: 
+there is an edge from x_j to x_i in A_ij % of all networks generated with
+react 
+
+For example there's an edge from every variable to x1 in every model, there's
+an edge from x1 to x2 in 8% of all models. 
+
+The last 5 rows should be ignored (they would indicate by which variables the
+perturbations are affected). 
+
+The last 5 entries in row i
+indicate which perturbation affected xi.
+For example x2 is affected by perturbation 1 in 16% of all models and in none
+of the models by perturbation 3. 
+
+
 1	100	0	10	100	100	100	100	70	100	100	0	100	100	2	
 11	100	35	34	34	34	48	37	58	38	20	35	36	0	34	
 0	0	3	0	0	0	0	0	0	0	39	40	40	0	0	
