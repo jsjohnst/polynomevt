@@ -97,6 +97,14 @@ def write_fileman( k )
   end
 end
 
+def backtick(cmd)
+  IO.popen(cmd) { |io|
+    while line = io.gets
+      puts line
+    end
+  }
+end
+
 
 for k in 1 .. 5 do 
   split_data_into_files("../challenge2-Boolean-data/Bool-100/size100-#{k}-Bool.txt", k)
@@ -116,6 +124,6 @@ for k in 1 .. 5 do
   FileUtils.mv("#{k}_TS111.txt", "#{k}_TS11.txt") 
   write_fileman(k) 
   puts "run react for network #{k}"
-  #puts `./React fileman-size100-#{k}.txt output-#{k}.txt`
+  backtick("./React fileman-size100-#{k}.txt output-#{k}.txt")
 end
 
