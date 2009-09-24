@@ -1,12 +1,12 @@
-GenePoolSize                    5000.00 
+GenePoolSize                    500.00 
   
-NumCandidates                    500.00  
+NumCandidates                    50.00  
  
-mNumParentsToPreserve            20.00  
+mNumParentsToPreserve            10.00  
  
-MaxGenerations                   1500.00   
+MaxGenerations                   150.00   
 
-StableGenerationLimit            200.00   
+StableGenerationLimit            40.00   
 
 MutateProbability                0.755   
 
