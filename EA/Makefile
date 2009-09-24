@@ -7,7 +7,7 @@
 React: BitStringNew.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModel.o React.o
 	g++ BitStringNew.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModel.o React.o -O3 -o React
 
-BitStringNew.o: BitStringNew.cpp
+BitStringNew.o: BitString.cpp
 	gcc BitStringNew.cpp -O3 -c
 
 DynSysModel.o: DynSysModel.cpp

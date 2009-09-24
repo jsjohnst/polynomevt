@@ -13,7 +13,7 @@
 #include <cmath>
 
 typedef unsigned short USHORT;
-typedef unsigned long ULONG;
+typedef unsigned int ULONG;
 
 // Standard Template Library Containers
 //  dynamically sized array, fast random access, no insertion/deletion
