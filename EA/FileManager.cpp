@@ -276,6 +276,7 @@ bool FileManager::ReadControlFile( String& control_file_path )
 // Read in a time series from the given file, optionally verify knockout variable kov
 bool FileManager::ReadTimeSeries( String& file_path, TimeSeries& ts, size_t kov )
 {
+	std::cout << "file: " << file_path << std::endl;
 	std::ifstream in_file;
 	in_file.open( file_path.c_str() );
 	if( !in_file.good() )
@@ -295,6 +296,7 @@ bool FileManager::ReadTimeSeries( String& file_path, TimeSeries& ts, size_t kov 
 		{
 			if( num_digits > 0 )
 			{
+				std::cout << "line: " << in_line << std::endl;
 				NTuple t( in_line  );
 				if( t.Size() != GAParams::NumVars() )
 				{
@@ -304,6 +306,8 @@ bool FileManager::ReadTimeSeries( String& file_path, TimeSeries& ts, size_t kov 
 				{
 					if( t[kov] )
 					{
+						std::cout << t[kov] << std::endl;
+						std::cout << kov << std::endl;
 						t.Reset( kov );
 						std::cout << "FileManager::ReadTimeSeries - knockout variable not zero in time series" << std::endl;
 						std::cout << "  data corrected - processing will continue" << std::endl;

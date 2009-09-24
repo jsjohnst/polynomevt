@@ -98,7 +98,7 @@ typedef StringVector::iterator StringVectorIter;
 
 #include "PolyMathRand.h"
 
-#include "BitString.h"
+#include "BitStringNew.h"
 
 typedef BitString TermType;
 typedef BitString TupleType;

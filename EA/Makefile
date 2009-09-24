@@ -4,11 +4,11 @@
 #
 #  primary target goes first
 #
-React: BitString.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModel.o React.o
-	g++ BitString.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModel.o React.o -O0 -o React
+React: BitStringNew.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModel.o React.o
+	g++ BitStringNew.o DynSysModel.o NTuple.o Monomial.o Polynomial.o GAParams.o FileManager.o GAModel.o React.o -O3 -o React
 
-BitString.o: BitString.cpp
-	gcc BitString.cpp -O0 -c -g
+BitStringNew.o: BitStringNew.cpp
+	gcc BitStringNew.cpp -O3 -c
 
 DynSysModel.o: DynSysModel.cpp
 	gcc DynSysModel.cpp -O0 -c -g
