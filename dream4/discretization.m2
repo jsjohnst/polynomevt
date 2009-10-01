@@ -1,4 +1,5 @@
 -- Discretize values
+--
 
 inInterval = (a, intervals) -> (
      result := position(intervals, b -> a <= b);

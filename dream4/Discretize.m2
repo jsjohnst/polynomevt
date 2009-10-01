@@ -142,4 +142,6 @@ discretize(String, ZZ, String) := (infile, n, outfile) -> (
 )
 
 end
+
+load discretize({"insilico_size10_1_timeseries-1.txt","insilico_size10_1_timeseries-2.txt","insilico_size10_1_timeseries-3.txt","insilico_size10_1_timeseries-4.txt","insilico_size10_1_timeseries-5.txt","insilico_size10_1_wildtype.txt","insilico_size10_1_knockout-1.txt","insilico_size10_1_knockout-2.txt","insilico_size10_1_knockout-3.txt","insilico_size10_1_knockout-4.txt","insilico_size10_1_knockout-5.txt","insilico_size10_1_knockout-6.txt","insilico_size10_1_knockout-7.txt","insilico_size10_1_knockout-8.txt","insilico_size10_1_knockout-9.txt","insilico_size10_1_knockout-10.txt"}, 10, "size10-1-Bool.txt")
 ----------------------------------------------------- end of file---------------------------------------------------

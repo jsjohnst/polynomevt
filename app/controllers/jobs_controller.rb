@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'ftools'
 
 include React
 include Spawn
@@ -259,6 +260,18 @@ class JobsController < ApplicationController
         simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}` 
         logger.info "simulation output: " + simulation_output 
         simulation_output = simulation_output.gsub("\n", "") 
+
+        multiple_functionfile = functionfile_name.gsub("functionfile", "multiplefunctionfile")
+        logger.info multiple_functionfile
+        if FileTest.exists?(multiple_functionfile)
+          logger.info "Multiple file exists"
+          # after simulating just one network copy the multiple networks into
+          # the function file that the user can display
+          File.copy(multiple_functionfile, functionfile_name)
+
+        else
+          logger.info "Multiple file does not exist"
+        end
       end
       self.write_done_file("1",  simulation_output)
     end

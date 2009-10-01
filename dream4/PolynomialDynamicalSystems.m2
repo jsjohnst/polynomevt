@@ -1,10 +1,12 @@
 newPackage(
     "PolynomialDynamicalSystems",
-        Version => "0.1", 
-        Date => "August 14, 2009",
+        Version => "0.11", 
+        Date => "August 26, 2009",
         Authors => {
          {Name => "Brandy Stigler", Email => "bstigler@smu.edu", HomePage => "http://users.mbi.ohio-state.edu/bstigler"},
          {Name => "Mike Stillman", Email => "mike@math.cornell.edu", HomePage => "http://www.math.cornell.edu/~mike"}
+--Edited by: 	Alan Veliz-Cuba
+--Edit Date: 	8/31/09
          },
         Headline => "Utilities for polynomial dynamical systems - mostly combined with RevEng package",
         DebuggingMode => true
@@ -31,10 +33,13 @@ export{getVars,
        checkFunction,
        Ws,
        minSetScoring,
+       allminSetScoring,
        minSetWeightedScoring,
        outDegrees,
        makeDotFile,
-       Avoid
+       Avoid,
+	Output,
+	Include
 }
 
 
@@ -211,7 +216,7 @@ readKOData(String,Ring) := (filename, R) -> (
     T = apply(T, l->(l_0, matrix(R,apply(l_1, s->select(separateRegexp(" +",s), c->c!="")/value))));
     H := new MutableHashTable;
     scan(T, p -> if H#?(p_0) then H#(p_0) = append(H#(p_0), p_1)
-	else H#(p_0) = {p_1});
+	else H#(p_0) = {p_1});print T;
     new TimeSeriesData from H
 )
 
@@ -394,20 +399,24 @@ mesdual MonomialIdeal := (J) -> (if J == 0
   else mesintersect (monomialIdeal @@ support \ first entries generators J))
 
 
-minSets = method(Options => {Output => null,
-                         Avoid => null}
-                 )
+--added "Included=>null"
+minSets = method(Options => {Output => null, 
+				Avoid => null, 
+				Include => null} 
+		)
 minSets(TimeSeriesData, ZZ, Ring) := opts -> (T, i, R) -> (
         d := functionData(T,i);
         I := minRep(d,R);
     if instance(I,ZZ) then I = monomialIdeal(0_R); -- because I can be the zero element
 --    I = I + monomialIdeal(R_(i-1));
-    if opts.Avoid =!= null then (
+    if opts.Avoid =!= null and opts.Avoid =!= {} and flatten {opts.Avoid}=!={1} then (
          J1= saturate(I,product flatten {opts.Avoid});
          globalI = J1;
          I = J1;
          );
+
     J := flatten entries gens mesdual I;
+
     if opts.Output =!= null
     then (
       fil := openOut opts.Output;
@@ -415,7 +424,16 @@ minSets(TimeSeriesData, ZZ, Ring) := opts -> (T, i, R) -> (
       displayMinSets(fil, J);
       close fil;
       );
-    J /sort @@ support
+
+--added from here
+	if opts.Include =!= null and opts.Include =!= {}
+	then (P:=product flatten {opts.Include};
+	if J=={} then J={P} else
+	(JJ:={};for j to #J-1 do JJ=append(JJ,J_j*P);J=JJ);
+	);
+--added to here
+
+J /sort @@ support
     )
 
 
@@ -462,7 +480,8 @@ T2 = (S,F) -> (sum apply(F, xi -> S xi)) / #F
 
 Model = new Type of HashTable
 
-minSetScoring = method(Options => {Output => null, Avoid => null})
+--added Include=>null
+minSetScoring = method(Options => {Output => null, Avoid => null, Include=>null})
 minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     i := index xi;
     << "##### variable " << xi << " ################" << endl;
@@ -474,7 +493,8 @@ minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     if i === null then error "expected a ring variable";
     i = i+1;
     R := ring xi;
-    J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid);
+-- modified from J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid) to:
+    J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid, Include=> opts.Include);
     -- now we determine the (S1,T1)-scores of 
     -- each variable and each set in J
     (Z1,Ws1) := Ws J;
@@ -482,6 +502,7 @@ minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     scores := apply(J, F -> logT1(S,F));
     sets := apply(J, F -> (F,logT1(S,F)));
     maxscore := max scores;
+print sets;print scores;
 -- made next line return the first best score - for web apps
     Jbest := J _ (positions(scores, x -> x === maxscore));
 --    Jbest := J _ (position(scores, x -> x === maxscore));
@@ -493,7 +514,8 @@ minSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
     );
 -- changed next line to return the var-score function S: 3-31-08
 --     (sets, result)
-    (sets, S, result)
+--changed to deal with "empty" cases
+if sets=={} or (not sets=!={null}) then ({},S,xi=>{hashTable{}}) else (sets, S, result)  
 )
 
 minSetScoring(List, RingElement) := opts -> (L, xi) -> (
@@ -502,6 +524,7 @@ minSetScoring(List, RingElement) := opts -> (L, xi) -> (
     S := S1(Z1,Ws1);
     scores := apply(L, F -> logT1(S,F));
     sets := apply(L, F -> (F,logT1(S,F)));
+print sets;print scores;
     maxscore := max scores;
     Lbest := L _ (positions(scores, x -> x === maxscore));
     result := (xi => apply(Lbest, F -> hashTable apply(F, x -> x => S x)));
@@ -510,8 +533,62 @@ minSetScoring(List, RingElement) := opts -> (L, xi) -> (
         fil << net result << endl;
         close fil;
     );
-    (sets, S, result)    
+--changed to deal with "empty" cases
+if sets=={} or (not sets=!={null}) then ({},S,xi=>{hashTable{}}) else (sets, S, result)    
 )
+
+
+--allminSetScoring finds the scores for all min sets
+
+allminSetScoring = method(Options => {Output => null, Avoid => null, Include=>null})
+allminSetScoring(TimeSeriesData, RingElement) := opts -> (T, xi) -> (
+    i := index xi;
+    << "##### variable " << xi << " ################" << endl;
+    if opts.Output =!= null then (
+    fil := openOut opts.Output;
+    fil << "##### variable " << xi << " ################" << endl;
+    close fil;
+    );
+    if i === null then error "expected a ring variable";
+    i = i+1;
+    R := ring xi;
+    J := minSets(T,i,R,Output => opts.Output, Avoid => opts.Avoid, Include=> opts.Include);
+    -- now we determine the (S1,T1)-scores of 
+    -- each variable and each set in J
+    (Z1,Ws1) := Ws J;
+    S := S1(Z1,Ws1);
+    scores := apply(J, F -> logT1(S,F));
+    sets := apply(J, F -> (F,logT1(S,F)));
+print sets;print scores;
+    result := (xi => apply(J, F -> hashTable apply(F, x -> x => S x)));
+    if opts.Output =!= null then (
+        fil = openOut opts.Output;
+        fil << net result << endl;
+        close fil;
+    );
+-- changed next line to return the var-score function S: 3-31-08
+--     (sets, result)
+--changed to deal with "empty" cases
+if sets=={} or (not sets=!={null}) then ({},S,xi=>{hashTable{}}) else (sets, S, result)  
+)
+
+allminSetScoring(List, RingElement) := opts -> (L, xi) -> (
+    --L is a list of minsets for variable xi
+    (Z1,Ws1) := Ws L;
+    S := S1(Z1,Ws1);
+    scores := apply(L, F -> logT1(S,F));
+    sets := apply(L, F -> (F,logT1(S,F)));
+print sets;print scores;
+   result := (xi => apply(L, F -> hashTable apply(F, x -> x => S x)));
+    if opts.Output =!= null then (
+        fil = openOut opts.Output;
+        fil << net result << endl;
+        close fil;
+    );
+--changed to deal with "empty" cases
+if sets=={} or (not sets=!={null}) then ({},S,xi=>{hashTable{}}) else (sets, S, result)    
+)
+
 
 findBestMinsets = (J, weights) -> (
      score := (F) -> (sum(weights_(apply(F,index)))/#F);
