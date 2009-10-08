@@ -61,7 +61,7 @@ Zscores = (H, mean'stddev) -> (
 getInfo = (H) -> (
      spreads := {};
      ans := toList apply(0..9, i -> (
-	  vals := flatten apply(H#"timeseries", m -> drop(flatten entries m_{i}, 11));
+	  vals := flatten apply(H#"timeseries", m -> drop(flatten entries m_{i}, 13));
 	  mu := mean  vals;
 	  sigma := stddev  vals;
 	  spreads = append(spreads, spread vals);
@@ -92,20 +92,4 @@ apply(perturbChanges, m -> toList select(1..10, i -> (a := m_(i-1,0); b := m_(i-
 --  perturn #4: genes 7,8,9, maybe 3,6
 --  perturn #5: genes 9, maybe 7
 
-WT = flatten entries H#"wildtype"
-apply(#WT, i -> (a := WT#i; (a-MU#i#0)/MU#i#1))
 
-
-loadPackage "PolynomialDynamicalSystems"
-TS = new TimeSeriesData from {WildType => DH}
-apply(1..10, i -> functionData(TS,i))
-functionData(TS, 3)
-R = QQ[makeVars 10]
-minRep(functionData(TS,3),R)
-H#"timeseries"#0
-
-
-TS = new TimeSeriesData from {WildType => H#"timeseries"}
-apply(1..10, i -> functionData(TS,i))
-
-R = RR[makeVars 10]
