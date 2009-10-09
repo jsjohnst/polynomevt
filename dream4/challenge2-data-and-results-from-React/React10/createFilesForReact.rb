@@ -73,31 +73,33 @@ def add_pertubation_timecourse(datafile, addon)
 end
 
 def write_fileman( k )
-  File.open("fileman-size10-#{k}.txt", "w") do |file|
-    file.puts "P=2; N=15;"
-    file.puts "WT ={"
-    for i in 1 .. 5 do 
-      file.puts "\"#{k}_TS#{i}.txt\","
+  for option in ["super", "sub"]
+    File.open("fileman-size10-#{k}-#{option}.txt", "w") do |file|
+      file.puts "P=2; N=15;"
+      file.puts "WT ={"
+      for i in 1 .. 5 do 
+        file.puts "\"#{k}_TS#{i}.txt\","
+      end
+      file.puts "\"#{k}_TS#{6}.txt\""
+      file.puts "};"
+      file.puts "KO ={"
+      for i in 1 .. 9 do 
+        file.puts "(#{i},\"#{k}_KO#{i}.txt\"),"
+      end
+      file.puts "(10,\"#{k}_KO#{10}.txt\")"
+      file.puts "};"
+      file.puts "REV = {};"
+      file.puts "CMPLX = {};"
+      file.puts "BIO = {Bio-network#{k}-#{option}set.txt};"
+      file.puts "MODEL = {};"
+      file.puts "PARAMS = {\"params-size10-1.txt\"};"
     end
-    file.puts "\"#{k}_TS#{6}.txt\""
-    file.puts "};"
-    file.puts "KO ={"
-    for i in 1 .. 9 do 
-      file.puts "(#{i},\"#{k}_KO#{i}.txt\"),"
-    end
-    file.puts "(10,\"#{k}_KO#{10}.txt\")"
-    file.puts "};"
-    file.puts "REV = {};"
-    file.puts "CMPLX = {};"
-    file.puts "BIO = {};"
-    file.puts "MODEL = {};"
-    file.puts "PARAMS = {\"params-size10-1.txt\"};"
   end
 end
 
 
 for k in 1 .. 5 do 
-  split_data_into_files("../challenge2-Boolean-data/Bool/size10-#{k}-Bool.txt", k)
+  split_data_into_files("../../challenge2-Boolean-data/Bool/size10-#{k}-Bool.txt", k)
   add_pertubation_timecourse("#{k}_TS1.txt", " 1 0 0 0 0")
   add_pertubation_timecourse("#{k}_TS2.txt", " 0 1 0 0 0")
   add_pertubation_timecourse("#{k}_TS3.txt", " 0 0 1 0 0")
@@ -110,7 +112,9 @@ for k in 1 .. 5 do
     FileUtils.mv("#{k}_TS#{i}.txt", "#{k}_KO#{j}.txt") 
   end
   write_fileman( k) 
-  puts "run react for network #{k}"
-  puts `./React fileman-size10-#{k}.txt output-#{k}.txt`
+  for option in ["super", "sub"]
+    puts "run react for network #{k} #{option}set"
+    puts `./React fileman-size10-#{k}-#{option}.txt output-#{k}.txt`
+  end
 end
 
