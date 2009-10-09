@@ -114,7 +114,7 @@ for k in 1 .. 5 do
   write_fileman( k) 
   for option in ["super", "sub"]
     puts "run react for network #{k} #{option}set"
-    puts `./React fileman-size10-#{k}-#{option}.txt output-#{k}.txt`
+    puts `./React fileman-size10-#{k}-#{option}.txt output-#{k}-#{option}.txt`
   end
 end
 
