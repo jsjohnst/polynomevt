@@ -21,6 +21,6 @@ KO ={
 };
 REV = {};
 CMPLX = {};
-BIO = {Bio-network5-subset.txt};
+BIO = {"Bio-network5-subset.txt"};
 MODEL = {};
 PARAMS = {"params-size10-1.txt"};

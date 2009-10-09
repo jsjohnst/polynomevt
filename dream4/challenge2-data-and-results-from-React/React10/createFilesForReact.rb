@@ -90,7 +90,7 @@ def write_fileman( k )
       file.puts "};"
       file.puts "REV = {};"
       file.puts "CMPLX = {};"
-      file.puts "BIO = {Bio-network#{k}-#{option}set.txt};"
+      file.puts "BIO = {\"Bio-network#{k}-#{option}set.txt\"};"
       file.puts "MODEL = {};"
       file.puts "PARAMS = {\"params-size10-1.txt\"};"
     end
