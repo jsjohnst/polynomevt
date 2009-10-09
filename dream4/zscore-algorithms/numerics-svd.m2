@@ -376,11 +376,12 @@ try1 = sort apply(subsets(prepend(1_R, gens R), 3), vs -> (
 	  ))
 
 try2 = sort apply(subsets({x1,x2,x3,x4,x6,x7,x8,x9,x10}, 3), vs -> (
-	  vs1 = join({1_R,x5,x11},vs);
+	  vs1 = join({1_R,x5,x11,x15},vs);
 	  vs1 = squarefrees(vs1,2);
 	  vs2 := apply(vs, x -> x^2);
 	  vs3 := apply(vs, x -> x^3);
 	  vs = join(vs1,vs2,vs3);
+	  vs = join(vs1,vs2);
 	  (err1, err2, vals, xfcn) =  svdF(F5,vs);
 	  << vs << ": " << err1 << endl;
 	  {err1, err2, vs}
@@ -411,3 +412,6 @@ select(try2, x -> x#1 <= 2.0)
 svdF(F5,{x1,x3,x9,x1^2,x3^2,x9^2})
 ideal(x1,x3,x9,x1^2,x3^2,x9^2) * ideal(1_R,x5,x11)
 svdF(F5,oo_*)
+
+-- attempt to cluster points?  maybe we can do minsets that way?  9-24-09
+apply(subsets(keys subFunctionData(functionData(ZH,2),{1,2,3}), 2), x -> len matrix{x#1-x#0})
