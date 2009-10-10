@@ -82,42 +82,41 @@ def split_data_into_files(datafile)
   datafiles
 end
 
-
-for k in 1..5 do 
-  # networks that we don't discard because the perturbations affect too many
-  # or little genes
-  number_of_good_networks = 0
-  sum = Array.new()
-  output = Array.new()
-  functionfiles = split_data_into_files("output-#{k}.txt")
-  functionfiles.each do |functionfile|
-    file_prefix = functionfile.sub(/\.functionfile\.txt/, "")
-    #file_prefix.sub!(/\/Users\/fhinkel\/Sites\/github\/htdocs\//,"")
-    puts file_prefix
-    dvd = DVDCore.new(file_prefix, 15, 2)
-    dvd.run
-    output = dvd.observe_dependencies_in_array
-     #  Only count the networks with the perturbations affecting the correct
-     #  number of genes
-    if thirty_percent_perturbations(output) 
-      add_componentwise(sum, output)
-      number_of_good_networks += 1
+for option in ["sub", "super"]
+  for k in 1..5 do 
+    # networks that we don't discard because the perturbations affect too many
+    # or little genes
+    number_of_good_networks = 0
+    sum = Array.new()
+    output = Array.new()
+    functionfiles = split_data_into_files("output-#{k}-#{option}.txt")
+    functionfiles.each do |functionfile|
+      file_prefix = functionfile.sub(/\.functionfile\.txt/, "")
+      puts file_prefix
+      dvd = DVDCore.new(file_prefix, 15, 2)
+      dvd.run
+      output = dvd.observe_dependencies_in_array
+       #  Only count the networks with the perturbations affecting the correct
+       #  number of genes
+      #if thirty_percent_perturbations(output) 
+        add_componentwise(sum, output)
+        number_of_good_networks += 1
+      #end
     end
 
-  end
-  outfile = File.new("output-only-good_networks-#{k}-edges.txt", "w")
-  outfile.puts "#{number_of_good_networks} of networks used"
-    for i in 0..sum.length-1 do 
-      for j in 0..sum[i].length-1 do
-        outfile.print sum[i][j] * 100 / number_of_good_networks 
-        #outfile.print sum[i][j] * 100 / 130
-        outfile.print "\t"
+    outfile = File.new("output-#{k}-#{option}.txt", "w")
+    outfile.puts "#{number_of_good_networks} of networks used"
+      for i in 0..sum.length-1 do 
+        for j in 0..sum[i].length-1 do
+          outfile.print sum[i][j] * 100 / number_of_good_networks 
+          #outfile.print sum[i][j] * 100 / 130
+          outfile.print "\t"
+        end
+        outfile.puts ""
       end
-      outfile.puts ""
-    end
-  outfile.close
+    outfile.close
+  end
 end
-
 
 
 
