@@ -18,9 +18,9 @@ module React
   end
   
   def parse_output(infile, outfile, long_outfile)
-    File.open(long_outfile, 'w') do |long_out_file|
-      File.open(outfile, 'w') do |out_file|
-        File.open(infile, 'r') do |file|
+    File.open(Rails.root.join(long_outfile), 'w') do |long_out_file|
+      File.open(Rails.root.join(outfile), 'w') do |out_file|
+        File.open(Rails.root.join(infile), 'r') do |file|
           # write the top 10 models into the file
           for i in 1..10 do 
             line = file.gets
@@ -79,7 +79,7 @@ module React
     end
     logger.info "file_string in EA: " + file_string
 
-    File.open( managerfile, 'w' ) do |file| 
+    File.open(Rails.root.join(managerfile), 'w' ) do |file| 
         
         data = "P=2; N=#{n_nodes};
 WT = {#{file_string}};
