@@ -256,9 +256,10 @@ class JobsController < ApplicationController
         functionfile_name = self.functionfile_name(@job.file_prefix)
         logger.info "Functionfile : " + functionfile_name
 
-        logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
+        logger.info "perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
+        
+        simulation_output = `perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}`
 
-        simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}` 
         logger.info "simulation output: " + simulation_output 
         simulation_output = simulation_output.gsub("\n", "") 
 
