@@ -81,7 +81,7 @@ class JobsController < ApplicationController
 
     # split is also checking the input format
     datafile = "public/perl/" + @job.file_prefix + ".input.txt"
-    File.open(datafile, 'w') {|file| file.write(@job.input_data) }
+    File.open(Rails.root.join(datafile), 'w') {|file| file.write(@job.input_data) }
 
     datafiles = self.split_data_into_files(datafile)
     if (!datafiles)
@@ -142,13 +142,14 @@ class JobsController < ApplicationController
 
       #concatenate_discretized_files
       first = TRUE
-      File.open( "public/perl/" + @job.file_prefix + ".discretized-input.txt", 'w') {
+      File.open(Rails.root.join("public/perl/" + @job.file_prefix +
+      ".discretized-input.txt"), 'w') {
           |f| discretized_datafiles.each do |datafile|
               unless (first)
                   f.write("#\n")
               end
               first = FALSE
-              f.write(File.open(datafile, 'r').read)
+              f.write(File.open(Rails.root.join(datafile), 'r').read)
           end
       }
 
@@ -292,7 +293,7 @@ class JobsController < ApplicationController
 
     datafiles = []
     output = NIL
-    File.open(datafile) do |file| 
+    File.open(Rails.root.join(datafile)) do |file| 
         counter = 0
         something_was_written = FALSE
         while line = file.gets 
@@ -308,7 +309,7 @@ class JobsController < ApplicationController
                     outputfile_name = datafile.gsub(/input/,"input" +
                     counter.to_s)
                     counter +=1
-                    output = File.open(outputfile_name, "w") 
+                    output = File.open(Rails.root.join(outputfile_name), "w") 
                     datafiles.push(Dir.getwd + "/" + outputfile_name)
                 end
                 # check if line matches @n_nodes digits
@@ -413,7 +414,7 @@ class JobsController < ApplicationController
     logger.info "outfiles: " + outfiles.to_s
     outfiles.each do |file|
       logger.info file
-      logger.info File.open(file, 'r').read
+      logger.info File.open(Rails.root.join(file), 'r').read
     end
     outfiles
   end
