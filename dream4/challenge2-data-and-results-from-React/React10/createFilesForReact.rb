@@ -92,8 +92,8 @@ def write_fileman( k )
       file.puts "CMPLX = {};"
       file.puts "BIO = {\"Bio-network#{k}-#{option}set.txt\"};"
       file.puts "MODEL = {};"
-      #file.puts "PARAMS = {\"params-size10-1.txt\"};"
-      file.puts "PARAMS = {\"paramsBioWiring.txt\"};"
+      file.puts "PARAMS = {\"params-size10-1.txt\"};"
+      #file.puts "PARAMS = {\"paramsBioWiring.txt\"};"
     end
   end
 end
