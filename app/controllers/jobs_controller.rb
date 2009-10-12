@@ -55,15 +55,6 @@ class JobsController < ApplicationController
       params[:job].delete(:input_file)
     end
     @job = Job.new(params[:job])
-    if (@job.valid?)
-        logger.info "job.valid? " + @job.valid?.to_s  
-        # create the dummy file to avoid RouteErrors
-        self.write_done_file("0", "")
-    else 
-        logger.info "job.valid? " + @job.valid?.to_s  
-        self.write_done_file("2", "Please check the data you input.")
-        return
-    end
   end
 
  # this one need a job to be passed (needed for testing)
@@ -78,6 +69,16 @@ class JobsController < ApplicationController
     # create file prefix using md5 check sum as part of the filename
     @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
     logger.info "@job.file_prefix: "+ @job.file_prefix 
+    
+    if (@job.valid?)
+        logger.info "job.valid? " + @job.valid?.to_s  
+        # create the dummy file to avoid RouteErrors
+        self.write_done_file("0", "")
+    else 
+        logger.info "job.valid? " + @job.valid?.to_s  
+        self.write_done_file("2", "Please check the data you input.")
+        return
+    end
 
     # split is also checking the input format
     datafile = "public/perl/" + @job.file_prefix + ".input.txt"
@@ -281,8 +282,8 @@ class JobsController < ApplicationController
  
   def write_done_file(done, simulation_output)
     # Tell the website we are done
-    `echo 'var done = #{done}' > public/perl/#{@job.file_prefix}.done.js`;
-    `echo "var simulation_output = '#{simulation_output}'" >> public/perl/#{@job.file_prefix}.done.js`;
+    `echo 'var done = #{done}' > #{Rails.root.join('public/perl', @job.file_prefix + '.done.js')}`;
+    `echo "var simulation_output = '#{simulation_output}'" >> #{Rails.root.join('public/perl', @job.file_prefix + '.done.js')}`;
   end
   
   # TODO FBH: This function is doing the checking at the moment, should

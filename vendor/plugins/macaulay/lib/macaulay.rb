@@ -17,7 +17,7 @@ module Macaulay
     
     # if no script path is provided, then default to sane defaults
     if(!options[:m2_script_path]) 
-      options[:m2_script_path] = "macaulay2/"; 
+      options[:m2_script_path] = Rails.root.join("macaulay2/"); 
     end
 
     # if no m2 options are provided, then default to sane defaults
