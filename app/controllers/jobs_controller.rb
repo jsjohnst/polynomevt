@@ -257,6 +257,9 @@ class JobsController < ApplicationController
         functionfile_name = self.functionfile_name(@job.file_prefix)
         logger.info "Functionfile : " + functionfile_name
 
+        logger.info "changing into #{Rails.root.join}"
+        `cd #{Rails.root.join}`
+
         logger.info "perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
         
         simulation_output = `perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}`
@@ -312,7 +315,9 @@ class JobsController < ApplicationController
                     counter.to_s)
                     counter +=1
                     output = File.open(Rails.root.join(outputfile_name), "w") 
-                    datafiles.push(Dir.getwd + "/" + outputfile_name)
+                    datafiles.push((Rails.root.join(outputfile_name)).to_s)
+                    #datafiles.push( "../" + outputfile_name)
+                    #datafiles.push(Dir.getwd + "/" + outputfile_name)
                 end
                 # check if line matches @n_nodes digits
                 nodes_minus_one = (@job.nodes - 1).to_s
