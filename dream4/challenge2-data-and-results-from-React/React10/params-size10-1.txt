@@ -16,7 +16,7 @@ ComplexityWeight                 0.20
  
 RevEngWeight                     0  
  
-BioProbWeight                    0  
+BioProbWeight                    0.85
  
 HammingModelWeight               0.30  
  
