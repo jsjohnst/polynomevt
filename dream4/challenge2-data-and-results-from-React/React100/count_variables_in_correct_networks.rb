@@ -66,12 +66,7 @@ for k in 1..5 do
     dvd = DVDCore.new(file_prefix, 110, 2)
     dvd.run
     output = dvd.observe_dependencies_in_array
-     #  Only count the networks with the perturbations affecting the correct
-     #  number of genes
-    if thirty_percent_perturbations(output) 
-      add_componentwise(sum, output)
-    end
-
+    add_componentwise(sum, output)
   end
   outfile = File.new("output-#{k}-edges.txt", "w")
     for i in 0..sum.length-1 do 
