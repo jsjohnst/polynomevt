@@ -30,14 +30,14 @@ node3 [label="x3", shape="box"];
 
   deterministic_state_space = <<-EOS
 digraph test {
-node0 [label=" 0 0 0"];
-node1 [label=" 0 0 1"];
-node2 [label=" 0 1 0"];
-node3 [label=" 0 1 1"];
-node4 [label=" 1 0 0"];
-node5 [label=" 1 0 1"];
-node6 [label=" 1 1 0"];
-node7 [label=" 1 1 1"];
+node0 [label="000"];
+node1 [label="001"];
+node2 [label="010"];
+node3 [label="011"];
+node4 [label="100"];
+node5 [label="101"];
+node6 [label="110"];
+node7 [label="111"];
 node0 -> node0; 
 node1 -> node1;
 node2 -> node4;
@@ -51,14 +51,14 @@ node7 -> node2;
 
   deterministic_state_space_with_probabilities = <<-EOS
 digraph test {
-node0 [label=" 0 0 0"];
-node1 [label=" 0 0 1"];
-node2 [label=" 0 1 0"];
-node3 [label=" 0 1 1"];
-node4 [label=" 1 0 0"];
-node5 [label=" 1 0 1"];
-node6 [label=" 1 1 0"];
-node7 [label=" 1 1 1"];
+node0 [label="000"];
+node1 [label="001"];
+node2 [label="010"];
+node3 [label="011"];
+node4 [label="100"];
+node5 [label="101"];
+node6 [label="110"];
+node7 [label="111"];
 node0 -> node0 [label= "1.00"];
 node1 -> node1 [label= "1.00"];
 node2 -> node4 [label= "1.00"];
@@ -100,14 +100,14 @@ node3 [label="x3", shape="box"];
 
   stochastic_state_space = <<-EOS
 digraph test {
-node0 [label=" 0 0 0"];
-node1 [label=" 0 0 1"];
-node2 [label=" 0 1 0"];
-node3 [label=" 0 1 1"];
-node4 [label=" 1 0 0"];
-node5 [label=" 1 0 1"];
-node6 [label=" 1 1 0"];
-node7 [label=" 1 1 1"];
+node0 [label="000"];
+node1 [label="001"];
+node2 [label="010"];
+node3 [label="011"];
+node4 [label="100"];
+node5 [label="101"];
+node6 [label="110"];
+node7 [label="111"];
 node0 -> node0;
 node1 -> node0;
 node1 -> node1;
@@ -131,14 +131,14 @@ node7 -> node7;
 
 stochastic_state_space_with_probabilities = <<-EOS
 digraph test {
-node0 [label=" 0 0 0"];
-node1 [label=" 0 0 1"];
-node2 [label=" 0 1 0"];
-node3 [label=" 0 1 1"];
-node4 [label=" 1 0 0"];
-node5 [label=" 1 0 1"];
-node6 [label=" 1 1 0"];
-node7 [label=" 1 1 1"];
+node0 [label="000"];
+node1 [label="001"];
+node2 [label="010"];
+node3 [label="011"];
+node4 [label="100"];
+node5 [label="101"];
+node6 [label="110"];
+node7 [label="111"];
 node0 -> node0 [label= "1.00"];
 node1 -> node0 [label= "0.50"];
 node1 -> node1 [label= "0.50"];
