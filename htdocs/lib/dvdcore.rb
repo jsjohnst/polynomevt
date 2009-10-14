@@ -27,7 +27,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       return false
     end
     
-    #| debug_dump @functions
+    debug_dump @functions
       
     if true # show_wiring_diagram
       generate_wiring_diagram_dot_file
@@ -313,7 +313,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
         # if not, then assume equal distribution of probability
         probability = probability.to_f
         if ( probability <= 0 || probability > 1 )
-          probability = 1 / functions.length
+          probability = 1.0 / functions.length
         end
         
         # strip whitespace (both inside and outside the string)
