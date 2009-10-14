@@ -142,6 +142,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     states = make_states_array
     
     output = Hash.new
+    fixed_points = Hash.new
     
     states.each_with_index do |state,index|
       f.puts "node#{index} [label=\"#{state}\"];\n"
@@ -174,6 +175,12 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
           output[key] = 0
         end
         output[key] += probability
+        if newval_index == index
+          if !fixed_points["node#{index}"]
+            fixed_points["node#{index}"] = 0
+          end
+          fixed_points["node#{index}"] += probability
+        end
       end
     end
     
@@ -187,6 +194,9 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     f.puts "}"
     f.close
+    
+    # puts "Fixed Points" + fixed_points.length.to_s
+    # puts `gc -c #{file_prefix + STATESPACE_DOT_SUFFIX}`
   end
  
 
