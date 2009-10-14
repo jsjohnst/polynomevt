@@ -11,6 +11,9 @@ module React
        parse_output(modelfile,functionfile,multiplefunctionfile)
        @react_logger.info "Done with react"
        return true
+    else
+       @react_logger.info "React failed (returned non-zero status)!"
+       return false
     end
   end
 
@@ -57,7 +60,7 @@ module React
                     long_out_file.write(line)
                     break
                 else
-                    @react_logger.info "ERROR: Reacht parsing models file: Line doesn't match anything"
+                    @react_logger.info "ERROR: React parsing models file: Line doesn't match anything"
                     return
                 end
             end
