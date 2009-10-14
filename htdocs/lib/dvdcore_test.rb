@@ -38,7 +38,7 @@ node4 [label="100"];
 node5 [label="101"];
 node6 [label="110"];
 node7 [label="111"];
-node0 -> node0; 
+node0 -> node0;
 node1 -> node1;
 node2 -> node4;
 node3 -> node5;
