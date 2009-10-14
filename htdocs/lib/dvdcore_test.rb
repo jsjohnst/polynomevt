@@ -170,7 +170,7 @@ node7 -> node7 [label= "0.05"];
     file_prefix = "/tmp/xxxw"
     create_file( "#{file_prefix}.functionfile.txt", deterministic_function_file )
     dvd = DVDCore.new(file_prefix, 3, 2)
-    dvd.run
+    dvd.run false
     assert FileTest.exists?( "#{file_prefix}.wiring_diagram.dot" )
   end
 
@@ -178,7 +178,7 @@ node7 -> node7 [label= "0.05"];
     file_prefix = "/tmp/xxxs"
     create_file( "#{file_prefix}.functionfile.txt", deterministic_function_file )
     dvd = DVDCore.new(file_prefix, 3, 2)
-    dvd.run
+    dvd.run false
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
   end
 
@@ -186,7 +186,7 @@ node7 -> node7 [label= "0.05"];
     file_prefix = "/tmp/xxxw1"
     create_file( "#{file_prefix}.functionfile.txt", deterministic_function_file )
     dvd = DVDCore.new(file_prefix, 3, 2)
-    dvd.run
+    dvd.run false
     assert FileTest.exists?( "#{file_prefix}.wiring_diagram.dot" )
     assert_equal deterministic_wiring_diagram, File.read( "#{file_prefix}.wiring_diagram.dot" ), "Wiring diagram not as expected"
   end
@@ -195,7 +195,7 @@ node7 -> node7 [label= "0.05"];
     file_prefix = "/tmp/xxxs1"
     create_file( "#{file_prefix}.functionfile.txt", stochastic_function_file )
     dvd = DVDCore.new(file_prefix, 3, 2)
-    dvd.run
+    dvd.run false
     assert FileTest.exists?( "#{file_prefix}.wiring_diagram.dot" )
     assert_equal stochastic_wiring_diagram, File.read( "#{file_prefix}.wiring_diagram.dot" ), "Wiring diagram not as expected"
   end
@@ -204,7 +204,7 @@ node7 -> node7 [label= "0.05"];
     file_prefix = "/tmp/xxxs2"
     create_file( "#{file_prefix}.functionfile.txt", deterministic_function_file )
     dvd = DVDCore.new(file_prefix, 3, 2)
-    dvd.run
+    dvd.run false
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
     assert_equal deterministic_state_space, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
   end
@@ -213,9 +213,27 @@ node7 -> node7 [label= "0.05"];
     file_prefix = "/tmp/xxxs3"
     create_file( "#{file_prefix}.functionfile.txt", stochastic_function_file )
     dvd = DVDCore.new(file_prefix, 3, 2)
-    dvd.run
+    dvd.run false
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
     assert_equal stochastic_state_space, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+  end
+  
+  test "check deterministic state space with probabilities" do 
+    file_prefix = "/tmp/xxxs2"
+    create_file( "#{file_prefix}.functionfile.txt", deterministic_function_file )
+    dvd = DVDCore.new(file_prefix, 3, 2)
+    dvd.run true
+    assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
+    assert_equal deterministic_state_space_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+  end
+
+  test "check stochastic state space with probabilities" do 
+    file_prefix = "/tmp/xxxs3"
+    create_file( "#{file_prefix}.functionfile.txt", stochastic_function_file )
+    dvd = DVDCore.new(file_prefix, 3, 2)
+    dvd.run true
+    assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
+    assert_equal stochastic_state_space_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
   end
 
 

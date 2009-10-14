@@ -15,9 +15,10 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     puts msg
   end
     
-  def run
+  def run(probabilities)
     @function_data = Array.new
     @functions = Array.new
+    @show_probabilities = probabilities
     
     load_function_data
     #| debug_dump @function_data
@@ -27,7 +28,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       return false
     end
     
-    debug_dump @functions
+    #| debug_dump @functions
       
     if true # show_wiring_diagram
       generate_wiring_diagram_dot_file
@@ -161,22 +162,36 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       
       combinations = make_list_of_function_combinations
       combinations.each do |combo|
-        newval = "";
+        newval = ""
+        probability = 1
         for i in 0..@functions.length-1
           newval += values[i][combo[i]].to_s
+          probability *= @functions[i][combo[i]][:probability]
         end
-        output.push ["node#{index}", newval]
+        output.push ["node#{index}", newval, probability]
       end
     end
     
     transitions = Array.new
+    transition_probabilities = Hash.new
     output.each do |arr|
       index = states.index(arr[1].split(//).map { |item| item.to_i })
-      transitions.push "#{arr[0]} -> node#{index};\n"
+      key = "#{arr[0]} -> node#{index}"
+      if !transition_probabilities[key]
+        transition_probabilities[key] = 0
+      end
+      transition_probabilities[key] += arr[2]
+      
+      transitions.push "#{arr[0]} -> node#{index}"
     end
     
     transitions.sort.uniq.each do |line|
-      f.puts line
+      f.print line
+      if @show_probabilities
+        probability = transition_probabilities[line]
+        f.print " [label= \"#{'%.02f' % probability}\"]"
+      end
+      f.puts ";\n"
     end
     
     f.puts "}"
