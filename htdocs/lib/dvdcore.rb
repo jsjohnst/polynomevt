@@ -141,7 +141,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     states = make_states_array
     
-    output = Array.new
+    output = Hash.new
     
     states.each_with_index do |state,index|
       f.puts "node#{index} [label=\"#{state}\"];\n"
@@ -162,33 +162,24 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       
       combinations = make_list_of_function_combinations
       combinations.each do |combo|
-        newval = ""
+        newval = Array.new
         probability = 1
         for i in 0..@functions.length-1
-          newval += values[i][combo[i]].to_s
+          newval.push values[i][combo[i]].to_i
           probability *= @functions[i][combo[i]][:probability]
         end
-        output.push ["node#{index}", newval, probability]
+        newval_index = states.index(newval)
+        key = "node#{index} -> node#{newval_index}"
+        if !output[key]
+          output[key] = 0
+        end
+        output[key] += probability
       end
     end
     
-    transitions = Array.new
-    transition_probabilities = Hash.new
-    output.each do |arr|
-      index = states.index(arr[1].split(//).map { |item| item.to_i })
-      key = "#{arr[0]} -> node#{index}"
-      if !transition_probabilities[key]
-        transition_probabilities[key] = 0
-      end
-      transition_probabilities[key] += arr[2]
-      
-      transitions.push "#{arr[0]} -> node#{index}"
-    end
-    
-    transitions.sort.uniq.each do |line|
+    output.sort.each do |line,probability|
       f.print line
       if @show_probabilities
-        probability = transition_probabilities[line]
         f.print " [label= \"#{'%.02f' % probability}\"]"
       end
       f.puts ";\n"
