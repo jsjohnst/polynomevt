@@ -104,7 +104,7 @@ for option in ["sub", "super"]
       #end
     end
 
-    outfile = File.new("output-#{k}-#{option}.txt", "w")
+    outfile = File.new("output-#{k}-#{option}-edges.txt", "w")
     outfile.puts "#{number_of_good_networks} of networks used"
       for i in 0..sum.length-1 do 
         for j in 0..sum[i].length-1 do

@@ -1,5 +1,5 @@
-irb
-require "lib/dvdcore.rb"
+require 'rubygems'
+require "dvdcore.rb"
 
 def add_componentwise(sum, output) 
   for i in 0..output.length-1 do 
@@ -55,7 +55,6 @@ def split_data_into_files(datafile)
 end
 
 
-require "lib/dvdcore.rb"
 
 for k in 1..5 do 
   sum = Array.new()
