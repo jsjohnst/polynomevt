@@ -5,6 +5,14 @@ class DvdcoreTest < ActiveSupport::TestCase
     assert true
   end
 
+  deterministic_function_file = "f1 = x1+x2
+  f2 = x1*x2*x3
+  f3 = x1*x2+x3^2"
+
+  deterministic_wiring_diagram = 
+  stochastic_function_file = ""
+
+
   test "creates wiring diagram" do
   end
 
