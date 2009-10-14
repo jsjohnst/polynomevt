@@ -48,6 +48,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       
     if true # all_trajectories
       # TODO: generate_state_space_dot_file_without_simulation(statespace)
+      generate_state_space_dot_file_without_simulation
     else
       if initial_state.nil? || initial_state.empty?
         error_log "ERROR: Can't simulate a single trajectory without an initial state."
@@ -80,38 +81,102 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     end
   end
   
+  # This builds an array of all possible states for a given node and pvalue
+  def make_states_array
+    states = Array.new
+    number_of_states = pvalue**nodes
+    for i in 0..number_of_states-1
+      state_in_base_pvalue = i.to_s(pvalue)
+      zero_padded_state_value = "%0#{nodes}d" % state_in_base_pvalue
+      state_as_array_of_digits = Array.new()
+      
+      # here we need to insure the value stored in the array is an int,
+      # not a string, so this conversion insures that
+      zero_padded_state_value.split(//).each do |state_string|
+        state_as_array_of_digits.push state_string.to_i
+      end
+      
+      states.push(state_as_array_of_digits)
+    end
+    return states
+  end
+  
+  # We need to build all possible combinations of functions
+  # we save the combinations as ntuples in a list
+  #
+  # So given:
+  # [[f1_1,f1_2], [f2_1], [f3_1,f3_2]]
+  #
+  # we want the following combinations: 
+  # [[f1_1,f2_1,f3_1], [f1_1,f2_1,f3_2],
+  #  [f1_2,f2_1,f3_1], [f1_2,f2_1,f3_2]]
+  #
+  # aka the following output:
+  # [[0,0,0], [0,0,1], [1,0,0], [1,0,1]]
+  #
+  # Since the number of nodes isn't fixed, we need to use recursion
+  # Also, 'combinations' is passed by reference, not value
+  def recurse_through_functions(funcs, pos, stack, combinations)
+    if pos < funcs.length
+    	for i in 0..funcs[pos].length-1
+    		tmp_stack = stack.clone
+    		tmp_stack.push i
+    		recurse_through_functions(funcs, pos+1, tmp_stack, combinations)
+    	end
+    else
+    	combinations.push stack
+    end	
+  end
+  
+  def make_list_of_function_combinations
+    combos = Array.new
+    recurse_through_functions(@functions, 0, Array.new, combos)
+    combos
+  end
+  
   def generate_state_space_dot_file_without_simulation    
     f = File.new(file_prefix + STATESPACE_DOT_SUFFIX, "w")
     f.puts "digraph test {"
     
-    fixed_points = Array.new
+    states = make_states_array
     
-    # recu( 0, 1 ) -- does this need fixed_points?
+    output = Array.new
     
-    for x in 0..(pvalue**nodes-1)
-      for y in 0..(pvalue**nodes-1)
-        
-        
-#              if ( scalar( $Adj[$x][$y] ) > 0 ) {
-                
-#                  if ( $x == $y ) {    #fixed point
-                                       # add state number and probability
-#                      push( @fixed_points, [ $x, $Adj[$x][$y] ] );
-#                  }
-#                  if ( !$Show_probabilities_in_state_space ) {    
-                          # make an edge from @y to @ans
-                          # graph with arrows without probablities
-#                      print $Dot_file "node$x -> node$y\n";
-#                  }
-#                  else {    # graph probablities
-#                      printf $Dot_file "node$x -> node$y [label= \"%.2f",
-#                          $Adj[$x][$y];
-#                      printf $Dot_file "\"];\n";
-#                  }
-#              }
-
-
+    states.each_with_index do |state,index|
+      f.puts "node#{index} [label=\"#{state}\"];\n"
+      
+      values = Array.new
+      for i in 0..@functions.length-1
+        tmp = Array.new
+        for j in 0..@functions[i].length-1
+          # this looks silly, but our functions are 1 based arrays
+          # so we need to put a value of 0 in the first (aka 0th) position
+          # which will never be used, so the value is insignificant
+          x = state.clone.unshift(0)
+          result = eval @functions[i][j][:func]
+          tmp.push(result % pvalue)
+        end
+        values.push tmp
       end
+      
+      combinations = make_list_of_function_combinations
+      combinations.each do |combo|
+        newval = "";
+        for i in 0..@functions.length-1
+          newval += values[i][combo[i]].to_s
+        end
+        output.push ["node#{index}", newval]
+      end
+    end
+    
+    transitions = Array.new
+    output.each do |arr|
+      index = states.index(arr[1].split(//).map { |item| item.to_i })
+      transitions.push "#{arr[0]} -> node#{index};\n"
+    end
+    
+    transitions.sort.uniq.each do |line|
+      f.puts line
     end
     
     f.puts "}"
