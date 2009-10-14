@@ -127,11 +127,48 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
 
     expected_data = [
-      "digraph {", 
-      "for now this still fails",
-      "}"
+      'digraph test {',
+      'node1 [label="x1", shape="box"];',
+      'node2 -> node1;',
+      'node2 -> node2;',
+      'node2 -> node3;',
+      'node2 [label="x2", shape="box"];',
+      'node3 -> node1;',
+      'node3 -> node2;',
+      'node3 -> node3;',
+      'node3 [label="x3", shape="box"];',
+      '}',
     ]
     compare_content(wiring_diagram + "dot", expected_data)
+  end
+  
+  test "should create function file" do
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
+      :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n", 
+      :show_wiring_diagram => true, :wiring_diagram_format => "gif",
+      :show_state_space => true, :state_space_format => "gif" })
+    wait_for_completion(my_job)
+
+    function_file = "public/" + my_job.file_prefix + ".functionfile.txt"
+    assert FileTest.exists?(function_file), "functionfile missing"
+
+    puts "should create function file"+function_file
+   
+    expected_data = [
+      "f1 = {",
+      "x3+1  #.6",
+      "x2+1  #.4",
+      "}",
+      "f2 = {",
+      "x3+1  #.6",
+      "x2+1  #.4",
+      "}",
+      "f3 = {",
+      "x3+1  #.6",
+      "x2+1  #.4",
+      "}"
+    ]
+    compare_content(function_file, expected_data)
   end
   
   test "should create state space" do
@@ -147,9 +184,17 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
     
     expected_data = [
-      "digraph test {", 
-      "for now this still fails",
-      "}"
+      'digraph test {',
+      'node1 [label="x1", shape="box"];',
+      'node2 -> node1;',
+      'node2 -> node2;',
+      'node2 -> node3;',
+      'node2 [label="x2", shape="box"];',
+      'node3 -> node1;',
+      'node3 -> node2;',
+      'node3 -> node3;',
+      'node3 [label="x3", shape="box"];',
+      '}',
     ]
     compare_content(wiring_diagram + "dot", expected_data)
     
@@ -159,9 +204,24 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
     expected_data = [
-      "digraph test {", 
-      "for now this still fails",
-      "}"
+      'digraph test {',
+      'node0 [label=" 0 0 0"];',
+      'node1 [label=" 0 0 1"];',
+      'node2 [label=" 0 1 0"];',
+      'node3 [label=" 0 1 1"];',
+      'node4 [label=" 1 0 0"];',
+      'node5 [label=" 1 0 1"];',
+      'node6 [label=" 1 1 0"];',
+      'node7 [label=" 1 1 1"];',
+      'node0 -> node7',
+      'node1 -> node5',
+      'node2 -> node5',
+      'node3 -> node0',
+      'node4 -> node3',
+      'node5 -> node5',
+      'node6 -> node5',
+      'node7 -> node0',
+      '}'
     ]
     compare_content(state_space + "dot", expected_data)
   end
@@ -185,9 +245,24 @@ class JobsControllerTest < ActionController::TestCase
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
     expected_data = [
-      "digraph test {", 
-      "for now this still fails",
-      "}"
+      'digraph test {',
+      'node0 [label=" 0 0 0"];',
+      'node1 [label=" 0 0 1"];',
+      'node2 [label=" 0 1 0"];',
+      'node3 [label=" 0 1 1"];',
+      'node4 [label=" 1 0 0"];',
+      'node5 [label=" 1 0 1"];',
+      'node6 [label=" 1 1 0"];',
+      'node7 [label=" 1 1 1"];',
+      'node0 -> node7',
+      'node1 -> node5',
+      'node2 -> node5',
+      'node3 -> node0',
+      'node4 -> node3',
+      'node5 -> node5',
+      'node6 -> node5',
+      'node7 -> node0',
+      '}'
     ]
     compare_content(state_space + "dot", expected_data)
   end
