@@ -807,7 +807,7 @@ sub count_comps_final_all_trajectories {
     _log("ended loop.");
 
     # terminate and close ip.out.dot
-    print $Dot_file "}";
+    print $Dot_file "}\n";
     close($Dot_file);
 }
 
@@ -1272,7 +1272,7 @@ sub regulatory {
         }
         $ind++;
     }
-    print $Dot_file "}";
+    print $Dot_file "}\n";
     close($Dot_file);
 
     $dot_filename2 = _get_filelocation("$file_prefix.wiring_diagram.dot");
