@@ -55,15 +55,6 @@ class JobsController < ApplicationController
       params[:job].delete(:input_file)
     end
     @job = Job.new(params[:job])
-    if (@job.valid?)
-        logger.info "job.valid? " + @job.valid?.to_s  
-        # create the dummy file to avoid RouteErrors
-        self.write_done_file("0", "")
-    else 
-        logger.info "job.valid? " + @job.valid?.to_s  
-        self.write_done_file("2", "Please check the data you input.")
-        return
-    end
   end
 
  # this one need a job to be passed (needed for testing)
@@ -78,10 +69,20 @@ class JobsController < ApplicationController
     # create file prefix using md5 check sum as part of the filename
     @job.file_prefix = 'files/files-' + Digest::MD5.hexdigest( @job.input_data )
     logger.info "@job.file_prefix: "+ @job.file_prefix 
+    
+    if (@job.valid?)
+        logger.info "job.valid? " + @job.valid?.to_s  
+        # create the dummy file to avoid RouteErrors
+        self.write_done_file("0", "")
+    else 
+        logger.info "job.valid? " + @job.valid?.to_s  
+        self.write_done_file("2", "Please check the data you input.")
+        return
+    end
 
     # split is also checking the input format
     datafile = "public/perl/" + @job.file_prefix + ".input.txt"
-    File.open(datafile, 'w') {|file| file.write(@job.input_data) }
+    File.open(Rails.root.join(datafile), 'w') {|file| file.write(@job.input_data) }
 
     datafiles = self.split_data_into_files(datafile)
     if (!datafiles)
@@ -142,13 +143,14 @@ class JobsController < ApplicationController
 
       #concatenate_discretized_files
       first = TRUE
-      File.open( "public/perl/" + @job.file_prefix + ".discretized-input.txt", 'w') {
+      File.open(Rails.root.join("public/perl/" + @job.file_prefix +
+      ".discretized-input.txt"), 'w') {
           |f| discretized_datafiles.each do |datafile|
               unless (first)
                   f.write("#\n")
               end
               first = FALSE
-              f.write(File.open(datafile, 'r').read)
+              f.write(File.open(Rails.root.join(datafile), 'r').read)
           end
       }
 
@@ -255,9 +257,13 @@ class JobsController < ApplicationController
         functionfile_name = self.functionfile_name(@job.file_prefix)
         logger.info "Functionfile : " + functionfile_name
 
-        logger.info "perl public/perl/dvd_stochastic_runner.pl -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
+        logger.info "changing into #{Rails.root.join}"
+        `cd #{Rails.root.join}`
 
-        simulation_output = `perl public/perl/dvd_stochastic_runner.pl #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} public/perl/#{@job.file_prefix} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}` 
+        logger.info "perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
+        
+        simulation_output = `perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}`
+
         logger.info "simulation output: " + simulation_output 
         simulation_output = simulation_output.gsub("\n", "") 
 
@@ -279,8 +285,8 @@ class JobsController < ApplicationController
  
   def write_done_file(done, simulation_output)
     # Tell the website we are done
-    `echo 'var done = #{done}' > public/perl/#{@job.file_prefix}.done.js`;
-    `echo "var simulation_output = '#{simulation_output}'" >> public/perl/#{@job.file_prefix}.done.js`;
+    `echo 'var done = #{done}' > #{Rails.root.join('public/perl', @job.file_prefix + '.done.js')}`;
+    `echo "var simulation_output = '#{simulation_output}'" >> #{Rails.root.join('public/perl', @job.file_prefix + '.done.js')}`;
   end
   
   # TODO FBH: This function is doing the checking at the moment, should
@@ -292,7 +298,7 @@ class JobsController < ApplicationController
 
     datafiles = []
     output = NIL
-    File.open(datafile) do |file| 
+    File.open(Rails.root.join(datafile)) do |file| 
         counter = 0
         something_was_written = FALSE
         while line = file.gets 
@@ -308,8 +314,10 @@ class JobsController < ApplicationController
                     outputfile_name = datafile.gsub(/input/,"input" +
                     counter.to_s)
                     counter +=1
-                    output = File.open(outputfile_name, "w") 
-                    datafiles.push(Dir.getwd + "/" + outputfile_name)
+                    output = File.open(Rails.root.join(outputfile_name), "w") 
+                    datafiles.push((Rails.root.join(outputfile_name)).to_s)
+                    #datafiles.push( "../" + outputfile_name)
+                    #datafiles.push(Dir.getwd + "/" + outputfile_name)
                 end
                 # check if line matches @n_nodes digits
                 nodes_minus_one = (@job.nodes - 1).to_s
@@ -413,7 +421,7 @@ class JobsController < ApplicationController
     logger.info "outfiles: " + outfiles.to_s
     outfiles.each do |file|
       logger.info file
-      logger.info File.open(file, 'r').read
+      logger.info File.open(Rails.root.join(file), 'r').read
     end
     outfiles
   end
