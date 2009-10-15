@@ -21,7 +21,8 @@ insilicoNames = hashTable {
 }
 
 insilicoName = insilicoNames#"10-1"
-files = {"wildtype", "timeseries", "knockouts"} -- add in "knockdowns", "multifactorial"?
+--files = {"wildtype", "timeseries", "knockouts"} -- add in "knockdowns", "multifactorial"?
+files = {"wildtype", "timeseries", "knockouts", "knockdowns"}
 
 toMatrices = (S,R,keepfirstcol) -> (
      -- S is a list of strings
