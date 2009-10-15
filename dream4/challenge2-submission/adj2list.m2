@@ -92,9 +92,9 @@ apply(#A100, i->(
 ))
 
 --Consensus data
---A = select(readDirectory ".", s->match("react",s));
+A = select(readDirectory ".", s->match("con",s));
 A10 = sort select(A, s->match("10-",s));
-A100 = sort select(A, s->match("100-",s));
+--A100 = sort select(A, s->match("100-",s));
 apply(#A10, i->(
         infile = A10_i;
         outfile = "DREAM4_Consensus_builders_6_InSilico_Size10_"|toString(i+1)|".txt";
