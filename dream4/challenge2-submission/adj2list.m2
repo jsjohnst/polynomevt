@@ -11,7 +11,7 @@ adj2list(String, String) := (fin, fout) -> (
 	else continue;
 
 	f = openOut fout;
-	apply(a, l->f<<toString(l_1)|" "|toString(l_2)|" "|toString(l_0)<<endl);
+	apply(a, l->f<<"G"|toString(l_1)|"\tG"|toString(l_2)|"\t"|toString(l_0)<<endl);
 	f << close;
 )
 
@@ -50,10 +50,10 @@ apply(#A100, i->(
 L = select(readDirectory ".", s->match("React",s));
 apply(L, f->(
 a=lines get f;
-a=apply(a, l->separate(" ",l)/value);
-a=select(a, l->l_0<=100 and l_1<=100);
+a=apply(a, l->separateRegexp(" +",l)/value);
+a=select(a, l->l_0<=G100 and l_1<=G100);
 f1=openOut (f|".out");
-apply(a, l->f1<<toString(l_0)|" "|toString(l_1)|" "|toString(l_2)<<endl);
+apply(a, l->f1<<toString(l_0)|"\t"|toString(l_1)|"\t"|toString(l_2)<<endl);
 f1<<close;
 ))
 
