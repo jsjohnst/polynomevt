@@ -59,7 +59,11 @@ f1<<close;
 
 --run "rm *React*txt"
 --now rename .txt.out to txt
-
+--mv DREAM4_React_0n_InSilico_Size100_1.txt.out DREAM4_React_0n_InSilico_Size100_1.txt
+mv DREAM4_React_0n_InSilico_Size100_2.txt.out DREAM4_React_0n_InSilico_Size100_2.txt
+mv DREAM4_React_0n_InSilico_Size100_3.txt.out DREAM4_React_0n_InSilico_Size100_3.txt
+mv DREAM4_React_0n_InSilico_Size100_4.txt.out DREAM4_React_0n_InSilico_Size100_4.txt
+mv DREAM4_React_0n_InSilico_Size100_5.txt.out DREAM4_React_0n_InSilico_Size100_5.txt
 
 --Elena's data
 A = select(readDirectory ".", s->match("deps",s));
