@@ -1,5 +1,17 @@
-
 require 'pp'
+
+## params
+# file_prefix to open function file
+# nodes
+# p_value
+# create wiring diagram?
+# create state space?
+# show probabilities in state space? 
+# threshold for probabilities in state space?
+# later: 
+# sequential or synchronous updates?
+# update schedule? 
+# random delays?
 
 class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)  
   FUNCTIONFILE_SUFFIX = ".functionfile.txt"
@@ -471,7 +483,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
         in_backet = false
         function_count = function_count + 1
         next
-      elsif ( !line.match(/\d/).nil? )
+      elsif ( !line.match(/x\d/).nil? )
         @function_data[function_count] = Array.new
         @function_data[function_count].push(line.split("=").pop.strip!)
         function_count = function_count + 1
