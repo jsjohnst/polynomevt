@@ -2,10 +2,7 @@ require 'test_helper'
 require 'dvdcore'
 
 class DvdcoreTest < ActiveSupport::TestCase
-  test "dummy" do 
-    assert true
-  end
-
+  
   deterministic_function_file = <<-EOS
 f1 = x1+x2
 f2 = x1*x2*x3
@@ -198,6 +195,8 @@ node7 -> node7 [label= "0.05"];
     dvd.run false
     assert FileTest.exists?( "#{file_prefix}.wiring_diagram.dot" )
     assert_equal stochastic_wiring_diagram, File.read( "#{file_prefix}.wiring_diagram.dot" ), "Wiring diagram not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.wiring_diagram.dot")
   end
 
   test "check deterministic state space" do 
@@ -207,6 +206,8 @@ node7 -> node7 [label= "0.05"];
     dvd.run false
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
     assert_equal deterministic_state_space, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.state_space.dot")
   end
 
   test "check stochastic state space" do 
@@ -216,6 +217,8 @@ node7 -> node7 [label= "0.05"];
     dvd.run false
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
     assert_equal stochastic_state_space, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.state_space.dot")
   end
   
   test "check deterministic state space with probabilities" do 
@@ -225,6 +228,8 @@ node7 -> node7 [label= "0.05"];
     dvd.run true
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
     assert_equal deterministic_state_space_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.state_space.dot")
   end
 
   test "check stochastic state space with probabilities" do 
@@ -233,7 +238,9 @@ node7 -> node7 [label= "0.05"];
     dvd = DVDCore.new(file_prefix, 3, 2)
     dvd.run true
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
-    assert_equal stochastic_state_space_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+assert_equal stochastic_state_space_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.state_space.dot")
   end
 
 
