@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl5.8.9
 
 ## dvd_stochasitic_runner.pl
 ## Multi-function, stochastic DVD Processing
