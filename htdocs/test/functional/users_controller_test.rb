@@ -136,6 +136,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should edit user" do
     session[:user] = users(:one).to_param
     put :edit, :id => users(:one).to_param, :user => { :login => "user", :password => "fubarbaz" }
+    puts flash[:notice]
     assert_redirected_to :action => :profile
     my_user = User.find(users(:one).to_param)
     assert_equal "user", my_user.login
