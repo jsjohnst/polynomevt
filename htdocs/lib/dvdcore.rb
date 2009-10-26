@@ -46,7 +46,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     #| debug_dump @functions
       
-    if true # show_wiring_diagram
+    if create_wiring_diagram
       generate_wiring_diagram_dot_file
     end
       
@@ -63,16 +63,16 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       # TODO: _check_and_set_update_schedule(update_schedule)
     end
       
-    if true # all_trajectories
+    if create_state_space # all_trajectories
       # TODO: generate_state_space_dot_file_without_simulation(statespace)
-      generate_state_space_dot_file_without_simulation
-    else
-      if initial_state.nil? || initial_state.empty?
-        error_log "ERROR: Can't simulate a single trajectory without an initial state."
-        return false
-      end
-      initial_state = sanitize_input(initial_state)
-      # TODO: sim(initial_state, update_sequential, update_schedule, statespace)
+      generate_state_space_dot_file
+#    else
+#      if initial_state.nil? || initial_state.empty?
+#        error_log "ERROR: Can't simulate a single trajectory without an initial state."
+#        return false
+#      end
+#      initial_state = sanitize_input(initial_state)
+#      # TODO: sim(initial_state, update_sequential, update_schedule, statespace)
     end
   end
   
@@ -151,7 +151,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     combos
   end
   
-  def generate_state_space_dot_file_without_simulation    
+  def generate_state_space_dot_file
     f = File.new(file_prefix + STATESPACE_DOT_SUFFIX, "w")
     f.puts "digraph test {"
     
