@@ -117,7 +117,7 @@ class ComputationJob < Struct.new(:job_id)
         self.abort()
       end
 
-      dvd = DVDCore.new(@job.file_prefix, @job.nodes, @job.pvalue)
+      dvd = DVDCore.new("public/" + @job.file_prefix, @job.nodes, @job.pvalue)
       dvd.create_wiring_diagram = @job.show_wiring_diagram
       dvd.create_state_space = @job.show_state_space
       dvd.show_probabilities = @job.show_probabilities_state_space
@@ -141,8 +141,8 @@ class ComputationJob < Struct.new(:job_id)
         `dot -T #{@job.state_space_format} -o #{state_space_graphfile} #{state_space_dotfile}`  
       end
 
-      @logger.info "simulation output: " + simulation_output
-      @job.log = simulation_output
+      #@logger.info "simulation output: " + simulation_output
+      #@job.log = simulation_output
     end
       
     # we succeeded if we got to here!
