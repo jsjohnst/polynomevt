@@ -2,6 +2,7 @@ require 'digest/md5'
 require 'ftools'
 require 'zip/zip'
 require 'zip/zipfilesystem'
+require 'dvdcore'
 
 include React
 
@@ -55,8 +56,10 @@ class ComputationJob < Struct.new(:job_id)
     generate_picture = false
     
     if @job.show_wiring_diagram || @job.show_functions
-      dotfile = "public/" + @job.file_prefix + ".wiring_diagram.dot"
-      graphfile = "public/" + @job.file_prefix + ".wiring_diagram." + @job.wiring_diagram_format
+      wiring_diagram_dotfile = "public/" + @job.file_prefix + ".wiring_diagram.dot"
+      wiring_diagram_graphfile = "public/" + @job.file_prefix + ".wiring_diagram." + @job.wiring_diagram_format
+      state_space_dotfile = "public/" + @job.file_prefix + ".state_space.dot"
+      state_space_graphfile = "public/" + @job.file_prefix + ".state_space." + @job.state_space_format
       functionfile = "public/" + @job.file_prefix + ".functionfile.txt"
       consistent_datafile = "public/" + @job.file_prefix + ".consistent_input.txt"
       
@@ -72,14 +75,14 @@ class ComputationJob < Struct.new(:job_id)
             @logger.info "judging from the flow chart we're supposed to use
             wd, but wd has not been rewritten to use a file with hashes
             instead of a list"
-            macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
-            `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
+            macaulay("wd.m2", "wd(///../htdocs/#{discretized_file}///, ///../htdocs/#{wiring_diagram_dotfile}///, #{@job.pvalue}, #{@job.nodes})")
+            `dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`
           end
         else
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
           @logger.info "running minsetsWD"
-          macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{dotfile}///, #{@job.pvalue}, #{@job.nodes})")
-          `dot -T #{@job.wiring_diagram_format} -o #{graphfile} #{dotfile}`
+          macaulay("minsets-web.m2", "minsetsWD(///../htdocs/#{discretized_file}///, ///../htdocs/#{wiring_diagram_dotfile}///, #{@job.pvalue}, #{@job.nodes})")
+          `dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`
         end
       else
         if @job.make_deterministic_model
@@ -107,30 +110,6 @@ class ComputationJob < Struct.new(:job_id)
     if generate_picture
       @logger.info "Starting simulation of state space."
       
-      show_probabilities_state_space = @job.show_probabilities_state_space ?
-      "-show_probabilities_state_space" : "" 
-      wiring_diagram = @job.show_wiring_diagram ? "-show_wiring_diagram" : "" 
-      state_space = @job.show_state_space ? "-show_statespace" : "" 
-
-      
-      # for stochastic sequential updates, sequential has to be set to 0        
-      # for dvd_stochastic_runner.pl to run correctly 
-      stochastic_sequential_update = "" 
-      if (@job.sequential? && @job.update_schedule == "")            
-        stochastic_sequential_update = "-update_stochastic"             
-        @job.update_type = 'synchronous'
-      end 
-  
-      sequential = @job.sequential? ? "-update_sequential" : "" 
-
-      # concatenate update schedule into one string with _ as separators
-      # so we can pass it to dvd_stochastic_runner.pl
-      update_schedule = ""
-      if @job.update_schedule 
-        @job.update_schedule.gsub!(/\s+/, "_" )
-        update_schedule = !@job.update_schedule.empty? ? "-update_schedule " + @job.update_schedule : ""; 
-        @logger.info "Update Schedule :" + @job.update_schedule + ":"
-      end
       @logger.info "Functionfile : " + functionfile
 
       unless File.exists?(functionfile) 
@@ -138,9 +117,29 @@ class ComputationJob < Struct.new(:job_id)
         self.abort()
       end
 
-      @logger.info "../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update}"
+      dvd = DVDCore.new(@job.file_prefix, @job.nodes, @job.pvalue)
+      dvd.create_wiring_diagram = @job.show_wiring_diagram
+      dvd.create_state_space = @job.show_state_space
+      dvd.show_probabilities = @job.show_probabilities_state_space
+      dvd.run
+      
+      #simulation_output = `../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update} `
 
-      simulation_output = `../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update} `
+      if @job.show_wiring_diagram
+        unless File.exists?(wiring_diagram_dotfile)
+          @logger.info "Wiring diagram dotfile has not been written."
+          self.abort() 
+        end
+        `dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`  
+      end
+
+      if @job.show_state_space
+        unless File.exists?(state_space_dotfile)
+          @logger.info "Wiring diagram dotfile has not been written."
+          self.abort() 
+        end
+        `dot -T #{@job.state_space_format} -o #{state_space_graphfile} #{state_space_dotfile}`  
+      end
 
       @logger.info "simulation output: " + simulation_output
       @job.log = simulation_output
