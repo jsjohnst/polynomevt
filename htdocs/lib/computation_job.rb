@@ -144,8 +144,6 @@ class ComputationJob < Struct.new(:job_id)
       end
 
     # TODO use simulation output 
-      @logger.info "simulation output: " + simulation_output
-      @job.log = simulation_output
     end
       
     # we succeeded if we got to here!

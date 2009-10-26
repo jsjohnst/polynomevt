@@ -81,7 +81,11 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
         redirect_to :action => :profile
+      else
+	flash[:notice] = 'Failed to update user.'
       end
+    else
+      flash[:notice] = 'Invalid request method'
     end
   end
   

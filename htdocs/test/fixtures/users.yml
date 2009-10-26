@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  login: MyString
+  login: testuser1
   password: MyString
   email: foo@bar.com
   first_name: MyString
