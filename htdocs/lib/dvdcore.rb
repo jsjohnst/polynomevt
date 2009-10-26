@@ -21,7 +21,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
   attr_accessor :create_wiring_diagram
   attr_accessor :create_state_space
   attr_accessor :show_probabilities
-  attr_accessor :probabilites_threshold
+  attr_accessor :probability_threshold
 
   def debug_dump(obj)
     pp obj
@@ -201,11 +201,13 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     end
     
     output.sort.each do |line,probability|
-      f.print line
-      if show_probabilities
-        f.print " [label= \"#{'%.02f' % probability}\"]"
+      if probability_threshold.nil? || probability_threshold <= probability
+        f.print line
+        if show_probabilities 
+          f.print " [label= \"#{'%.02f' % probability}\"]"
+        end
+        f.puts ";\n"
       end
-      f.puts ";\n"
     end
     
     f.puts "}"

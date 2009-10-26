@@ -157,6 +157,48 @@ node7 -> node7 [label= "0.05"];
 }
   EOS
 
+stochastic_state_space_threshold_0_5_with_probabilities = <<-EOS
+digraph test {
+node0 [label="000"];
+node1 [label="001"];
+node2 [label="010"];
+node3 [label="011"];
+node4 [label="100"];
+node5 [label="101"];
+node6 [label="110"];
+node7 [label="111"];
+node0 -> node0 [label= "1.00"];
+node1 -> node0 [label= "0.50"];
+node1 -> node1 [label= "0.50"];
+node3 -> node5 [label= "0.90"];
+node4 -> node4 [label= "1.00"];
+node5 -> node4 [label= "0.50"];
+node5 -> node5 [label= "0.50"];
+node6 -> node1 [label= "0.90"];
+}
+  EOS
+
+stochastic_state_space_threshold_0_5 = <<-EOS
+digraph test {
+node0 [label="000"];
+node1 [label="001"];
+node2 [label="010"];
+node3 [label="011"];
+node4 [label="100"];
+node5 [label="101"];
+node6 [label="110"];
+node7 [label="111"];
+node0 -> node0;
+node1 -> node0;
+node1 -> node1;
+node3 -> node5;
+node4 -> node4;
+node5 -> node4;
+node5 -> node5;
+node6 -> node1;
+}
+  EOS
+
   def create_file( absolute_path, content )
     File.open(absolute_path, "w") do |f|
       f.write(content)
@@ -249,6 +291,33 @@ node7 -> node7 [label= "0.05"];
     dvd.run #true
     assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
 assert_equal stochastic_state_space_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.state_space.dot")
+  end
+  
+  test "check stochastic state space with threshold .5 show probabilities" do 
+    file_prefix = "/tmp/xxxs4"
+    create_file( "#{file_prefix}.functionfile.txt", stochastic_function_file )
+    dvd = DVDCore.new(file_prefix, 3, 2)
+    dvd.show_probabilities = true
+    dvd.create_state_space = true
+    dvd.probability_threshold = 0.5
+    dvd.run #true
+    assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
+assert_equal stochastic_state_space_threshold_0_5_with_probabilities, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
+    File.delete("#{file_prefix}.functionfile.txt")
+    File.delete("#{file_prefix}.state_space.dot")
+  end
+
+  test "check stochastic state space with threshold .5" do 
+    file_prefix = "/tmp/xxxs4"
+    create_file( "#{file_prefix}.functionfile.txt", stochastic_function_file )
+    dvd = DVDCore.new(file_prefix, 3, 2)
+    dvd.create_state_space = true
+    dvd.probability_threshold = 0.5
+    dvd.run #true
+    assert FileTest.exists?( "#{file_prefix}.state_space.dot" )
+assert_equal stochastic_state_space_threshold_0_5, File.read( "#{file_prefix}.state_space.dot" ), "State space not as expected"
     File.delete("#{file_prefix}.functionfile.txt")
     File.delete("#{file_prefix}.state_space.dot")
   end
