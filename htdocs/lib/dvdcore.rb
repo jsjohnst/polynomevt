@@ -17,7 +17,12 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
   FUNCTIONFILE_SUFFIX = ".functionfile.txt"
   WIRINGDIAGRAM_DOT_SUFFIX = ".wiring_diagram.dot"
   STATESPACE_DOT_SUFFIX = ".state_space.dot"
-  
+
+  attr_accessor :create_wiring_diagram
+  attr_accessor :create_state_space
+  attr_accessor :show_probabilities
+  attr_accessor :probabilites_threshold
+
   def debug_dump(obj)
     pp obj
   end
@@ -27,10 +32,9 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     puts msg
   end
     
-  def run(probabilities)
+  def run
     @function_data = Array.new
     @functions = Array.new
-    @show_probabilities = probabilities
     
     load_function_data
     #| debug_dump @function_data
@@ -42,7 +46,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     #| debug_dump @functions
       
-    if true # show_wiring_diagram
+    if create_wiring_diagram
       generate_wiring_diagram_dot_file
     end
       
@@ -59,16 +63,16 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
       # TODO: _check_and_set_update_schedule(update_schedule)
     end
       
-    if true # all_trajectories
+    if create_state_space # all_trajectories
       # TODO: generate_state_space_dot_file_without_simulation(statespace)
-      generate_state_space_dot_file_without_simulation
-    else
-      if initial_state.nil? || initial_state.empty?
-        error_log "ERROR: Can't simulate a single trajectory without an initial state."
-        return false
-      end
-      initial_state = sanitize_input(initial_state)
-      # TODO: sim(initial_state, update_sequential, update_schedule, statespace)
+      generate_state_space_dot_file
+#    else
+#      if initial_state.nil? || initial_state.empty?
+#        error_log "ERROR: Can't simulate a single trajectory without an initial state."
+#        return false
+#      end
+#      initial_state = sanitize_input(initial_state)
+#      # TODO: sim(initial_state, update_sequential, update_schedule, statespace)
     end
   end
   
@@ -147,7 +151,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     combos
   end
   
-  def generate_state_space_dot_file_without_simulation    
+  def generate_state_space_dot_file
     f = File.new(file_prefix + STATESPACE_DOT_SUFFIX, "w")
     f.puts "digraph test {"
     
@@ -198,7 +202,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     output.sort.each do |line,probability|
       f.print line
-      if @show_probabilities
+      if show_probabilities
         f.print " [label= \"#{'%.02f' % probability}\"]"
       end
       f.puts ";\n"
