@@ -123,10 +123,9 @@ class ComputationJob < Struct.new(:job_id)
       dvd.show_probabilities = @job.show_probabilities_state_space
       dvd.run
 
-      simulation_output = ""
+      simulation_output = "Fixed points: #{dvd.fixed_points}"
+      @logger.info simulation_output
       
-      #simulation_output = `../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update} `
-
       if @job.show_wiring_diagram
         unless File.exists?(wiring_diagram_dotfile)
           @logger.info "Wiring diagram dotfile has not been written."
