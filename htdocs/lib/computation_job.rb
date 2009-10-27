@@ -125,8 +125,6 @@ class ComputationJob < Struct.new(:job_id)
 
       simulation_output = ""
       
-      #simulation_output = `../perl/dvd_stochastic_runner.pl -v -nodes #{@job.nodes} -pvalue #{@job.pvalue} -function_file #{functionfile} -file_prefix public/#{@job.file_prefix} -statespace_format #{@job.state_space_format} -wiring_diagram_format #{@job.wiring_diagram_format} #{show_probabilities_state_space} #{wiring_diagram} #{state_space} #{sequential} #{update_schedule} #{stochastic_sequential_update} `
-
       if @job.show_wiring_diagram
         unless File.exists?(wiring_diagram_dotfile)
           @logger.info "Wiring diagram dotfile has not been written."
@@ -143,7 +141,6 @@ class ComputationJob < Struct.new(:job_id)
         `dot -T #{@job.state_space_format} -o #{state_space_graphfile} #{state_space_dotfile}`  
       end
 
-    # TODO use simulation output 
     end
       
     # we succeeded if we got to here!
