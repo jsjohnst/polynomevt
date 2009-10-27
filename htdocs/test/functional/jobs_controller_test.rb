@@ -53,7 +53,7 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should create job" do
     assert_difference('Job.count') do
-      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_data => "3 2 1\n2 1 1\n1 1 0"  }
+      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_data => "3 2 1\n2 1 1\n1 1 0", :state_space_format => "jpg", :wiring_diagram_format => "gif" }
     end
 
     assert_redirected_to jobs_path
@@ -62,7 +62,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should create job with file upload" do
     data_file = fixture_file_upload('files/data.txt','text/plain')
     assert_difference('Job.count') do
-      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file }
+      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file , :state_space_format => "jpg", :wiring_diagram_format => "gif" }
     end
 
     assert_redirected_to jobs_path
@@ -71,7 +71,7 @@ class JobsControllerTest < ActionController::TestCase
   test "should not create job with empty file upload" do
     data_file = fixture_file_upload('files/empty_data.txt','text/plain')
     assert_no_difference('Job.count') do
-      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file }
+      post :create, :job => { :user_id => 2, :nodes => 3, :pvalue => 2, :input_file => data_file, :state_space_format => "jpg", :wiring_diagram_format => "gif" }
     end
   end
   
@@ -99,13 +99,13 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should not create file with pvalue not 2" do
-    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 3, 
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 3, :state_space_format => "jpg", :wiring_diagram_format => "gif",
     :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
     assert_response :success
   end
 
   test "should create file with discretized data" do
-    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2, 
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2, :state_space_format => "jpg", :wiring_diagram_format => "gif", 
     :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
     wait_for_completion(my_job)
     discretized_file_name = "public/" + my_job.file_prefix + ".discretized_input.txt"
@@ -254,6 +254,32 @@ class JobsControllerTest < ActionController::TestCase
     compare_content(state_space + "dot", expected_data)
   end
 
+  test "should create state space for constant functions" do 
+    my_job = Job.new({ :user_id => 1, :nodes => 0, :pvalue => 2, 
+    :input_data => "0 0\n0 0", :show_state_space => true, :state_space_format => "gif",
+    })
+    wait_for_completion(my_job)
+    
+    state_space = "public/" + my_job.file_prefix + ".state_space."
+    puts state_space + my_job.state_space_format
+    assert FileTest.exists?(state_space + "dot"), "dot file for state space missing"
+    assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
+
+    expected_data = [
+      'digraph test {',
+      'node0 [label="00"];',
+      'node1 [label="01"];',
+      'node2 [label="10"];',
+      'node3 [label="11"];',
+      'node0 -> node0',
+      'node1 -> node0',
+      'node2 -> node0',
+      'node3 -> node0',
+      '}'
+    ]
+    compare_content(state_space + "dot", expected_data)
+  end
+
   test "should create state space of deterministic network using react" do
     my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 2,
       :input_data => "1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n", 
@@ -282,14 +308,14 @@ class JobsControllerTest < ActionController::TestCase
       'node5 [label="101"];',
       'node6 [label="110"];',
       'node7 [label="111"];',
-      'node0 -> node',
-      'node1 -> node',
-      'node2 -> node',
-      'node3 -> node',
-      'node4 -> node',
-      'node5 -> node',
-      'node6 -> node',
-      'node7 -> node',
+      'node0 -> node0',
+      'node1 -> node0',
+      'node2 -> node0',
+      'node3 -> node0',
+      'node4 -> node0',
+      'node5 -> node0',
+      'node6 -> node0',
+      'node7 -> node0',
       '}'
     ]
     compare_content(state_space + "dot", expected_data)
