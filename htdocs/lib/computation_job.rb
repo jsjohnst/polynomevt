@@ -142,7 +142,6 @@ class ComputationJob < Struct.new(:job_id)
         `dot -T #{@job.state_space_format} -o #{state_space_graphfile} #{state_space_dotfile}`  
       end
 
-    # TODO use simulation output 
     end
       
     # we succeeded if we got to here!
