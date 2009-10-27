@@ -255,8 +255,8 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should create state space for constant functions" do 
-    my_job = Job.new({ :user_id => 1, :nodes => 0, :pvalue => 2, 
-    :input_data => "0 0\n0 0", :show_state_space => true, :state_space_format => "gif",
+    my_job = Job.new({ :user_id => 1, :nodes => 2, :pvalue => 2, 
+    :input_data => "0 0\n0 0", :show_state_space => true, :state_space_format => "gif"
     })
     wait_for_completion(my_job)
     
