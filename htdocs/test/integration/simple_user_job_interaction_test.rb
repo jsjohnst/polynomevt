@@ -52,4 +52,17 @@ class SimpleUserJobInteractionTest < ActionController::IntegrationTest
       my_user.destroy
     end
   end
+
+  test "login with broken job, edit user" do
+    my_user = users(:user_with_invalid_job)
+    post "/users/authenticate", :user => { :login => my_user.login, :password => my_user.password }
+    assert_redirected_to :action => "profile", :controller => "users"
+    
+    # make sure use has at least one test
+    num_jobs = Job.find(:all, :conditions => { :user_id => my_user.id }).length
+    assert num_jobs == 1
+
+    put "/users/edit", :user => { :id => my_user.id, :organization => "My Organization" }
+    assert_redirected_to :action => "profile", :controller => "users"
+  end
 end

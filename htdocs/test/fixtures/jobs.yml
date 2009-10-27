@@ -96,3 +96,7 @@ simple:
   completed: false
   deleted: false
   user_id: 1
+
+invalid_job:
+  nodes: 3
+  user_id: 4

@@ -24,6 +24,7 @@ UserWithoutEmail:
   email: ""
 
 valid_user:
+  id: 3 
   login: simpleuser
   password: simpleuserspassword
   email: valid@adress.com
@@ -54,3 +55,9 @@ invalid_user_with_invalid_email:
   first_name: Simple
   last_name: User
   organization:
+
+user_with_invalid_job:
+  id: 4
+  login: userInvalidJob
+  password: password
+
