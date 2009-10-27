@@ -22,6 +22,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
   attr_accessor :create_state_space
   attr_accessor :show_probabilities
   attr_accessor :probability_threshold
+  attr_reader :fixed_points
 
   def debug_dump(obj)
     pp obj

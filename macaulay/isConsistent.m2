@@ -38,10 +38,10 @@ efunctionData(TimeSeriesData, ZZ) := (tsdata,v) -> (
 )
 
 isConsistent = method(TypicalValue => Boolean)
-isConsistent(List, ZZ, ZZ) := (WT, p, n) -> (
+isConsistent(String, ZZ, ZZ) := (WT, p, n) -> (
     k := ZZ/p; --Field
     --TS is a hashtable of time series data WITH NO KO DATA
-    TS := readTSData(WT, {}, k);
+    TS := readTSData(WT, ZZ);
     
     --FD is a list of hashtables, where each contains the input-vectors/output --pairs for each node
     ct:=0;

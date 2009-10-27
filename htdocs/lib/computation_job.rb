@@ -123,7 +123,8 @@ class ComputationJob < Struct.new(:job_id)
       dvd.show_probabilities = @job.show_probabilities_state_space
       dvd.run
 
-      simulation_output = ""
+      simulation_output = "Fixed points: #{dvd.fixed_points}"
+      @logger.info simulation_output
       
       if @job.show_wiring_diagram
         unless File.exists?(wiring_diagram_dotfile)
