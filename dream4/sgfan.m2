@@ -74,7 +74,7 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
     IN := transpose matrix keys first FD;
     
     -- All the normal forms will be placed in this ring:
-    S := kk[makeVars nvars];
+    S := kk[makeVars nvars, MonomialSize=>8];
 
     F := matrix {apply(nvars, i-> time findFunction(FD_i, gens S))};
     
@@ -87,7 +87,7 @@ sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
         wtvec := randomWeightVector nvars;
         print wtvec;
         --Rr is a polynomial ring in nn variables; can declare a term order here
-        Rr := kk[gens S, Weights => wtvec];
+        Rr := kk[gens S, Weights => wtvec, MonomialSize=>8];
         
         --SM is a list of standard monomials
         --LT is an ideal of leading terms
@@ -136,3 +136,4 @@ R = ZZ/5[makeVars 15]
 TS = readTSData("challenge2-discretized/consistent-output-10-1-time-series", ZZ/5)
 minSets(TS,7,R)
 oo/print;
+

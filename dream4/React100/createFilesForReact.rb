@@ -124,6 +124,6 @@ for k in 1 .. 5 do
   FileUtils.mv("#{k}_TS111.txt", "#{k}_TS11.txt") 
   write_fileman(k) 
   puts "run react for network #{k}"
-  backtick("./React fileman-size100-#{k}.txt output-#{k}.txt")
+  #backtick("./React fileman-size100-#{k}.txt output-#{k}.txt")
 end
 
