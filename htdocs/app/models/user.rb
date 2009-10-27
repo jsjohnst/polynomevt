@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   # will delete all jobs belong to user if the user is deleted
-  has_many :job, :dependent => :destroy
+  has_many :job, :dependent => :delete_all
   
-  validates_associated :job
   validates_length_of :login, :within => 3..40
   validates_length_of :password, :within => 6..40
   validates_presence_of :login , :password
