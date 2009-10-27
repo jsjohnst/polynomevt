@@ -17,6 +17,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
   FUNCTIONFILE_SUFFIX = ".functionfile.txt"
   WIRINGDIAGRAM_DOT_SUFFIX = ".wiring_diagram.dot"
   STATESPACE_DOT_SUFFIX = ".state_space.dot"
+  LOGFILE_SUFFIX = ".dvdcore_log.txt"
 
   attr_accessor :create_wiring_diagram
   attr_accessor :create_state_space
@@ -24,28 +25,35 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
   attr_accessor :probability_threshold
   attr_reader :fixed_points
 
-  def debug_dump(obj)
-    pp obj
+  def debug_dump(what,obj)
+    @logfile << "\nDebugging #{what}:"
+    PP.pp(obj, @logfile)
+    @logfile << "\n\n"
   end
   
   def error_log(msg)
     # TODO: Make this log somewhere useful
-    puts msg
+    @logfile.puts msg
   end
     
   def run
+    @logfile = File.new(file_prefix + LOGFILE_SUFFIX, "w")
+    @logfile.puts "Starting new job"
+
     @function_data = Array.new
     @functions = Array.new
     
     load_function_data
-    #| debug_dump @function_data
+    debug_dump "@function_data", @function_data
     
     if !valid_data?
       error_log "ERROR: Can't do anything without valid data."
       return false
     end
     
-    #| debug_dump @functions
+    debug_dump "@functions", @functions
+	
+    @logfile.flush
       
     if create_wiring_diagram
       generate_wiring_diagram_dot_file
@@ -75,6 +83,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
 #      initial_state = sanitize_input(initial_state)
 #      # TODO: sim(initial_state, update_sequential, update_schedule, statespace)
     end
+    @logfile.close
   end
   
   def sanitize_input(data)
@@ -187,7 +196,10 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
           probability *= @functions[i][combo[i]][:probability]
         end
         newval_index = states.index(newval)
-        key = "node#{index} -> node#{newval_index}"
+        debug_dump "states", states
+	debug_dump "newval", newval
+	debug_dump "newval_index", newval_index
+	key = "node#{index} -> node#{newval_index}"
         if !output[key]
           output[key] = 0
         end
@@ -213,9 +225,6 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     f.puts "}"
     f.close
-    
-    # puts "Fixed Points" + fixed_points.length.to_s
-    # puts `gc -c #{file_prefix + STATESPACE_DOT_SUFFIX}`
   end
  
 
@@ -270,7 +279,7 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     # remove duplicates and sort
     output.sort!.uniq!
     
-    #| debug_dump output
+    debug_dump "output", output
     
     # write *.wiring_diagram.dot file
     f = File.new(file_prefix + WIRINGDIAGRAM_DOT_SUFFIX, "w")
@@ -466,6 +475,12 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
     
     # make the code ready for eval
     eval_func.gsub!(/x(\d+)/, "x[\\1]")
+
+    # return back the parsed function
+    # this is required separately from
+    # above as gsub! returns nil if it
+    # doesn't match anything
+    eval_func
   end
  
   # 
@@ -490,9 +505,11 @@ class DVDCore < Struct.new(:file_prefix, :nodes, :pvalue)
         in_backet = false
         function_count = function_count + 1
         next
-      elsif ( !line.match(/x\d/).nil? )
+      elsif ( !line.match(/\d/).nil? ) # && !(line.match(/^\s*f\d/).nil? || line.match(/\d/).size == 1) )
         @function_data[function_count] = Array.new
-        @function_data[function_count].push(line.split("=").pop.strip!)
+	rhs = line.split("=").pop
+	rhs.strip! unless rhs.nil?
+        @function_data[function_count].push(rhs)
         function_count = function_count + 1
       end
     end
