@@ -1,8 +1,6 @@
 module Delayed
   class Worker
-    @@sleep_delay = 5
-    
-    cattr_accessor :sleep_delay
+    SLEEP = 5
 
     cattr_accessor :logger
     self.logger = if defined?(Merb::Logger)
@@ -35,7 +33,7 @@ module Delayed
         break if $exit
 
         if count.zero?
-          sleep(@@sleep_delay)
+          sleep(SLEEP)
         else
           say "#{count} jobs processed at %.4f j/s, %d failed ..." % [count / realtime, result.last]
         end

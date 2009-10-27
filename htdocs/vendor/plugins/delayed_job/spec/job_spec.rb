@@ -58,7 +58,7 @@ describe Delayed::Job do
   end
 
   it "should be able to set run_at when enqueuing items" do
-    later = (Delayed::Job.db_time_now+5.minutes)
+    later = 5.minutes.from_now
     Delayed::Job.enqueue SimpleJob.new, 5, later
 
     # use be close rather than equal to because millisecond values cn be lost in DB round trip
@@ -152,47 +152,30 @@ describe Delayed::Job do
     lambda { job.payload_object.perform }.should raise_error(Delayed::DeserializationError)
   end
   
-  context "reschedule" do
-    before do
-      @job = Delayed::Job.create :payload_object => SimpleJob.new
-    end
-    
-    context "and we want to destroy jobs" do
-      before do
-        Delayed::Job.destroy_failed_jobs = true
-      end
-      
-      it "should be destroyed if it failed more than Job::max_attempts times" do
-        @job.should_receive(:destroy)
-        Delayed::Job::max_attempts.times { @job.reschedule 'FAIL' }
-      end
-      
-      it "should not be destroyed if failed fewer than Job::max_attempts times" do
-        @job.should_not_receive(:destroy)
-        (Delayed::Job::max_attempts - 1).times { @job.reschedule 'FAIL' }
-      end
-    end
-    
-    context "and we don't want to destroy jobs" do
-      before do
-        Delayed::Job.destroy_failed_jobs = false
-      end
-      
-      it "should be failed if it failed more than Job::max_attempts times" do
-        @job.reload.failed_at.should == nil
-        Delayed::Job::max_attempts.times { @job.reschedule 'FAIL' }
-        @job.reload.failed_at.should_not == nil
-      end
+  it "should be failed if it failed more than MAX_ATTEMPTS times and we don't want to destroy jobs" do
+    default = Delayed::Job.destroy_failed_jobs
+    Delayed::Job.destroy_failed_jobs = false
 
-      it "should not be failed if it failed fewer than Job::max_attempts times" do
-        (Delayed::Job::max_attempts - 1).times { @job.reschedule 'FAIL' }
-        @job.reload.failed_at.should == nil
-      end
-      
-    end
+    @job = Delayed::Job.create :payload_object => SimpleJob.new, :attempts => 50
+    @job.reload.failed_at.should == nil
+    @job.reschedule 'FAIL'
+    @job.reload.failed_at.should_not == nil
+
+    Delayed::Job.destroy_failed_jobs = default
   end
-  
-  it "should fail after Job::max_run_time" do
+
+  it "should be destroyed if it failed more than MAX_ATTEMPTS times and we want to destroy jobs" do
+    default = Delayed::Job.destroy_failed_jobs
+    Delayed::Job.destroy_failed_jobs = true
+
+    @job = Delayed::Job.create :payload_object => SimpleJob.new, :attempts => 50
+    @job.should_receive(:destroy)
+    @job.reschedule 'FAIL'
+
+    Delayed::Job.destroy_failed_jobs = default
+  end
+
+  it "should fail after MAX_RUN_TIME" do
     @job = Delayed::Job.create :payload_object => LongRunningJob.new
     Delayed::Job.reserve_and_run_one_job(1.second)
     @job.reload.last_error.should =~ /expired/
@@ -200,7 +183,7 @@ describe Delayed::Job do
   end
 
   it "should never find failed jobs" do
-    @job = Delayed::Job.create :payload_object => SimpleJob.new, :attempts => 50, :failed_at => Delayed::Job.db_time_now
+    @job = Delayed::Job.create :payload_object => SimpleJob.new, :attempts => 50, :failed_at => Time.now
     Delayed::Job.find_available(1).length.should == 0
   end
 
@@ -262,7 +245,7 @@ describe Delayed::Job do
     end
 
     it "should not allow a second worker to get exclusive access if failed to be processed by worker1 and run_at time is now in future (due to backing off behaviour)" do
-      @job.update_attributes(:attempts => 1, :run_at => 1.day.from_now)
+      @job.update_attributes(:attempts => 1, :run_at => Time.now + 1.day)
       @job_copy_for_worker_2.lock_exclusively!(4.hours, 'worker2').should == false
     end
   end
@@ -379,7 +362,7 @@ describe Delayed::Job do
   context "while running with locked and expired jobs, it" do
     before(:each) do
       Delayed::Job.worker_name = 'worker1'
-      exp_time = Delayed::Job.db_time_now - (1.minutes + Delayed::Job::max_run_time)
+      exp_time = Delayed::Job.db_time_now - (1.minutes + Delayed::Job::MAX_RUN_TIME)
       Delayed::Job.create(:payload_object => SimpleJob.new, :locked_by => 'worker1', :locked_at => exp_time)
       Delayed::Job.create(:payload_object => SimpleJob.new, :locked_by => 'worker2', :locked_at => (Delayed::Job.db_time_now - 1.minutes))
       Delayed::Job.create(:payload_object => SimpleJob.new)

@@ -8,11 +8,8 @@ module Delayed
   # A job object that is persisted to the database.
   # Contains the work object as a YAML field.
   class Job < ActiveRecord::Base
-    @@max_attempts = 25
-    @@max_run_time = 4.hours
-    
-    cattr_accessor :max_attempts, :max_run_time
-    
+    MAX_ATTEMPTS = 25
+    MAX_RUN_TIME = 4.hours
     set_table_name :delayed_jobs
 
     # By default failed jobs are destroyed after too many attempts.
@@ -68,16 +65,17 @@ module Delayed
     # Reschedule the job in the future (when a job fails).
     # Uses an exponential scale depending on the number of failed attempts.
     def reschedule(message, backtrace = [], time = nil)
-      if (self.attempts += 1) < max_attempts
+      if self.attempts < MAX_ATTEMPTS
         time ||= Job.db_time_now + (attempts ** 4) + 5
 
+        self.attempts    += 1
         self.run_at       = time
         self.last_error   = message + "\n" + backtrace.join("\n")
         self.unlock
         save!
       else
         logger.info "* [JOB] PERMANENTLY removing #{self.name} because of #{attempts} consequetive failures."
-        destroy_failed_jobs ? destroy : update_attribute(:failed_at, Delayed::Job.db_time_now)
+        destroy_failed_jobs ? destroy : update_attribute(:failed_at, Time.now)
       end
     end
 
@@ -121,7 +119,7 @@ module Delayed
     end
 
     # Find a few candidate jobs to run (in case some immediately get locked by others).
-    def self.find_available(limit = 5, max_run_time = max_run_time)
+    def self.find_available(limit = 5, max_run_time = MAX_RUN_TIME)
 
       time_now = db_time_now
 
@@ -148,7 +146,7 @@ module Delayed
 
     # Run the next job we can get an exclusive lock on.
     # If no jobs are left we return nil
-    def self.reserve_and_run_one_job(max_run_time = max_run_time)
+    def self.reserve_and_run_one_job(max_run_time = MAX_RUN_TIME)
 
       # We get up to 5 jobs from the db. In case we cannot get exclusive access to a job we try the next.
       # this leads to a more even distribution of jobs across the worker processes
@@ -250,7 +248,7 @@ module Delayed
     # Note: This does not ping the DB to get the time, so all your clients
     # must have syncronized clocks.
     def self.db_time_now
-      (ActiveRecord::Base.default_timezone == :utc) ? Time.now.utc : Time.zone.now
+      (ActiveRecord::Base.default_timezone == :utc) ? Time.now.utc : Time.now
     end
 
   protected
