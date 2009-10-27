@@ -1,10 +1,10 @@
-GenePoolSize                    500.00 
+GenePoolSize                    50.00 
   
 NumCandidates                    50.00  
  
 mNumParentsToPreserve            10.00  
  
-MaxGenerations                   150.00   
+MaxGenerations                   15.00   
 
 StableGenerationLimit            40.00   
 
