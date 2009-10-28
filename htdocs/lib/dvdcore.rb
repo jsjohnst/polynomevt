@@ -1,13 +1,6 @@
 require 'pp'
 
 ## params
-# file_prefix to open function file
-# nodes
-# p_value
-# create wiring diagram?
-# create state space?
-# show probabilities in state space? 
-# threshold for probabilities in state space?
 # later: 
 # sequential or synchronous updates?
 # update schedule? 
