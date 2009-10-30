@@ -4,6 +4,7 @@ require 'zip/zip'
 require 'zip/zipfilesystem'
 require 'dvdcore'
 require 'react'
+require 'macaulay'
 
 class ComputationJob < Struct.new(:job_id)  
   def perform  
@@ -49,7 +50,7 @@ class ComputationJob < Struct.new(:job_id)
     # discretize files
     @logger.info "pwd => " + Dir.getwd
     
-    macaulay("Discretize.m2", "discretize(///#{File.join(RAILS_ROOT, datafile)}///, 0, ///#{File.join(RAILS_ROOT, discretized_file)}///)")
+    Macaulay.run("Discretize.m2", "discretize(///#{File.join(RAILS_ROOT, datafile)}///, 0, ///#{File.join(RAILS_ROOT, discretized_file)}///)")
     
     n_react_threshold = 5;
     generate_picture = false
@@ -64,7 +65,7 @@ class ComputationJob < Struct.new(:job_id)
       
       if @job.show_wiring_diagram && !@job.show_functions
         if @job.nodes <= n_react_threshold
-          if !macaulay("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
+          if !Macaulay.run("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
             react = React.new(File.join(RAILS_ROOT, 'public', @job.file_prefix), @job.nodes)
             react.discretized_data_file = discretized_file
             begin
@@ -82,13 +83,13 @@ class ComputationJob < Struct.new(:job_id)
             @logger.info "judging from the flow chart we're supposed to use
             wd, but wd has not been rewritten to use a file with hashes
             instead of a list"
-            macaulay("wd.m2", "wd(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, wiring_diagram_dotfile)}///, #{@job.pvalue}, #{@job.nodes})")
+            Macaulay.run("wd.m2", "wd(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, wiring_diagram_dotfile)}///, #{@job.pvalue}, #{@job.nodes})")
             `dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`
           end
         else
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
           @logger.info "running minsetsWD"
-          macaulay("minsets-web.m2", "minsetsWD(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, wiring_diagram_dotfile)}///, #{@job.pvalue}, #{@job.nodes})")
+          Macaulay.run("minsets-web.m2", "minsetsWD(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, wiring_diagram_dotfile)}///, #{@job.pvalue}, #{@job.nodes})")
           `dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`
         end
       else
@@ -102,13 +103,12 @@ class ComputationJob < Struct.new(:job_id)
           else
             self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
             @logger.info "running minsetsPDS"
-            macaulay("minsets-web.m2", "minsetsPDS(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, functionfile)}///, #{@job.pvalue}, #{@job.nodes})")
+            Macaulay.run("minsets-web.m2", "minsetsPDS(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, functionfile)}///, #{@job.pvalue}, #{@job.nodes})")
             generate_picture = true
           end
         else # stochastic
           @logger.info "stochastic"
           self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-          macaulay("sgfan.m2", "sgfan(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, functionfile)}///, #{@job.pvalue}, #{@job.nodes})")
           generate_picture = true
         end
       end
@@ -156,8 +156,8 @@ class ComputationJob < Struct.new(:job_id)
   end  
   
   def check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-    if !macaulay("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
-      self.macaulay("incons.m2", "makeConsistent(///#{File.join(RAILS_ROOT, datafile)}///, #{@job.nodes}, ///#{File.join(RAILS_ROOT, consistent_datafile)}///)")
+    if !Macaulay.run("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
+      Macaulay.run("incons.m2", "makeConsistent(///#{File.join(RAILS_ROOT, datafile)}///, #{@job.nodes}, ///#{File.join(RAILS_ROOT, consistent_datafile)}///)")
       if (File.zero?(consistent_datafile))
         # TODO: make a way to store errors into the job for the user to see
         self.abort()
@@ -166,22 +166,10 @@ class ComputationJob < Struct.new(:job_id)
       File.copy(datafile, "public/" + @job.file_prefix + ".original-input.txt") 
       # copy consistent data into input and rediscretize
       File.copy(consistent_datafile, "public/" + @job.file_prefix + ".input.txt") 
-      self.macaulay("Discretize.m2", "discretize(///#{File.join(RAILS_ROOT, datafile)}///, 0, ///#{File.join(RAILS_ROOT, discretized_file)}///)")
+      Macaulay.run("Discretize.m2", "discretize(///#{File.join(RAILS_ROOT, datafile)}///, 0, ///#{File.join(RAILS_ROOT, discretized_file)}///)")
     end
   end
  
-  # we do the continue_on_error optionally because we want to sometimes
-  # check the return value of a command normally (ie isConsistent) but
-  # in most cases we want to just exit on m2 failure
-  def macaulay(m2_file, m2_command, continue_on_error = false)
-    @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;"
-    @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; cd ../htdocs;`
-    if continue_on_error && $? != 0
-       @logger.info "Macaulay (#{m2_file}) (#{m2_command}) returned a non-zero exit code (#{$?}), aborting."
-       self.abort
-    end
-    $? == 0
-  end
   
   def abort
     @job.failed = true
