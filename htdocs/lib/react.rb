@@ -10,17 +10,20 @@ class React < Struct.new(:file_prefix, :nodes)
 
   def run
     @react_logger = Logger.new(File.join(RAILS_ROOT, 'log', 'react.log'))
-    if write_manager_file && execute_react && parse_output 
-       @react_logger.info "Done with react"
-       return true
-    else
+    unless write_manager_file && execute_react && parse_output 
        @react_logger.info "React failed (returned non-zero status)!"
        return false
     end
+    @react_logger.info "Done with react"
+    true
   end
 
   def execute_react
     @react_logger.info "Successfully calling react lib in run:"
+    modelfile = file_prefix + MODELFILE_SUFFIX
+    if File.exists?(modelfile) && !File.writable?(modelfile)
+      raise Errno::EACCES
+    end
     @react_logger.info "cd ../EA; ./React #{file_prefix + MANAGERFILE_SUFFIX} #{file_prefix + MODELFILE_SUFFIX}"
     @react_logger.info `cd ../EA; ./React #{file_prefix + MANAGERFILE_SUFFIX} #{file_prefix + MODELFILE_SUFFIX}`
     @react_logger.info "done react lib in run:"
@@ -95,6 +98,7 @@ class React < Struct.new(:file_prefix, :nodes)
     end
     @react_logger.info "file_string in EA: " + file_string
 
+    
     File.open( file_prefix + MANAGERFILE_SUFFIX, 'w' ) do |file| 
         
         data = "P=2; N=#{nodes};

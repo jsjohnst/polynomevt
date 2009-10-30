@@ -23,18 +23,42 @@ f3 = x1*x2+x3^2
     end
   end
 
-  test "dummy" do 
-    assert true
-  end
-  
   test "basic react test" do
     file_prefix = "/tmp/xxxw"
     create_file( "#{file_prefix}.discretized.txt", discretized_data_file)
     react = React.new(file_prefix, 3)
     react.discretized_data_file = "#{file_prefix}.discretized.txt"
-    react.run
+    assert react.run
     assert FileTest.exists?( "#{file_prefix}.model.txt" ), "modelfile missing"
     assert FileTest.exists?( "#{file_prefix}.functionfile.txt" ), "functionfile missing"
     assert FileTest.exists?( "#{file_prefix}.multiplefunctionfile.txt" ), "multiplefunctionfile missing"
   end
+
+  test "assert react fails if file cannot be written" do 
+    file_prefix = "/tmp/xxxnot"
+    create_file( "#{file_prefix}.discretized.txt", discretized_data_file)
+    react = React.new(file_prefix, 3)
+    react.discretized_data_file = "#{file_prefix}.discretized.txt"
+    FileUtils.touch( "#{file_prefix}.model.txt")
+    File.chmod( 0222, "#{file_prefix}.model.txt")
+    assert_raise Errno::EACCES do
+      react.run
+    end
+    File.chmod( 0644, "#{file_prefix}.model.txt")
+   
+    File.chmod( 0000, "#{file_prefix}.model.txt")
+    assert_raise Errno::EACCES do 
+      react.run
+    end
+    File.chmod( 0644, "#{file_prefix}.model.txt")
+   
+    File.chmod( 0000, "#{file_prefix}.fileman.txt")
+    assert_raise Errno::EACCES do 
+      react.run
+    end
+    File.chmod( 0644, "#{file_prefix}.fileman.txt")
+   
+  end
+
+
 end

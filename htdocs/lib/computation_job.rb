@@ -67,7 +67,15 @@ class ComputationJob < Struct.new(:job_id)
           if !macaulay("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
             react = React.new(File.join(RAILS_ROOT, 'public', @job.file_prefix), @job.nodes)
             react.discretized_data_file = discretized_file
-            react.run
+            begin
+              unless react.run 
+                @logger.info "React failed, aborting"
+                self.abort() 
+              end
+            rescue 
+              @logger.info "React threw exception, aborting"
+              self.abort()
+            end
             generate_picture = true
           else
             # TODO
