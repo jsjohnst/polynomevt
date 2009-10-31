@@ -199,11 +199,6 @@ node6 -> node1;
 }
   EOS
 
-  def create_file( absolute_path, content )
-    File.open(absolute_path, "w") do |f|
-      f.write(content)
-    end
-  end
 
   test "creates wiring diagram" do
     file_prefix = "/tmp/xxxw"
