@@ -41,7 +41,7 @@ class ParameterEstimationTest < ActiveSupport::TestCase
 0 0 1
      EOS
   def setup
-    @fake_job = FakeJob.new(2, 3, "/tmp")
+    @fake_job = FakeJob4PE.new(2, 3, "/tmp")
   end  
 
   test "generate function file with minsets" do 
@@ -70,5 +70,5 @@ class ParameterEstimationTest < ActiveSupport::TestCase
 
 end
 
-class FakeJob < Struct.new(:pvalue, :nodes, :file_prefix) 
+class FakeJob4PE < Struct.new(:pvalue, :nodes, :file_prefix) 
 end
