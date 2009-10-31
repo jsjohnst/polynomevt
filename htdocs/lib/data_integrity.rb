@@ -10,7 +10,7 @@ class DataIntegrity < Algorithm
 
   def self.makeConsistent(file)
 		if !self.consistent?(file)
-			inconsistent_data = file.gsub(/discretized/, 'inconsistent-discretized')
+			inconsistent_data = file.gsub(/\.txt/, '_original.txt')
 		
 			# backup original discretized data
 			File.copy(file, inconsistent_data)

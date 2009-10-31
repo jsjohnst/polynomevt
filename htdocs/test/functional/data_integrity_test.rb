@@ -86,8 +86,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
     inconsistent_data_file = file_prefix + ".inconsistent.txt"
     create_file( inconsistent_data_file, inconsistent_data)
     assert !DataIntegrity.consistent?(inconsistent_data_file)
-    new_consistent_data_file = file_prefix + ".new_consistent.txt"
-    DataIntegrity.makeConsistent(inconsistent_data_file, new_consistent_data_file )
+    DataIntegrity.makeConsistent(inconsistent_data_file)
     expected_data = [
 "#TS1",
 "0 1 0",
@@ -96,7 +95,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
 "1 0 1",
 "0 1 0"
     ]
-    compare_content(new_consistent_data_file, expected_data)
+    compare_content(inconsistent_data_file, expected_data)
   end
   
   test "basic make consistent with hash symbols test" do
@@ -107,8 +106,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
     inconsistent_with_hash_data_file = file_prefix + ".inconsistent_with_hash.txt"
     create_file( inconsistent_with_hash_data_file, inconsistent_with_hash_data)
     assert !DataIntegrity.consistent?(inconsistent_with_hash_data_file)
-    new_consistent_with_hash_data_file = file_prefix + ".new_consistent_with_hash.txt"
-    DataIntegrity.makeConsistent(inconsistent_with_hash_data_file, new_consistent_with_hash_data_file )
+    DataIntegrity.makeConsistent(inconsistent_with_hash_data_file)
     expected_data = [
 "#TS1",
 "1 1 1 ",
@@ -120,7 +118,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
 "1 0 1 ",
 "0 1 0 "
     ]
-    compare_content(new_consistent_with_hash_data_file, expected_data)
+    compare_content(inconsistent_with_hash_data_file, expected_data)
   end
 
 end
