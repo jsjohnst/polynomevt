@@ -75,4 +75,18 @@ class DataIntegrityTest < ActiveSupport::TestCase
     create_file( inconsistent_with_hash_data_file, inconsistent_with_hash_data)
     assert !DataIntegrity.consistent?(inconsistent_with_hash_data)
   end
+  
+  test "basic make consistent test" do
+    file_prefix = "/tmp/xxxcons"
+    Macaulay.pvalue = 2 
+    Macaulay.nodes = 3
+    
+    inconsistent_data_file = file_prefix + ".inconsistent.txt"
+    create_file( inconsistent_data_file, inconsistent_data)
+    assert !DataIntegrity.consistent?(inconsistent_data)
+    new_consistent_data_file = file_prefix + ".new_consistent.txt"
+    DataIntegrity.makeConsistent(inconsistent_data, new_consistent_data_file )
+
+  end
+
 end
