@@ -1,7 +1,7 @@
-require 'macaulay'
+require 'algorithm'
 require 'data_integrity'
 
-class GenerateWiringDiagram < Macaulay
+class GenerateWiringDiagram < Algorithm 
   def self.run(discretized_file, wiring_diagram_dotfile)
     n_react_threshold = 5
     if(Algorithm.job.nodes < n_react_threshold)
@@ -11,6 +11,7 @@ class GenerateWiringDiagram < Macaulay
 				self.run_gfan(discretized_file, wiring_diagram_dotfile)
 			end
 		else
+      DataIntegrity.makeConsistent(discretized_file)	
 			self.run_minsets(discretized_file, wiring_diagram_dotfile)
 		end
 	end
@@ -20,7 +21,6 @@ class GenerateWiringDiagram < Macaulay
 	end
 
 	def self.run_minsets(discretized_file, wiring_diagram_dotfile)	
-		DataIntegrity.makeConsistent(discretized_file)	
-		self.run_macaulay("minsets-web.m2", "minsetsWD(///#{discretized_file)}///, ///#{wiring_diagram_dotfile)}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
+		self.run_macaulay("minsets-web.m2", "minsetsWD(///#{discretized_file}///, ///#{wiring_diagram_dotfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
 	end
 end
