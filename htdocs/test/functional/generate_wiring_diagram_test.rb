@@ -52,6 +52,14 @@ class GenerateWdTest < ActiveSupport::TestCase
     create_file(consistent_data_file, consistent_data) 
     GenerateWiringDiagram.run_minsets(consistent_data_file, "#{file_prefix}.minset_wd.dot")
     assert File.exists?("#{file_prefix}.minset_wd.dot")
+    expected_data = [
+      "digraph { ",
+      "{x1; x2} -> x1;",
+      "{x1} -> x2;",
+      "{x1} -> x3;",
+      "}"
+    ]
+    compare_content("#{file_prefix}.minset_wd.dot", expected_data)
 
     inconsistent_data_file = file_prefix + ".inconsistent.txt"
     create_file( inconsistent_data_file, inconsistent_data) 
@@ -69,6 +77,18 @@ class GenerateWdTest < ActiveSupport::TestCase
     create_file(consistent_data_file, consistent_data) 
     GenerateWiringDiagram.run_gfan(consistent_data_file, "#{file_prefix}.gfan_wd.dot")
     assert File.exists?("#{file_prefix}.gfan_wd.dot")
+#    expected_data = [
+#      "digraph {",
+#      "x1 [shape=\"box\"];",
+#      "x2 [shape=\"box\"];",
+#      "x3 [shape=\"box\"];",
+#      "x1->x1 [label=\"1\"];",
+#      "x2->x1 [label=\".466667\"];",
+#      "x3->x1 [label=\".533333\"];",
+#      "x1->x2 [label=\"1\"];",
+#      "x1->x3 [label=\"1\"];",
+#    ]
+#    compare_content("#{file_prefix}.gfan_wd.dot", expected_data)
 
     inconsistent_data_file = file_prefix + ".inconsistent.txt"
     create_file( inconsistent_data_file, inconsistent_data) 
