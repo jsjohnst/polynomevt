@@ -1,6 +1,8 @@
 
 class Macaulay
   class << self
+    attr_accessor :nodes
+    attr_accessor :pvalue
     attr_accessor :logger
   end
 
