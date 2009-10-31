@@ -1,26 +1,29 @@
 require 'algorithm'
 require 'data_integrity'
 
-class GenerateWiringDiagram < Algorithm 
-  def self.run(discretized_file, wiring_diagram_dotfile)
+class ParameterEstimation < Algorithm 
+  def self.run(discretized_file, functionfile)
     n_react_threshold = 5
-    if(Algorithm.job.nodes < n_react_threshold)
-			if !DataIntegrity.consistent?(discretized_file)
+		if(Algorithm.job.make_deterministic_model)
+	    if(Algorithm.job.nodes < n_react_threshold)
       	self.run_react(discretized_file)
 			else
-				self.run_gfan(discretized_file, wiring_diagram_dotfile)
+      	DataIntegrity.makeConsistent(discretized_file)	
+				self.run_minsets(discretized_file, functionfile)
+				self.run_dvdcore
 			end
-		else
-      DataIntegrity.makeConsistent(discretized_file)	
-			self.run_minsets(discretized_file, wiring_diagram_dotfile)
+		else # stochastic
+      DataIntegrity.makeConsistent(discretized_file)
+			self.run_gfan(discretized_file, functionfile)
+			self.run_dvdcore	
 		end
 	end
 
-  def self.run_gfan(discretized_file, wiring_diagram_dotfile)
-		self.run_macaulay("wd.m2", "wd(///#{discretized_file}///, ///#{wiring_diagram_dotfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
-	end
+  def self.run_gfan
+		self.run_macaulay("sgfan.m2", "sgfan(///#{discretized_file}///, ///#{functionfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
+  end
 
-	def self.run_minsets(discretized_file, wiring_diagram_dotfile)	
-		self.run_macaulay("minsets-web.m2", "minsetsWD(///#{discretized_file}///, ///#{wiring_diagram_dotfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
+	def self.run_minsets(discretized_file, functionfile)	
+		self.run_macaulay("minsets-web.m2", "minsetsPDS(///#{discretized_file}///, ///#{functionfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
 	end
 end
