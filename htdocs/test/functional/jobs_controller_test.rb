@@ -122,7 +122,7 @@ class JobsControllerTest < ActionController::TestCase
     wait_for_completion(my_job)
 
     wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
-    puts wiring_diagram + my_job.wiring_diagram_format
+    # puts wiring_diagram + my_job.wiring_diagram_format
     assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
 
@@ -152,7 +152,7 @@ class JobsControllerTest < ActionController::TestCase
     function_file = "public/" + my_job.file_prefix + ".functionfile.txt"
     assert FileTest.exists?(function_file), "functionfile missing"
 
-    puts "should create function file: " + function_file
+    # puts "should create function file: " + function_file
    
     expected_data = [
       "f1 = {",
@@ -179,7 +179,7 @@ class JobsControllerTest < ActionController::TestCase
     wait_for_completion(my_job)
 
     wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
-    puts wiring_diagram + my_job.wiring_diagram_format
+    # puts wiring_diagram + my_job.wiring_diagram_format
     assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring diagram missing"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
     
@@ -199,7 +199,7 @@ class JobsControllerTest < ActionController::TestCase
     compare_content(wiring_diagram + "dot", expected_data)
     
     state_space = "public/" + my_job.file_prefix + ".state_space."
-    puts state_space + my_job.state_space_format
+    # puts state_space + my_job.state_space_format
     assert FileTest.exists?(state_space + "dot"), "dot file for state space missing"
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
@@ -261,7 +261,7 @@ class JobsControllerTest < ActionController::TestCase
     wait_for_completion(my_job)
     
     state_space = "public/" + my_job.file_prefix + ".state_space."
-    puts state_space + my_job.state_space_format
+    # puts state_space + my_job.state_space_format
     assert FileTest.exists?(state_space + "dot"), "dot file for state space missing"
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
@@ -289,12 +289,12 @@ class JobsControllerTest < ActionController::TestCase
     wait_for_completion(my_job)
 
     wiring_diagram = "public/" + my_job.file_prefix + ".wiring_diagram."
-    puts wiring_diagram + my_job.wiring_diagram_format
+    # puts wiring_diagram + my_job.wiring_diagram_format
     assert FileTest.exists?(wiring_diagram + "dot"), "dot file for wiring diagram missing"
     assert FileTest.exists?(wiring_diagram + my_job.wiring_diagram_format), "picture for wiring diagram missing"
     
     state_space = "public/" + my_job.file_prefix + ".state_space."
-    puts state_space + my_job.state_space_format
+    # puts state_space + my_job.state_space_format
     assert FileTest.exists?(state_space + "dot"), "dot file for state space missing"
     assert FileTest.exists?(state_space + my_job.state_space_format), "picture for state space missing"
 
