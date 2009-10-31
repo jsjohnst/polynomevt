@@ -7,6 +7,8 @@ require 'react'
 require 'algorithm'
 require 'discretize'
 require 'data_integrity'
+require 'generate_wiring_diagram'
+require 'parameter_estimation'
 
 class ComputationJob < Struct.new(:job_id)  
   def perform
@@ -58,9 +60,6 @@ class ComputationJob < Struct.new(:job_id)
 			
 		  Discretize.run(File.join(RAILS_ROOT, datafile), File.join(RAILS_ROOT, discretized_file))
 	
-			n_react_threshold = 5;
-			generate_picture = false
-			
 			if @job.show_wiring_diagram || @job.show_functions
 				wiring_diagram_dotfile = "public/" + @job.file_prefix + ".wiring_diagram.dot"
 				wiring_diagram_graphfile = "public/" + @job.file_prefix + ".wiring_diagram." + @job.wiring_diagram_format
@@ -68,88 +67,33 @@ class ComputationJob < Struct.new(:job_id)
 				state_space_graphfile = "public/" + @job.file_prefix + ".state_space." + @job.state_space_format
 				functionfile = "public/" + @job.file_prefix + ".functionfile.txt"
 				consistent_datafile = "public/" + @job.file_prefix + ".consistent_input.txt"
+			
+				@original_file_prefix = @job.file_prefix	
+				Algorithm.job.file_prefix = File.join(RAILS_ROOT, 'public', @job.file_prefix)
 				
 				if @job.show_wiring_diagram && !@job.show_functions
-					if @job.nodes <= n_react_threshold
-						if !DataIntegrity.consistent?(File.join(RAILS_ROOT, discretized_file))
-							react = React.new(File.join(RAILS_ROOT, 'public', @job.file_prefix), @job.nodes)
-							react.discretized_data_file = discretized_file
-							unless react.run 
-								@logger.info "React failed, aborting"
-								self.abort() 
-							end
-							generate_picture = true
-						else
-							# TODO
-							@logger.info "judging from the flow chart we're supposed to use
-							wd, but wd has not been rewritten to use a file with hashes
-							instead of a list"
-							Macaulay.run("wd.m2", "wd(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, wiring_diagram_dotfile)}///, #{@job.pvalue}, #{@job.nodes})")
-							`dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`
-						end
-					else
-						self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-						@logger.info "running minsetsWD"
-						Macaulay.run("minsets-web.m2", "minsetsWD(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, wiring_diagram_dotfile)}///, #{@job.pvalue}, #{@job.nodes})")
-						`dot -T #{@job.wiring_diagram_format} -o #{wiring_diagram_graphfile} #{wiring_diagram_dotfile}`
-					end
+					GenerateWiringDiagram.run(File.join(RAILS_ROOT, discretized_file), File.join(RAILS_ROOT, wiring_diagram_dotfile))
 				else
-					if @job.make_deterministic_model
-						@logger.info "deterministic"
-						if @job.nodes <= n_react_threshold
-							react = React.new(File.join(RAILS_ROOT, 'public', @job.file_prefix), @job.nodes)
-							react.discretized_data_file = discretized_file
-							react.run
-							generate_picture = true
-						else
-							self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-							@logger.info "running minsetsPDS"
-							Macaulay.run("minsets-web.m2", "minsetsPDS(///#{File.join(RAILS_ROOT, discretized_file)}///, ///#{File.join(RAILS_ROOT, functionfile)}///, #{@job.pvalue}, #{@job.nodes})")
-							generate_picture = true
-						end
-					else # stochastic
-						@logger.info "stochastic"
-						self.check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-						generate_picture = true
-					end
+					ParameterEstimation.run(File.join(RAILS_ROOT, discretized_file), File.join(RAILS_ROOT, functionfile))
 				end
-
 			end
 			
-			if generate_picture
-				@logger.info "Starting simulation of state space."
-				
-				@logger.info "Functionfile : " + functionfile
+			@logger.info "Functionfile : " + functionfile
 
-				unless File.exists?(functionfile) 
-					@logger.info "Functionfile has not been written so we can't run dvd_stochastic_runner on it. "
-					self.abort()
+			if @job.show_wiring_diagram
+				unless File.exists?(wiring_diagram_dotfile)
+					@logger.info "Wiring diagram dotfile has not been written."
+					self.abort() 
 				end
+				`dot -T #{@job.wiring_diagram_format} -o #{File.join(RAILS_ROOT, wiring_diagram_graphfile)} #{File.join(RAILS_ROOT, wiring_diagram_dotfile)}`  
+			end
 
-				dvd = DVDCore.new(File.join(RAILS_ROOT, 'public', @job.file_prefix), @job.nodes, @job.pvalue)
-				dvd.create_wiring_diagram = @job.show_wiring_diagram
-				dvd.create_state_space = @job.show_state_space
-				dvd.show_probabilities = @job.show_probabilities_state_space
-				dvd.run
-
-				simulation_output = "Fixed points: #{dvd.fixed_points}"
-				@logger.info simulation_output
-				
-				if @job.show_wiring_diagram
-					unless File.exists?(wiring_diagram_dotfile)
-						@logger.info "Wiring diagram dotfile has not been written."
-						self.abort() 
-					end
-					`dot -T #{@job.wiring_diagram_format} -o #{File.join(RAILS_ROOT, wiring_diagram_graphfile)} #{File.join(RAILS_ROOT, wiring_diagram_dotfile)}`  
+			if @job.show_state_space
+				unless File.exists?(state_space_dotfile)
+					@logger.info "Wiring diagram dotfile has not been written."
+					self.abort() 
 				end
-
-				if @job.show_state_space
-					unless File.exists?(state_space_dotfile)
-						@logger.info "Wiring diagram dotfile has not been written."
-						self.abort() 
-					end
-					`dot -T #{@job.state_space_format} -o #{File.join(RAILS_ROOT, state_space_graphfile)} #{File.join(RAILS_ROOT, state_space_dotfile)}`  
-				end
+				`dot -T #{@job.state_space_format} -o #{File.join(RAILS_ROOT, state_space_graphfile)} #{File.join(RAILS_ROOT, state_space_dotfile)}`  
 			end
 				
 			# we succeeded if we got to here!
@@ -209,6 +153,7 @@ class ComputationJob < Struct.new(:job_id)
   end
   
   def completed
+		@job.file_prefix = @original_file_prefix
     @job.completed = true
     @job.save
   end
