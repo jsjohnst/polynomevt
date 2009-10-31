@@ -50,7 +50,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
 
   test "basic consistent test" do
     file_prefix = "/tmp/xxxcons"
-    Macaulay.pvalue = 3
+    Macaulay.pvalue = 2 
     Macaulay.nodes = 3
     
     consistent_data_file = file_prefix + ".consistent.txt"
@@ -64,7 +64,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
 
   test "consistent test with hash" do
     file_prefix = "/tmp/xxxconshash"
-    Macaulay.pvalue = 3
+    Macaulay.pvalue = 2
     Macaulay.nodes = 3
     
     consistent_with_hash_data_file = file_prefix + ".consistent_with_hash.txt"
