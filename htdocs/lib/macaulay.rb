@@ -12,7 +12,7 @@ class Macaulay
   def self.run(m2_file, m2_command, continue_on_error = false)
     @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;" unless @logger.nil?
     @logger.info `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; cd ../htdocs;` unless @logger.nil?
-    if continue_on_error && $? != 0
+    if !continue_on_error && $? != 0
        @logger.info "Macaulay (#{m2_file}) (#{m2_command}) returned a non-zero exit code (#{$?}), aborting." unless @logger.nil?
        raise MacaulayError.new "Macaulay (#{m2_file}) (#{m2_command}) returned a non-zero exit code (#{$?}), aborting."
     end
