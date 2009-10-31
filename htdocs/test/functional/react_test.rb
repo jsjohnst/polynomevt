@@ -32,6 +32,7 @@ f3 = x1*x2+x3^2
     assert FileTest.exists?( "#{file_prefix}.model.txt" ), "modelfile missing"
     assert FileTest.exists?( "#{file_prefix}.functionfile.txt" ), "functionfile missing"
     assert FileTest.exists?( "#{file_prefix}.multiplefunctionfile.txt" ), "multiplefunctionfile missing"
+    assert false, "this test should be rewritten to check the file content"
   end
 
   test "assert react fails if file cannot be written" do 
