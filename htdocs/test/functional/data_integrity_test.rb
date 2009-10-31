@@ -40,11 +40,16 @@ class DataIntegrityTest < ActiveSupport::TestCase
 0 0 1
 0 0 1
      EOS
+  
+  def setup
+    @fake_job = FakeJob.new(2, 3, "/tmp")
+  end  
+
 
   test "basic consistent test" do
     file_prefix = "/tmp/xxxcons"
-    Macaulay.pvalue = 3
-    Macaulay.nodes = 3
+		@fake_job.file_prefix = file_prefix
+    Algorithm.job = @fake_job
     
     consistent_data_file = file_prefix + ".consistent.txt"
     create_file( consistent_data_file, consistent_data)
@@ -57,8 +62,8 @@ class DataIntegrityTest < ActiveSupport::TestCase
 
   test "consistent test with hash" do
     file_prefix = "/tmp/xxxconshash"
-    Macaulay.pvalue = 3
-    Macaulay.nodes = 3
+		@fake_job.file_prefix = file_prefix
+    Algorithm.job = @fake_job
     
     consistent_with_hash_data_file = file_prefix + ".consistent_with_hash.txt"
     create_file( consistent_with_hash_data_file, consistent_with_hash_data)
@@ -71,8 +76,8 @@ class DataIntegrityTest < ActiveSupport::TestCase
   
   test "basic make consistent test" do
     file_prefix = "/tmp/xxxcons"
-    Macaulay.pvalue = 2 
-    Macaulay.nodes = 3
+		@fake_job.file_prefix = file_prefix
+    Algorithm.job = @fake_job
     
     inconsistent_data_file = file_prefix + ".inconsistent.txt"
     create_file( inconsistent_data_file, inconsistent_data)
@@ -92,12 +97,12 @@ class DataIntegrityTest < ActiveSupport::TestCase
   
   test "basic make consistent with hash symbols test" do
     file_prefix = "/tmp/xxxcons"
-    Macaulay.pvalue = 2 
-    Macaulay.nodes = 3
+		@fake_job.file_prefix = file_prefix
+    Algorithm.job = @fake_job
     
     inconsistent_with_hash_data_file = file_prefix + ".inconsistent_with_hash.txt"
     create_file( inconsistent_with_hash_data_file, inconsistent_with_hash_data)
-    assert !DataIntegrity.consistent_with_hash?(inconsistent_with_hash_data_file)
+    assert !DataIntegrity.consistent?(inconsistent_with_hash_data_file)
     new_consistent_with_hash_data_file = file_prefix + ".new_consistent_with_hash.txt"
     DataIntegrity.makeConsistent(inconsistent_with_hash_data_file, new_consistent_with_hash_data_file )
     expected_data = [
@@ -111,4 +116,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
     compare_content(new_consistent_with_hash_data_file, expected_data)
   end
 
+end
+
+class FakeJob < Struct.new(:pvalue, :nodes, :file_prefix) 
 end

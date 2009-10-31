@@ -4,7 +4,7 @@ require 'zip/zip'
 require 'zip/zipfilesystem'
 require 'dvdcore'
 require 'react'
-require 'macaulay'
+require 'algorithm'
 require 'discretize'
 require 'data_integrity'
 
@@ -27,9 +27,8 @@ class ComputationJob < Struct.new(:job_id)
 			discretized_file = "public/" + @job.file_prefix + ".discretized_input.txt"
 			
 			@logger = Logger.new(File.join(RAILS_ROOT, 'log', 'computation_job.log'))
-			Macaulay.logger = @logger    
-			Macaulay.pvalue = @job.pvalue
-			Macaulay.nodes = @job.nodes
+			Algorithm.logger = @logger    
+			Algorithm.job = @job
 
 			@logger.info "Discretized_file => " + discretized_file
 		 
