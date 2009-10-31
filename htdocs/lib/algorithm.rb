@@ -29,6 +29,8 @@ class Algorithm
     dvd.create_state_space = Algorithm.job.show_state_space
     dvd.show_probabilities = Algorithm.job.show_probabilities_state_space
     dvd.run
+
+		@logger.info "Fixed points: #{dvd.fixed_points}"
 	end
 
 	def self.run_react(discretized_file)
