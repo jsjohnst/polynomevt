@@ -7,6 +7,6 @@ class DataIntegrity < Macaulay
   end
 
   def self.makeConsistent(datafile, consistent_datafile)
-		self.run("incons.m2", "makeConsistent(///#{datafile}///, #{Macaulay.nodes}, ///#{consistent_datafile}///)")
+		self.run("incons.m2", "makeConsistent(///#{datafile}///, ///#{consistent_datafile}///)")
   end
 end
