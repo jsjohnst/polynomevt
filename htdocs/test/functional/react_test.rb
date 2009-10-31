@@ -17,12 +17,6 @@ f3 = x1*x2+x3^2
 0 0 1
      EOS
 
-  def create_file( absolute_path, content )
-    File.open(absolute_path, "w") do |f|
-      f.write(content)
-    end
-  end
-
   test "basic react test" do
     file_prefix = "/tmp/xxxw"
     create_file( "#{file_prefix}.discretized.txt", discretized_data_file)
