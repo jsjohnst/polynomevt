@@ -56,7 +56,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
     Algorithm.job = @fake_job
     
     consistent_data_file = file_prefix + ".consistent.txt"
-    create_file( consistent_data_file, consistent_data)
+    create_file(consistent_data_file, consistent_data)
     assert DataIntegrity.consistent?(consistent_data_file)
     
     inconsistent_data_file = file_prefix + ".inconsistent.txt"
