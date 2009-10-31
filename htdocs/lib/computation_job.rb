@@ -5,6 +5,8 @@ require 'zip/zipfilesystem'
 require 'dvdcore'
 require 'react'
 require 'macaulay'
+require 'discretize'
+require 'data_integrity'
 
 class ComputationJob < Struct.new(:job_id)  
   def perform
@@ -26,6 +28,8 @@ class ComputationJob < Struct.new(:job_id)
 			
 			@logger = Logger.new(File.join(RAILS_ROOT, 'log', 'computation_job.log'))
 			Macaulay.logger = @logger    
+			Macaulay.pvalue = @job.pvalue
+			Macaulay.nodes = @job.nodes
 
 			@logger.info "Discretized_file => " + discretized_file
 		 
@@ -53,8 +57,8 @@ class ComputationJob < Struct.new(:job_id)
 			# discretize files
 			@logger.info "pwd => " + Dir.getwd
 			
-			Macaulay.run("Discretize.m2", "discretize(///#{File.join(RAILS_ROOT, datafile)}///, 0, ///#{File.join(RAILS_ROOT, discretized_file)}///)")
-			
+		  Discretize.run(File.join(RAILS_ROOT, datafile), File.join(RAILS_ROOT, discretized_file))
+	
 			n_react_threshold = 5;
 			generate_picture = false
 			
@@ -68,7 +72,7 @@ class ComputationJob < Struct.new(:job_id)
 				
 				if @job.show_wiring_diagram && !@job.show_functions
 					if @job.nodes <= n_react_threshold
-						if !Macaulay.run("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
+						if !DataIntegrity.consistent?(File.join(RAILS_ROOT, discretized_file))
 							react = React.new(File.join(RAILS_ROOT, 'public', @job.file_prefix), @job.nodes)
 							react.discretized_data_file = discretized_file
 							unless react.run 
@@ -160,8 +164,8 @@ class ComputationJob < Struct.new(:job_id)
   end  
   
   def check_and_make_consistent(datafile, consistent_datafile, discretized_file)
-    if !Macaulay.run("isConsistent.m2", "isConsistent(///#{File.join(RAILS_ROOT, discretized_file)}///, #{@job.pvalue}, #{@job.nodes})", true)
-      Macaulay.run("incons.m2", "makeConsistent(///#{File.join(RAILS_ROOT, datafile)}///, #{@job.nodes}, ///#{File.join(RAILS_ROOT, consistent_datafile)}///)")
+    if !DataIntegrity.consistent?(File.join(RAILS_ROOT, discretized_file))
+			DataIntegrity.makeConsistent(File.join(RAILS_ROOT, datafile), File.join(RAILS_ROOT, consistent_datafile))
       if (File.zero?(consistent_datafile))
         # TODO: make a way to store errors into the job for the user to see
         self.abort()
@@ -170,7 +174,7 @@ class ComputationJob < Struct.new(:job_id)
       File.copy(datafile, "public/" + @job.file_prefix + ".original-input.txt") 
       # copy consistent data into input and rediscretize
       File.copy(consistent_datafile, "public/" + @job.file_prefix + ".input.txt") 
-      Macaulay.run("Discretize.m2", "discretize(///#{File.join(RAILS_ROOT, datafile)}///, 0, ///#{File.join(RAILS_ROOT, discretized_file)}///)")
+		  Discretize.run(File.join(RAILS_ROOT, datafile), File.join(RAILS_ROOT, discretized_file))
     end
   end
  
