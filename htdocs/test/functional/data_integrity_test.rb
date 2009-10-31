@@ -33,11 +33,15 @@ class DataIntegrityTest < ActiveSupport::TestCase
      EOS
   
   inconsistent_with_hash_data = <<-EOS
+#  
 0 0 1
 1 0 1
 0 1 0
 #
 0 0 1
+1 1 1
+1 0 1
+0 1 0
 0 0 1
      EOS
 
@@ -97,16 +101,19 @@ class DataIntegrityTest < ActiveSupport::TestCase
     
     inconsistent_with_hash_data_file = file_prefix + ".inconsistent_with_hash.txt"
     create_file( inconsistent_with_hash_data_file, inconsistent_with_hash_data)
-    assert !DataIntegrity.consistent_with_hash?(inconsistent_with_hash_data_file)
+    assert !DataIntegrity.consistent?(inconsistent_with_hash_data_file)
     new_consistent_with_hash_data_file = file_prefix + ".new_consistent_with_hash.txt"
     DataIntegrity.makeConsistent(inconsistent_with_hash_data_file, new_consistent_with_hash_data_file )
     expected_data = [
 "#TS1",
-"0 1 0",
-"0 0 1",
+"1 1 1 ",
+"1 0 1 ",
 "#TS2",
-"1 0 1",
-"0 1 0"
+"0 1 0 ",
+"0 0 1 ",
+"#TS3",
+"1 0 1 ",
+"0 1 0 "
     ]
     compare_content(new_consistent_with_hash_data_file, expected_data)
   end
