@@ -86,7 +86,7 @@ class DataIntegrityTest < ActiveSupport::TestCase
     
     inconsistent_with_hash_data_file = file_prefix + ".inconsistent_with_hash.txt"
     create_file( inconsistent_with_hash_data_file, inconsistent_with_hash_data)
-    assert !DataIntegrity.consistent?(inconsistent_with_hash_data)
+    assert !DataIntegrity.consistent?(inconsistent_with_hash_data_file)
   end
   
   test "basic make consistent test" do
