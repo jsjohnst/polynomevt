@@ -22,6 +22,21 @@ class Algorithm
     end
     Algorithm.last_m2_exit_code == 0
   end
+
+	def self.run_dvdcore
+		dvd = DVDCore.new(Algorithm.job.file_prefix, Algorithm.job.nodes, Algorithm.job.pvalue)
+    dvd.create_wiring_diagram = Algorithm.job.show_wiring_diagram
+    dvd.create_state_space = Algorithm.job.show_state_space
+    dvd.show_probabilities = Algorithm.job.show_probabilities_state_space
+    dvd.run
+	end
+
+	def self.run_react(discretized_file)
+    react = React.new(Algorithm.job.file_prefix, Algorithm.job.nodes)
+    react.discretized_data_file = discretized_file
+    react.run
+		self.run_dvdcore
+  end
 end
 
 class MacaulayError < RuntimeError
