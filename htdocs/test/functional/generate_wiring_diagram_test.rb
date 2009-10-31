@@ -40,7 +40,7 @@ class GenerateWdTest < ActiveSupport::TestCase
      EOS
   
   def setup
-    @fake_job = FakeJob.new(2, 3, "/tmp")
+    @fake_job = FakeJob4Test.new(2, 3, "/tmp")
   end  
 
   test "generate wd with minsets" do 
@@ -79,5 +79,5 @@ class GenerateWdTest < ActiveSupport::TestCase
 
 end
 
-class FakeJob < Struct.new(:pvalue, :nodes, :file_prefix) 
+class FakeJob4Test < Struct.new(:pvalue, :nodes, :file_prefix) 
 end
