@@ -21,7 +21,7 @@ class Job < ActiveRecord::Base
   validates_numericality_of :nodes, :only_integer => true, :message => "Number of nodes must be an integer between 1 and 11"
   validates_numericality_of :nodes, :less_than => 12, :message => "Number of nodes is too big!"
   validates_numericality_of :nodes, :greater_than => 0, :message => "Number of nodes is too small!"
-  validates_numericality_of :pvalue, :equal_to => 2
+  validates_numericality_of :pvalue, :only_integer => true
   validates_inclusion_of :wiring_diagram_format, :in => %w( jpg gif png ), :message => "extension {{value}} is not supported (gif,jpg,png supported)."
   validates_inclusion_of :state_space_format, :in => %w( jpg gif png ), :message => "extension {{value}} is not supported (gif,jpg,png supported)."
   validate :check_update_schedule
