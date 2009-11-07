@@ -98,8 +98,8 @@ class JobsControllerTest < ActionController::TestCase
     assert_redirected_to jobs_path
   end
 
-  test "should not create file with pvalue not 2" do
-    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 3, :state_space_format => "jpg", :wiring_diagram_format => "gif",
+  test "should not create file with pvalue not an integer" do
+    my_job = Job.new({ :user_id => 1, :nodes => 3, :pvalue => 1.5, :state_space_format => "jpg", :wiring_diagram_format => "gif",
     :input_data => "# First time course from testing\n1.2 2.3 3.4\n1.1 1.2 1.3\n2.2 2.3 2.4\n0.1 0.2 0.3\n" })
     assert_response :success
   end
