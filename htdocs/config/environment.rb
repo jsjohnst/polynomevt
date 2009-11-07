@@ -23,6 +23,8 @@ Rails::Initializer.run do |config|
     :source => "http://gems.github.com"
 
   config.gem "rubyzip", :lib=>"zip/zip", :version=>"~>0.9.1"
+
+	config.gem "parseexcel"
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
