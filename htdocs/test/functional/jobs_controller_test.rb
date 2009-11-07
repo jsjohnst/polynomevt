@@ -156,16 +156,16 @@ class JobsControllerTest < ActionController::TestCase
    
     expected_data = [
       "f1 = {",
-      "x3+1  #.",
-      "x2+1  #.",
+      "x2+1  # .",
+      "x3+1  # .",
       "}",
       "f2 = {",
-      "x3+1  #.",
-      "x2+1  #.",
+      "x2+1  # .",
+      "x3+1  # .",
       "}",
       "f3 = {",
-      "x3+1  #.",
-      "x2+1  #.",
+      "x2+1  # .",
+      "x3+1  # .",
       "}"
     ]
     compare_content(function_file, expected_data)
