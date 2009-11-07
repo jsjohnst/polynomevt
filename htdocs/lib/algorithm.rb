@@ -4,16 +4,19 @@ class Algorithm
     attr_accessor :job
     attr_accessor :logger
     attr_accessor :last_m2_exit_code
+		attr_accessor :macaulay_path
   end
 
   # we do the continue_on_error optionally because we want to sometimes
   # check the return value of a command normally (ie isConsistent) but
   # in most cases we want to just exit on m2 failure
   def self.run_macaulay(m2_file, m2_command, continue_on_error = false)
-    @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;" unless @logger.nil?
+		Algorithm.macaulay_path ||= "../macaulay"
+		current_dir = Dir.pwd
+    @logger.info "cd #{Algorithm.macaulay_path}; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd #{current_dir};" unless @logger.nil?
     #puts "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;" 
     exit_tmp = Tempfile.new("macaulay")
-    m2_output = `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; echo $? > #{exit_tmp.path}; cd ../htdocs;`
+    m2_output = `cd #{Algorithm.macaulay_path}; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; echo $? > #{exit_tmp.path}; cd #{current_dir};`
     Algorithm.last_m2_exit_code = exit_tmp.gets.to_i
     exit_tmp.close!
     @logger.info m2_output unless @logger.nil?
