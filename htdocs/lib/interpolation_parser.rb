@@ -14,7 +14,7 @@ class InterpolationParser < Struct.new(:filename)
 
 	attr_accessor :truth_tables
 
-	def parse
+	def parse_excel
 		@truth_tables = []
 
 		# open the excel spreadsheet and parse it
