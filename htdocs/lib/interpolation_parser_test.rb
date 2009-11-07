@@ -14,8 +14,6 @@ def run_gfan(truth_table)
 	functionfile = Tempfile.open('tmpfile')
 	discretized_file.write truth_table['timecourse_data']
 	discretized_file.flush
-	puts discretized_file.path
-	puts `cat #{discretized_file.path}`
 	ParameterEstimation.run_gfan(discretized_file.path, functionfile.path)
 	functionfile.read
 end
@@ -26,7 +24,7 @@ ip = InterpolationParser.new("../../designdocs/test-truthtable.xls", variable_ma
 ip.parse_excel
 
 ip.each do |truth_table|
-	truth_table['function_data'] = run_gfan(truth_table) # "f1 = x1*x2\nf2 = 0"
+	truth_table['function_data'] = run_gfan(truth_table)
 	pp truth_table
 end
 
