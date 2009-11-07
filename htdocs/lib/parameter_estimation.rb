@@ -20,7 +20,7 @@ class ParameterEstimation < Algorithm
 	end
 
   def self.run_gfan(discretized_file, functionfile)
-		self.run_macaulay("sgfan.m2", "sgfan(///#{discretized_file}///, ///#{functionfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
+		self.run_macaulay("sgfan.m2", "sgfan( (///#{discretized_file}///,null), ///#{functionfile}///, #{Algorithm.job.pvalue}, #{Algorithm.job.nodes})")
   end
 
 	def self.run_minsets(discretized_file, functionfile)	
