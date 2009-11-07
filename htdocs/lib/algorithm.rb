@@ -11,6 +11,7 @@ class Algorithm
   # in most cases we want to just exit on m2 failure
   def self.run_macaulay(m2_file, m2_command, continue_on_error = false)
     @logger.info "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;" unless @logger.nil?
+    #puts "cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e \"#{m2_command}; exit 0;\"; cd ../htdocs;" 
     exit_tmp = Tempfile.new("macaulay")
     m2_output = `cd ../macaulay/; M2 #{m2_file} --stop --no-debug --silent -q -e "#{m2_command}; exit 0;"; echo $? > #{exit_tmp.path}; cd ../htdocs;`
     Algorithm.last_m2_exit_code = exit_tmp.gets.to_i
@@ -30,7 +31,8 @@ class Algorithm
     dvd.show_probabilities = Algorithm.job.show_probabilities_state_space
     dvd.run
 
-		@logger.info "Fixed points: #{dvd.fixed_points}"
+		@logger.info "Fixed points: #{dvd.fixed_points}" unless @logger.nil? 
+
 	end
 
 	def self.run_react(discretized_file)
