@@ -58,7 +58,7 @@ class ComputationJob < Struct.new(:job_id)
 			# discretize files
 			@logger.info "pwd => " + Dir.getwd
 			
-		  Discretize.run(File.join(RAILS_ROOT, datafile), File.join(RAILS_ROOT, discretized_file))
+		  Discretize.run(File.join(RAILS_ROOT, datafile), @job.pvalue, File.join(RAILS_ROOT, discretized_file))
 	
 			if @job.show_wiring_diagram || @job.show_functions
 				wiring_diagram_dotfile = "public/" + @job.file_prefix + ".wiring_diagram.dot"
