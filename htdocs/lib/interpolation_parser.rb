@@ -128,15 +128,16 @@ class InterpolationParser < Struct.new(:filename, :variable_map)
 			end
 			fdata = truth_table['function_data'].split("\n").first
 			truth_table['variables'].each_with_index do |variable,index|
-				fdata.gsub!(/x#{index+1}/, "x#{get_variable_map_index(variable)}")
+				fdata.gsub!(/x#{index+1}/, "XXX#{get_variable_map_index(variable)}")
 			end
+			fdata.gsub!(/XXX(\d+)/, 'x\1')
 			function_data.push fdata.gsub(/f1/, "f#{get_vtc_map_index(truth_table)}")
 		end
 		function_data.join("\n")
 	end
 
 	def get_variable_map_index(val)
-		variable_map.index(val)
+		variable_map.index(val) + 1
 	end
 
 	def get_vtc_map_index(truth_table)
