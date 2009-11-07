@@ -24,7 +24,7 @@ ip = InterpolationParser.new("../../designdocs/test-truthtable.xls", variable_ma
 ip.parse_excel
 
 ip.each do |truth_table|
-	truth_table['function_data'] = run_gfan(truth_table) # "f1 = x1*x2\nf2 = 0"
+	truth_table['function_data'] = run_gfan(truth_table)
 	pp truth_table
 end
 
