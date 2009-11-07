@@ -4,7 +4,7 @@ require 'parseexcel_patch'
 # parses it and generates timecourses from the truth
 # tables inside it
 
-class InterpolationParser < Struct.new(:filename)
+class InterpolationParser < Struct.new(:filename, :variable_map)
 	include Enumerable
 
 	# allows us to do an ip.each to iterate over the truth tables	
@@ -78,9 +78,6 @@ class InterpolationParser < Struct.new(:filename)
 				end
 			end
 
-			# first line of the timecourse data is a comment with the variables in order
-			truth_table['timecourse_data'] += "# #{truth_table['variables'].join(", ")}\n"
-
 			data.each_with_index do |row,index|
 				computed_cell_value = -1
 
@@ -115,8 +112,34 @@ class InterpolationParser < Struct.new(:filename)
 				truth_table['timecourse_data'] += "#{zero_fill}\n"
 			end
 
+			# last line of the timecourse data is a comment with the variables in order
+			truth_table['timecourse_data'] += "# #{truth_table['variables'].join(", ")}"
+			
 			# we've got a good truth table now, so store it!
 			@truth_tables.push truth_table	
 		end
+	end
+	
+	def generate_function_list
+		function_data = []
+		@truth_tables.each do |truth_table|
+			if truth_table['function_data'].nil?
+				raise RuntimeException.new("Please run gfan on the parsed timecourses before attempting to build a function list")
+			end
+			fdata = truth_table['function_data'].split("\n").first
+			truth_table['variables'].each_with_index do |variable,index|
+				fdata.gsub!(/x#{index+1}/, "x#{get_variable_map_index(variable)}")
+			end
+			function_data.push fdata.gsub(/f1/, "f#{get_vtc_map_index(truth_table)}")
+		end
+		function_data.join("\n")
+	end
+
+	def get_variable_map_index(val)
+		variable_map.index(val)
+	end
+
+	def get_vtc_map_index(truth_table)
+		get_variable_map_index(truth_table['variable_to_calculate'])
 	end
 end
