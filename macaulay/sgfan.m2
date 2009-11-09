@@ -51,7 +51,7 @@ randomWeightVector2 = (nn) -> (
 	       j-1))
      )
 
-sgfan = method(Options => {Limit => 1200})
+sgfan = method(Options => {Limit => 1})
 sgfan(Sequence, String, ZZ, ZZ) := opts -> (WTandKO, outfile, p, nvars) -> (
     -- WTandKO: (WT, KO)
     -- outfile:
