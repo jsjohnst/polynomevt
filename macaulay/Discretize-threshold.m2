@@ -1,21 +1,20 @@
 --*********************
 --File Name:	Discretize-interval.m2
 --Author: 	Elena S. Dimitrova
---Original 	Date:9/22/2009
---Description: Discretizes the input data using interval discretization. 
---Input: 	Number of variables; time series files; prime number of intervals; output file name(s)
+--Original 	Date: 11/2/2009
+--Description: Discretizes the input data using user provided thresholds. 
+--Input: 	Number of variables; time series files; threshlds (number must be prime-1); output file name(s)
 --Output: 	File(s) with the discretized data:
 --		If a single file is input/output, then multiple time series are separated by hash marks (#)
---Usage:      discretize(infile, num_nodes, num_intervals, outfile)
+--Usage:      discretize(infile, num_nodes, thresholds, outfile)
 --********************* 
 
 needs "PolynomialDynamicalSystems.m2"
 
 discretize = method()
 
-discretize(String, ZZ, ZZ, String) := (infile, n, p, outfile) -> (
-    if not isPrime p then error "Expected a prime integer";
-    if n < p then error "Fewer points than required discrete levels."
+discretize(String, ZZ, List, String) := (infile, n, thresholds, outfile) -> (
+    if not isPrime (#thresholds+1) then error "Expected a prime number of discretization intervals";
 	
     m:={};
     discrm:={};
@@ -28,16 +27,11 @@ discretize(String, ZZ, ZZ, String) := (infile, n, p, outfile) -> (
     ));
     
     m=transpose flatten m;
+    thr := sort thresholds;	
     
     for j from 0 to #m-1 do (
-        dis:={}; 
-        msort:=sort m#j;
-        minval:=msort#0;
-        maxval:=msort#(#msort-1);
-	 intwidth:=(maxval - minval)/p;
-
-        apply(#(m#j), i->(apply(p, s->(if m#j#i >= minval+s*intwidth then discrval=s)); dis=append(dis, discrval);));
-	     
+        dis={}; 
+        apply(#(m#j), i->(discrval=0; apply(#thr, s->(if m#j#i >= thr#s then discrval=s+1)); dis=append(dis, discrval);));	     
         discrm=append(discrm, dis);
     );
     c:=0;
