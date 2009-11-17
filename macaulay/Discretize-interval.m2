@@ -1,12 +1,12 @@
 --*********************
 --File Name:	Discretize-interval.m2
 --Author: 	Elena S. Dimitrova
---Original 	Date:9/22/2009
---Description: Discretizes the input data using interval discretization. 
+--Original Date:9/22/2009
+--Description: 	Discretizes the input data using interval discretization. 
 --Input: 	Number of variables; time series files; prime number of intervals; output file name(s)
---Output: 	File(s) with the discretized data:
+--Output: 	File(s) with the booleanized data:
 --		If a single file is input/output, then multiple time series are separated by hash marks (#)
---Usage:      discretize(infile, num_nodes, num_intervals, outfile)
+--Usage:        discretize(infile, num_nodes, num_intervals, outfile)
 --********************* 
 
 needs "PolynomialDynamicalSystems.m2"
@@ -15,7 +15,6 @@ discretize = method()
 
 discretize(String, ZZ, ZZ, String) := (infile, n, p, outfile) -> (
     if not isPrime p then error "Expected a prime integer";
-    if n < p then error "Fewer points than required discrete levels."
 	
     m:={};
     discrm:={};
@@ -31,10 +30,10 @@ discretize(String, ZZ, ZZ, String) := (infile, n, p, outfile) -> (
     
     for j from 0 to #m-1 do (
         dis:={}; 
-        msort:=sort m#j;
-        minval:=msort#0;
-        maxval:=msort#(#msort-1);
-	 intwidth:=(maxval - minval)/p;
+        msort=sort m#j;
+        minval=msort#0;
+        maxval=msort#(#msort-1);
+	 intwidth=(maxval - minval)/p;
 
         apply(#(m#j), i->(apply(p, s->(if m#j#i >= minval+s*intwidth then discrval=s)); dis=append(dis, discrval);));
 	     

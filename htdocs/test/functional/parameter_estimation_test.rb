@@ -13,6 +13,7 @@ class ParameterEstimationTest < ActiveSupport::TestCase
      EOS
   
   consistent_data_3 = <<-EOS
+# another
 0 0 
 0 0 
 #
@@ -39,6 +40,7 @@ class ParameterEstimationTest < ActiveSupport::TestCase
 #
 2 2 
 1 0 
+#
      EOS
   
   inconsistent_data = <<-EOS

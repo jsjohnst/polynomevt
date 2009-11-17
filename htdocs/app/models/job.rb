@@ -19,7 +19,7 @@ class Job < ActiveRecord::Base
   validates_presence_of :nodes
   validates_length_of :input_data, :minimum => 1
   validates_numericality_of :nodes, :only_integer => true, :message => "Number of nodes must be an integer between 1 and 11"
-  validates_numericality_of :nodes, :less_than => 12, :message => "Number of nodes is too big!"
+  validates_numericality_of :nodes, :less_than => 38, :message => "Number of nodes is too big!"
   validates_numericality_of :nodes, :greater_than => 0, :message => "Number of nodes is too small!"
   validates_numericality_of :pvalue, :only_integer => true
   validates_inclusion_of :wiring_diagram_format, :in => %w( jpg gif png ), :message => "extension {{value}} is not supported (gif,jpg,png supported)."
@@ -79,8 +79,8 @@ class Job < ActiveRecord::Base
     if !make_deterministic_model
       if show_state_space
         if !nodes.nil?
-		errors.add_to_base("A stochastic model with more than 11 nodes cannot be simulated.") unless
-        		nodes <= 11 # if you update this, be sure and update the error message above too
+		errors.add_to_base("A stochastic model with more than 38 nodes cannot be simulated.") unless
+        		nodes <= 38 # if you update this, be sure and update the error message above too
 	end
       end
       
