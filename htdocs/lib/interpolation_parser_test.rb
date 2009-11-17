@@ -18,9 +18,10 @@ def run_gfan(truth_table)
 	functionfile.read
 end
 
-variable_mapping = "GeneA\nGeneB\nGeneC".split(/\s+/)
+variable_mapping = "LabileIron\nHO1\nALAS1\nTfR1\nFt\nDMT1\nFpn\nROS\nHeme\nIRP\nJAK2\nHepc\nHP\nXFe".split(/\s+/)
+#variable_mapping = "GeneA\nGeneB\nGeneC".split(/\s+/)
 
-ip = InterpolationParser.new("../../designdocs/test-truthtable.xls", variable_mapping)
+ip = InterpolationParser.new("./functions_without_first_sheet.xls", variable_mapping)
 ip.parse_excel
 
 ip.each do |truth_table|
