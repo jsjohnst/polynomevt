@@ -259,7 +259,8 @@ class JobsController < ApplicationController
 
         logger.info "changing into #{Rails.root.join}"
         `cd "#{Rails.root.join}"`
-
+	
+	logger.info `perl --version`
         logger.info "perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
         
         simulation_output = `perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}`
