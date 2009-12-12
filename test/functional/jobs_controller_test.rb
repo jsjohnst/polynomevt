@@ -143,7 +143,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".functionfile.txt" )
     function_file = @prefix + ".functionfile.txt"
     number_of_functions = `wc -l < #{function_file}`
-    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+    assert_equal( (@job.nodes+1)*10, number_of_functions.chop.to_i )
   end
 
   test "should generate state space for deterministic network" do
@@ -247,7 +247,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".functionfile.txt" )
     function_file = @prefix + ".functionfile.txt"
     number_of_functions = `wc -l < #{function_file}`
-    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+    assert_equal( (@job.nodes+1)*10, number_of_functions.chop.to_i )
   end
 
   test "should generate state space for random sequential network" do
@@ -308,7 +308,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".functionfile.txt" )
     function_file = @prefix + ".functionfile.txt"
     number_of_functions = `wc -l < #{function_file}`
-    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+    assert_equal( (@job.nodes+1)*10, number_of_functions.chop.to_i )
   end
 
   test "should generate state space for sequential network" do
@@ -418,7 +418,7 @@ class JobsControllerTest < ActionController::TestCase
     run_test_on_job( @job, ".functionfile.txt" )
     function_file = @prefix + ".functionfile.txt"
     number_of_functions = `wc -l < #{function_file}`
-    assert_equal( @job.nodes, number_of_functions.chop.to_i )
+    assert_equal( (@job.nodes+1)*10, number_of_functions.chop.to_i )
   end
 
   test "should generate state space for deterministic network for inconsistent
