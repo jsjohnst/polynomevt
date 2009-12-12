@@ -22,16 +22,17 @@ module Macaulay
 
     # if no m2 options are provided, then default to sane defaults
     if(!options[:m2_options]) 
-      options[:m2_options] = " --stop --no-debug --silent -q -e "; 
+      options[:m2_options] = " --stop --no-debug --silent -q -e " 
     end
     
     # fork a background task to run M2
     spawn_id = spawn do
       # TODO: Check the return value of M2 and handle errors
       logger.info "cd #{options[:m2_script_path]}; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; cd ..;"
-      `cd #{options[:m2_script_path]}; echo "Running cmd: " M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; echo $? > ./exitcode.val; cd ..;`;
+      `cd #{options[:m2_script_path]}; echo "Running cmd: " M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log; M2 #{options[:m2_file]} #{options[:m2_options]} \"#{options[:m2_command]}; exit 0;\" >> ./macaulay.log 2>&1; echo $? > ./exitcode.val; cd ..;`
       if(options[:post_m2_command])
-        `#{options[:post_m2_command]}; echo $? > #{options[:m2_script_path]}/exitcode-post_m2.val`;
+	logger.info "M2 post command: #{options[:post_m2_command]}"
+        `#{options[:post_m2_command]}; echo $? > #{options[:m2_script_path]}/exitcode-post_m2.val`
       end
     end
     

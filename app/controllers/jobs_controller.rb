@@ -359,7 +359,7 @@ class JobsController < ApplicationController
     logger.info macaulay2(
       :m2_command => "wd(#{m2_string(discretized_data_files)}, ///../#{dotfile}///, #{p_value}, #{n_nodes})",
       :m2_file => "wd.m2",
-      :post_m2_command => "dot -T #{file_format} -o #{graphfile} #{dotfile}",
+      :post_m2_command => "dot -T #{file_format} -o #{Rails.root.join(graphfile)} #{Rails.root.join(dotfile)}",
       :m2_wait => 1
       )
   end
