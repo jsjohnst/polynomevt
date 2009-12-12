@@ -12,8 +12,8 @@ module React
 
   def run(managerfile, modelfile)
     logger.info "Successfully calling react lib:"
-    logger.info "./EA/React #{managerfile} #{modelfile}"
-    `./EA/React #{managerfile} #{modelfile}`
+    logger.info "cd #{Rails.root}; ./EA/React #{managerfile} #{modelfile};"
+    `cd #{Rails.root}; ./EA/React #{managerfile} #{modelfile}`
     return "Successfully calling react lib"
   end
   
