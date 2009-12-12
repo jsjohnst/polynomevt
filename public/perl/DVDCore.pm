@@ -1292,9 +1292,9 @@ sub regulatory {
     close($Dot_file);
 
     $dot_filename2 = _get_filelocation("$file_prefix.out2.dot");
-    _log("`sort -u $dot_filename > $dot_filename2`");
+    _log("`export LANG=EN; sort -u $dot_filename > $dot_filename2`");
     _log("Removing double arrows from $dot_filename2");
-    `sort -u $dot_filename > $dot_filename2`;
+    `export LANG=EN; sort -u $dot_filename > $dot_filename2`;
     `rm -f $dot_filename`;
     $dot_filename = $dot_filename2;
 
