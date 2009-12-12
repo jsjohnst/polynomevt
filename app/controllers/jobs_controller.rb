@@ -257,24 +257,21 @@ class JobsController < ApplicationController
         functionfile_name = self.functionfile_name(@job.file_prefix)
         logger.info "Functionfile : " + functionfile_name
 
-        logger.info "changing into #{Rails.root.join}"
-        `cd "#{Rails.root.join}"`
-	
 	logger.info `perl --version`
-        logger.info "perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}"
+        logger.info "cd #{Rails.root}; perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{Rails.root.join(functionfile_name)}"
         
-        simulation_output = `perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{functionfile_name}`
+        simulation_output = `cd #{Rails.root}; perl #{Rails.root.join('public/perl/dvd_stochastic_runner.pl')} -v #{@job.nodes} #{@p_value.to_s} 1 #{stochastic_sequential_update} #{Rails.root.join('public/perl',@job.file_prefix)} #{@job.state_space_format} #{@job.wiring_diagram_format} #{wiring_diagram} #{state_space} #{sequential} #{@job.update_schedule} #{show_probabilities_state_space} 1 0 #{Rails.root.join(functionfile_name)}`
 
         logger.info "simulation output: " + simulation_output 
         simulation_output = simulation_output.gsub("\n", "") 
 
-        multiple_functionfile = functionfile_name.gsub("functionfile", "multiplefunctionfile")
+        multiple_functionfile = Rails.root.join(functionfile_name.gsub("functionfile", "multiplefunctionfile"))
         logger.info multiple_functionfile
         if FileTest.exists?(multiple_functionfile)
           logger.info "Multiple file exists"
           # after simulating just one network copy the multiple networks into
           # the function file that the user can display
-          File.copy(multiple_functionfile, functionfile_name)
+          File.copy(multiple_functionfile, Rails.root.join(functionfile_name) )
 
         else
           logger.info "Multiple file does not exist"
