@@ -12,11 +12,11 @@
 <body>
 
 <%= render :partial => "shared/menubar" %>
+<%= render :partial => "shared/analytics" %>
 	
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>
-<%= google_analytics_js %>
 </body>
 <script type="text/javascript" src="/javascripts/prototype.js"></script>
 <script type="text/javascript" src="/javascripts/scriptaculous.js"></script>

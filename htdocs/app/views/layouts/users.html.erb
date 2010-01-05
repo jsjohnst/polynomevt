@@ -10,10 +10,10 @@
 <body>
 
 <%= render :partial => "shared/menubar" %>
+<%= render :partial => "shared/analytics" %>
 
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>
-<%= google_analytics_js %>
 </body>
 </html>
