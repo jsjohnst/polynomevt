@@ -7,6 +7,8 @@
 <%= javascript_include_tag '/perl/tutorial' %>
 </head>
 <body id="bodytag">
+<%= render :partial => "shared/analytics" %>
+
 <div id="notification"><%= flash[:notice] %></div>
 <%= yield %>	
 </body>
